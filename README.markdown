@@ -5,5 +5,6 @@ submitted to the *School of Chemistry Crystallography Service*.
 Its features will eventually include:
 
 * user database;
+* simple file create/edit interface for static pages;
 * user categories (e.g. standard and administrative users);
 * sample database with submission forms and status flags.
