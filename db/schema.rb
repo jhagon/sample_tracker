@@ -10,12 +10,28 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20110918145000) do
+ActiveRecord::Schema.define(:version => 20110925092701) do
+
+  create_table "assets", :force => true do |t|
+    t.string   "document"
+    t.text     "description"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
 
   create_table "pages", :force => true do |t|
     t.string   "name"
     t.string   "permalink"
     t.text     "content"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "uploads", :force => true do |t|
+    t.string   "name"
+    t.text     "comment"
+    t.string   "content_type"
+    t.binary   "data",         :limit => 2097152
     t.datetime "created_at"
     t.datetime "updated_at"
   end

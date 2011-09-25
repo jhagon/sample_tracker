@@ -1,0 +1,7 @@
+one:
+  document: MyString
+  description: MyText
+
+two:
+  document: MyString
+  description: MyText

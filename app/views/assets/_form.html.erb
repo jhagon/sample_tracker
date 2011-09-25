@@ -1,0 +1,12 @@
+<%= form_for @asset, :html => {:multipart => true} do |f| %>
+  <%= f.error_messages %>
+  <p>
+    <%= f.label :document %><br />
+    <%= f.file_field :document %>
+  </p>
+  <p>
+    <%= f.label :description %><br />
+    <%= f.text_area :description %>
+  </p>
+  <p><%= f.submit %></p>
+<% end %>

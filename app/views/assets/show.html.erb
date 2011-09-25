@@ -1,0 +1,16 @@
+<% title "Asset" %>
+
+<p>
+  <strong>Document:</strong>
+  <%= @asset.document %>
+</p>
+<p>
+  <strong>Description:</strong>
+  <%= @asset.description %>
+</p>
+
+<p>
+  <%= link_to "Edit", edit_asset_path(@asset) %> |
+  <%= link_to "Destroy", @asset, :confirm => 'Are you sure?', :method => :delete %> |
+  <%= link_to "View All", assets_path %>
+</p>

@@ -1,4 +1,6 @@
 SampleTracker::Application.routes.draw do
+  resources :assets
+
   resources :pages
 
   match ':permalink', :controller => 'pages', :action => 'show'
