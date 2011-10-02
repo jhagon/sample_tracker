@@ -1,0 +1,64 @@
+<% title "Sample" %>
+
+<p>
+  <strong>Code:</strong>
+  <%= @sample.code %>
+</p>
+<p>
+  <strong>Cif:</strong>
+  <%= @sample.cif %>
+</p>
+<p>
+  <strong>Synth:</strong>
+  <%= @sample.synth %>
+</p>
+<p>
+  <strong>Coshh Name:</strong>
+  <%= @sample.coshh_name %>
+</p>
+<p>
+  <strong>Coshh Desc:</strong>
+  <%= @sample.coshh_desc %>
+</p>
+<p>
+  <strong>Coshh Info:</strong>
+  <%= @sample.coshh_info %>
+</p>
+<p>
+  <strong>Coshh Haz:</strong>
+  <%= @sample.coshh_haz %>
+</p>
+<p>
+  <strong>Params:</strong>
+  <%= @sample.params %>
+</p>
+<p>
+  <strong>Status:</strong>
+  <%= @sample.status %>
+</p>
+<p>
+  <strong>Priority:</strong>
+  <%= @sample.priority %>
+</p>
+<p>
+  <strong>Powd:</strong>
+  <%= @sample.powd %>
+</p>
+<p>
+  <strong>Chiral:</strong>
+  <%= @sample.chiral %>
+</p>
+<p>
+  <strong>Cost Code:</strong>
+  <%= @sample.cost_code %>
+</p>
+<p>
+  <strong>Barcode:</strong>
+  <%= @sample.barcode %>
+</p>
+
+<p>
+  <%= link_to "Edit", edit_sample_path(@sample) %> |
+  <%= link_to "Destroy", @sample, :confirm => 'Are you sure?', :method => :delete %> |
+  <%= link_to "View All", samples_path %>
+</p>

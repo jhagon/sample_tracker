@@ -1,4 +1,6 @@
 SampleTracker::Application.routes.draw do
+  resources :samples
+
   resources :assets
 
   resources :pages

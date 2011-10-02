@@ -1,0 +1,43 @@
+<% title "Samples" %>
+
+<table>
+  <tr>
+    <th>Code</th>
+    <th>Cif</th>
+    <th>Synth</th>
+    <th>Coshh Name</th>
+    <th>Coshh Desc</th>
+    <th>Coshh Info</th>
+    <th>Coshh Haz</th>
+    <th>Params</th>
+    <th>Status</th>
+    <th>Priority</th>
+    <th>Powd</th>
+    <th>Chiral</th>
+    <th>Cost Code</th>
+    <th>Barcode</th>
+  </tr>
+  <% for sample in @samples %>
+    <tr>
+      <td><%= sample.code %></td>
+      <td><%= sample.cif %></td>
+      <td><%= sample.synth %></td>
+      <td><%= sample.coshh_name %></td>
+      <td><%= sample.coshh_desc %></td>
+      <td><%= sample.coshh_info %></td>
+      <td><%= sample.coshh_haz %></td>
+      <td><%= sample.params %></td>
+      <td><%= sample.status %></td>
+      <td><%= sample.priority %></td>
+      <td><%= sample.powd %></td>
+      <td><%= sample.chiral %></td>
+      <td><%= sample.cost_code %></td>
+      <td><%= sample.barcode %></td>
+      <td><%= link_to "Show", sample %></td>
+      <td><%= link_to "Edit", edit_sample_path(sample) %></td>
+      <td><%= link_to "Destroy", sample, :confirm => 'Are you sure?', :method => :delete %></td>
+    </tr>
+  <% end %>
+</table>
+
+<p><%= link_to "New Sample", new_sample_path %></p>

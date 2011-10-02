@@ -1,0 +1,61 @@
+<%= form_for @sample, :html => {:multipart => true} do |f| %>
+  <%= f.error_messages %>
+  <p>
+    <%= f.label :code %><br />
+    <%= f.text_field :code %>
+  </p>
+  <p>
+    <%= f.label :cif %><br />
+    <%= f.text_field :cif %>
+  </p>
+  <p>
+    <%= f.label :synth %><br />
+    <%= f.file_field :synth %>
+
+  </p>
+  <p>
+    <%= f.label :coshh_name %><br />
+    <%= f.text_field :coshh_name %>
+  </p>
+  <p>
+    <%= f.label :coshh_desc %><br />
+    <%= f.text_field :coshh_desc %>
+  </p>
+  <p>
+    <%= f.label :coshh_info %><br />
+    <%= f.text_area :coshh_info %>
+  </p>
+  <p>
+    <%= f.label :coshh_haz %><br />
+    <%= f.text_field :coshh_haz %>
+  </p>
+  <p>
+    <%= f.label :params %><br />
+    <%= f.text_field :params %>
+  </p>
+  <p>
+    <%= f.label :status %><br />
+    <%= f.text_field :status %>
+  </p>
+  <p>
+    <%= f.label :priority %><br />
+    <%= f.text_field :priority %>
+  </p>
+  <p>
+    <%= f.label :powd %><br />
+    <%= f.check_box :powd %>
+  </p>
+  <p>
+    <%= f.label :chiral %><br />
+    <%= f.check_box :chiral %>
+  </p>
+  <p>
+    <%= f.label :cost_code %><br />
+    <%= f.text_field :cost_code %>
+  </p>
+  <p>
+    <%= f.label :barcode %><br />
+    <%= f.text_field :barcode %>
+  </p>
+  <p><%= f.submit %></p>
+<% end %>

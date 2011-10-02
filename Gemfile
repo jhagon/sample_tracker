@@ -2,12 +2,22 @@ source 'http://rubygems.org'
 
 gem 'rails', '3.0.6'
 gem 'sqlite3-ruby', :require => 'sqlite3'
+
+# redcloth provides a neat textile interface
+
 gem 'RedCloth' # note case sensitive!
 
-# need carrierwave for file uploading etc.
+# need carrierwave for file uploading with
+# rmagick useful for image scaling etc.
 
 gem "rmagick"
 gem "carrierwave"
+
+# barcode stuff - chunky_png needed for barcode 
+# PNG output from barby.
+
+gem "barby"
+gem "chunky_png"
 
 group :development do
   gem 'rspec-rails', '2.0.1'

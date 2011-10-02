@@ -1,0 +1,31 @@
+one:
+  code: MyString
+  cif: MyString
+  synth: MyString
+  coshh_name: MyString
+  coshh_desc: MyString
+  coshh_info: MyText
+  coshh_haz: MyString
+  params: MyString
+  status: MyString
+  priority: 1
+  powd: false
+  chiral: false
+  cost_code: MyString
+  barcode: MyString
+
+two:
+  code: MyString
+  cif: MyString
+  synth: MyString
+  coshh_name: MyString
+  coshh_desc: MyString
+  coshh_info: MyText
+  coshh_haz: MyString
+  params: MyString
+  status: MyString
+  priority: 1
+  powd: false
+  chiral: false
+  cost_code: MyString
+  barcode: MyString

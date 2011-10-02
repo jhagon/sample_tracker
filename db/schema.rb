@@ -10,7 +10,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20110925092701) do
+ActiveRecord::Schema.define(:version => 20111002104308) do
 
   create_table "assets", :force => true do |t|
     t.string   "document"
@@ -23,6 +23,25 @@ ActiveRecord::Schema.define(:version => 20110925092701) do
     t.string   "name"
     t.string   "permalink"
     t.text     "content"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "samples", :force => true do |t|
+    t.string   "code"
+    t.string   "cif"
+    t.string   "synth"
+    t.string   "coshh_name"
+    t.string   "coshh_desc"
+    t.text     "coshh_info"
+    t.string   "coshh_haz"
+    t.string   "params"
+    t.string   "status"
+    t.integer  "priority"
+    t.boolean  "powd"
+    t.boolean  "chiral"
+    t.string   "cost_code"
+    t.string   "barcode"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
