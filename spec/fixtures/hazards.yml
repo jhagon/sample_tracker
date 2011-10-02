@@ -1,0 +1,7 @@
+one:
+  hazard_desc: MyString
+  hazard_abbr: MyString
+
+two:
+  hazard_desc: MyString
+  hazard_abbr: MyString

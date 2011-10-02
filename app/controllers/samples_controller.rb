@@ -25,6 +25,7 @@ class SamplesController < ApplicationController
   end
 
   def update
+    params[:sample][:hazard_ids] ||= []
     @sample = Sample.find(params[:id])
     if @sample.update_attributes(params[:sample])
       redirect_to @sample, :notice  => "Successfully updated sample."

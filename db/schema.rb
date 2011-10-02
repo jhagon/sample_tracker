@@ -10,13 +10,25 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20111002104308) do
+ActiveRecord::Schema.define(:version => 20111002171231) do
 
   create_table "assets", :force => true do |t|
     t.string   "document"
     t.text     "description"
     t.datetime "created_at"
     t.datetime "updated_at"
+  end
+
+  create_table "hazards", :force => true do |t|
+    t.string   "hazard_desc"
+    t.string   "hazard_abbr"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "hazards_samples", :id => false, :force => true do |t|
+    t.integer "sample_id", :null => false
+    t.integer "hazard_id", :null => false
   end
 
   create_table "pages", :force => true do |t|
@@ -34,7 +46,6 @@ ActiveRecord::Schema.define(:version => 20111002104308) do
     t.string   "coshh_name"
     t.string   "coshh_desc"
     t.text     "coshh_info"
-    t.string   "coshh_haz"
     t.string   "params"
     t.string   "status"
     t.integer  "priority"

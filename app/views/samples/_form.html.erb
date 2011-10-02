@@ -1,8 +1,9 @@
 <%= form_for @sample, :html => {:multipart => true} do |f| %>
   <%= f.error_messages %>
   <p>
-    <%= f.label :code %><br />
-    <%= f.text_field :code %>
+Note an identifier for internal use and a unique barcode will be
+automatically generated on submission of this form.
+    <%= f.hidden_field :code %>
   </p>
   <p>
     <%= f.label :cif %><br />
@@ -26,9 +27,15 @@
     <%= f.text_area :coshh_info %>
   </p>
   <p>
-    <%= f.label :coshh_haz %><br />
-    <%= f.text_field :coshh_haz %>
+    <%= f.label "Chemical Hazard Information" %><br />
+    <% for hazard in Hazard.find(:all) %>
+    <div>
+      <%= check_box_tag "sample[hazard_ids][]", hazard.id, @sample.hazards.include?(hazard) %>
+      <%= hazard.hazard_desc %>
+    </div>
+    <% end %>
   </p>
+
   <p>
     <%= f.label :params %><br />
     <%= f.text_field :params %>
@@ -54,8 +61,7 @@
     <%= f.text_field :cost_code %>
   </p>
   <p>
-    <%= f.label :barcode %><br />
-    <%= f.text_field :barcode %>
+    <%= f.hidden_field :barcode %>
   </p>
   <p><%= f.submit %></p>
 <% end %>

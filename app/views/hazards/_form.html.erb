@@ -1,0 +1,12 @@
+<%= form_for @hazard do |f| %>
+  <%= f.error_messages %>
+  <p>
+    <%= f.label :hazard_desc %><br />
+    <%= f.text_field :hazard_desc %>
+  </p>
+  <p>
+    <%= f.label :hazard_abbr %><br />
+    <%= f.text_field :hazard_abbr %>
+  </p>
+  <p><%= f.submit %></p>
+<% end %>

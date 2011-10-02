@@ -1,0 +1,19 @@
+<% title "Hazards" %>
+
+<table>
+  <tr>
+    <th>Hazard Desc</th>
+    <th>Hazard Abbr</th>
+  </tr>
+  <% for hazard in @hazards %>
+    <tr>
+      <td><%= hazard.hazard_desc %></td>
+      <td><%= hazard.hazard_abbr %></td>
+      <td><%= link_to "Show", hazard %></td>
+      <td><%= link_to "Edit", edit_hazard_path(hazard) %></td>
+      <td><%= link_to "Destroy", hazard, :confirm => 'Are you sure?', :method => :delete %></td>
+    </tr>
+  <% end %>
+</table>
+
+<p><%= link_to "New Hazard", new_hazard_path %></p>

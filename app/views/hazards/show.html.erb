@@ -1,0 +1,16 @@
+<% title "Hazard" %>
+
+<p>
+  <strong>Hazard Desc:</strong>
+  <%= @hazard.hazard_desc %>
+</p>
+<p>
+  <strong>Hazard Abbr:</strong>
+  <%= @hazard.hazard_abbr %>
+</p>
+
+<p>
+  <%= link_to "Edit", edit_hazard_path(@hazard) %> |
+  <%= link_to "Destroy", @hazard, :confirm => 'Are you sure?', :method => :delete %> |
+  <%= link_to "View All", hazards_path %>
+</p>
