@@ -1,4 +1,24 @@
 class SamplesController < ApplicationController
+
+  def show_barcode
+
+    require 'barby'
+    require 'barby/barcode/code_39'
+    require 'barby/outputter/png_outputter'
+    #require 'barby/outputter/ascii_outputter'
+    @sample = Sample.find(params[:id])
+
+    barcode = Barby::Code39.new(@sample.barcode)
+
+    # puts barcode.to_ascii #Implicitly uses the AsciiOutputter
+
+    bcimage = barcode.to_png
+
+    send_data bcimage, :type => 'image/png', :disposition => 'inline'
+
+  end
+
+
   def index
     @samples = Sample.all
   end

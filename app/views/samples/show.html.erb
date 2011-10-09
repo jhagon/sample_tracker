@@ -1,16 +1,16 @@
-<% title "Sample" %>
+<% title "Sample #{@sample.code}" %>
 
-<p>
-  <strong>Code:</strong>
-  <%= @sample.code %>
-</p>
 <p>
   <strong>Cif:</strong>
   <%= @sample.cif %>
 </p>
 <p>
-  <strong>Synth:</strong>
-  <%= @sample.synth %>
+  <strong>Synthetic Route:</strong><br/>
+  <%= link_to   image_tag( @sample.synth_url(:thumb).to_s, 
+                :title => "Click for full size view in new window or tab.",
+                :alt => "Click for full size view in new window or tab."),
+                @sample.synth_url.to_s,
+                :target => "_blank"  %>
 </p>
 <p>
   <strong>Coshh Name:</strong>
@@ -53,7 +53,9 @@
 </p>
 <p>
   <strong>Barcode:</strong>
-  <%= @sample.barcode %>
+  <%= @sample.barcode %><br />
+  <%= image_tag url_for(:controller => "samples", :action => "show_barcode", :id => @sample.id) %>
+
 </p>
 <p>
   <strong>Hazard Categories</strong>

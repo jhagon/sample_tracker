@@ -18,14 +18,14 @@ class Sample < ActiveRecord::Base
   private
 
   def make_barcode
-  # create random 12 digit lowercase alphanumeric string
+  # create random 12 digit uppercase alphanumeric string
   # then set this to be the barcode.
     self.barcode = rand_alphanums
   end
 
   def rand_alphanums
   # create random 12 digit lowercase alphanumeric string
-    alphanums = [('0'..'9'),('a'..'z')].map {|range| range.to_a}.flatten
+    alphanums = [('0'..'9'),('A'..'Z')].map {|range| range.to_a}.flatten
     (0...11).map { alphanums[Kernel.rand(alphanums.size)] }.join
   end
 

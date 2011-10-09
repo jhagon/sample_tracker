@@ -9,6 +9,8 @@ SampleTracker::Application.routes.draw do
 
   match ':permalink', :controller => 'pages', :action => 'show'
 
+  match ':controller/:action/:id'
+
   # The priority is based upon order of creation:
   # first created -> highest priority.
 
