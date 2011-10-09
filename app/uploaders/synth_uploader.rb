@@ -2,10 +2,6 @@
 
 class SynthUploader < CarrierWave::Uploader::Base
 
-  def cache_dir
-    "#{Rails.root}/tmp/uploads"
-  end
-
 
   # Include RMagick or ImageScience support:
   include CarrierWave::RMagick
