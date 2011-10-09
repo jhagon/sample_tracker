@@ -4,6 +4,7 @@ class SamplesController < ApplicationController
   end
 
   def show
+    @hazards = Hazard.find(:all)
     @sample = Sample.find(params[:id])
   end
 
@@ -21,6 +22,7 @@ class SamplesController < ApplicationController
   end
 
   def edit
+    @hazards = Hazard.find(:all)
     @sample = Sample.find(params[:id])
   end
 

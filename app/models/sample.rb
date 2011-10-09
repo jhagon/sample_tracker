@@ -1,5 +1,5 @@
 class Sample < ActiveRecord::Base
-  attr_accessible :code, :cif, :synth, :coshh_name, :coshh_desc, :coshh_info, :coshh_haz, :params, :status, :priority, :powd, :chiral, :cost_code, :barcode
+  attr_accessible :hazard_ids, :code, :cif, :synth, :coshh_name, :coshh_desc, :coshh_info, :coshh_haz, :params, :status, :priority, :powd, :chiral, :cost_code, :barcode
   has_and_belongs_to_many :hazards
 
   validates :cif,        :presence => true

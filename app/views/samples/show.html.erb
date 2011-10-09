@@ -55,6 +55,15 @@
   <strong>Barcode:</strong>
   <%= @sample.barcode %>
 </p>
+<p>
+  <strong>Hazard Categories</strong>
+  <ul>
+  <% for hazard in @hazards %>
+    <% if @sample.hazards.include? hazard%>
+      <li><%=hazard.hazard_desc + "(" + hazard.hazard_abbr + ")"%></li>
+    <% end %>
+  <% end %>
+</p>
 
 <p>
   <%= link_to "Edit", edit_sample_path(@sample) %> |
