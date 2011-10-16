@@ -1,4 +1,6 @@
 SampleTracker::Application.routes.draw do
+  resources :groups
+
   resources :hazards
 
   resources :samples

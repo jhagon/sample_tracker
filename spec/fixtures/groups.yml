@@ -1,0 +1,7 @@
+one:
+  group_abbr: MyString
+  group_desc: MyString
+
+two:
+  group_abbr: MyString
+  group_desc: MyString

@@ -10,11 +10,18 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20111002171231) do
+ActiveRecord::Schema.define(:version => 20111016102709) do
 
   create_table "assets", :force => true do |t|
     t.string   "document"
     t.text     "description"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "groups", :force => true do |t|
+    t.string   "group_abbr", :limit => 3
+    t.string   "group_desc"
     t.datetime "created_at"
     t.datetime "updated_at"
   end

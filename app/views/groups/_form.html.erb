@@ -1,0 +1,12 @@
+<%= form_for @group do |f| %>
+  <%= f.error_messages %>
+  <p>
+    <%= f.label :group_abbr %><br />
+    <%= f.text_field :group_abbr %>
+  </p>
+  <p>
+    <%= f.label :group_desc %><br />
+    <%= f.text_field :group_desc %>
+  </p>
+  <p><%= f.submit %></p>
+<% end %>
