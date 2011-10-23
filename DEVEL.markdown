@@ -349,3 +349,30 @@ Add some validations for the group abbreviation:
 
 this restricts the abbreviation to a 3-capital letter unique string.
 
+PDF Generation
+==============
+
+Decided to use PDFkit for this. First installed wkhtmltopdf by downloading
+a static executable from the website and copying to /usr/local/bin and
+/usr/bin (just to be sure). Next the Gemfile for PDFKit:
+
+```
+gem "pdfkit"
+```
+
+After the usual @bundle install@, added a line near the end of
+the file @config/application.rb@:
+
+```
+    config.filter_parameters += [:password]
+    config.middleware.use "PDFKit::Middleware"
+  end
+end
+```
+
+Then did a @rake middleware@ to check that PDFKit was installed
+correctly. Now, appending @.pdf@ to a URL will render a PDF version
+of that page. Unfortunately you can really only check this in production
+mode because WEBrick is single-threaded (and still just displays the HTML).
+You can test that the URL is accepted by the server however, even if it
+doesn't display the HTML.

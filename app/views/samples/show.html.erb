@@ -31,8 +31,10 @@
 <p>
   <strong>Status:</strong>
   <%= @sample.status %>
+</p>
+<p>
   <strong>Updated:</strong>
-  <%= @sample.updated_at %>
+  <%= @sample.updated_at.localtime %>
 </p>
 <p>
   <strong>Priority:</strong>
@@ -66,7 +68,7 @@
   <% end %>
 </p>
 
-<p>
+<p id="pdf_link">
   <%= link_to "Edit", edit_sample_path(@sample) %> |
   <%= link_to "Destroy", @sample, :confirm => 'Are you sure?', :method => :delete %> |
   <%= link_to "View All", samples_path %>

@@ -19,6 +19,10 @@ gem "carrierwave"
 gem "barby"
 gem "chunky_png"
 
+# PDF middleware
+
+gem "pdfkit"
+
 group :development do
   gem 'rspec-rails', '2.0.1'
   gem 'mocha'
