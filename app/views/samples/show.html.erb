@@ -1,7 +1,7 @@
 <% title "Sample #{@sample.code}" %>
 
 <p>
-  <strong>Cif:</strong>
+  <strong>Chemical Formula:</strong>
   <%= @sample.cif %>
 </p>
 <p>
@@ -25,15 +25,14 @@
   <%= @sample.coshh_info %>
 </p>
 <p>
-  <strong>Chemical Hazards:</strong>
-</p>
-<p>
   <strong>Params:</strong>
   <%= @sample.params %>
 </p>
 <p>
   <strong>Status:</strong>
   <%= @sample.status %>
+  <strong>Updated:</strong>
+  <%= @sample.updated_at %>
 </p>
 <p>
   <strong>Priority:</strong>
