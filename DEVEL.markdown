@@ -318,7 +318,7 @@ users will ultimately be linked with.
 rails generate nifty:scaffold Group group_abbr:string group_desc:string
 ```
 
-Now we want to limit the abbreviation string to 4 characters so we
+Now we want to limit the abbreviation string to 3 characters so we
 create a new migration:
 
 ```
@@ -376,3 +376,50 @@ of that page. Unfortunately you can really only check this in production
 mode because WEBrick is single-threaded (and still just displays the HTML).
 You can test that the URL is accepted by the server however, even if it
 doesn't display the HTML.
+
+User Authentication with Devise
+===============================
+Followed Ryan Bates Railscast example. Added
+
+```
+gem 'devise', '1.4.9'
+```
+
+and then did a @bundle install@ followed by:
+
+```
+rails generate devise:install
+```
+
+note colon rather than underscore in the above command.
+Then needed to add the following to the development environment file
+@config/environments/development.rb@:
+
+```
+config.action_mailer.default_url_options = { :host => 'localhost:3000' }
+```
+
+For production, need to add a similar line to the
+@config/environments/development.rb@ file, but with the name of the
+actual machine replacing the @localhost:3000@ bit. You must also set an
+explicit @root_url@ in the @config/routes.rb@ file such as:
+
+```
+root :to => "home#index"
+```
+
+Also need to ensure you have flash messages in 
+@app/views/layouts/application.html.erb@, e.g.:
+
+```
+<p class="notice"><%= notice %></p>
+<p class="alert"><%= alert %></p>
+```
+
+This is achieved in the current application via some general flash code:
+
+```
+<% flash.each do |name, msg| %>
+  <%= content_tag :div, msg, :id => "flash_#{name}" %>
+<% end %>
+```
