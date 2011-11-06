@@ -1,4 +1,7 @@
 class PagesController < ApplicationController
+  def home
+    @page = Page.find_by_permalink('about')
+  end
   def index
     @pages = Page.all
   end

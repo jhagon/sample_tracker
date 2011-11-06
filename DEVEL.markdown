@@ -400,13 +400,26 @@ config.action_mailer.default_url_options = { :host => 'localhost:3000' }
 ```
 
 For production, need to add a similar line to the
-@config/environments/development.rb@ file, but with the name of the
+@config/environments/production.rb@ file, but with the name of the
 actual machine replacing the @localhost:3000@ bit. You must also set an
 explicit @root_url@ in the @config/routes.rb@ file such as:
 
 ```
-root :to => "home#index"
+root :to => "pages#home"
 ```
+
+For this to work, also created a home controller action for the page model
+in @app/controllers/pages_controller.rb@ (initially using the 'about'
+permalink but eventually this will be the 'home' permalink:
+
+```
+  def home
+    @page = Page.find_by_permalink('about')
+  end
+```
+
+and a view in @app/views/pages/home.html.erb@ - this was almost identical to
+the 'show' action view.
 
 Also need to ensure you have flash messages in 
 @app/views/layouts/application.html.erb@, e.g.:
@@ -416,10 +429,65 @@ Also need to ensure you have flash messages in
 <p class="alert"><%= alert %></p>
 ```
 
-This is achieved in the current application via some general flash code:
+This is achieved in the current application via some general flash code
+in the view template (@app/views/layouts/application.html.erb@):
 
 ```
 <% flash.each do |name, msg| %>
   <%= content_tag :div, msg, :id => "flash_#{name}" %>
 <% end %>
+```
+
+After this, followed the user setup as explained by Ryan Bates (the devise 
+docs also have clear instructions on how to do this).
+
+Defining the User and Group Relationship
+========================================
+We need a one-to-many relationship between groups and users (a group has 
+many users, but a user belongs to just one group. 
+First, we must add a group_id integer field to the user model by creating
+a migration as follows:
+
+```
+rails generate migration add_group_id_to_users group_id:integer
+```
+
+Also, we need the following entries in the user and group models
+respectively (the files user.rb and group.rb in app/models):
+
+```
+  has_many :users # group.rb
+
+  belongs_to :group # user.rb
+```
+
+The group_id field must be made accessible in the user model:
+
+```
+attr_accessible :email, :password, :password_confirmation, :remember_me, :group_id
+```
+
+We need to customise views in devise, so we first ask devise to generate files
+for its default views (which are normally stored in the devise 'engine':
+
+```
+rails generate devise:views
+```
+
+This creates a lot of views which we can now edit to include groups.
+The first files to change are the new user registration form and edit form:
+
+```
+app/views/devise/registrations/new.html.erb
+app/views/devise/registrations/edit.html.erb
+```
+
+In the user form, we can now add a group select dropdown thus ( note that
+the call to select is NOT preceded by the form object reference, i.e.
+not f.select just select):
+
+```
+  <div><%= f.label "Group" %><br />
+  <%= select(:user, :group_id, Group.all.collect {|g| [ g.group_desc, g.id ] },
+    {:include_blank => 'None'}) %></div>
 ```
