@@ -491,3 +491,67 @@ not f.select just select):
   <%= select(:user, :group_id, Group.all.collect {|g| [ g.group_desc, g.id ] },
     {:include_blank => 'None'}) %></div>
 ```
+
+Modifying the User Model
+========================
+Needed to add a few more fields to the devise user model. First added a
+boolean 'admin' field to denote whether a user is an administrator.
+Did this via a migration as usual:
+
+```
+rails generate migration add_admin_to_user admin:boolean
+```
+
+Wanted to make the default for this @false@ so modified the migration
+file by adding a @:default => false@ directive to @add-column@:
+
+```
+class AddAdminToUser < ActiveRecord::Migration
+  def self.up
+    add_column :users, :admin, :boolean, :default => false
+  end
+
+  def self.down
+    remove_column :users, :admin
+  end
+end
+```
+
+Then did a @rake db:migrate and restarted the server. Then did a similar
+thing to add @firstname@ and @lastname@ text fields. After this, edited
+the user model file to make these new fields attribute accessible
+in @app/models/user.rb@:
+
+```
+class User < ActiveRecord::Base
+  # Include default devise modules. Others available are:
+  # :token_authenticatable, :encryptable, :confirmable, :lockable, :timeoutable and :omniauthable
+  devise :database_authenticatable, :registerable,
+         :recoverable, :rememberable, :trackable, :validatable
+
+  # Setup accessible (or protected) attributes for your model
+  attr_accessible :email, :password, :password_confirmation, :remember_me, :group_id, :firstname, :lastname, :admin
+end
+```
+
+Unfortunately, attempting to regenerate the devise views with:
+
+```
+rails generate devise:views
+```
+
+doesn't add entries for the new fields. Worse, it deletes the references
+to the user group in the existing forms as created previously. Hence,
+the new fields needed to be added to the forms:
+
+```
+  <div><%= f.label 'First Name' %><br />
+  <%= f.text_field :firstname %></div>
+
+  <div><%= f.label 'Last Name' %><br />
+  <%= f.text_field :lastname %></div>
+```
+
+Note that the admin entry was not added, since it defaults to @false@.
+It will (eventually) be available only for an administrator to edit.
+The group reference was reinstated as before.

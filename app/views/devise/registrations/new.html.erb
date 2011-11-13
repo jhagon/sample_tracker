@@ -6,6 +6,12 @@
   <div><%= f.label :email %><br />
   <%= f.email_field :email %></div>
 
+  <div><%= f.label 'First Name' %><br />
+  <%= f.text_field :firstname %></div>
+
+  <div><%= f.label 'Last Name' %><br />
+  <%= f.text_field :lastname %></div>
+
   <div><%= f.label :password %><br />
   <%= f.password_field :password %></div>
 
@@ -13,11 +19,11 @@
   <%= f.password_field :password_confirmation %></div>
 
   <div><%= f.label "Group" %><br />
-  <%= select(:user, :group_id, Group.all.collect {|g| [ g.group_desc, g.id ] }, 
+  <%= select(:user, :group_id, Group.all.collect {|g| [ g.group_desc, g.id ] },
     {:include_blank => 'None'}) %></div>
 
 
-  <div><%= f.submit "Sign up" %></div>
+  <br /><div><%= f.submit "Sign up" %></div>
 <% end %>
 
 <%= render :partial => "devise/shared/links" %>
