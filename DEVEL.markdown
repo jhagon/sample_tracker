@@ -360,8 +360,8 @@ a static executable from the website and copying to /usr/local/bin and
 gem "pdfkit"
 ```
 
-After the usual @bundle install@, added a line near the end of
-the file @config/application.rb@:
+After the usual `bundle install`, added a line near the end of
+the file `config/application.rb`:
 
 ```
     config.filter_parameters += [:password]
@@ -370,8 +370,8 @@ the file @config/application.rb@:
 end
 ```
 
-Then did a @rake middleware@ to check that PDFKit was installed
-correctly. Now, appending @.pdf@ to a URL will render a PDF version
+Then did a `rake middleware` to check that PDFKit was installed
+correctly. Now, appending `.pdf` to a URL will render a PDF version
 of that page. Unfortunately you can really only check this in production
 mode because WEBrick is single-threaded (and still just displays the HTML).
 You can test that the URL is accepted by the server however, even if it
@@ -385,7 +385,7 @@ Followed Ryan Bates Railscast example. Added
 gem 'devise', '1.4.9'
 ```
 
-and then did a @bundle install@ followed by:
+and then did a `bundle install` followed by:
 
 ```
 rails generate devise:install
@@ -393,23 +393,23 @@ rails generate devise:install
 
 note colon rather than underscore in the above command.
 Then needed to add the following to the development environment file
-@config/environments/development.rb@:
+`config/environments/development.rb`:
 
 ```
 config.action_mailer.default_url_options = { :host => 'localhost:3000' }
 ```
 
 For production, need to add a similar line to the
-@config/environments/production.rb@ file, but with the name of the
-actual machine replacing the @localhost:3000@ bit. You must also set an
-explicit @root_url@ in the @config/routes.rb@ file such as:
+`config/environments/production.rb` file, but with the name of the
+actual machine replacing the `localhost:3000` bit. You must also set an
+explicit @root_url@ in the `config/routes.rb` file such as:
 
 ```
 root :to => "pages#home"
 ```
 
 For this to work, also created a home controller action for the page model
-in @app/controllers/pages_controller.rb@ (initially using the 'about'
+in `app/controllers/pages_controller.rb` (initially using the 'about'
 permalink but eventually this will be the 'home' permalink:
 
 ```
@@ -418,11 +418,11 @@ permalink but eventually this will be the 'home' permalink:
   end
 ```
 
-and a view in @app/views/pages/home.html.erb@ - this was almost identical to
+and a view in `app/views/pages/home.html.erb` - this was almost identical to
 the 'show' action view.
 
 Also need to ensure you have flash messages in 
-@app/views/layouts/application.html.erb@, e.g.:
+`app/views/layouts/application.html.erb`, e.g.:
 
 ```
 <p class="notice"><%= notice %></p>
@@ -430,7 +430,7 @@ Also need to ensure you have flash messages in
 ```
 
 This is achieved in the current application via some general flash code
-in the view template (@app/views/layouts/application.html.erb@):
+in the view template (`app/views/layouts/application.html.erb`):
 
 ```
 <% flash.each do |name, msg| %>
@@ -503,7 +503,7 @@ rails generate migration add_admin_to_user admin:boolean
 ```
 
 Wanted to make the default for this @false@ so modified the migration
-file by adding a @:default => false@ directive to @add-column@:
+file by adding a `:default => false` directive to `add-column`:
 
 ```
 class AddAdminToUser < ActiveRecord::Migration
@@ -517,10 +517,10 @@ class AddAdminToUser < ActiveRecord::Migration
 end
 ```
 
-Then did a @rake db:migrate and restarted the server. Then did a similar
-thing to add @firstname@ and @lastname@ text fields. After this, edited
+Then did a `rake db:migrate` and restarted the server. Then did a similar
+thing to add `firstname` and `lastname` text fields. After this, edited
 the user model file to make these new fields attribute accessible
-in @app/models/user.rb@:
+in `app/models/user.rb`:
 
 ```
 class User < ActiveRecord::Base
@@ -552,6 +552,6 @@ the new fields needed to be added to the forms:
   <%= f.text_field :lastname %></div>
 ```
 
-Note that the admin entry was not added, since it defaults to @false@.
+Note that the admin entry was not added, since it defaults to `false`.
 It will (eventually) be available only for an administrator to edit.
 The group reference was reinstated as before.
