@@ -583,3 +583,10 @@ The user_id field must be made accessible in the sample model:
                   :coshh_info, :coshh_haz, :params, :status, :priority, 
                   :powd, :chiral, :cost_code, :barcode, :user_id
 ```
+
+Basic Refinement of Views
+=========================
+Next, refine some of the views. For example, the samples index really
+needs to show only a few basic things - so we strip off things such
+as the reaction pathway image and add a column to show the user who
+submitted the sample and his research group.
