@@ -555,3 +555,31 @@ the new fields needed to be added to the forms:
 Note that the admin entry was not added, since it defaults to `false`.
 It will (eventually) be available only for an administrator to edit.
 The group reference was reinstated as before.
+
+Defining the Sample and User Relationship
+========================================
+We need a one-to-many relationship between users and samples (a user has
+many samples, but a sample belongs to just one user.
+First, we must add a user_id integer field to the sample model by creating
+a migration as follows:
+
+```
+rails generate migration add_user_id_to_samples user_id:integer
+```
+
+Also, we need the following entries in the sample and user models
+respectively (the files sample.rb and user.rb in app/models):
+
+```
+  has_many :samples # user.rb
+
+  belongs_to :user # sample.rb
+```
+
+The user_id field must be made accessible in the sample model:
+
+```
+  attr_accessible :hazard_ids, :code, :cif, :synth, :coshh_name, :coshh_desc, 
+                  :coshh_info, :coshh_haz, :params, :status, :priority, 
+                  :powd, :chiral, :cost_code, :barcode, :user_id
+```
