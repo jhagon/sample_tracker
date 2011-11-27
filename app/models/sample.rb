@@ -14,7 +14,7 @@ class Sample < ActiveRecord::Base
 
   mount_uploader :synth, SynthUploader
 
-  before_create :make_barcode, :make_code
+  before_create :make_barcode
 
   private
 
@@ -28,11 +28,6 @@ class Sample < ActiveRecord::Base
   # create random 12 digit lowercase alphanumeric string
     alphanums = [('0'..'9'),('A'..'Z')].map {|range| range.to_a}.flatten
     (0...11).map { alphanums[Kernel.rand(alphanums.size)] }.join
-  end
-
-  def make_code
-    x = Time.now
-    self.code = 'ABC-DEF-' + x.strftime('%g') + '-001'
   end
 
 end

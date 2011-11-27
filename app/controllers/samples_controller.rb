@@ -1,5 +1,34 @@
 class SamplesController < ApplicationController
 
+  before_filter :authenticate_user!
+
+  def make_sample_code
+    x = Time.now
+    grp = current_user.group.group_abbr
+    usr = current_user.firstname.first.upcase +
+           current_user.lastname.first.upcase
+    yr  = x.strftime('%g')
+    num = create_sample_num
+    "#{grp}-#{usr}-#{yr}-#{num}"
+  end
+
+  def create_sample_num
+    x = Time.now
+    yr = x.strftime('%g')
+    grp = current_user.group.group_abbr
+    samps = Sample.where('code LIKE ?', "#{grp}-%-#{yr}-%").all
+    if (samps.length > 0)
+      str = samps.last.code
+      last_num = /\d\d\d\d$/.match(str)[0].to_i
+      new_num = last_num + 1
+      # now an amazing idiom to convert to 4 digit string!
+      return "%04d" % new_num
+    else
+      return 1
+    end
+  end
+
+
   def show_barcode
 
     require 'barby'
@@ -30,10 +59,12 @@ class SamplesController < ApplicationController
 
   def new
     @sample = Sample.new
+    @sample.code = make_sample_code
   end
 
   def create
-    @sample = Sample.new(params[:sample])
+    # @sample = Sample.new(params[:sample])
+    @sample = current_user.samples.build params[:sample]
     if @sample.save
       redirect_to @sample, :notice => "Successfully created sample."
     else
