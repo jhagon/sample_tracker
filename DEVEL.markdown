@@ -584,6 +584,22 @@ The user_id field must be made accessible in the sample model:
                   :powd, :chiral, :cost_code, :barcode, :user_id
 ```
 
+When creating a sample, the user is associated with it via this simple
+piece of code in the create function of the sample controller (note the
+current_user function supplied by devise):
+
+```
+  def create
+    # @sample = Sample.new(params[:sample])
+    @sample = current_user.samples.build params[:sample]
+    if @sample.save
+      redirect_to @sample, :notice => "Successfully created sample."
+    else
+      render :action => 'new'
+    end
+  end
+```
+
 Basic Refinement of Views
 =========================
 Next, refine some of the views. For example, the samples index really
@@ -611,5 +627,43 @@ a number which is incremented for that supervisor but reset to
 zero at the start of each calendar year. The AAA part is taken from the
 three letter group abbreviation and the AA part is taken from the
 user initials. the year is trivial and a bit of code is needed to generate
-the 4-digit trailing number. The code to do this goes in the sample
-data model.
+the 4-digit trailing number. The code to do this goes in the controller
+rather than the model, since it relies on pulling information from the
+user and group tables. Here is the code in the samples controller file:
+
+```
+  def make_sample_code
+    x = Time.now
+    grp = current_user.group.group_abbr
+    usr = current_user.firstname.first.upcase +
+           current_user.lastname.first.upcase
+    yr  = x.strftime('%g')
+    num = create_sample_num
+    "#{grp}-#{usr}-#{yr}-#{num}"
+  end
+
+  def create_sample_num
+    x = Time.now
+    yr = x.strftime('%g')
+    grp = current_user.group.group_abbr
+    samps = Sample.where('code LIKE ?', "#{grp}-%-#{yr}-%").all
+    if (samps.length > 0)
+      str = samps.last.code
+      last_num = /\d\d\d\d$/.match(str)[0].to_i
+      new_num = last_num + 1
+      # now an amazing idiom to convert to 4 digit string!
+      return "%04d" % new_num
+    else
+      return 1
+    end
+  end
+```
+
+These functions are then used later in the 'new' function:
+
+```
+  def new
+    @sample = Sample.new
+    @sample.code = make_sample_code
+  end
+```
