@@ -2,9 +2,19 @@
 
   <%= raw RedCloth.new(@page.content).to_html %>
 
+<% if user_signed_in? %>
+
+<% if current_user.admin? %>
 <p>
   <%= link_to "Edit", edit_page_path(@page) %> |
   <%= link_to "Destroy", @page, :confirm => 'Are you sure?', :method => :delete %> |
   <%= link_to "View All", pages_path %> |
   <%= link_to "Input Help", "http://en.wikipedia.org/wiki/Textile_%28markup_language%29", :target => "_blank" %>
 </p>
+
+<% else %>
+<p>
+</p>
+<% end %>
+
+<% end %>

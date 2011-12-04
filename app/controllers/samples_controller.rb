@@ -17,6 +17,8 @@ class SamplesController < ApplicationController
     yr = x.strftime('%g')
     grp = current_user.group.group_abbr
     samps = Sample.where('code LIKE ?', "#{grp}-%-#{yr}-%").all
+    # check if anyone from this group has submitted a sample this year
+    # if yes, incr the most recent code number by 1 else return "0001"
     if (samps.length > 0)
       str = samps.last.code
       last_num = /\d\d\d\d$/.match(str)[0].to_i
@@ -24,7 +26,7 @@ class SamplesController < ApplicationController
       # now an amazing idiom to convert to 4 digit string!
       return "%04d" % new_num
     else
-      return 1
+      return "%04d" % 1
     end
   end
 
