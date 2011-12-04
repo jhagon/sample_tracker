@@ -1,7 +1,8 @@
 class Sample < ActiveRecord::Base
-  attr_accessible :hazard_ids, :code, :cif, :synth, :coshh_name, :coshh_desc, :coshh_info, :coshh_haz, :params, :status, :priority, :powd, :chiral, :cost_code, :barcode, :user_id
+  attr_accessible :hazard_ids, :code, :cif, :synth, :coshh_name, :coshh_desc, :coshh_info, :coshh_haz, :params, :priority, :powd, :chiral, :cost_code, :barcode, :user_id, :flag_id
   has_and_belongs_to_many :hazards
   belongs_to :user
+  belongs_to :flag
 
   validates :cif,        :presence => true
   validates :synth,      :presence => true
@@ -9,7 +10,6 @@ class Sample < ActiveRecord::Base
   validates :coshh_info, :presence => true
   validates :coshh_desc, :presence => true
   validates :params,     :presence => true
-  validates :status,     :presence => true
   validates :priority,   :presence => true
 
   mount_uploader :synth, SynthUploader

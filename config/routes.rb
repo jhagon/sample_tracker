@@ -1,4 +1,6 @@
 SampleTracker::Application.routes.draw do
+  resources :flags
+
   devise_for :users
 
   resources :groups

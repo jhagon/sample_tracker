@@ -654,7 +654,7 @@ user and group tables. Here is the code in the samples controller file:
       # now an amazing idiom to convert to 4 digit string!
       return "%04d" % new_num
     else
-      return 1
+      return "%04d" % 1
     end
   end
 ```
@@ -666,4 +666,161 @@ These functions are then used later in the 'new' function:
     @sample = Sample.new
     @sample.code = make_sample_code
   end
+```
+
+View and Controller Permissions: Making a Start
+===============================================
+
+First, we change the permissions on the semi-static pages by making the
+Edit/Destroy etc links disappear for all users (whether signed-in or not)
+except when a user is signed in and is an administrator. This needs only
+to be done for the @home.html.erb@ and @show.html.erb@ views.
+Here's the code we use:
+
+```
+<% if user_signed_in? %>
+
+<% if current_user.admin? %>
+<p>
+  <%= link_to "Edit", edit_page_path(@page) %> |
+  <%= link_to "Destroy", @page, :confirm => 'Are you sure?', :method => :delete %> |
+  <%= link_to "View All", pages_path %> |
+  <%= link_to "Input Help", "http://en.wikipedia.org/wiki/Textile_%28markup_language%29", :target => "_blank" %>
+</p>
+
+<% else %>
+<p>
+</p>
+<% end %>
+
+<% end %>
+```
+
+Of course, this just prevents the links being seen --- we still need to
+protect the controllers. Do this by defining a before filter
+called @admin_required@ in the @application_controller.rb@ file:
+
+```
+  def admin_required
+    return true if user_signed_in? and current_user.admin?
+    session[:return_to] = request.request_uri
+    redirect_to root_url,
+             :alert => 
+             "You must be an administrator to do this!" and return false
+  end
+```
+
+We then make use of this in the pages controller file:
+
+```
+  before_filter :admin_required, :only => [ :new, :create, :index, :edit,
+                                            :update, :destroy ]
+```
+
+In this way, we protect the semi-static pages from being edited
+by an unauthorized user.
+
+Setting up a Status Flag Table
+==============================
+It was decided to set up a special table to hold status flag strings. The
+table is very simple, consisting of a string field and a text field
+to hold the status flag and some brief explanatory text.
+As usual, RB's nifty generators were used:
+
+```
+rails generate nifty:scaffold Flag name:string description:text
+```
+
+We need a one-to-many relationship between status flags and samples 
+(a flag can be associated with many samples, but a sample has just one 
+status flag at any one time.
+First, we must add a flag_id integer field to the sample model by creating
+a migration as follows:
+
+```
+rails generate migration add_flag_id_to_samples flag_id:integer
+```
+
+Also, we need the following entries in the sample and flag models
+respectively (the files sample.rb and flag.rb in app/models):
+
+```
+  has_many :samples # flag.rb
+
+  belongs_to :flag # sample.rb
+```
+We now remove @:status@ from the attr_accessible flag of the sample model
+as well as its validation line from @app/models/sample.rb@.
+Of course, we must now also remove the status field from the sample model.
+Do this with a migration:
+
+```
+rails generate migration remove_status_from_sample
+```
+
+Edit the migration to contain the following code:
+
+```
+class RemoveHazardFromSample < ActiveRecord::Migration
+  def self.up
+    remove_column :samples, :status
+  end
+
+  def self.down
+    add_column :samples, :status, :string
+  end
+end
+```
+
+Forcing a Default Status Flag for a New Sample
+==============================================
+This seemed a sensible thing to do, so a migration was applied. The
+migration file had the following content:
+
+```
+class AddDefaultValueForStatusToSample < ActiveRecord::Migration
+  def self.up
+    change_column :samples, :flag_id, :integer, :default => 1, :null => false
+  end
+
+  def self.down
+    change_column :samples, :flag_id, :integer
+  end
+end
+```
+
+Adding User sample Listing on Edit User Page
+===========================================
+This is achieved by editing the @app/views/devise/registrations/edit.html.erb@
+page with the following code:
+
+```
+<h3><%="My Samples" %></h3>
+
+<table>
+  <tr>
+    <th>Code</th>
+    <th>Params</th>
+    <th>Status</th>
+    <th>Update</th>
+    <th>Priority</th>
+    <th>Powd</th>
+    <th>Chiral</th>
+    <th>Cost Code</th>
+    <th>Group</th>
+  </tr>
+  <% for sample in @user.samples %>
+    <tr>
+      <td><%= sample.code %></td>
+      <td><%= sample.params %></td>
+      <td><%= sample.flag.name %></td>
+      <td><%= sample.updated_at %></td>
+      <td><%= sample.priority %></td>
+      <td><%= sample.powd %></td>
+      <td><%= sample.chiral %></td>
+      <td><%= sample.cost_code %></td>
+      <td><%= link_to "Show", sample %></td>
+    </tr>
+  <% end %>
+</table>
 ```

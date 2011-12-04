@@ -1,4 +1,6 @@
 class PagesController < ApplicationController
+  before_filter :admin_required, :only => [ :new, :create, :index, :edit,
+                                            :update, :destroy ]
   def home
     @page = Page.find_by_permalink('about')
   end

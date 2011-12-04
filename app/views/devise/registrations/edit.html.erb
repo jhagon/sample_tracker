@@ -34,6 +34,35 @@
   <br /><div><%= f.submit "Update" %></div>
 <% end %>
 
+<h3><%="My Samples" %></h3>
+
+<table>
+  <tr>
+    <th>Code</th>
+    <th>Params</th>
+    <th>Status</th>
+    <th>Update</th>
+    <th>Priority</th>
+    <th>Powd</th>
+    <th>Chiral</th>
+    <th>Cost Code</th>
+    <th>Group</th>
+  </tr>
+  <% for sample in @user.samples %>
+    <tr>
+      <td><%= sample.code %></td>
+      <td><%= sample.params %></td>
+      <td><%= sample.flag.name %></td>
+      <td><%= sample.updated_at %></td>
+      <td><%= sample.priority %></td>
+      <td><%= sample.powd %></td>
+      <td><%= sample.chiral %></td>
+      <td><%= sample.cost_code %></td>
+      <td><%= link_to "Show", sample %></td>
+    </tr>
+  <% end %>
+</table>
+
 <h3>Cancel my account</h3>
 
 <p>Unhappy? <%= link_to "Cancel my account", registration_path(resource_name), :confirm => "Are you sure?", :method => :delete %>.</p>

@@ -10,10 +10,17 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20111120142932) do
+ActiveRecord::Schema.define(:version => 20111204171820) do
 
   create_table "assets", :force => true do |t|
     t.string   "document"
+    t.text     "description"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "flags", :force => true do |t|
+    t.string   "name"
     t.text     "description"
     t.datetime "created_at"
     t.datetime "updated_at"
@@ -54,7 +61,6 @@ ActiveRecord::Schema.define(:version => 20111120142932) do
     t.string   "coshh_desc"
     t.text     "coshh_info"
     t.string   "params"
-    t.string   "status"
     t.integer  "priority"
     t.boolean  "powd"
     t.boolean  "chiral"
@@ -63,6 +69,7 @@ ActiveRecord::Schema.define(:version => 20111120142932) do
     t.datetime "created_at"
     t.datetime "updated_at"
     t.integer  "user_id"
+    t.integer  "flag_id",    :default => 1, :null => false
   end
 
   create_table "uploads", :force => true do |t|

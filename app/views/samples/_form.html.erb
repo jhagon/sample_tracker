@@ -40,9 +40,14 @@ automatically generated on submission of this form.
     <%= f.label :params %><br />
     <%= f.text_field :params %>
   </p>
+  <% if user_signed_in? and current_user.admin? %>
   <p>
-    <%= f.label :status %><br />
-    <%= f.text_field :status %>
+  <div><%= f.label "Status Flag" %><br />
+  <%= select(:sample, :flag_id, Flag.all.collect {|f| [ f.name, f.id ] })
+    %></div>
+  </p>
+  <% end %>
+
   </p>
   <p>
     <%= f.label :priority %><br />

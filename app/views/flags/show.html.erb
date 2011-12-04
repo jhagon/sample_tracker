@@ -1,0 +1,16 @@
+<% title "Flag" %>
+
+<p>
+  <strong>Name:</strong>
+  <%= @flag.name %>
+</p>
+<p>
+  <strong>Description:</strong>
+  <%= @flag.description %>
+</p>
+
+<p>
+  <%= link_to "Edit", edit_flag_path(@flag) %> |
+  <%= link_to "Destroy", @flag, :confirm => 'Are you sure?', :method => :delete %> |
+  <%= link_to "View All", flags_path %>
+</p>
