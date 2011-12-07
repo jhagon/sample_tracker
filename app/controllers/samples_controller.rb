@@ -1,6 +1,8 @@
 class SamplesController < ApplicationController
 
   before_filter :authenticate_user!
+  before_filter :must_be_creator_or_admin, :only => :show
+  before_filter :admin_required, :only => [:index, :edit, :update, :destroy]
 
   def make_sample_code
     x = Time.now
@@ -94,4 +96,16 @@ class SamplesController < ApplicationController
     @sample.destroy
     redirect_to samples_url, :notice => "Successfully destroyed sample."
   end
+
+private
+
+  def must_be_creator_or_admin
+    sample = Sample.find(params[:id])
+    return true if (user_signed_in? and (current_user.admin? or current_user==sample.user))
+    session[:return_to] = request.request_uri
+    redirect_to root_url,
+             :alert =>
+             "You must be the sample owner or an administrator to view this sample!" and return false
+  end
+
 end

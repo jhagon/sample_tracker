@@ -824,3 +824,155 @@ page with the following code:
   <% end %>
 </table>
 ```
+
+Adding an Explicit Users Controller
+===================================
+To enable users to see a 'show' page, needed to add a users controller
+(since we're using a 'user' model in devise (@app/controllers/users_controller.rb@):
+
+```
+class UsersController < ApplicationController
+  def show
+    @user = current_user
+  end
+end
+```
+
+and then construct an appropriate view listing the user's details and his
+list of samples (@app/views/users/show.html.erb@):
+
+```
+<h2><%= "#{@user.firstname} #{@user.lastname}"%></h2>
+
+
+<p>
+  <strong>Group</strong>
+  <%= "#{@user.group.group_desc}(#{@user.group.group_abbr})" %>
+</p>
+<p>
+  <strong>EMail</strong>
+  <%=@user.email %>
+</p>
+<p>
+  <strong>Administrator?</strong>
+  <%=@user.admin? ? 'yes' : 'no' %>
+</p>
+
+<h3><%="Samples" %></h3>
+
+<table>
+  <tr>
+    <th>Code</th>
+    <th>Params</th>
+    <th>Status</th>
+    <th>Update</th>
+    <th>Priority</th>
+    <th>Powd</th>
+    <th>Chiral</th>
+    <th>Cost Code</th>
+    <th>Group</th>
+  </tr>
+  <% for sample in @user.samples %>
+    <tr>
+      <td><%= sample.code %></td>
+      <td><%= sample.params %></td>
+      <td><%= sample.flag.name %></td>
+      <td><%= sample.updated_at %></td>
+      <td><%= sample.priority %></td>
+      <td><%= sample.powd %></td>
+      <td><%= sample.chiral %></td>
+      <td><%= sample.cost_code %></td>
+      <td><%= link_to "Show", sample %></td>
+    </tr>
+  <% end %>
+</table>
+
+<%= link_to "Back", :back %>
+```
+
+Adding Some Admin Links
+=======================
+Administrators will need to add/edit pages, assets, research groups, hazards,
+samples and status flags. To put links to the edit menus for these, we
+edit the @app/views/layouts/application.html.erb@ file. To achieve what we
+want, we edit the following container in the layout:
+
+```
+  <div id="user_nav">
+    <% if user_signed_in? %>
+      Signed in as <%= current_user.email %>. Not you?
+      <%= link_to "Sign out", destroy_user_session_path, :method => :delete %>
+      <br />
+      <%= link_to 'My Samples', "/users/show/#{current_user.id}" %>
+    <% else %>
+      <%= link_to "Sign up", new_user_registration_path %> or
+      <%= link_to "Sign in", new_user_session_path %>
+    <% end %>
+  </div>
+```
+
+Note that we have used the user show controller action and view.
+Also add an extra layout for admins:
+
+```
+  <div id="admin_nav">
+    <% if user_signed_in? and current_user.admin?%>
+      Admin Tools:
+      <%= link_to 'Hazards', hazards_path %> |
+      <%= link_to 'User Groups', groups_path %> |
+      <%= link_to 'Assets', assets_path %> |
+      <%= link_to 'Pages', pages_path %> |
+      <%= link_to 'Status Flags', flags_path %> |
+      <%= link_to 'Samples', samples_path %>
+    <% else %>
+    <% end %>
+  </div>
+```
+
+Restricting Users
+=================
+To stop users editing samples, we remove the Edit|Destroy|View All options
+at the bottom of the show page if they are not an admin. Then we also
+restrict their ability to do this completely (even if they know the
+correct action URL) in the controller.
+So, in @app/views/samples/show.html.erb@ we have:
+
+```
+<% if current_user.admin? %>
+<p id="pdf_link">
+  <%= link_to "Edit", edit_sample_path(@sample) %> |
+  <%= link_to "Destroy", @sample, :confirm => 'Are you sure?', :method => :delete %> |
+  <%= link_to "View All", samples_path %>
+</p>
+<% end %>
+```
+In the samples controller we add the following:
+
+```
+before_filter :admin_required :only => [:edit, :update, :destroy]
+```
+
+To prevent users viewing samples other than their own, we have this
+in the samples controller:
+
+```
+  before_filter :must_be_creator_or_admin, :only => :show
+```
+
+with the filter code in the same file (since it's specific to the samples
+controller):
+
+```
+private
+
+  def must_be_creator_or_admin
+    sample = Sample.find(params[:id])
+    return true if (user_signed_in? and (current_user.admin? or current_user==sample.user))
+    session[:return_to] = request.request_uri
+    redirect_to root_url,
+             :alert =>
+             "You must be the sample owner or an administrator to view this sample!" and return false
+  end
+```
+
+Notice, it's in a private block to be safe.

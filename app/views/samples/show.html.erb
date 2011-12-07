@@ -1,5 +1,4 @@
 <% title "Sample #{@sample.code}" %>
-
 <p>
   <strong>Chemical Formula:</strong>
   <%= @sample.cif %>
@@ -67,9 +66,10 @@
     <% end %>
   <% end %>
 </p>
-
+<% if current_user.admin? %>
 <p id="pdf_link">
   <%= link_to "Edit", edit_sample_path(@sample) %> |
   <%= link_to "Destroy", @sample, :confirm => 'Are you sure?', :method => :delete %> |
   <%= link_to "View All", samples_path %>
 </p>
+<% end %>
