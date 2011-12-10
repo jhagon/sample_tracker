@@ -976,3 +976,18 @@ private
 ```
 
 Notice, it's in a private block to be safe.
+
+Sorting Columns
+===============
+It is important that the samples column be easily sortable. Used Ryan
+Bates' method described in Railscasts 228. Unfortunately, this is not
+the full answer because it only works on 'native' fields and not 
+fields in related tables. For this I added some extra code using
+SQL join instructions. This is not perfect because (amongst other things)
+it is database-dependent, but for now it'll do. 
+
+There is yet another problem with ordering samples by group - this is
+because the group is not directly related to the sample. Rather, the
+relationship is via the user, i.e. group --> user --> sample. It may
+not be necessary to implement this (instead have a search box which
+allows a listing of samples by group).
