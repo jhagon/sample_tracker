@@ -46,6 +46,22 @@ Apache configuration file and set its DocumentRoot to /somewhere/public:
       </Directory>
    </VirtualHost>
 ```
+
+Also, need to do a full deployment bundle install to be safe:
+
+```
+bundle install --deployment
+```
+
+Mailer config
+=============
+
+Add this line to config/environments/production.rb:
+
+```
+  # standard mailer setup
+  config.action_mailer.delivery_method = :sendmail
+```
 Finally, need to initialize the production database:
 
 ```

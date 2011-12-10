@@ -2,16 +2,16 @@
 
 <table>
   <tr>
-    <th>Code</th>
+    <th><%= sortable "code", "Code" %></th>
     <th>Params</th>
-    <th>Status</th>
-    <th>Update</th>
-    <th>Priority</th>
+    <th><%= jsortable "name", "Status", "flags" %></th>
+    <th><%= sortable "updated_at", "Updated" %></th>
+    <th><%= sortable "priority", "Priority" %></th>
     <th>Powd</th>
     <th>Chiral</th>
-    <th>Cost Code</th>
-    <th>User</th>
-    <th>Group</th>
+    <th><%= sortable "cost_code", "Cost Code" %></th>
+    <th><%= jsortable "lastname", "User", "users" %></th>
+    <th><%= sortable "group_id", "Group" %></th>
   </tr>
   <% for sample in @samples %>
     <tr>

@@ -1,4 +1,5 @@
 class SamplesController < ApplicationController
+  helper_method :sort_column, :sort_direction, :join_sql, :join_column_sort
 
   before_filter :authenticate_user!
   before_filter :must_be_creator_or_admin, :only => :show
@@ -53,7 +54,11 @@ class SamplesController < ApplicationController
 
 
   def index
-    @samples = Sample.all
+    if (params[:jtable])
+      @samples = Sample.joins(join_sql).order(join_column_sort + " " + sort_direction)
+    else
+      @samples = Sample.order(sort_column + " " + sort_direction)
+    end
   end
 
   def show
@@ -106,6 +111,29 @@ private
     redirect_to root_url,
              :alert =>
              "You must be the sample owner or an administrator to view this sample!" and return false
+  end
+
+  def sort_column
+    Sample.column_names.include?(params[:sort]) ? params[:sort] : "code"
+  end
+  
+  def sort_direction
+    %w[asc desc].include?(params[:direction]) ? params[:direction] : "asc"
+  end
+
+  def join_sql
+#  constructs something like  "join flags on samples.flag_id = flags.id"
+#
+# used multiple equals statements because of strange behaviour
+# when adding strings in one expression running over multiple lines.
+    join_sql  = "join " + params[:jtable] + " on samples." 
+    join_sql += params[:jtable].singularize 
+    join_sql += "_id = " + params[:jtable] + ".id"
+#
+  end
+
+  def join_column_sort
+    params[:jtable] + "." + params[:sort]
   end
 
 end
