@@ -983,11 +983,199 @@ It is important that the samples column be easily sortable. Used Ryan
 Bates' method described in Railscasts 228. Unfortunately, this is not
 the full answer because it only works on 'native' fields and not 
 fields in related tables. For this I added some extra code using
-SQL join instructions. This is not perfect because (amongst other things)
+SQL instructions. This is not perfect because (amongst other things)
 it is database-dependent, but for now it'll do. 
 
-There is yet another problem with ordering samples by group - this is
-because the group is not directly related to the sample. Rather, the
-relationship is via the user, i.e. group --> user --> sample. It may
-not be necessary to implement this (instead have a search box which
-allows a listing of samples by group).
+First in the samples controller I added two private helper methods:
+
+```
+  def sort_column
+    cols = Sample.column_names + Flag.column_names + Group.column_names + User.column_names
+    cols.include?(params[:sort]) ? params[:sort] : "code"
+  end
+
+  def sort_direction
+    %w[asc desc].include?(params[:direction]) ? params[:direction] : "asc"
+  end
+```
+
+To make these accessible within views, they must explicity be labelled
+as helper methods at the beginning of the controller code:
+
+```
+class SamplesController < ApplicationController
+  helper_method :sort_column, :sort_direction
+```
+
+The first helper defines a set of columns over which we want to sort.
+In this case, the list includes columns from the Flag, Group and User
+tables as well as the Sample table. In the URL, one column will be
+tagged as a sort column - if the column in the URL is not one of those
+in the cols list, then the sort column will default to 'code'.
+
+The second helper sets either a descending or ascending order - this
+will alternate with successive clicks on the link. 
+The sort column is selected by clicking on the header
+which then send a URL of the form:
+
+```
+http://server/samples?direction=<asc|desc>&sort=<col>
+```
+
+The index function in the samples controller is re-written as:
+
+```
+  def index
+     @samples=Sample.all( :joins => [:flag, {:user => :group}],
+                          :order => "#{sort_column} #{sort_direction}")
+  end
+```
+
+Note that the SQL ordering is set using the helpers and we have done an
+inner join on the samples data so we can access the external tables
+and their columns.
+
+The index view in the file @app/views/samples/index.html.erb@ now has
+these entries in the header region:
+
+```
+<table class="pretty">
+  <tr>
+    <th><%= sortable "code", "Code" %></th>
+<!--    <th><%= sortable "params", "Parameters" %></th> -->
+    <th><%= sortable "name", "Status" %></th>
+    <th><%= sortable "created_at", "Submitted" %></th>
+    <th><%= sortable "updated_at", "Updated" %></th>
+    <th><%= sortable "priority", "Priority" %></th>
+<!--    <th><%= sortable "powd", "Powd?" %></th> -->
+<!--    <th><%= sortable "chiral", "Chiral?" %></th> -->
+<!--    <th><%= sortable "cost_code", "Cost Code" %></th> -->
+    <th><%= sortable "lastname", "User" %></th>
+    <th><%= sortable "group_abbr", "Group" %></th>
+  </tr>
+```
+
+Here we use a helper called @sortable@ to set up the appropriate links.
+This helper is defined in @app/helpers/application_helper.rb@ since
+it is fairly generic:
+
+```
+module ApplicationHelper
+
+  def sortable(column, title = nil)
+    title ||= column.titleize
+    css_class = column == sort_column ? "current #{sort_direction}" : nil
+    direction = column == sort_column && sort_direction == "asc" ? "desc" : "asc"
+    link_to title, {:sort => column, :direction => direction}, {:class => css_class}
+  end
+
+  def neat_time(date)
+     date.strftime("%d/%m/%Y") + date.strftime("(%I:%M%P)")
+  end
+
+end
+```
+
+Note also the function @neat_time@ which is used for displaying 'neat'
+timestamps in tables.
+Finally, added some CSS code to display an up/down arrow to indicate
+both the current ordered column and its sorting direction. This is
+in the file @public/stylesheets/application.css@:
+
+```
+table.pretty {
+  border-collapse: collapse;
+}
+
+.pretty td, .pretty th {
+  padding: 4px 10px;
+}
+
+.pretty th .current {
+  padding-right: 12px;
+  background-repeat: no-repeat;
+  background-position: right center;
+}
+.pretty th .asc {
+  background-image: url(/images/up_arrow.gif);
+}
+
+.pretty th .desc {
+  background-image: url(/images/down_arrow.gif);
+}
+```
+
+We need to do something similar in the 'My Samples' page for each user.
+There are some subtle differences however. First, here is the controller
+code for the user model:
+
+```
+class UsersController < ApplicationController
+
+helper_method :sort_column, :sort_direction
+
+  def show
+    @user = current_user
+    s = @user.samples
+    @samples=s.all( :joins => :flag,
+                    :order => "#{sort_column} #{sort_direction}")
+
+  end
+
+private
+
+  def sort_column
+    cols = Sample.column_names + Flag.column_names
+    cols.include?(params[:sort]) ? params[:sort] : "code"
+  end
+
+  def sort_direction
+    %w[asc desc].include?(params[:direction]) ? params[:direction] : "asc"
+  end
+
+end
+```
+
+We have introduced the same helper functions as before but @sort_column@
+is slightly different because we only need to sort on fields from the
+sample and flag tables. We must also define a samples list which is
+done with a similar join as before. Now the samples section on the user
+show page looks like this:
+
+```
+<h3><%="Samples" %></h3>
+<% if @user.samples.count > 0 %>
+<table class="pretty">
+  <tr>
+    <th><%= sortable "code", "Code" %></th>
+    <th><%= sortable "params", "Params" %></th>
+    <th><%= sortable "name", "Status" %></th>
+    <th><%= sortable "created_at", "Submitted" %></th>
+    <th><%= sortable "updated_at", "Updated" %></th>
+    <th><%= sortable "priority", "Priority" %></th>
+    <th><%= sortable "powd", "Powd?" %></th>
+    <th><%= sortable "chiral", "Chiral?" %></th>
+    <th><%= sortable "cost_code", "Cost Code" %></th>
+  </tr>
+  <% for sample in @samples %>
+    <tr>
+      <td><%= sample.code %></td>
+      <td><%= sample.params %></td>
+      <td><%= sample.flag.name %></td>
+      <td><%= neat_time(sample.created_at) %></td>
+      <td><%= neat_time(sample.updated_at) %></td>
+      <td><%= sample.priority %></td>
+      <td><%= sample.powd %></td>
+      <td><%= sample.chiral %></td>
+      <td><%= sample.cost_code %></td>
+      <td><%= link_to "Show", sample %></td>
+    </tr>
+  <% end %>
+</table>
+<% else %>
+<p>
+You have no samples!
+</p>
+```
+
+Amazingly, it all seems to work!

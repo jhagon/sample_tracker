@@ -3,7 +3,7 @@
 
 <p>
   <strong>Group</strong>
-  <%= "#{@user.group.group_desc}(#{@user.group.group_abbr})" %>
+  <%= "#{@user.group.group_desc} (#{@user.group.group_abbr})" %>
 </p>
 <p>
   <strong>EMail</strong>
@@ -16,24 +16,25 @@
 
 <h3><%="Samples" %></h3>
 <% if @user.samples.count > 0 %>
-<table>
+<table class="pretty">
   <tr>
-    <th>Code</th>
-    <th>Params</th>
-    <th>Status</th>
-    <th>Update</th>
-    <th>Priority</th>
-    <th>Powd</th>
-    <th>Chiral</th>
-    <th>Cost Code</th>
-    <th>Group</th>
+    <th><%= sortable "code", "Code" %></th>
+    <th><%= sortable "params", "Params" %></th>
+    <th><%= sortable "name", "Status" %></th>
+    <th><%= sortable "created_at", "Submitted" %></th>
+    <th><%= sortable "updated_at", "Updated" %></th>
+    <th><%= sortable "priority", "Priority" %></th>
+    <th><%= sortable "powd", "Powd?" %></th>
+    <th><%= sortable "chiral", "Chiral?" %></th>
+    <th><%= sortable "cost_code", "Cost Code" %></th>
   </tr>
-  <% for sample in @user.samples %>
+  <% for sample in @samples %>
     <tr>
       <td><%= sample.code %></td>
       <td><%= sample.params %></td>
       <td><%= sample.flag.name %></td>
-      <td><%= sample.updated_at %></td>
+      <td><%= neat_time(sample.created_at) %></td>
+      <td><%= neat_time(sample.updated_at) %></td>
       <td><%= sample.priority %></td>
       <td><%= sample.powd %></td>
       <td><%= sample.chiral %></td>
