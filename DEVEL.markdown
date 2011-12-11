@@ -674,7 +674,7 @@ View and Controller Permissions: Making a Start
 First, we change the permissions on the semi-static pages by making the
 Edit/Destroy etc links disappear for all users (whether signed-in or not)
 except when a user is signed in and is an administrator. This needs only
-to be done for the @home.html.erb@ and @show.html.erb@ views.
+to be done for the `home.html.erb` and `show.html.erb` views.
 Here's the code we use:
 
 ```
@@ -698,7 +698,7 @@ Here's the code we use:
 
 Of course, this just prevents the links being seen --- we still need to
 protect the controllers. Do this by defining a before filter
-called @admin_required@ in the @application_controller.rb@ file:
+called `admin_required` in the `application_controller.rb` file:
 
 ```
   def admin_required
@@ -742,15 +742,15 @@ rails generate migration add_flag_id_to_samples flag_id:integer
 ```
 
 Also, we need the following entries in the sample and flag models
-respectively (the files sample.rb and flag.rb in app/models):
+respectively (the files `sample.rb` and `flag.rb` in `app/models`):
 
 ```
   has_many :samples # flag.rb
 
   belongs_to :flag # sample.rb
 ```
-We now remove @:status@ from the attr_accessible flag of the sample model
-as well as its validation line from @app/models/sample.rb@.
+We now remove `:status` from the `attr_accessible` flag of the sample model
+as well as its validation line from `app/models/sample.rb`.
 Of course, we must now also remove the status field from the sample model.
 Do this with a migration:
 
@@ -791,7 +791,7 @@ end
 
 Adding User sample Listing on Edit User Page
 ===========================================
-This is achieved by editing the @app/views/devise/registrations/edit.html.erb@
+This is achieved by editing the `app/views/devise/registrations/edit.html.erb`
 page with the following code:
 
 ```
@@ -828,7 +828,7 @@ page with the following code:
 Adding an Explicit Users Controller
 ===================================
 To enable users to see a 'show' page, needed to add a users controller
-(since we're using a 'user' model in devise (@app/controllers/users_controller.rb@):
+(since we're using a 'user' model in devise (`app/controllers/users_controller.rb`):
 
 ```
 class UsersController < ApplicationController
@@ -894,7 +894,7 @@ Adding Some Admin Links
 =======================
 Administrators will need to add/edit pages, assets, research groups, hazards,
 samples and status flags. To put links to the edit menus for these, we
-edit the @app/views/layouts/application.html.erb@ file. To achieve what we
+edit the `app/views/layouts/application.html.erb` file. To achieve what we
 want, we edit the following container in the layout:
 
 ```
@@ -935,7 +935,7 @@ To stop users editing samples, we remove the Edit|Destroy|View All options
 at the bottom of the show page if they are not an admin. Then we also
 restrict their ability to do this completely (even if they know the
 correct action URL) in the controller.
-So, in @app/views/samples/show.html.erb@ we have:
+So, in `app/views/samples/show.html.erb` we have:
 
 ```
 <% if current_user.admin? %>
@@ -983,8 +983,7 @@ It is important that the samples column be easily sortable. Used Ryan
 Bates' method described in Railscasts 228. Unfortunately, this is not
 the full answer because it only works on 'native' fields and not 
 fields in related tables. For this I added some extra code using
-SQL instructions. This is not perfect because (amongst other things)
-it is database-dependent, but for now it'll do. 
+SQL instructions.
 
 First in the samples controller I added two private helper methods:
 
@@ -1035,7 +1034,7 @@ Note that the SQL ordering is set using the helpers and we have done an
 inner join on the samples data so we can access the external tables
 and their columns.
 
-The index view in the file @app/views/samples/index.html.erb@ now has
+The index view in the file `app/views/samples/index.html.erb` now has
 these entries in the header region:
 
 ```
@@ -1055,8 +1054,8 @@ these entries in the header region:
   </tr>
 ```
 
-Here we use a helper called @sortable@ to set up the appropriate links.
-This helper is defined in @app/helpers/application_helper.rb@ since
+Here we use a helper called `sortable` to set up the appropriate links.
+This helper is defined in `app/helpers/application_helper.rb` since
 it is fairly generic:
 
 ```
@@ -1076,11 +1075,11 @@ module ApplicationHelper
 end
 ```
 
-Note also the function @neat_time@ which is used for displaying 'neat'
+Note also the function `neat_time` which is used for displaying 'neat'
 timestamps in tables.
 Finally, added some CSS code to display an up/down arrow to indicate
 both the current ordered column and its sorting direction. This is
-in the file @public/stylesheets/application.css@:
+in the file `public/stylesheets/application.css`:
 
 ```
 table.pretty {
@@ -1136,7 +1135,7 @@ private
 end
 ```
 
-We have introduced the same helper functions as before but @sort_column@
+We have introduced the same helper functions as before but `sort_column`
 is slightly different because we only need to sort on fields from the
 sample and flag tables. We must also define a samples list which is
 done with a similar join as before. Now the samples section on the user
