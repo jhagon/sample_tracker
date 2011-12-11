@@ -839,7 +839,7 @@ end
 ```
 
 and then construct an appropriate view listing the user's details and his
-list of samples (@app/views/users/show.html.erb@):
+list of samples (`app/views/users/show.html.erb`):
 
 ```
 <h2><%= "#{@user.firstname} #{@user.lastname}"%></h2>
