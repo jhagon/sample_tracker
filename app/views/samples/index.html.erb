@@ -3,6 +3,7 @@
 <table class="pretty">
   <tr>
     <th><%= sortable "code", "Code" %></th>
+    <th><%= sortable "userref", "Ref" %></th>
 <!--    <th><%= sortable "params", "Parameters" %></th> -->
     <th><%= sortable "name", "Status" %></th>
     <th><%= sortable "created_at", "Submitted" %></th>
@@ -17,6 +18,7 @@
   <% for sample in @samples %>
     <tr>
       <td><%= sample.code %></td>
+      <td><%= sample.userref %></td>
 <!--      <td><%= sample.params %></td> -->
       <td><%= sample.flag.name %></td>
       <td><%= neat_time(sample.created_at) %></td>

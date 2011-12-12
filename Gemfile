@@ -30,6 +30,7 @@ gem 'devise', '1.4.9'
 group :development do
   gem 'rspec-rails', '2.0.1'
   gem 'mocha'
+  gem 'faker'
   gem "nifty-generators"
 end
 

@@ -10,7 +10,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20111204171820) do
+ActiveRecord::Schema.define(:version => 20111212095426) do
 
   create_table "assets", :force => true do |t|
     t.string   "document"
@@ -70,6 +70,7 @@ ActiveRecord::Schema.define(:version => 20111204171820) do
     t.datetime "updated_at"
     t.integer  "user_id"
     t.integer  "flag_id",    :default => 1, :null => false
+    t.string   "userref"
   end
 
   create_table "uploads", :force => true do |t|

@@ -1178,3 +1178,57 @@ You have no samples!
 ```
 
 Amazingly, it all seems to work!
+
+Additions to sample Model
+=========================
+Added a text string as a user reference. restrict this to be an alphanumeric
+string with no spaces (validation). The migration file looks like this:
+
+```
+class AddUserrefTo_sample < ActiveRecord::Migration
+  def self.up
+    add_column :samples, :userref, :string, :default => nil
+  end
+
+  def self.down
+    remove_column :samples, :userref
+  end
+end
+```
+
+Note the default is nil, but the validation process in the model
+(`app/models/sample.rb`) will require this to be changed:
+
+```
+  validates :userref,    :format => {
+    :with     => %r{^[A-Z,a-z,0-9]+$},
+    :message  => 'must be alphanumeric sequence of characters without spaces.'
+  }
+```
+
+Finally, need to add the userref field as attribute_accessible in the
+user model.
+
+Decided to remove the default value for userref so change this
+with a migration:
+
+```
+class ChangeUserrefDefaultIn_sample < ActiveRecord::Migration
+  def self.up
+    change_column :samples, :userref, :string
+  end
+
+  def self.down
+    change_column :samples, :userref, :string, :default => nil
+  end
+end
+```
+
+Generating Sample Data
+======================
+Use Faker to generate a large number of users and samples so that we can
+test (among other things) pagination of sample listings etc.
+Faker is installed via bundle in the usual way by placing the instruction
+`gem 'faker'` in the development group of the Gemfile. Then need to
+add the populate instructions in a rake tasks file which I've called
+`sample_data.rake`. This file is placed in `lib/tasks`.

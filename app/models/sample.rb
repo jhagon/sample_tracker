@@ -1,5 +1,5 @@
 class Sample < ActiveRecord::Base
-  attr_accessible :hazard_ids, :code, :cif, :synth, :coshh_name, :coshh_desc, :coshh_info, :coshh_haz, :params, :priority, :powd, :chiral, :cost_code, :barcode, :user_id, :flag_id
+  attr_accessible :hazard_ids, :code, :cif, :synth, :coshh_name, :coshh_desc, :coshh_info, :coshh_haz, :params, :priority, :powd, :chiral, :cost_code, :barcode, :user_id, :flag_id, :userref
   has_and_belongs_to_many :hazards
   belongs_to :user
   belongs_to :flag
@@ -10,7 +10,14 @@ class Sample < ActiveRecord::Base
   validates :coshh_info, :presence => true
   validates :coshh_desc, :presence => true
   validates :params,     :presence => true
-  validates :priority,   :presence => true
+  validates :priority,   :format => {
+    :with     => %r{^[1-9]$},
+    :message  => 'must be a single integer between 1 and 9.'
+  }
+  validates :userref,    :format => {
+    :with     => %r{^[A-Z,a-z,0-9]+$},
+    :message  => 'must be alphanumeric sequence of characters without spaces.'
+  }
 
   mount_uploader :synth, SynthUploader
 
