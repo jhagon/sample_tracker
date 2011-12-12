@@ -27,6 +27,10 @@ gem "pdfkit"
 
 gem 'devise', '1.4.9'
 
+# use cancan for authorization
+
+gem "cancan"
+
 group :development do
   gem 'rspec-rails', '2.0.1'
   gem 'mocha'

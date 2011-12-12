@@ -1224,6 +1224,288 @@ class ChangeUserrefDefaultIn_sample < ActiveRecord::Migration
 end
 ```
 
+CRUD Interface to User Model
+============================
+Devise doesn't create a CRUD interface by default. We create one by following the devise docs and
+the excellent summary by "Brandon Martin":http://zyphmartin.com/blog/manage-users-with-devise-and-cancan.
+We will also make use of Ryan Bates' `cancan` gem for some authorization here. We add cancan to the
+Gemfile and do a bundle install. After installing cancan, need to create an `Ability` class. Do this
+by typing:
+
+```
+rails g cancan:ability
+```
+
+which creates a file `app/models/ability.rb`. This file is used by cancan to define abilities. At present,
+we follow Brandon Martin with the following setup:
+
+```
+class Ability
+  include CanCan::Ability
+
+  def initialize(user)
+   if user.admin?
+     can :manage, :all
+   else
+     can :read, :all
+   end
+end
+```
+
+We will probably add to this later. Cancan assumes that there is a `current_user` method - no problem
+since we're using devise.
+
+For the CRUD interface first thing to do is set up the correct routes. 
+Here's what we need in the `config/routes.rb` file:
+
+```
+  devise_for :users
+
+  devise_scope :user do
+    get '/login' => 'devise/sessions#new'
+    get '/logout' => 'devise/sessions#destroy'
+  end
+
+  resources :user, :controller => "user"
+```
+
+Previously we had just `resources :users`, but now this is changed to a `:user` resource (singular) and a 
+`devise_scope` directive.
+
+Next, we need to create the `user` controller in `app/controllers/user_controller.rb`. We list it here in full:
+
+```
+class UserController < ApplicationController
+
+  helper_method :sort_column, :sort_direction
+
+  before_filter :authenticate_user!
+  before_filter :must_be_user_or_admin, :only => [:show, :edit, :update]
+  before_filter :admin_required, :only => [:index, :destroy]
+
+  load_and_authorize_resource
+
+  def index
+    @users = User.all
+  end
+
+  def new
+    @user = User.new
+  end
+
+  def create
+    @user = User.new(params[:user])
+    if @user.save
+      flash[:notice] = "Successfully created User."
+      redirect_to root_path
+    else
+      render :action => 'new'
+    end
+  end
+
+  def show
+    @user = User.find(params[:id])
+    s = @user.samples
+    @samples=s.all( :joins => :flag,
+    :order => "#{sort_column} #{sort_direction}")
+  end
+
+  def edit
+    @user = User.find(params[:id])
+  end
+
+  def update
+    @user = User.find(params[:id])
+    params[:user].delete(:password) if params[:user][:password].blank?
+    params[:user].delete(:password_confirmation) if params[:user][:password].blank? and params[:user][:password_confirmation].blank?
+    if @user.update_attributes(params[:user])
+      flash[:notice] = "Successfully updated User."
+      redirect_to root_path
+    else
+      render :action => 'edit'
+    end
+  end
+
+  def destroy
+    @user = User.find(params[:id])
+    if @user.destroy
+      flash[:notice] = "Successfully deleted User."
+      redirect_to root_path
+    end
+  end
+
+private
+
+  def sort_column
+    cols = Sample.column_names + Flag.column_names
+    cols.include?(params[:sort]) ? params[:sort] : "code"
+  end
+
+  def sort_direction
+    %w[asc desc].include?(params[:direction]) ? params[:direction] : "asc"
+  end
+
+  def must_be_user_or_admin
+    user = User.find(params[:id])
+    return true if (user_signed_in? and (current_user.admin? or current_user==user))
+    session[:return_to] = request.request_uri
+    redirect_to root_url,
+             :alert =>
+             "You must be the relevant user or an administrator to view or edit this user's details!" and return false
+  end
+
+end
+```
+
+Now, in `app/views/user` we add the following view templates:
+
+```
+edit.html.erb  _form.html.erb  index.html.erb  new.html.erb  show.html.erb
+```
+
+Here is the content of the various files.
+
+`_form.html.erb`
+================
+```
+<%= f.error_messages %>
+
+<p><%= f.label "First Name" %><br />
+<%= f.text_field :firstname %></p>
+
+<p><%= f.label "last Name" %><br />
+<%= f.text_field :lastname %></p>
+
+<p><%= f.label :email %><br />
+<%= f.text_field :email %></p>
+
+  <div><%= f.label "Group" %><br />
+  <%= select(:user, :group_id, Group.all.collect {|g| [ g.group_desc, g.id ] },
+    {:include_blank => 'None'}) %></div>
+
+<p>
+<%= label_tag(:admin, "Administrator?") %>
+<%= f.check_box(:admin) %>
+</p>
+
+<p><%= f.label :password %><br />
+<%= f.password_field :password %></p>
+
+<p><%= f.label :password_confirmation %><br />
+<%= f.password_field :password_confirmation %></p>
+
+<p><%= f.submit "Submit" %></p>
+```
+
+`edit.html.erb`
+===============
+```
+% title "Edit User" %>
+
+<%= form_for @user, :url => user_path do |f| %>
+  <%= render :partial => 'form', :locals => { :f => f } %>
+<% end %>
+```
+
+`index.html.erb`
+================
+```
+<% title "Users" %>
+
+<table>
+  <tr>
+    <th>First Name</th>
+    <th>Last name</th>
+    <th>Group</th>
+  </tr>
+  <% for user in @users %>
+    <tr>
+      <td><%= user.firstname %></td>
+      <td><%= user.lastname %></td>
+      <td><%= user.group.group_desc %></td>
+      <td><%= link_to "Show", user %></td>
+      <td><%= link_to "Edit", edit_user_path(user) %></td>
+      <td><%= link_to "Destroy", user, :confirm => 'Are you sure?', :method => :delete %></td>
+    </tr>
+  <% end %>
+</table>
+
+<p><%= link_to "New User", new_user_path %></p>
+```
+
+`new.html.erb`
+==============
+```
+<% title "New User" %>
+
+<%= form_for @user, :url => user_index_path do |f| %>
+  <%= render :partial => 'form', :locals => { :f => f } %>
+<% end %>
+```
+
+`show.html.erb`
+===============
+```
+<h2><%= "#{@user.firstname} #{@user.lastname}"%></h2>
+
+
+<p>
+  <strong>Group</strong>
+  <%= "#{@user.group.group_desc} (#{@user.group.group_abbr})" %>
+</p>
+<p>
+  <strong>EMail</strong>
+  <%=@user.email %>
+</p>
+<p>
+  <strong>Administrator?</strong>
+  <%=@user.admin? ? 'yes' : 'no' %>
+</p>
+
+<h3><%="Samples" %></h3>
+<% if @user.samples.count > 0 %>
+<table class="pretty">
+  <tr>
+    <th><%= sortable "code", "Code" %></th>
+    <th><%= sortable "userref", "Ref" %></th>
+    <th><%= sortable "params", "Params" %></th>
+    <th><%= sortable "name", "Status" %></th>
+    <th><%= sortable "created_at", "Submitted" %></th>
+    <th><%= sortable "updated_at", "Updated" %></th>
+    <th><%= sortable "priority", "Priority" %></th>
+    <th><%= sortable "powd", "Powd?" %></th>
+    <th><%= sortable "chiral", "Chiral?" %></th>
+    <th><%= sortable "cost_code", "Cost Code" %></th>
+  </tr>
+ <% for sample in @samples %>
+    <tr>
+      <td><%= sample.code %></td>
+      <td><%= sample.userref %></td>
+      <td><%= sample.params %></td>
+      <td><%= sample.flag.name %></td>
+      <td><%= neat_time(sample.created_at) %></td>
+      <td><%= neat_time(sample.updated_at) %></td>
+      <td><%= sample.priority %></td>
+      <td><%= sample.powd %></td>
+      <td><%= sample.chiral %></td>
+      <td><%= sample.cost_code %></td>
+      <td><%= link_to "Show", sample %></td>
+    </tr>
+  <% end %>
+</table>
+<% else %>
+<p>
+You have no samples!
+</p>
+<% end %>
+
+<%= link_to "Back", :back %>
+```
+
+Note that the show form also shows the user's samples and that all of the pages, where appropriate, use the
+column sorting tricks first used earlier.
+
+
 Generating Sample Data
 ======================
 Use Faker to generate a large number of users and samples so that we can

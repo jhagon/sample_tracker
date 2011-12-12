@@ -1,4 +1,4 @@
-class UsersController < ApplicationController
+class UserController < ApplicationController
 
   helper_method :sort_column, :sort_direction
 
@@ -6,32 +6,56 @@ class UsersController < ApplicationController
   before_filter :must_be_user_or_admin, :only => [:show, :edit, :update]
   before_filter :admin_required, :only => [:index, :destroy]
 
-
+  load_and_authorize_resource
+  
   def index
     @users = User.all
   end
-
-  def edit
-    @user = User.find(params[:id])
+  
+  def new
+    @user = User.new
   end
-
-
+  
+  def create
+    @user = User.new(params[:user])
+    if @user.save
+      flash[:notice] = "Successfully created User."
+      redirect_to root_path
+    else
+      render :action => 'new'
+    end
+  end
+  
   def show
-    @user = current_user
+    @user = User.find(params[:id])
     s = @user.samples
     @samples=s.all( :joins => :flag,
     :order => "#{sort_column} #{sort_direction}")
   end
 
-  def test_blank_pw
-
-    if params[:user][:password].blank?
-      params[:user].delete(:password)
-      params[:user].delete(:password_confirmation)
-    end
-
+  def edit
+    @user = User.find(params[:id])
   end
-
+  
+  def update
+    @user = User.find(params[:id])
+    params[:user].delete(:password) if params[:user][:password].blank?
+    params[:user].delete(:password_confirmation) if params[:user][:password].blank? and params[:user][:password_confirmation].blank?
+    if @user.update_attributes(params[:user])
+      flash[:notice] = "Successfully updated User."
+      redirect_to root_path
+    else
+      render :action => 'edit'
+    end
+  end
+  
+  def destroy
+    @user = User.find(params[:id])
+    if @user.destroy
+      flash[:notice] = "Successfully deleted User."
+      redirect_to root_path
+    end
+  end
 
 private
 
