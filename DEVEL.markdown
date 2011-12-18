@@ -1522,6 +1522,9 @@ and an extra entry to the `app/models/sample.rb` file:
 mount_uploader :zipdata, ZipdataUploader
 ```
 
+Changed the sample show/edit views and sample form accordingly.
+As with the status flag, only an administrator can change this value.
+
 
 Generating Sample Data
 ======================
