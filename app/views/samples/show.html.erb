@@ -40,6 +40,15 @@
   <%= @sample.updated_at.localtime %>
 </p>
 <p>
+  <strong>Analysis Data:</strong>
+  <% if @sample.zipdata? %>
+    <%= link_to 'Data Available', @sample.zipdata_url.to_s  %>
+  <% else %>
+    Data not yet available.
+  <% end %>
+</p>
+
+<p>
   <strong>Priority:</strong>
   <%= @sample.priority %>
 </p>

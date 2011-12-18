@@ -1505,6 +1505,23 @@ You have no samples!
 Note that the show form also shows the user's samples and that all of the pages, where appropriate, use the
 column sorting tricks first used earlier.
 
+Addition to Sample Model
+========================
+Added a field `zipdata` via a migration called
+`add_zipdata_to_sample`. This is for a data file upload supplied by
+an administrator after a sample has been analyzed. Used carrierwave
+as previously with an uploader called `Zipdata` generated via:
+
+```
+rails g uploader Zipdata
+```
+
+and an extra entry to the `app/models/sample.rb` file:
+
+```
+mount_uploader :zipdata, ZipdataUploader
+```
+
 
 Generating Sample Data
 ======================

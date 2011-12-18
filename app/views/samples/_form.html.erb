@@ -6,7 +6,7 @@ automatically generated on submission of this form.
     <%= f.hidden_field :code %>
   </p>
   <p>
-    <%= f.label 'Your ref:' %><br />
+    <%= f.label 'Your Ref' %><br />
     <%= f.text_field :userref %>
   </p>
   <p>
@@ -14,7 +14,7 @@ automatically generated on submission of this form.
     <%= f.text_field :cif %>
   </p>
   <p>
-    <%= f.label :synth %><br />
+    <%= f.label "Synthetic Route Diagram" %><br />
     <%= f.file_field :synth %>
 
   </p>
@@ -28,7 +28,7 @@ automatically generated on submission of this form.
   </p>
   <p>
     <%= f.label :coshh_info %><br />
-    <%= f.text_area :coshh_info %>
+    <%= f.text_area :coshh_info, :rows => 3 %>
   </p>
   <p>
     <%= f.label "Chemical Hazard Information" %><br />
@@ -49,6 +49,15 @@ automatically generated on submission of this form.
   <div><%= f.label "Status Flag" %><br />
   <%= select(:sample, :flag_id, Flag.all.collect {|f| [ f.name, f.id ] })
     %></div>
+  </p>
+  <p>
+    <%= f.label 'Data Zip File' %><br />
+    <% if @sample.zipdata? %>
+      A file has been uploaded.<br /> 
+    <% else %>
+      No data has yet been uploaded. <br />
+    <% end %>
+    <%= f.file_field :zipdata %>
   </p>
   <% end %>
 

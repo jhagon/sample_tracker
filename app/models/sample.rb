@@ -1,5 +1,5 @@
 class Sample < ActiveRecord::Base
-  attr_accessible :hazard_ids, :code, :cif, :synth, :coshh_name, :coshh_desc, :coshh_info, :coshh_haz, :params, :priority, :powd, :chiral, :cost_code, :barcode, :user_id, :flag_id, :userref
+  attr_accessible :hazard_ids, :code, :cif, :synth, :coshh_name, :coshh_desc, :coshh_info, :coshh_haz, :params, :priority, :powd, :chiral, :cost_code, :barcode, :user_id, :flag_id, :userref, :zipdata
   has_and_belongs_to_many :hazards
   belongs_to :user
   belongs_to :flag
@@ -20,6 +20,7 @@ class Sample < ActiveRecord::Base
   }
 
   mount_uploader :synth, SynthUploader
+  mount_uploader :zipdata, ZipdataUploader
 
   before_create :make_barcode
 
