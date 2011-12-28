@@ -39,6 +39,7 @@
   <strong>Updated:</strong>
   <%= @sample.updated_at.localtime %>
 </p>
+
 <p>
   <strong>Analysis Data:</strong>
   <% if @sample.zipdata? %>
@@ -47,6 +48,29 @@
     Data not yet available.
   <% end %>
 </p>
+
+<p>
+  <strong>Analysis Image:</strong>
+  <% if @sample.sampleimage? %>
+    <%= link_to   image_tag( @sample.sampleimage_url(:thumb).to_s,
+                  :title => "Click for full size view in new window or tab.",
+                  :alt => "Click for full size view in new window or tab."),
+                  @sample.sampleimage_url.to_s,
+                  :target => "_blank"  %>
+  <% else %>
+    Image not yet available.
+  <% end %>
+</p>
+
+<p>
+  <strong>Reference Link:</strong>
+  <% if @sample.reference? %>
+    <%= link_to @sample.reference, @sample.reference  %>
+  <% else %>
+    A reference URL is not yet available.
+  <% end %>
+</p>
+
 
 <p>
   <strong>Priority:</strong>

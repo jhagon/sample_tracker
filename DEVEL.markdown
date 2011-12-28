@@ -249,7 +249,7 @@ To do this, we need rmagick (which is installed via a gem as described
 earlier). Then we edit the carrierwave uploader class file in:
 
 ```
-app/uploaders/image_uploader.rb
+app/uploaders/synth_uploader.rb
 ```
 
 and edit/uncomment the thumbnail code already there to:
@@ -1505,7 +1505,7 @@ You have no samples!
 Note that the show form also shows the user's samples and that all of the pages, where appropriate, use the
 column sorting tricks first used earlier.
 
-Addition to Sample Model
+Additions to Sample Model
 ========================
 Added a field `zipdata` via a migration called
 `add_zipdata_to_sample`. This is for a data file upload supplied by
@@ -1523,7 +1523,96 @@ mount_uploader :zipdata, ZipdataUploader
 ```
 
 Changed the sample show/edit views and sample form accordingly.
-As with the status flag, only an administrator can change this value.
+As with the status flag, only an administrator can change this field.
+
+Also added a field `sampleimage` via a migration called
+`add_sampleimage_to_sample`. This is an image of the sample which is
+uploaded after analysis by crystallography staff. 
+Used carrierwave as previously with an uploader called `Sampleimage` 
+generated via:
+
+```
+rails g uploader Sampleimage
+```
+
+and an extra entry to the `app/models/sample.rb` file:
+
+```
+mount_uploader :sampleimage, SampleimageUploader
+```
+
+We also create a thumbnail image (as with the synthetic route image file)
+by making appropriate edits (described earlier in the synthetic
+route image case) to the file:
+
+```
+app/uploaders/sampleimage_uploader.rb
+```
+
+Note that as ever, we must add any new fields that are editable to the
+attribute accessible list in the file `app/models/sample.rb`:
+
+```
+class Sample < ActiveRecord::Base
+  attr_accessible :hazard_ids, :code, :cif, :synth, :coshh_name, :coshh_desc, 
+                  :coshh_info, :coshh_haz, :params, :priority, :powd, :chiral, 
+                  :cost_code, :barcode, :user_id, :flag_id, :userref, 
+                  :zipdata, :sampleimage
+```
+
+
+
+As with the zip data file
+the sample show/edit views and sample form are changed accordingly.
+Only an administrator can change this field.
+
+Adding a DOI Reference Field
+============================
+This field allows the administrator to add a link to a reference in which
+the structure has been published. This will take the form (usually) of
+a DOI link. We start with a migration
+
+```
+rails generate migration add_reference_to_sample
+```
+
+Adding a Help Popups Table
+==========================
+This is a table of help strings. The idea is that administrators can
+add arbitrary help strings which can be made to popup in some forms.
+Initially, only the sample submission form will use these, but in
+principle, any form can do so.
+As usual, RB's nifty generators were used:
+
+```
+rails generate nifty:scaffold Popup name:string description:text
+```
+
+In the file `app/helpers/samples_helper.rb` we define a function to
+display the popup description text:
+
+```
+  def popup_info( ref_str )
+    if (p = Popup.find_by_name( ref_str ))
+      p.description
+    end
+  end
+```
+
+and in the sample form, we have entries such as:
+
+```
+  <p>
+    <%= f.label 'Your Ref' %><br />
+    <%= f.text_field :userref, :title => popup_info('sample_yourref')%>
+  </p>
+```
+
+This will display a popup box showing the popup description text, in this
+case corresponding to the `sample_yourref` popup name. It is
+recommended when using popups that a consistent naming convention is
+adopted. In this case we have used `<model>_<field>` as the naming
+convention for the popup.
 
 
 Generating Sample Data

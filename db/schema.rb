@@ -10,7 +10,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20111218161135) do
+ActiveRecord::Schema.define(:version => 20111228122358) do
 
   create_table "assets", :force => true do |t|
     t.string   "document"
@@ -53,6 +53,13 @@ ActiveRecord::Schema.define(:version => 20111218161135) do
     t.datetime "updated_at"
   end
 
+  create_table "popups", :force => true do |t|
+    t.string   "name"
+    t.text     "description"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
   create_table "samples", :force => true do |t|
     t.string   "code"
     t.string   "cif"
@@ -69,9 +76,11 @@ ActiveRecord::Schema.define(:version => 20111218161135) do
     t.datetime "created_at"
     t.datetime "updated_at"
     t.integer  "user_id"
-    t.integer  "flag_id",    :default => 1, :null => false
+    t.integer  "flag_id",     :default => 1, :null => false
     t.string   "userref"
     t.string   "zipdata"
+    t.string   "sampleimage"
+    t.string   "reference"
   end
 
   create_table "uploads", :force => true do |t|

@@ -1,4 +1,6 @@
 SampleTracker::Application.routes.draw do
+  resources :popups
+
   resources :flags
 
   devise_for :users

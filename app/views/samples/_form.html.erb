@@ -7,28 +7,28 @@ automatically generated on submission of this form.
   </p>
   <p>
     <%= f.label 'Your Ref' %><br />
-    <%= f.text_field :userref %>
+    <%= f.text_field :userref, :title => popup_info('sample_yourref')%>
   </p>
   <p>
     <%= f.label :cif %><br />
-    <%= f.text_field :cif %>
+    <%= f.text_field :cif, :title => popup_info('sample_cif') %>
   </p>
   <p>
     <%= f.label "Synthetic Route Diagram" %><br />
-    <%= f.file_field :synth %>
+    <%= f.file_field :synth, :title => popup_info('sample_synth') %>
 
   </p>
   <p>
     <%= f.label :coshh_name %><br />
-    <%= f.text_field :coshh_name %>
+    <%= f.text_field :coshh_name, :title => popup_info('sample_coshh_name') %>
   </p>
   <p>
     <%= f.label :coshh_desc %><br />
-    <%= f.text_field :coshh_desc %>
+    <%= f.text_field :coshh_desc, :title => popup_info('sample_coshh_desc') %>
   </p>
   <p>
     <%= f.label :coshh_info %><br />
-    <%= f.text_area :coshh_info, :rows => 3 %>
+    <%= f.text_area :coshh_info, :rows => 3, :title => popup_info('sample_coshh_info') %>
   </p>
   <p>
     <%= f.label "Chemical Hazard Information" %><br />
@@ -42,7 +42,7 @@ automatically generated on submission of this form.
 
   <p>
     <%= f.label :params %><br />
-    <%= f.text_field :params %>
+    <%= f.text_field :params, :title => popup_info('sample_params') %>
   </p>
   <% if user_signed_in? and current_user.admin? %>
   <p>
@@ -50,33 +50,56 @@ automatically generated on submission of this form.
   <%= select(:sample, :flag_id, Flag.all.collect {|f| [ f.name, f.id ] })
     %></div>
   </p>
+
   <p>
     <%= f.label 'Data Zip File' %><br />
     <% if @sample.zipdata? %>
-      A file has been uploaded.<br /> 
+      A data file has been uploaded.<br /> 
     <% else %>
       No data has yet been uploaded. <br />
     <% end %>
     <%= f.file_field :zipdata %>
   </p>
+
+  <p>
+    <%= f.label 'Sample Image File' %><br />
+    <% if @sample.sampleimage? %>
+      An image has been uploaded.<br />
+    <% else %>
+      No image has yet been uploaded. <br />
+    <% end %>
+    <%= f.file_field :sampleimage %>
+  </p>
+
+  <p>
+    <%= f.label 'Reference Article' %><br />
+    <% if @sample.reference? %>
+      A reference link has been added.<br />
+    <% else %>
+      No reference link has yet been added. <br />
+    <% end %>
+    <%= f.text_field :reference %>
+  </p>
+
   <% end %>
+
 
   </p>
   <p>
     <%= f.label :priority %><br />
-    <%= f.text_field :priority %>
+    <%= f.text_field :priority, :title => popup_info('sample_priority') %>
   </p>
   <p>
     <%= f.label :powd %><br />
-    <%= f.check_box :powd %>
+    <%= f.check_box :powd, :title => popup_info('sample_powd') %>
   </p>
   <p>
     <%= f.label :chiral %><br />
-    <%= f.check_box :chiral %>
+    <%= f.check_box :chiral, :title => popup_info('sample_chiral') %>
   </p>
   <p>
     <%= f.label :cost_code %><br />
-    <%= f.text_field :cost_code %>
+    <%= f.text_field :cost_code, :title => popup_info('sample_cost_code') %>
   </p>
   <p>
     <%= f.hidden_field :barcode %>

@@ -1,0 +1,16 @@
+<% title "Popup" %>
+
+<p>
+  <strong>Name:</strong>
+  <%= @popup.name %>
+</p>
+<p>
+  <strong>Description:</strong>
+  <%= @popup.description %>
+</p>
+
+<p>
+  <%= link_to "Edit", edit_popup_path(@popup) %> |
+  <%= link_to "Destroy", @popup, :confirm => 'Are you sure?', :method => :delete %> |
+  <%= link_to "View All", popups_path %>
+</p>

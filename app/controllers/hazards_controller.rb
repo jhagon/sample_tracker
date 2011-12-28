@@ -1,4 +1,7 @@
 class HazardsController < ApplicationController
+
+  before_filter :admin_required
+
   def index
     @hazards = Hazard.all
   end

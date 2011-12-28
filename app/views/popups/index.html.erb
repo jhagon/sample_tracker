@@ -1,0 +1,19 @@
+<% title "Popups" %>
+
+<table>
+  <tr>
+    <th>Name</th>
+    <th>Description</th>
+  </tr>
+  <% for popup in @popups %>
+    <tr>
+      <td><%= popup.name %></td>
+      <td><%= popup.description %></td>
+      <td><%= link_to "Show", popup %></td>
+      <td><%= link_to "Edit", edit_popup_path(popup) %></td>
+      <td><%= link_to "Destroy", popup, :confirm => 'Are you sure?', :method => :delete %></td>
+    </tr>
+  <% end %>
+</table>
+
+<p><%= link_to "New Popup", new_popup_path %></p>
