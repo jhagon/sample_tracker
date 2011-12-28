@@ -16,6 +16,11 @@
       <br />
       User Tools:
       <%= link_to 'My Samples', "/users/show/#{current_user.id}" %> |
+      <% if user_signed_in? and (current_user.admin? or current_user.leader?) %>
+        <%= link_to 'My Group Samples', :controller => "samples", 
+                                        :action => "groupindex",
+                                        :id => current_user.id %> |
+      <% end %>
       <%= link_to 'Submit New Sample', new_sample_path %> |
       <%= link_to 'Home', root_url %>
     <% else %>

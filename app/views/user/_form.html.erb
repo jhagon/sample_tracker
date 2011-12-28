@@ -18,6 +18,11 @@
 <%= f.check_box(:admin) %>
 </p>
 
+<p>
+<%= label_tag(:leader, "Group Leader?") %>
+<%= f.check_box(:leader) %>
+</p>
+
 <p><%= f.label :password %><br />
 <%= f.password_field :password %></p>
 

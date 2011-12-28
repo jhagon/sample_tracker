@@ -1614,6 +1614,61 @@ recommended when using popups that a consistent naming convention is
 adopted. In this case we have used `<model>_<field>` as the naming
 convention for the popup.
 
+Adding Group Leader Status
+==========================
+We add an extra boolean field to the User model to indicate that the
+user is a 'group leader'. At present, all this does is allow such users
+to look at ALL the samples submitted by a group, not just their own.
+Additionally, they will receive e-mails when any group sample is
+submitted or updated. This was achieved by adding an appropriate
+migration to add a new field `leader` to the user model.
+
+A new controller action called `groupindex` was added to the sample 
+controller. This lists all the samples of the group to which the user
+belongs. However, only group leaders can execute this action:
+
+```
+  def groupindex
+    @samples=Sample.where("code LIKE '#{current_user.group.group_abbr}%'").joins(:flag, {:user => :group}).order("#{sort_column} #{sort_direction}")
+#                          :joins => [:flag, {:user => :group}],
+  end
+```
+
+Note that we have relied on comparing the sample code string to the
+group abbreviation string belonging to the group of the current user.
+This is OK because such abbreviation strings are unique.
+A before filter called `must_be_leader_or_admin` was also added to
+restrict access to this new controller:
+
+```
+  def must_be_leader_or_admin
+    return true if (user_signed_in? and (current_user.admin? or current_user.leader?))
+    session[:return_to] = request.request_uri
+    redirect_to root_url,
+             :alert =>
+             "You must be a group leader or an administrator to view all group samples!" and return false
+  end
+```
+
+At the top of the controller, we add the line:
+
+```
+  before_filter :must_be_leader_or_admin, :only => :groupindex
+```
+
+In the file `app/views/layouts/application.html.erb` we add some code to
+display a link to the group samples index if the user is a group leader:
+
+```
+     <% if user_signed_in? and (current_user.admin? or current_user.leader?) %>
+        <%= link_to 'My Group Samples', :controller => "samples",
+                                        :action => "groupindex",
+                                        :id => current_user.id %> |
+      <% end %>
+```
+
+Note that strictly the `:id` parameter is not necessary, but is passed
+to satisfy the routing requirements.
 
 Generating Sample Data
 ======================

@@ -4,6 +4,7 @@ class SamplesController < ApplicationController
   before_filter :authenticate_user!
   before_filter :must_be_creator_or_admin, :only => :show
   before_filter :admin_required, :only => [:index, :edit, :update, :destroy]
+  before_filter :must_be_leader_or_admin, :only => :groupindex
 
   def make_sample_code
     x = Time.now
@@ -58,6 +59,11 @@ class SamplesController < ApplicationController
                           :order => "#{sort_column} #{sort_direction}")
   end
 
+  def groupindex
+    @samples=Sample.where("code LIKE '#{current_user.group.group_abbr}%'").joins(:flag, {:user => :group}).order("#{sort_column} #{sort_direction}")
+#                          :joins => [:flag, {:user => :group}],
+  end
+
   def show
     @hazards = Hazard.find(:all)
     @sample = Sample.find(params[:id])
@@ -108,6 +114,14 @@ private
     redirect_to root_url,
              :alert =>
              "You must be the sample owner or an administrator to view this sample!" and return false
+  end
+
+  def must_be_leader_or_admin
+    return true if (user_signed_in? and (current_user.admin? or current_user.leader?))
+    session[:return_to] = request.request_uri
+    redirect_to root_url,
+             :alert =>
+             "You must be a group leader or an administrator to view all group samples!" and return false
   end
 
   def sort_column
