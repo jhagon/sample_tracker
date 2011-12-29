@@ -20,8 +20,14 @@ gem "barby"
 gem "chunky_png"
 
 # PDF middleware
+#
+#gem "pdfkit"
+#
 
-gem "pdfkit"
+#
+# Use prawn for PDF generation
+#
+gem "prawn"
 
 # use the devise gem for authentication
 

@@ -1670,6 +1670,133 @@ display a link to the group samples index if the user is a group leader:
 Note that strictly the `:id` parameter is not necessary, but is passed
 to satisfy the routing requirements.
 
+Redoing PDF output
+==================
+Decided to switch to Prawn. After installing Prawn via an entry in the 
+Gemfile, the following was added to the file
+`config/initializers/mime_types.rb `:
+
+```
+Mime::Type.register "application/pdf", :pdf
+```
+
+Only the sample 'show' action will initially have PDF support.
+To enable the support, we change the 'show' code to:
+```
+  def show
+    @hazards = Hazard.find(:all)
+    @sample = Sample.find(params[:id])
+    respond_to do |format|
+      format.html
+      format.pdf do
+        pdf = SamplePdf.new(@sample)
+        send_data pdf.render, filename: "sample_#{@sample.code}",
+                              type: "application/pdf"
+
+      end
+    end
+  end
+```
+
+The code has been modified with a `respond_to` directive which includes
+pdf. At the end of the pdf response, the pdf output is rendered via
+`send_data` to a file called `sample_<sample code>.pdf`.
+To keep the controller code clean, most of the work is handled by a new
+class called `SamplePdf` defined in the file `app/pdfs/order_pdf.rb`.
+The `app/pdfs` directory was created first. the contents of this file
+are as follows:
+
+```
+class SamplePdf < Prawn::Document
+
+  def initialize(sample)
+    super(page_size: "A4")
+    @sample = sample
+    header
+    sample_code
+    scissor_line
+    show_barcode
+
+  end
+
+  def header
+    nbsp = Prawn::Text::NBSP
+    font("Times-Roman" ) do
+      text "Newcastle Crystallography Service", font: "Helvetica", size: 30, style: :bold, align: :center
+      text "Bedson Building#{nbsp}#{nbsp} " +
+           "<font name='ZapfDingbats' size='12'>F#{nbsp}#{nbsp}#{nbsp}</font>" + 
+           "#{nbsp}#{nbsp}Newcastle University#{nbsp}#{nbsp}" +
+           "<font name='ZapfDingbats' size='12'>#{nbsp}#{nbsp}F#{nbsp}#{nbsp}</font>" +
+           "#{nbsp}#{nbsp}NE1 7RU", size: 16, style: :bold,
+             align: :center, :inline_format => true
+
+    end
+  end
+
+  def sample_code
+    text "Sample #{@sample.code}", size: 24, style: :bold
+  end
+
+  def show_barcode
+
+    require 'tempfile'
+    require 'barby'
+    require 'barby/barcode/code_39'
+    require 'barby/outputter/png_outputter'
+    #require 'barby/outputter/ascii_outputter'
+
+    barcode = Barby::Code39.new(@sample.barcode)
+
+    # puts barcode.to_ascii #Implicitly uses the AsciiOutputter
+
+    font("Courier" ) do
+      draw_text "#{@sample.code}", size: 14, style: :bold, :at => [32,cursor+3]
+    end
+
+    temp_file = Tempfile.new(['bc', '.png'])
+
+    temp_file.write barcode.to_png(:margin => 0)
+    temp_file.close
+
+    image temp_file.path
+
+    temp_file.close(true)
+
+    bc_str = @sample.barcode.gsub(/(.{1})(?=.)/, '\1 \2')
+
+    font("Courier" ) do
+      draw_text "#{bc_str}", size: 12, style: :bold, :at => [7,cursor-10]
+    end
+
+  end
+
+  def scissor_line
+    vmiddle=(bounds.top + bounds.bottom)*0.5
+    hmiddle=(bounds.left + bounds.right)*0.5
+    dash(5, :space => 5, :phase => 3)
+    stroke do
+      pad(20) {
+        font("ZapfDingbats", :size => 28) do
+          draw_text "$", :at => [hmiddle,cursor]
+        end
+        move_up 10
+        horizontal_rule
+      }
+    end
+    undash
+  end
+
+
+end
+```
+
+The rendering is done in this code by a few funcyions. For example, the
+header function renders the main title of the page.
+The `show_barcode` function renders a graphic of the barcode and also
+typesets the sample code and barcode number above and below the graphic.
+A temporary file is used to store the graphic so that it can be rendered.
+
+
 Generating Sample Data
 ======================
 Use Faker to generate a large number of users and samples so that we can

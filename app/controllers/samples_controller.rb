@@ -67,6 +67,15 @@ class SamplesController < ApplicationController
   def show
     @hazards = Hazard.find(:all)
     @sample = Sample.find(params[:id])
+    respond_to do |format|
+      format.html
+      format.pdf do
+        pdf = SamplePdf.new(@sample)
+        send_data pdf.render, filename: "sample_#{@sample.code}",
+                              type: "application/pdf"
+
+      end
+    end
   end
 
   def new
