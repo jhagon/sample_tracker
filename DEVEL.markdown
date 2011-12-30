@@ -1796,6 +1796,37 @@ The `show_barcode` function renders a graphic of the barcode and also
 typesets the sample code and barcode number above and below the graphic.
 A temporary file is used to store the graphic so that it can be rendered.
 
+Tweaking Group Leader Views and Permissions
+===========================================
+Needed to allow group leaders to view their groups samples individually
+as well as in a list. Therefore amended the 
+`must_be_creator_or_admin` function in
+`app/controllers/samples_controller.rb` to allow this and changed the name
+of the function to `must_be_creator_or_leader_or_admin`. This function
+now returns true if the current user is a group leader and the sample he
+wants to view belongs to his group. 
+The `must_be_creator_or_leader_or_admin` function now looks like this:
+
+```
+  def must_be_creator_or_leader_or_admin
+    sample = Sample.find(params[:id])
+    return true if (user_signed_in? and (current_user.admin? or current_user==sample.user))
+    return true if((sample.user.group_id == current_user.group_id) and current_user.leader?)
+    session[:return_to] = request.request_uri
+    redirect_to root_url,
+             :alert =>
+             "You must be the sample owner, sample group leader or an administrator to view this sample!" and return false
+  end
+```
+
+The contoller code is amended near the top to now read:
+
+```
+  before_filter :must_be_creator_or_leader_or_admin, :only => :show
+```
+
+Finally, we amend the group index view to remove the links to edit and 
+destroy since the group leader cannot apply these actions.
 
 Generating Sample Data
 ======================

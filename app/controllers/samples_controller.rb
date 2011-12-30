@@ -2,7 +2,7 @@ class SamplesController < ApplicationController
   helper_method :sort_column, :sort_direction
 
   before_filter :authenticate_user!
-  before_filter :must_be_creator_or_admin, :only => :show
+  before_filter :must_be_creator_or_leader_or_admin, :only => :show
   before_filter :admin_required, :only => [:index, :edit, :update, :destroy]
   before_filter :must_be_leader_or_admin, :only => :groupindex
 
@@ -116,13 +116,14 @@ class SamplesController < ApplicationController
 
 private
 
-  def must_be_creator_or_admin
+  def must_be_creator_or_leader_or_admin
     sample = Sample.find(params[:id])
     return true if (user_signed_in? and (current_user.admin? or current_user==sample.user))
+    return true if((sample.user.group_id == current_user.group_id) and current_user.leader?)
     session[:return_to] = request.request_uri
     redirect_to root_url,
              :alert =>
-             "You must be the sample owner or an administrator to view this sample!" and return false
+             "You must be the sample owner, sample group leader or an administrator to view this sample!" and return false
   end
 
   def must_be_leader_or_admin
