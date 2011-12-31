@@ -4,6 +4,7 @@ class Sample < ActiveRecord::Base
   belongs_to :user
   belongs_to :flag
 
+  validates :code,	 :uniqueness => true
   validates :cif,        :presence => true
   validates :synth,      :presence => true
   validates :coshh_name, :presence => true

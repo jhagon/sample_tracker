@@ -1,6 +1,7 @@
 class User < ActiveRecord::Base
   has_many :samples
   belongs_to :group
+  validates_presence_of :group_id
   # Include default devise modules. Others available are:
   # :token_authenticatable, :encryptable, :confirmable, :lockable, :timeoutable and :omniauthable
   devise :database_authenticatable, :registerable,

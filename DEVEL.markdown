@@ -1742,7 +1742,7 @@ class SamplePdf < Prawn::Document
   def sample_code
     text_box "Sample Code: #{@sample.code}", size: 16, style: :bold, align: :left, :at => [0,bounds.top-84]
     move_up 16
-    text_box "Your Ref: #{@sample.userref}", size: 16, style: :bold, align: :right, :at => [400,bounds.top-84]
+    text_box "Your Ref: #{@sample.userref}", size: 16, style: :bold, align: :right, :at => [250,bounds.top-84]
     intro_str = "Please check the details on this receipt. " +
                 "Changes can be made only by Crystallography staff." +
                 "Please use the tear-off slip at the bottom of the page and " +
@@ -1983,6 +1983,161 @@ and similarly for groupindex:
 
 This produces a useful search while still allowing column resorting!
 
+Fixing Group Validation
+=======================
+Needed to force user to select a group on registration so added:
+
+```
+  validates_presence_of :group_id
+```
+
+to the `app/models/user.rb` file. This solved the problem.
+
+E-Mail Notifiction
+==================
+Devise is well integrated with e-mail and merely requires the correct
+settings for the local e-mail agent. On the production system
+(`crystal.ncl.ac.uk`) this will be `sendmail`, but on the development
+system, I use google smtp via my gmail account. The production settings
+go in the file `config/environments/production.rb`:
+
+```
+  config.action_mailer.default_url_options = { :host => 'crystal.ncl.ac.uk' }
+```
+
+and development settings go in `config/environments/development.rb`:
+
+```
+  config.action_mailer.default_url_options = { :host => 'localhost:3000' }
+  config.action_mailer.delivery_method = :smtp
+  config.action_mailer.smtp_settings = {
+    :address              => "smtp.gmail.com",
+    :port                 => "587",
+    :domain               => "gmail.com",
+    :user_name            => "<my gmail username> ",
+    :password             => "<my gmail password>",
+    :authentication       => "plain",
+    :enable_starttls_auto => true
+}
+```
+
+Note there is no delivery method specified in the first case because
+sendmail is assumed by default. With these settings, devise seems to do its
+stuff, although its email templates may need modification later. New
+registrations and password resetting seem to work fine.
+
+The next aspect is sample recepts and updates. For these we create a Sample
+mailer with two templates:
+
+```
+rails g mailer sample_mailer sample_receipt sample_update
+```
+
+This generates a file `app/mailers/sample_mailer.rb`. This is edited to
+contain the following:
+
+```
+class SampleMailer < ActionMailer::Base
+  default :from => "Crystallography Service <ncrystal@ncl.ac.uk>"
+
+  # Subject can be set in your I18n file at config/locales/en.yml
+  # with the following lookup:
+  #
+  #   en.sample.sample_receipt.subject
+  #
+  def sample_receipt(sample)
+    @sample = sample
+    mail(:to => "#{sample.user.firstname} #{sample.user.lastname} <#{sample.user.email}>", :subject => "Crystallography Service: Analysis Request Acknowledgement")
+  end
+
+  # Subject can be set in your I18n file at config/locales/en.yml
+  # with the following lookup:
+  #
+  #   en.sample.sample_update.subject
+  #
+  def sample_update(sample)
+
+    mail(:to => "#{sample.user.firstname} #{sample.user.lastname} <#{sample.user.email}>", :subject => "Crystallography Service: Sample Status Update Notification")
+  end
+end
+```
+
+The line with `default` sets the default `from` address. There are two
+methods, one of which sends a confirmation email when a sample is first
+submitted. The second (incomplete) method will send an email when a sample
+status changes. These methods can now be used by the samples controller
+as here in the case of the `create` action:
+
+```
+  def create
+    # @sample = Sample.new(params[:sample])
+    @sample = current_user.samples.build params[:sample]
+    if @sample.save
+      SampleMailer.sample_receipt(@sample).deliver
+      redirect_to @sample, :notice => "Sample request registered. You will receive a receipt and confirmation via email."
+    else
+      render :action => 'new'
+    end
+  end
+```
+
+Note that the controller calls the `sample_receipt` method defined in
+the `app/mailers/sample_mailer.rb` file. The `@sample` variable is
+passed on to the appropriate view which is constructed prior to the
+sending of the email.
+
+The views are in the directory `app/views/sample_mailer`
+in the files `sample_receipt.text.erb` and `sample_update.text.erb`. They
+are designed as templates for text emails. For html you create files
+with similar names but `text` replaced by `html`. A first attempt at this
+produced the following template for `sample_receipt.html.erb`:
+
+```
+<p>
+Dear <%="#{@sample.user.firstname} #{@sample.user.lastname}"%>
+<p>
+<p>
+your sample analysis request has been received. Please download a
+receipt using the link below. There is a tear-off slip at the bottom
+of the receipt which you should attach to your sample.
+You will be informed via email of any
+changes in the status of your sample analysis.
+<p>
+<p>
+<%= link_to "Analysis Request Receipt", "#{sample_url(@sample, :host => 'localhost:3000')}.pdf" %>
+</p>
+<p>
+Newcastle Crystallography Service
+</p>
+```
+
+One final thing which is useful (maybe essential) for development work.
+With many users you don't want to send emails to the real addresses - it
+would be nice if all emails to users could go to a single convenient address
+in development. This functionality can be provided by interceptors.
+To set things up, first create a file in the top-level `lib` directory
+called (say) `development_mail_interceptor.rb`. The contents of this
+file are:
+
+```
+class DevelopmentMailInterceptor
+  def self.delivering_email(message)
+    message.subject = "[#{message.to}] #{message.subject}"
+    message.to = "jphagon@gmail.com"
+  end
+end
+```
+
+This code sets up the required behaviour, redirecting all emails to
+`jphagon@gmail.com`. 
+Next we need to register the interceptor in an initializer file 
+which we can do by creating a file called (say) `setup_mail.rb` in
+the `config/initializers` directory.
+
+```
+require 'development_mail_interceptor' # put this in the lib directory
+ActionMailer::Base.register_interceptor(DevelopmentMailInterceptor) if Rails.env.development?
+```
 
 Generating Sample Data
 ======================

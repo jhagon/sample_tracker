@@ -33,7 +33,7 @@ class SamplePdf < Prawn::Document
   def sample_code
     text_box "Sample Code: #{@sample.code}", size: 16, style: :bold, align: :left, :at => [0,bounds.top-84]
     move_up 16
-    text_box "Your Ref: #{@sample.userref}", size: 16, style: :bold, align: :right, :at => [400,bounds.top-84]
+    text_box "Your Ref: #{@sample.userref}", size: 16, style: :bold, align: :right, :at => [250,bounds.top-84]
     intro_str = "Please check the details on this receipt. " +
                 "Changes can be made only by Crystallography staff." +
                 "Please use the tear-off slip at the bottom of the page and " +

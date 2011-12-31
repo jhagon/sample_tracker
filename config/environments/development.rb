@@ -23,6 +23,17 @@ SampleTracker::Application.configure do
   # Only use best-standards-support built into browsers
   config.action_dispatch.best_standards_support = :builtin
 
-  # need this for 'devise# authentication.
+  # need this for 'devise# authentication, e-mail status updates etc..
   config.action_mailer.default_url_options = { :host => 'localhost:3000' }
+  config.action_mailer.delivery_method = :smtp
+  config.action_mailer.smtp_settings = {
+    :address              => "smtp.gmail.com",
+    :port                 => "587",
+    :domain               => "gmail.com",
+    :user_name            => "jphagon",
+    :password             => "wtqcb2sq",
+    :authentication       => "plain",
+    :enable_starttls_auto => true
+}
+
 end

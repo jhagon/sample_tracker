@@ -1,0 +1,16 @@
+<p>
+Dear <%="#{@sample.user.firstname} #{@sample.user.lastname}"%>
+<p>
+<p>
+your sample analysis request has been received. Please download a
+receipt using the link below. There is a tear-off slip at the bottom
+of the receipt which you should attach to your sample.
+You will be informed via email of any
+changes in the status of your sample analysis.
+<p>
+<p>
+<%= link_to "Analysis Request Receipt", "#{sample_url(@sample, :host => 'localhost:3000')}.pdf" %>
+</p>
+<p>
+Newcastle Crystallography Service
+</p>

@@ -91,7 +91,8 @@ class SamplesController < ApplicationController
     # @sample = Sample.new(params[:sample])
     @sample = current_user.samples.build params[:sample]
     if @sample.save
-      redirect_to @sample, :notice => "Successfully created sample."
+      SampleMailer.sample_receipt(@sample).deliver
+      redirect_to @sample, :notice => "Sample request registered. You will receive a receipt and confirmation via email."
     else
       render :action => 'new'
     end

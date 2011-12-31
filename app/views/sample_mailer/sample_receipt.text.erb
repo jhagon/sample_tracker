@@ -1,0 +1,9 @@
+Dear <%="#{@sample.user.firstname} #{@sample.user.lastname}"%>
+
+your sample analysis request has been received. Please download a
+receipt using the link below. You will be informed via email of any
+changes in the status of your sample analysis.
+
+<%= sample_path(@sample, :host => "localhost:3000") %>
+
+Newcastle Crystallography Service
