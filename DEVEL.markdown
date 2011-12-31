@@ -1945,6 +1945,45 @@ The contoller code is amended near the top to now read:
 Finally, we amend the group index view to remove the links to edit and 
 destroy since the group leader cannot apply these actions.
 
+Simple Search
+=============
+Implemented a simple search by code for both admins on all samples and
+group leaders on group samples. Used Ryan Bates' technique described in
+Railscasts. The one change from RBs method was to keep the search logic
+within the controller in order to still use the column sorting functions.
+First, in the view templates for index and groupindex, the following code 
+was added to provide a search box - note the GET method must be used and
+also the `:name` parameter is set to `nil` so that the URL does not
+get appended with a useless `commit=search` string:
+
+```
+<% form_tag samples_path, :method => 'get' do %>
+  <p>
+    <%= text_field_tag :search, params[:search] %>
+    <%= submit_tag "Search", :name => nil %>
+  </p>
+<% end %>
+```
+
+In the controller, for the full index we amend the `@samples` assignment
+as follows:
+
+```
+     @samples=Sample.find( :all,
+                           :joins => [:flag, {:user => :group}],
+                           :order => "#{sort_column} #{sort_direction}",
+                           :conditions => ['code LIKE ?', "%#{params[:search]}%"])
+```
+
+and similarly for groupindex:
+
+```
+    @samples=Sample.where("(code LIKE '#{current_user.group.group_abbr}%') AND (code LIKE '%#{params[:search]}%')").joins(:flag, {:user => :group}).order("#{sort_column} #{sort_direction}")
+```
+
+This produces a useful search while still allowing column resorting!
+
+
 Generating Sample Data
 ======================
 Use Faker to generate a large number of users and samples so that we can

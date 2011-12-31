@@ -1,5 +1,12 @@
 <% title "Samples for #{current_user.group.group_abbr} Group" %>
 
+<% form_tag samples_path, :method => 'get' do %>
+  <p>
+    <%= text_field_tag :search, params[:search] %>
+    <%= submit_tag "Search", :name => nil %>
+  </p>
+<% end %>
+
 <table class="pretty">
   <tr>
     <th><%= sortable "code", "Code" %></th>

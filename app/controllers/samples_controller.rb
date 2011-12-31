@@ -57,10 +57,14 @@ class SamplesController < ApplicationController
   def index
      @samples=Sample.all( :joins => [:flag, {:user => :group}], 
                           :order => "#{sort_column} #{sort_direction}")
+     @samples=Sample.find( :all,
+                           :joins => [:flag, {:user => :group}], 
+                           :order => "#{sort_column} #{sort_direction}",
+                           :conditions => ['code LIKE ?', "%#{params[:search]}%"])
   end
 
   def groupindex
-    @samples=Sample.where("code LIKE '#{current_user.group.group_abbr}%'").joins(:flag, {:user => :group}).order("#{sort_column} #{sort_direction}")
+    @samples=Sample.where("(code LIKE '#{current_user.group.group_abbr}%') AND (code LIKE '%#{params[:search]}%')").joins(:flag, {:user => :group}).order("#{sort_column} #{sort_direction}")
 #                          :joins => [:flag, {:user => :group}],
   end
 

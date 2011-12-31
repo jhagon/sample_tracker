@@ -84,7 +84,7 @@ class SamplePdf < Prawn::Document
     vmiddle=(bounds.top + bounds.bottom)*0.5
     hmiddle=(bounds.left + bounds.right)*0.5
     pagewidth = bounds.right - bounds.left
-    bounding_box([0,144], :width => pagewidth) do
+    bounding_box([0,154], :width => pagewidth) do
       dash(5, :space => 5, :phase => 3)
       stroke do
         pad(20) {
