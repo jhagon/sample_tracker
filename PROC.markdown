@@ -148,3 +148,22 @@ git branch -d topic-branch (optional)
 
 the last line does a final cleanup and actually deletes the branch name
 itself if required.
+
+Undoing Unstaged edits
+======================
+
+If you've done some edits without yet commiting then they can be undone by
+typing:
+
+```
+git checkout -- .
+```
+
+in the current working directory. If you've created new files in the interim,
+they will be marked as untracked (you'll need to do a `git add .` for them.
+
+For specific files do:
+
+```
+git checkout path/to/file/to/revert
+```

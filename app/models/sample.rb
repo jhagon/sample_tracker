@@ -26,6 +26,15 @@ class Sample < ActiveRecord::Base
 
   before_create :make_barcode
 
+  after_update :send_email_after_status_change
+
+  def send_email_after_status_change
+    if (self.flag_id_changed?)
+      flag=Flag.find(self.flag_id_was)
+      SampleMailer.sample_update(self, flag).deliver
+    end
+  end
+
   private
 
   def make_barcode

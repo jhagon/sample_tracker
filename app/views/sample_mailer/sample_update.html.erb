@@ -1,12 +1,19 @@
+<p>
 Dear <%="#{@sample.user.firstname} #{@sample.user.lastname}"%>
-
+<p>
+<p>
 This is to inform you that the status for your sample
 <%=@sample.code%> (your ref <%=@sample.userref%>) has changed as follows:
-
-<%="New Status: #{@sample.flag.name} (#{@sample.flag.description}"%>
-
-<%="Old Status: #{@old_flag.name} (#{@old_flag.description}"%>
-
+</p>
+<p>
+<%="New Status: #{@sample.flag.name} (#{@sample.flag.description})"%>
+</p>
+<p>
+<%="Old Status: #{@old_flag.name} (#{@old_flag.description})"%>
+</p>
+<p>
 <%= link_to "Link to Full Sample Information", "#{sample_url(@sample, :host => 'localhost:3000')}" %>
-
+</p>
+<p>
 Newcastle Crystallography Service
+</p>

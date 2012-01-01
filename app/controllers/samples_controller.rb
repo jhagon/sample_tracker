@@ -107,7 +107,7 @@ class SamplesController < ApplicationController
     params[:sample][:hazard_ids] ||= []
     @sample = Sample.find(params[:id])
     if @sample.update_attributes(params[:sample])
-      redirect_to @sample, :notice  => "Successfully updated sample."
+      redirect_to @sample, :notice  => "Successfully updated sample. If the status has changed, an email will be sent to the user."
     else
       render :action => 'edit'
     end

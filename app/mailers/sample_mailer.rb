@@ -17,7 +17,9 @@ class SampleMailer < ActionMailer::Base
   #
   #   en.sample.sample_update.subject
   #
-  def sample_update(sample)
+  def sample_update(sample, old_flag)
+    @sample = sample
+    @old_flag = old_flag
     @greeting = "Hi"
 
     mail(:to => "#{sample.user.firstname} #{sample.user.lastname} <#{sample.user.email}>", :subject => "Crystallography Service: Sample Status Update Notification")

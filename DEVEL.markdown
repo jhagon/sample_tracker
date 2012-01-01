@@ -1702,7 +1702,7 @@ The code has been modified with a `respond_to` directive which includes
 pdf. At the end of the pdf response, the pdf output is rendered via
 `send_data` to a file called `sample_<sample code>.pdf`.
 To keep the controller code clean, most of the work is handled by a new
-class called `SamplePdf` defined in the file `app/pdfs/order_pdf.rb`.
+class called `SamplePdf` defined in the file `app/pdfs/sample_pdf.rb`.
 The `app/pdfs` directory was created first. the contents of this file
 are as follows:
 
@@ -1793,7 +1793,7 @@ class SamplePdf < Prawn::Document
     vmiddle=(bounds.top + bounds.bottom)*0.5
     hmiddle=(bounds.left + bounds.right)*0.5
     pagewidth = bounds.right - bounds.left
-    bounding_box([0,144], :width => pagewidth) do
+    bounding_box([0,154], :width => pagewidth) do
       dash(5, :space => 5, :phase => 3)
       stroke do
         pad(20) {
@@ -1884,26 +1884,41 @@ class SamplePdf < Prawn::Document
       stroke_bounds
       bounding_box([bounds.left+10 ,bounds.top-10], :width => boxwidth*0.5-20, :height => boxheight-20) do
         text "<b>Name of Solvent:</b>  #{@sample.coshh_name}", :size => 8, :inline_format => true
-        text "<b>Description of Sample:</b>  #{@sample.coshh_desc}", :size => 8, :inline_format => true
-        text "<b>Hazards and Procedures:</b>  #{@sample.coshh_info}", :size => 8, :inline_format => true
+          font_size = 8
+        if (@sample.coshh_desc.split(/[^-a-zA-Z]/).size > 30)
+          font_size = 6
+        end
+        text "<b>Description of Sample:</b>  #{@sample.coshh_desc}", :size => font_size, :inline_format => true
+          font_size = 8
+        if (@sample.coshh_info.split(/[^-a-zA-Z]/).size > 30)
+          font_size = 6
+        end
+        text "<b>Hazards and Procedures:</b>  #{@sample.coshh_info}", :size => font_size, :inline_format => true
       end
       bounding_box([boxwidth*0.5+10 ,bounds.top-10], :width => boxwidth*0.5-20, :height => boxheight-20) do
         text "<b>Hazard Categories:</b>", :size => 8, :inline_format => true
         move_down 12
+        font_size = 8
+        if (@sample.hazards.count > 5)
+          font_size = 6
+        end
+        if (@sample.hazards.count < 6)
+          font_size = 8
+        end
         for hazard in @hazards
           if @sample.hazards.include? hazard
             str = "#{hazard.hazard_desc} (#{hazard.hazard_abbr})"
-            text str, :size => 8, :inline_format => true
+            text str, :size => font_size, :inline_format => true
           end
         end
       end
-      indent(5) do
-        text "<i>School of Chemistry Crystallography Service, Newcastle University</i>", :size => 8, :inline_format => true
-      end
+
     end
+    font("Helvetica") do
+      draw_text "School of Chemistry Crystallography Service, Newcastle University", :size => 8, :at => [195,0], :style => :italic
+    end
+
   end
-
-
 end
 ```
 
@@ -1912,6 +1927,8 @@ header function renders the main title of the page.
 The `show_barcode` function renders a graphic of the barcode and also
 typesets the sample code and barcode number above and below the graphic.
 A temporary file is used to store the graphic so that it can be rendered.
+The code is a mess and will be one of the first candidates to be more
+robustly written if/when time permits.
 
 Tweaking Group Leader Views and Permissions
 ===========================================
@@ -2047,6 +2064,7 @@ class SampleMailer < ActionMailer::Base
   #
   def sample_receipt(sample)
     @sample = sample
+    @greeting = "Hi"
     mail(:to => "#{sample.user.firstname} #{sample.user.lastname} <#{sample.user.email}>", :subject => "Crystallography Service: Analysis Request Acknowledgement")
   end
 
@@ -2055,7 +2073,10 @@ class SampleMailer < ActionMailer::Base
   #
   #   en.sample.sample_update.subject
   #
-  def sample_update(sample)
+  def sample_update(sample, old_flag)
+    @sample = sample
+    @old_flag = old_flag
+    @greeting = "Hi"
 
     mail(:to => "#{sample.user.firstname} #{sample.user.lastname} <#{sample.user.email}>", :subject => "Crystallography Service: Sample Status Update Notification")
   end
@@ -2064,7 +2085,7 @@ end
 
 The line with `default` sets the default `from` address. There are two
 methods, one of which sends a confirmation email when a sample is first
-submitted. The second (incomplete) method will send an email when a sample
+submitted. The second method will send an email when a sample
 status changes. These methods can now be used by the samples controller
 as here in the case of the `create` action:
 
@@ -2097,14 +2118,77 @@ produced the following template for `sample_receipt.html.erb`:
 Dear <%="#{@sample.user.firstname} #{@sample.user.lastname}"%>
 <p>
 <p>
+New Sample Submission Code: <%=@sample.code%> (your ref <%=@sample.userref%>)
+</p>
+<p>
 your sample analysis request has been received. Please download a
-receipt using the link below. There is a tear-off slip at the bottom
+receipt using the link below. Please quote the sample code in any
+correspondence.
+</p>
+<p>
+There is a tear-off slip at the bottom
 of the receipt which you should attach to your sample.
 You will be informed via email of any
-changes in the status of your sample analysis.
-<p>
+changes in the status of your sample.
+</p>
 <p>
 <%= link_to "Analysis Request Receipt", "#{sample_url(@sample, :host => 'localhost:3000')}.pdf" %>
+</p>
+<p>
+Newcastle Crystallography Service
+</p>
+```
+
+We also want to send an email when the status flag changes. We edit the
+sample model code to initiate this:
+
+```
+  after_update :send_email_after_status_change
+
+  def send_email_after_status_change
+    if (self.flag_id_changed?)
+      flag=Flag.find(self.flag_id_was)
+      SampleMailer.sample_update(self, flag).deliver
+    end
+  end
+```
+
+where we have an after_update filter which checks for a change to the
+status flag and calls the `SampleMailer.sample_update` function defined
+in the file `app/mailers/sample_mailer.rb`. The code is shown here:
+
+```
+  def sample_update(sample, old_flag)
+    @sample = sample
+    @old_flag = old_flag
+    @greeting = "Hi"
+
+    mail(:to => "#{sample.user.firstname} #{sample.user.lastname} <#{sample.user.email}>", :subject => "Crystallography Service: Sample Status Update Notification")
+  end
+```
+
+This function sends two arguments to the mailer (and ultimately the
+email view templates. `@sample` contains the current (updated) sample
+object and `@old_flag` contains the previous flag object.
+This is then displayed as a view in an email by the following code
+contained in the file `app/views/sample_mailer/sample_update.html.erb`.
+
+```
+<p>
+Dear <%="#{@sample.user.firstname} #{@sample.user.lastname}"%>
+<p>
+<p>
+This is to inform you that the status for your sample
+<%=@sample.code%> (your ref <%=@sample.userref%>) has changed as follows:
+</p>
+<p>
+<%="New Status: #{@sample.flag.name} (#{@sample.flag.description})"%>
+</p>
+<p>
+<%="Old Status: #{@old_flag.name} (#{@old_flag.description})"%>
+</p>
+<p>
+<%= link_to "Link to Full Sample Information", "#{sample_url(@sample, :host => 'localhost:3000')}" %>
 </p>
 <p>
 Newcastle Crystallography Service

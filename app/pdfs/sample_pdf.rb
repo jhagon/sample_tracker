@@ -175,24 +175,39 @@ class SamplePdf < Prawn::Document
       stroke_bounds
       bounding_box([bounds.left+10 ,bounds.top-10], :width => boxwidth*0.5-20, :height => boxheight-20) do
         text "<b>Name of Solvent:</b>  #{@sample.coshh_name}", :size => 8, :inline_format => true
-        text "<b>Description of Sample:</b>  #{@sample.coshh_desc}", :size => 8, :inline_format => true
-        text "<b>Hazards and Procedures:</b>  #{@sample.coshh_info}", :size => 8, :inline_format => true
+          font_size = 8
+        if (@sample.coshh_desc.split(/[^-a-zA-Z]/).size > 30)
+          font_size = 6
+        end
+        text "<b>Description of Sample:</b>  #{@sample.coshh_desc}", :size => font_size, :inline_format => true
+          font_size = 8
+        if (@sample.coshh_info.split(/[^-a-zA-Z]/).size > 30)
+          font_size = 6
+        end
+        text "<b>Hazards and Procedures:</b>  #{@sample.coshh_info}", :size => font_size, :inline_format => true
       end
       bounding_box([boxwidth*0.5+10 ,bounds.top-10], :width => boxwidth*0.5-20, :height => boxheight-20) do
         text "<b>Hazard Categories:</b>", :size => 8, :inline_format => true
         move_down 12
+        font_size = 8
+        if (@sample.hazards.count > 5)
+          font_size = 6
+        end
+        if (@sample.hazards.count < 6)
+          font_size = 8
+        end
         for hazard in @hazards
           if @sample.hazards.include? hazard
             str = "#{hazard.hazard_desc} (#{hazard.hazard_abbr})"
-            text str, :size => 8, :inline_format => true
+            text str, :size => font_size, :inline_format => true
           end
         end
       end
-      indent(5) do
-        text "<i>School of Chemistry Crystallography Service, Newcastle University</i>", :size => 8, :inline_format => true
-      end
+
     end
+    font("Helvetica") do
+      draw_text "School of Chemistry Crystallography Service, Newcastle University", :size => 8, :at => [195,0], :style => :italic
+    end
+
   end
-
-
 end
