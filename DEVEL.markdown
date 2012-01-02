@@ -2378,6 +2378,104 @@ A `before_filter` was set up using `must_be_creator_or_leader_or_admin`.
 The view template was almost identical to that for the `groupindex`
 action apart from the title.
 
+Bar Code Search
+===============
+A special form was created for bar code searches. This was done by
+adding a new samples controller action called `findbarcode`. The
+controller code is as follows:
+
+```
+  def findbarcode
+    @samples=Sample.where("(barcode =  '#{params[:search]}')").joins(:flag, {:user => :group})
+  end
+```
+
+with access only to admins:
+
+```
+  before_filter :admin_required, :only => [:index, :findbarcode, :edit, :update, :destroy]
+```
+
+The view template looks like this:
+
+```
+<% title "Sample Bar Code Search" %>
+
+<% form_tag "/samples/findbarcode/#{current_user.id}", 
+    :method => 'get' do %>
+  <p>
+    <%= text_field_tag :search, params[:search] %>
+    <%= submit_tag "Search", :name => nil %>
+  </p>
+<% end %>
+
+<% if (@samples.size != 0) %>
+
+<table class="pretty">
+  <tr>
+    <th><%= sortable "code", "Code" %></th>
+    <th><%= sortable "userref", "Ref" %></th>
+<!--    <th><%= sortable "params", "Parameters" %></th> -->
+    <th><%= sortable "name", "Status" %></th>
+    <th><%= sortable "created_at", "Submitted" %></th>
+    <th><%= sortable "updated_at", "Updated" %></th>
+    <th><%= sortable "priority", "Priority" %></th>
+<!--    <th><%= sortable "powd", "Powd?" %></th> -->
+<!--    <th><%= sortable "chiral", "Chiral?" %></th> -->
+<!--    <th><%= sortable "cost_code", "Cost Code" %></th> -->
+    <th><%= sortable "lastname", "User" %></th>
+    <th><%= sortable "group_abbr", "Group" %></th>
+  </tr>
+  <% for sample in @samples %>
+    <tr>
+      <td><%= sample.code %></td>
+      <td><%= sample.userref %></td>
+<!--      <td><%= sample.params %></td> -->
+      <td><%= sample.flag.name %></td>
+      <td><%= neat_time(sample.created_at) %></td>
+      <td><%= neat_time(sample.updated_at) %></td>
+      <td><%= sample.priority %></td>
+<!--      <td><%= sample.powd %></td> -->
+<!--      <td><%= sample.chiral %></td> -->
+<!--      <td><%= sample.cost_code %></td> -->
+      <td><%= "#{sample.user.firstname} #{sample.user.lastname}"  %></td>
+      <td><%= "#{sample.user.group.group_desc}"  %></td>
+      <td><%= link_to "Show", sample %></td>
+      <td><%= link_to "PDF", sample_path(sample, :format => "pdf") %></td>
+<!--      <td><%= link_to "Edit", edit_sample_path(sample) %></td>
+      <td><%= link_to "Destroy", sample, :confirm => 'Are you sure?', :method => :delete %></td> -->
+      <td></td>
+      <td></td>
+    </tr>
+  <% end %>
+</table>
+
+<% end %>
+```
+
+Note that no pagination is necessary because the search should find at
+most a single sample since the barcode is unique.
+Finally, added a link on the main 'Admin Tools' list in
+`app/views/layouts/application.html.erb`:
+
+```
+  <div id="admin_nav">
+    <% if user_signed_in? and current_user.admin?%>
+      Admin Tools:
+      <%= link_to 'Hazards', hazards_path %> |
+      <%= link_to 'User Groups', groups_path %> |
+      <%= link_to 'Assets', assets_path %> |
+      <%= link_to 'Pages', pages_path %> |
+      <%= link_to 'Popups', popups_path %> |
+      <%= link_to 'Status Flags', flags_path %> |
+      <%= link_to 'Samples', samples_path %> |
+      <%= link_to 'Find Bar Code', :controller => "samples",
+                                   :action => "findbarcode",
+                                   :id => current_user.id %> |
+      <%= link_to 'Users', '/user' %>
+    <% else %>
+    <% end %>
+  </div>
 
 TODO: Generating Sample Data
 ============================

@@ -4,7 +4,7 @@ class SamplesController < ApplicationController
   before_filter :authenticate_user!
   before_filter :must_be_creator_or_leader_or_admin, 
     :only => [:show, :userindex]
-  before_filter :admin_required, :only => [:index, :edit, :update, :destroy]
+  before_filter :admin_required, :only => [:index, :findbarcode, :edit, :update, :destroy]
   before_filter :must_be_leader_or_admin, :only => :groupindex
 
   def make_sample_code
@@ -62,14 +62,17 @@ class SamplesController < ApplicationController
 
   end
 
+  def findbarcode
+    @samples=Sample.where("(barcode =  '#{params[:search]}')").joins(:flag, {:user => :group})
+  end
 
   def index
-     @samples=Sample.all( :joins => [:flag, {:user => :group}], 
-                          :order => "#{sort_column} #{sort_direction}")
-     @samples=Sample.page(params[:page]).per_page(ITEMS_PER_PAGE).find( :all,
-                           :joins => [:flag, {:user => :group}], 
-                           :order => "#{sort_column} #{sort_direction}",
-                           :conditions => ['code LIKE ?', "%#{params[:search]}%"])
+  #   @samples=Sample.all( :joins => [:flag, {:user => :group}], 
+  #                        :order => "#{sort_column} #{sort_direction}")
+      @samples=Sample.page(params[:page]).per_page(ITEMS_PER_PAGE).find( :all,
+        :joins => [:flag, {:user => :group}],                  
+        :order => "#{sort_column} #{sort_direction}",
+        :conditions => ['code LIKE ?', "%#{params[:search]}%"])
   end
 
   def groupindex

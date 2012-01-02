@@ -1,13 +1,14 @@
-<% title "Samples for #{current_user.firstname} #{current_user.lastname}" %>
+<% title "Sample Bar Code Search" %>
 
-<%= will_paginate @samples %>
-
-<% form_tag samples_path, :method => 'get' do %>
+<% form_tag "/samples/findbarcode/#{current_user.id}", 
+    :method => 'get' do %>
   <p>
     <%= text_field_tag :search, params[:search] %>
     <%= submit_tag "Search", :name => nil %>
   </p>
 <% end %>
+
+<% if (@samples.size != 0) %>
 
 <table class="pretty">
   <tr>
@@ -48,4 +49,4 @@
   <% end %>
 </table>
 
-<p><%= link_to "New Sample", new_sample_path %></p>
+<% end %>

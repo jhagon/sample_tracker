@@ -43,6 +43,9 @@
       <%= link_to 'Popups', popups_path %> |
       <%= link_to 'Status Flags', flags_path %> |
       <%= link_to 'Samples', samples_path %> |
+      <%= link_to 'Find Bar Code', :controller => "samples",
+                                   :action => "findbarcode",
+                                   :id => current_user.id %> |
       <%= link_to 'Users', '/user' %>
     <% else %>
     <% end %>

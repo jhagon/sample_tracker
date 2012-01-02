@@ -2,7 +2,8 @@
 
 <%= will_paginate @samples %>
 
-<% form_tag samples_path, :method => 'get' do %>
+<% form_tag "/samples/groupindex/#{current_user.id}", 
+    :method => 'get' do %>
   <p>
     <%= text_field_tag :search, params[:search] %>
     <%= submit_tag "Search", :name => nil %>
@@ -39,6 +40,7 @@
       <td><%= "#{sample.user.firstname} #{sample.user.lastname}"  %></td>
       <td><%= "#{sample.user.group.group_desc}"  %></td>
       <td><%= link_to "Show", sample %></td>
+      <td><%= link_to "PDF", sample_path(sample, :format => "pdf") %></td>
 <!--      <td><%= link_to "Edit", edit_sample_path(sample) %></td>
       <td><%= link_to "Destroy", sample, :confirm => 'Are you sure?', :method => :delete %></td> -->
       <td></td>
@@ -46,5 +48,3 @@
     </tr>
   <% end %>
 </table>
-
-<p><%= link_to "New Sample", new_sample_path %></p>
