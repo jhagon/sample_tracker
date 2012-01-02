@@ -2477,6 +2477,13 @@ Finally, added a link on the main 'Admin Tools' list in
     <% end %>
   </div>
 
+BUGFIX: Removed before_filter on userindex
+==========================================
+The before_filter didn't work properly, and in any case seems
+unnecessary. Even if the user types in the correct 'My samples' URL
+for another user, it doesn't show because the :id part of the URL
+is ignored anyway.
+
 TODO: Generating Sample Data
 ============================
 Use Faker to generate a large number of users and samples so that we can

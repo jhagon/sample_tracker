@@ -3,7 +3,7 @@ class SamplesController < ApplicationController
 
   before_filter :authenticate_user!
   before_filter :must_be_creator_or_leader_or_admin, 
-    :only => [:show, :userindex]
+    :only => [:show]
   before_filter :admin_required, :only => [:index, :findbarcode, :edit, :update, :destroy]
   before_filter :must_be_leader_or_admin, :only => :groupindex
 
