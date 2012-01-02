@@ -17,10 +17,7 @@ class UsersController < ApplicationController
 
 
   def show
-    @user = current_user
-    s = @user.samples
-    @samples=s.all( :joins => :flag,
-    :order => "#{sort_column} #{sort_direction}")
+    @user = User.find(params[:id])
   end
 
   def test_blank_pw

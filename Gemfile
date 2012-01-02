@@ -37,6 +37,10 @@ gem 'devise', '1.4.9'
 
 gem "cancan"
 
+# use will_paginate for pagination
+
+gem "will_paginate", "> 3.0"
+
 group :development do
   gem 'rspec-rails', '2.0.1'
   gem 'mocha'

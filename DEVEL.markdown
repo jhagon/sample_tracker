@@ -2297,6 +2297,87 @@ Used `truncate` to limit the amount of page data visible in the index:
 <td><%= truncate(page.content, :length => 80) %></td>
 ```
 
+Pagination
+==========
+Used will_paginate to do index pagination. This requires a version 
+greater than 3.0.2. Once installed, need to do make the following
+change to a `Sample.find` call:
+
+```
+Sample.page(params[:page]).per_page(ITEMS_PER_PAGE).find
+
+```
+
+Here's an example for the `queue` action:
+
+```
+  def queue
+     @samples=Sample.page(params[:page]).per_page(ITEMS_PER_PAGE).find( :all,
+       :joins => [:flag],
+       :order => "created_at ASC",
+       :conditions => [" flags.id = samples.flag_id AND flags.name = 'SUBMITTED'"])
+
+  end
+```
+
+`ITEMS_PER_PAGE` is a global constant defined in
+`config/environment.rb`:
+
+```
+# Load the rails application
+require File.expand_path('../application', __FILE__)
+
+# Initialize the rails application
+SampleTracker::Application.initialize!
+ITEMS_PER_PAGE = 10 # num items per page for will_paginate
+```
+
+The only modification to most views is the following entry near the top:
+
+```
+<%= will_paginate @samples %>
+```
+
+For special views with calculated column values in the view, may need to
+take into account the page number. This was the case for the queue samples
+view:
+
+```
+ </tr>
+  <% page_num = params[:page].to_i > 0 ? params[:page].to_i : 1 %>
+  <% days =  1 + (page_num - 1) * 5%>
+  <% for sample in @samples %>
+    <tr>
+      <td><%= sample.code %></td>
+      <td><%= sample.userref %></td>
+      <td><%= neat_time(sample.created_at) %></td>
+      <td><%= sample.priority %></td>
+      <td><%= pluralize(days, 'Day') %></td>
+    </tr>
+    <% days = days + 1%>
+    </tr>
+```
+where the wait time column value now depend on a combination of page
+number and row, rather than just row as before.
+
+For the user sample index, it was easier to have a separate view.
+So, the former 'My Samples' link was changed to 'My Profile' and the
+samples list removed from both the controller and view leaving just
+a basic profile page.
+Instead, a new `userindex` controller action was set up in the
+samples controller, very similar to the groupindex action:
+
+```
+  def userindex
+    @samples=Sample.page(params[:page]).per_page(ITEMS_PER_PAGE).where("(user_id = '#{current_user.id}') AND (code LIKE '%#{params[:search]}%')").joins(:flag, {:user => :group}).order("#{sort_column} #{sort_direction}")
+#                          :joins => [:flag, {:user => :group}],
+  end
+```
+
+A `before_filter` was set up using `must_be_creator_or_leader_or_admin`.
+The view template was almost identical to that for the `groupindex`
+action apart from the title.
+
 
 TODO: Generating Sample Data
 ============================

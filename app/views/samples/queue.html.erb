@@ -1,4 +1,7 @@
 <% title "Current Sample Queue" %>
+
+<%= will_paginate @samples %>
+
 <p>
 The estimated wait time is likely to be shorter if the priority
 number is lower for multiple samples submitted on the same day.
@@ -11,7 +14,8 @@ number is lower for multiple samples submitted on the same day.
     <th>Priority</th>
     <th>Wait Time</th>
   </tr>
-  <% days = 1 %>
+  <% page_num = params[:page].to_i > 0 ? params[:page].to_i : 1 %>
+  <% days =  1 + (page_num - 1) * 5%>
   <% for sample in @samples %>
     <tr>
       <td><%= sample.code %></td>
@@ -20,7 +24,7 @@ number is lower for multiple samples submitted on the same day.
       <td><%= sample.priority %></td>
       <td><%= pluralize(days, 'Day') %></td>
     </tr>
-    <% days = days + 1 %>
+    <% days = days + 1%>
     </tr>
   <% end %>
 </table>

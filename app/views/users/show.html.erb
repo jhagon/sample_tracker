@@ -20,40 +20,4 @@
   <%=@user.leader? ? 'yes' : 'no' %>
 </p>
 
-<h3><%="Samples" %></h3>
-<% if @user.samples.count > 0 %>
-<table class="pretty">
-  <tr>
-    <th><%= sortable "code", "Code" %></th>
-    <th><%= sortable "params", "Params" %></th>
-    <th><%= sortable "name", "Status" %></th>
-    <th><%= sortable "created_at", "Submitted" %></th>
-    <th><%= sortable "updated_at", "Updated" %></th>
-    <th><%= sortable "priority", "Priority" %></th>
-    <th><%= sortable "powd", "Powd?" %></th>
-    <th><%= sortable "chiral", "Chiral?" %></th>
-    <th><%= sortable "cost_code", "Cost Code" %></th>
-  </tr>
-  <% for sample in @samples %>
-    <tr>
-      <td><%= sample.code %></td>
-      <td><%= sample.params %></td>
-      <td><%= sample.flag.name %></td>
-      <td><%= neat_time(sample.created_at) %></td>
-      <td><%= neat_time(sample.updated_at) %></td>
-      <td><%= sample.priority %></td>
-      <td><%= sample.powd %></td>
-      <td><%= sample.chiral %></td>
-      <td><%= sample.cost_code %></td>
-      <td><%= link_to "Show", sample %></td>
-      <td><%= link_to "PDF", sample_path(sample, :format => "pdf") %></td>
-    </tr>
-  <% end %>
-</table>
-<% else %>
-<p>
-You have no samples!
-</p>
-<% end %>
-
 <%= link_to "Back", :back %>

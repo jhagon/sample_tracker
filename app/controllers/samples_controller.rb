@@ -2,7 +2,8 @@ class SamplesController < ApplicationController
   helper_method :sort_column, :sort_direction
 
   before_filter :authenticate_user!
-  before_filter :must_be_creator_or_leader_or_admin, :only => :show
+  before_filter :must_be_creator_or_leader_or_admin, 
+    :only => [:show, :userindex]
   before_filter :admin_required, :only => [:index, :edit, :update, :destroy]
   before_filter :must_be_leader_or_admin, :only => :groupindex
 
@@ -54,7 +55,7 @@ class SamplesController < ApplicationController
   end
 
   def queue
-     @samples=Sample.find( :all,
+     @samples=Sample.page(params[:page]).per_page(ITEMS_PER_PAGE).find( :all,
        :joins => [:flag],
        :order => "created_at ASC",
        :conditions => [" flags.id = samples.flag_id AND flags.name = 'SUBMITTED'"])
@@ -65,14 +66,19 @@ class SamplesController < ApplicationController
   def index
      @samples=Sample.all( :joins => [:flag, {:user => :group}], 
                           :order => "#{sort_column} #{sort_direction}")
-     @samples=Sample.find( :all,
+     @samples=Sample.page(params[:page]).per_page(ITEMS_PER_PAGE).find( :all,
                            :joins => [:flag, {:user => :group}], 
                            :order => "#{sort_column} #{sort_direction}",
                            :conditions => ['code LIKE ?', "%#{params[:search]}%"])
   end
 
   def groupindex
-    @samples=Sample.where("(code LIKE '#{current_user.group.group_abbr}%') AND (code LIKE '%#{params[:search]}%')").joins(:flag, {:user => :group}).order("#{sort_column} #{sort_direction}")
+    @samples=Sample.page(params[:page]).per_page(ITEMS_PER_PAGE).where("(code LIKE '#{current_user.group.group_abbr}%') AND (code LIKE '%#{params[:search]}%')").joins(:flag, {:user => :group}).order("#{sort_column} #{sort_direction}")
+#                          :joins => [:flag, {:user => :group}],
+  end
+
+  def userindex
+    @samples=Sample.page(params[:page]).per_page(ITEMS_PER_PAGE).where("(user_id = '#{current_user.id}') AND (code LIKE '%#{params[:search]}%')").joins(:flag, {:user => :group}).order("#{sort_column} #{sort_direction}")
 #                          :joins => [:flag, {:user => :group}],
   end
 

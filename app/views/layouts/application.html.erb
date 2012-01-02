@@ -15,7 +15,8 @@
       <%= link_to "Sign out", destroy_user_session_path, :method => :delete %>
       <br />
       User Tools:
-      <%= link_to 'My Samples', "/users/show/#{current_user.id}" %> |
+      <%= link_to 'My Profile', "/users/show/#{current_user.id}" %> |
+      <%= link_to 'My Samples', "/samples/userindex/#{current_user.id}" %> |
       <% if user_signed_in? and (current_user.admin? or current_user.leader?) %>
         <%= link_to 'My Group Samples', :controller => "samples", 
                                         :action => "groupindex",
