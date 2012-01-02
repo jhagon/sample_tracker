@@ -53,6 +53,14 @@ class SamplesController < ApplicationController
 
   end
 
+  def queue
+     @samples=Sample.find( :all,
+       :joins => [:flag],
+       :order => "created_at ASC",
+       :conditions => [" flags.id = samples.flag_id AND flags.name = 'SUBMITTED'"])
+
+  end
+
 
   def index
      @samples=Sample.all( :joins => [:flag, {:user => :group}], 

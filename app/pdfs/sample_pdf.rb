@@ -206,7 +206,7 @@ class SamplePdf < Prawn::Document
 
     end
     font("Helvetica") do
-      draw_text "School of Chemistry Crystallography Service, Newcastle University", :size => 8, :at => [195,0], :style => :italic
+      draw_text "School of Chemistry Crystallography Service, Newcastle University", :size => 6, :at => [195,0], :style => :italic
     end
 
   end

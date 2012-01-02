@@ -1,0 +1,26 @@
+<% title "Current Sample Queue" %>
+<p>
+The estimated wait time is likely to be shorter if the priority
+number is lower for multiple samples submitted on the same day.
+</p>
+<table >
+  <tr>
+    <th>Sample Code</th>
+    <th>User Ref</th>
+    <th>Submitted At</th>
+    <th>Priority</th>
+    <th>Wait Time</th>
+  </tr>
+  <% days = 1 %>
+  <% for sample in @samples %>
+    <tr>
+      <td><%= sample.code %></td>
+      <td><%= sample.userref %></td>
+      <td><%= neat_time(sample.created_at) %></td>
+      <td><%= sample.priority %></td>
+      <td><%= pluralize(days, 'Day') %></td>
+    </tr>
+    <% days = days + 1 %>
+    </tr>
+  <% end %>
+</table>

@@ -1915,7 +1915,7 @@ class SamplePdf < Prawn::Document
 
     end
     font("Helvetica") do
-      draw_text "School of Chemistry Crystallography Service, Newcastle University", :size => 8, :at => [195,0], :style => :italic
+      draw_text "School of Chemistry Crystallography Service, Newcastle University", :size => 6, :at => [195,0], :style => :italic
     end
 
   end
@@ -2223,8 +2223,83 @@ require 'development_mail_interceptor' # put this in the lib directory
 ActionMailer::Base.register_interceptor(DevelopmentMailInterceptor) if Rails.env.development?
 ```
 
-Generating Sample Data
-======================
+Adding a Queue Page
+===================
+Added a simple queue page for samples bearing the 'SUBMITTED' flag. This is
+visible to all users so contains only limited information:
+
+* sample code
+* user ref
+* submission date/time
+* priority number
+* estimated wait time
+
+The estimated wait time is based solely on the submission date. It could
+be modified to include priority information later. The queue page is
+implemented by adding a queue controller action to the samples controller:
+
+```
+  def queue
+     @samples=Sample.find( :all,
+       :joins => [:flag],
+       :order => "created_at ASC",
+       :conditions => [" flags.id = samples.flag_id AND flags.name = 'SUBMITTED'"])
+
+  end
+```
+
+The associated view looks like this:
+
+```
+<% title "Current Sample Queue" %>
+<p>
+The estimated wait time is likely to be shorter if the priority
+number is lower for multiple samples submitted on the same day.
+</p>
+<table >
+  <tr>
+    <th>Sample Code</th>
+    <th>User Ref</th>
+    <th>Submitted At</th>
+    <th>Priority</th>
+    <th>Wait Time</th>
+  </tr>
+  <% days = 1 %>
+  <% for sample in @samples %>
+    <tr>
+      <td><%= sample.code %></td>
+      <td><%= sample.userref %></td>
+      <td><%= neat_time(sample.created_at) %></td>
+      <td><%= sample.priority %></td>
+      <td><%= pluralize(days, 'Day') %></td>
+    </tr>
+    <% days = days + 1 %>
+    </tr>
+  <% end %>
+</table>
+```
+Also added a 'Sample Queue' link to the standard user tools menu.
+
+Modifying 'My Samples' Page
+===========================
+Added PDF links to each sample entry in the file
+`app/views/users/show.html.erb` via:
+
+```
+<td><%= link_to "PDF", sample_path(sample, :format => "pdf") %></td>
+```
+
+Modifying Pages Index
+=====================
+Used `truncate` to limit the amount of page data visible in the index:
+
+```
+<td><%= truncate(page.content, :length => 80) %></td>
+```
+
+
+TODO: Generating Sample Data
+============================
 Use Faker to generate a large number of users and samples so that we can
 test (among other things) pagination of sample listings etc.
 Faker is installed via bundle in the usual way by placing the instruction

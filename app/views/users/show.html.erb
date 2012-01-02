@@ -46,6 +46,7 @@
       <td><%= sample.chiral %></td>
       <td><%= sample.cost_code %></td>
       <td><%= link_to "Show", sample %></td>
+      <td><%= link_to "PDF", sample_path(sample, :format => "pdf") %></td>
     </tr>
   <% end %>
 </table>

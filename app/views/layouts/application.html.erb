@@ -21,6 +21,9 @@
                                         :action => "groupindex",
                                         :id => current_user.id %> |
       <% end %>
+        <%= link_to 'Sample Queue',     :controller => "samples", 
+                                        :action => "queue",
+                                        :id => current_user.id %> |
       <%= link_to 'Submit New Sample', new_sample_path %> |
       <%= link_to 'Home', root_url %>
     <% else %>
