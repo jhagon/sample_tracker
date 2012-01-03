@@ -2020,6 +2020,8 @@ go in the file `config/environments/production.rb`:
 
 ```
   config.action_mailer.default_url_options = { :host => 'crystal.ncl.ac.uk' }
+  config.action_mailer.delivery_method = :sendmail
+
 ```
 
 and development settings go in `config/environments/development.rb`:
@@ -2038,8 +2040,7 @@ and development settings go in `config/environments/development.rb`:
 }
 ```
 
-Note there is no delivery method specified in the first case because
-sendmail is assumed by default. With these settings, devise seems to do its
+With these settings, devise seems to do its
 stuff, although its email templates may need modification later. New
 registrations and password resetting seem to work fine.
 
