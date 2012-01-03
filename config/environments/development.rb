@@ -35,5 +35,7 @@ SampleTracker::Application.configure do
     :authentication       => "plain",
     :enable_starttls_auto => true
 }
-
+  # define host in email templates. There may well be a helper for
+  # this, but for now do it via a global string variable.
+  MAIL_HOST = 'localhost:3000'
 end

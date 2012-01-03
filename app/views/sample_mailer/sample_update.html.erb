@@ -12,7 +12,8 @@ This is to inform you that the status for your sample
 <%="Old Status: #{@old_flag.name} (#{@old_flag.description})"%>
 </p>
 <p>
-<%= link_to "Link to Full Sample Information", "#{sample_url(@sample, :host => 'localhost:3000')}" %>
+<%= link_to "Link to Full Sample Information", "#{sample_url(@sample, 
+            :host => MAIL_HOST)}" %>
 </p>
 <p>
 Newcastle Crystallography Service

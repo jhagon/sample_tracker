@@ -92,7 +92,7 @@ class SamplesController < ApplicationController
       format.html
       format.pdf do
         pdf = SamplePdf.new(@sample)
-        send_data pdf.render, filename: "sample_#{@sample.code}",
+        send_data pdf.render, filename: "sample_#{@sample.code}.pdf",
                               type: "application/pdf"
 
       end

@@ -2484,6 +2484,55 @@ unnecessary. Even if the user types in the correct 'My samples' URL
 for another user, it doesn't show because the :id part of the URL
 is ignored anyway.
 
+Tidying Up
+==========
+Changed wording at the top of the sample create/edit form view template
+in `app/views/samples/_form.html.erb` to:
+
+```
+<b>Note:</b> a unique code and a barcode will be
+automatically generated on submission of this form when a new sample
+is created.
+```
+
+Also added the code string to the sample edit page title in
+`app/views/samples/edit.html.erb`:
+
+```
+<% title "Edit Sample #{@sample.code}" %>
+```
+
+Added a '.pdf' extension to PDF file link in
+`app/controllers/sample_controller.rb`:
+
+```
+  def show
+    @hazards = Hazard.find(:all)
+    @sample = Sample.find(params[:id])
+    respond_to do |format|
+      format.html
+      format.pdf do
+        pdf = SamplePdf.new(@sample)
+        send_data pdf.render, filename: "sample_#{@sample.code}.pdf",
+                              type: "application/pdf"
+
+      end
+    end
+  end
+```
+
+Added a link to 'Edit' in the `findbarcode` view (since that's often
+what you want to do when searching by barcode).
+
+Introduced a global variable `MAIL_HOST` which is referred to in the
+email view template files. This constant is then set in the
+files `development.rb` and `production.rb` in the directory
+`config/environments`. In the former case the value is 'localhost:3000'
+and in the latter case it is 'crystal.ncl.ac.uk'. There may well be
+a helper for this, which would be the correct way to do it, but at least
+this does not require a manual change when shifting from development
+mode to production mode.
+
 TODO: Generating Sample Data
 ============================
 Use Faker to generate a large number of users and samples so that we can

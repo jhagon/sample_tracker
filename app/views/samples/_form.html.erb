@@ -1,8 +1,9 @@
 <%= form_for @sample, :html => {:multipart => true} do |f| %>
   <%= f.error_messages %>
   <p>
-Note an identifier for internal use and a unique barcode will be
-automatically generated on submission of this form.
+<b>Note:</b> a unique code and a barcode will be
+automatically generated on submission of this form when a new sample
+is created.
     <%= f.hidden_field :code %>
   </p>
   <p>
