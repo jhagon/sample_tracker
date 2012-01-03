@@ -49,6 +49,7 @@ SampleTracker::Application.configure do
 
   # need this for 'devise# authentication and status updates etc.
   config.action_mailer.default_url_options = { :host => 'crystal.ncl.ac.uk' }
+  config.action_mailer.delivery_method = :sendmail
 
   # define host in email templates. There may well be a helper for
   # this, but for now do it via a global string variable.
