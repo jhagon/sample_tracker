@@ -1,4 +1,7 @@
 <% title "Sample #{@sample.code}" %>
+<p> 
+<%= link_to "Show as PDF", "#{sample_path(@sample)}.pdf" %>
+</p>
 <p>
   <strong>Your Ref:</strong>
   <%= @sample.userref %>
@@ -16,15 +19,15 @@
                 :target => "_blank"  %>
 </p>
 <p>
-  <strong>Coshh Name:</strong>
+  <strong>Solvent Name:</strong>
   <%= @sample.coshh_name %>
 </p>
 <p>
-  <strong>Coshh Desc:</strong>
+  <strong>Description:</strong>
   <%= @sample.coshh_desc %>
 </p>
 <p>
-  <strong>Coshh Info:</strong>
+  <strong>Handling Information:</strong>
   <%= @sample.coshh_info %>
 </p>
 <p>
@@ -77,12 +80,12 @@
   <%= @sample.priority %>
 </p>
 <p>
-  <strong>Powd:</strong>
-  <%= @sample.powd %>
+  <strong>Powder Diffraction Required?:</strong>
+  <%= @sample.powd ? 'Yes' : 'No'%>
 </p>
 <p>
-  <strong>Chiral:</strong>
-  <%= @sample.chiral %>
+  <strong>Chiral Molecule?:</strong>
+  <%= @sample.chiral ? 'Yes' : 'No'%>
 </p>
 <p>
   <strong>Cost Code:</strong>

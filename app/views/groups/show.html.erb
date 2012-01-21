@@ -1,13 +1,60 @@
 <% title "Group" %>
 
 <p>
-  <strong>Group Abbr:</strong>
+  <strong>Group Abbreviation:</strong>
   <%= @group.group_abbr %>
 </p>
 <p>
-  <strong>Group Desc:</strong>
+  <strong>Group Description:</strong>
   <%= @group.group_desc %>
 </p>
+
+<h3><%="Samples List for this Group" %></h3>
+
+<p>
+<%= will_paginate @samples %>
+</p>
+
+<% if @samples.count > 0 %>
+<p>
+<table class="pretty">
+  <tr>
+    <th><%= sortable "code", "Code" %></th>
+    <th><%= sortable "userref", "Ref" %></th>
+    <th><%= sortable "params", "Params" %></th>
+    <th><%= sortable "name", "Status" %></th>
+    <th><%= sortable "created_at", "Submitted" %></th>
+    <th><%= sortable "updated_at", "Updated" %></th>
+    <th><%= sortable "priority", "Priority" %></th>
+    <th><%= sortable "powd", "Powd?" %></th>
+    <th><%= sortable "chiral", "Chiral?" %></th>
+    <th><%= sortable "cost_code", "Cost Code" %></th>
+  </tr>
+
+  <% for sample in @samples %>
+    <tr>
+      <td><%= sample.code %></td>
+      <td><%= sample.userref %></td>
+      <td><%= sample.params %></td>
+      <td><%= sample.flag.name %></td>
+      <td><%= neat_time(sample.created_at) %></td>
+      <td><%= neat_time(sample.updated_at) %></td>
+      <td><%= sample.priority %></td>
+      <td><%= sample.powd %></td>
+      <td><%= sample.chiral %></td>
+      <td><%= sample.cost_code %></td>
+      <td><%= link_to "Show", sample %></td>
+    </tr>
+  <% end %>
+</table>
+</p>
+<% else %>
+<p>
+This group has no samples!
+</p>
+<% end %>
+
+
 
 <p>
   <%= link_to "Edit", edit_group_path(@group) %> |

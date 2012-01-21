@@ -15,7 +15,13 @@
 </p>
 
 <h3><%="Samples" %></h3>
+
+<p>
+<%= will_paginate @samples %>
+</p>
+
 <% if @user.samples.count > 0 %>
+<p>
 <table class="pretty">
   <tr>
     <th><%= sortable "code", "Code" %></th>
@@ -42,9 +48,11 @@
       <td><%= sample.chiral %></td>
       <td><%= sample.cost_code %></td>
       <td><%= link_to "Show", sample %></td>
+      <td><%= link_to "PDF", sample_path(sample, :format => "pdf") %></td>
     </tr>
   <% end %>
 </table>
+</p>
 <% else %>
 <p>
 You have no samples!

@@ -2534,6 +2534,139 @@ a helper for this, which would be the correct way to do it, but at least
 this does not require a manual change when shifting from development
 mode to production mode.
 
+Group 'Show' Page
+=================
+Decided to re-implement the Group 'show' action and views. Didi this by
+using a `:has_many => :through` relation to relate groups to samples.
+Then if a user is a group leader he can list group and sample information
+via the groups controller rather than the contrived groupindex action in
+the samples controller as used previously. This enables us to get all
+the samples for a group simply via `@group.samples.all`.
+The group controller is thus modified to contain:
+
+```
+  helper_method :sort_column, :sort_direction
+  before_filter :admin_required, :only => [:index, :create, :new,
+                                           :edit, :update, :destroy]
+  before_filter :must_be_leader_or_admin, :only => :show
+
+.
+.
+.
+
+  def show
+    @group = Group.find(params[:id])
+    @samples=@group.samples.page(params[:page]).per_page(ITEMS_PER_PAGE).all( :joins => :flag,
+    :order => "#{sort_column} #{sort_direction}")
+  end
+
+.
+.
+.
+
+private
+
+  def must_be_leader_or_admin
+    @group = Group.find(params[:id])
+    return true if (user_signed_in? and (current_user.admin? or (current_user.leader? and current_user.group == @group)))
+    session[:return_to] = request.request_uri
+    redirect_to root_url,
+             :alert =>
+             "You must be a leader for this group or an administrator to view group data!" and return false
+  end
+
+  def sort_column
+    cols = Sample.column_names + Flag.column_names
+    cols.include?(params[:sort]) ? params[:sort] : "code"
+  end
+
+  def sort_direction
+    %w[asc desc].include?(params[:direction]) ? params[:direction] : "asc"
+  end
+```
+
+The group model now has the statement:
+
+```
+  has_many :samples, :through => :users
+```
+
+and so, in the show view for groups we now have a samples listing:
+
+
+```
+<% title "Group" %>
+
+<p>
+  <strong>Group Abbreviation:</strong>
+  <%= @group.group_abbr %>
+</p>
+<p>
+  <strong>Group Description:</strong>
+  <%= @group.group_desc %>
+</p>
+
+<h3><%="Samples List for this Group" %></h3>
+
+<p>
+<%= will_paginate @samples %>
+</p>
+
+<% if @samples.count > 0 %>
+<p>
+<table class="pretty">
+  <tr>
+    <th><%= sortable "code", "Code" %></th>
+    <th><%= sortable "userref", "Ref" %></th>
+    <th><%= sortable "params", "Params" %></th>
+    <th><%= sortable "name", "Status" %></th>
+    <th><%= sortable "created_at", "Submitted" %></th>
+    <th><%= sortable "updated_at", "Updated" %></th>
+    <th><%= sortable "priority", "Priority" %></th>
+    <th><%= sortable "powd", "Powd?" %></th>
+    <th><%= sortable "chiral", "Chiral?" %></th>
+    <th><%= sortable "cost_code", "Cost Code" %></th>
+  </tr>
+
+  <% for sample in @samples %>
+    <tr>
+      <td><%= sample.code %></td>
+      <td><%= sample.userref %></td>
+      <td><%= sample.params %></td>
+      <td><%= sample.flag.name %></td>
+      <td><%= neat_time(sample.created_at) %></td>
+      <td><%= neat_time(sample.updated_at) %></td>
+      <td><%= sample.priority %></td>
+      <td><%= sample.powd %></td>
+      <td><%= sample.chiral %></td>
+      <td><%= sample.cost_code %></td>
+      <td><%= link_to "Show", sample %></td>
+    </tr>
+  <% end %>
+</table>
+</p>
+<% else %>
+<p>
+This group has no samples!
+</p>
+<% end %>
+
+
+
+<p>
+  <%= link_to "Edit", edit_group_path(@group) %> |
+  <%= link_to "Destroy", @group, :confirm => 'Are you sure?', :method => :delete %> |
+  <%= link_to "View All", groups_path %>
+</p>
+```
+
+Further Tweaking to Views
+======================
+Additionally added PDF links to most of the views which included sample
+listings (but not the sample queue). Also added pagination to samples lists
+in user and group views and cleaned up the HTML by putting pagination
+statements and samples tables within paragraphs for clarity.
+
 TODO: Generating Sample Data
 ============================
 Use Faker to generate a large number of users and samples so that we can

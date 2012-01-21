@@ -1,11 +1,14 @@
 <% title "Current Sample Queue" %>
 
-<%= will_paginate @samples %>
-
 <p>
 The estimated wait time is likely to be shorter if the priority
 number is lower for multiple samples submitted on the same day.
 </p>
+
+<p>
+<%= will_paginate @samples %>
+</p>
+<p>
 <table >
   <tr>
     <th>Sample Code</th>
@@ -28,3 +31,4 @@ number is lower for multiple samples submitted on the same day.
     </tr>
   <% end %>
 </table>
+</p>

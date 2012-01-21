@@ -18,9 +18,9 @@
       <%= link_to 'My Profile', "/users/show/#{current_user.id}" %> |
       <%= link_to 'My Samples', "/samples/userindex/#{current_user.id}" %> |
       <% if user_signed_in? and (current_user.admin? or current_user.leader?) %>
-        <%= link_to 'My Group Samples', :controller => "samples", 
-                                        :action => "groupindex",
-                                        :id => current_user.id %> |
+        <%= link_to 'My Group Samples', :controller => "groups", 
+                                        :action => "show",
+                                        :id => current_user.group.id %> |
       <% end %>
         <%= link_to 'Sample Queue',     :controller => "samples", 
                                         :action => "queue",

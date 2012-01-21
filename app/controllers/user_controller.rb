@@ -29,7 +29,7 @@ class UserController < ApplicationController
   def show
     @user = User.find(params[:id])
     s = @user.samples
-    @samples=s.all( :joins => :flag,
+    @samples=s.page(params[:page]).per_page(ITEMS_PER_PAGE).all( :joins => :flag,
     :order => "#{sort_column} #{sort_direction}")
   end
 

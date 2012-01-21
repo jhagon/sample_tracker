@@ -4,4 +4,5 @@ class Group < ActiveRecord::Base
   validates_format_of :group_abbr, :with => /[A-Z]{3}/
   attr_accessible :group_abbr, :group_desc
   has_many :users
+  has_many :samples, :through => :users
 end
