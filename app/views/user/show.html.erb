@@ -5,10 +5,22 @@
   <strong>Group</strong>
   <%= "#{@user.group.group_desc} (#{@user.group.group_abbr})" %>
 </p>
+
 <p>
   <strong>EMail</strong>
   <%=@user.email %>
 </p>
+
+<p>
+  <strong>Active?</strong>
+  <%=@user.active? ? 'yes' : 'no' %>
+</p>
+
+<p>
+  <strong>Group Leader?</strong>
+  <%=@user.leader? ? 'yes' : 'no' %>
+</p>
+
 <p>
   <strong>Administrator?</strong>
   <%=@user.admin? ? 'yes' : 'no' %>

@@ -14,13 +14,19 @@
     {:include_blank => 'None'}) %></div>
 
 <p>
-<%= label_tag(:admin, "Administrator?") %>
-<%= f.check_box(:admin) %>
+<%= label_tag(:active, "Active User?") %>
+<%= f.check_box(:active) %>
 </p>
 
 <p>
 <%= label_tag(:leader, "Group Leader?") %>
 <%= f.check_box(:leader) %>
+</p>
+
+
+<p>
+<%= label_tag(:admin, "Administrator?") %>
+<%= f.check_box(:admin) %>
 </p>
 
 <p><%= f.label :password %><br />
