@@ -7,28 +7,28 @@ is created.
     <%= f.hidden_field :code %>
   </p>
   <p>
-    <%= f.label 'Your Ref' %><br />
+    <%= f.label :userref %><br />
     <%= f.text_field :userref, :title => popup_info('sample_yourref')%>
   </p>
   <p>
-    <%= f.label 'Chemical Formula' %><br />
+    <%= f.label :cif %><br />
     <%= f.text_field :cif, :title => popup_info('sample_cif') %>
   </p>
   <p>
-    <%= f.label "Synthetic Route Diagram" %><br />
+    <%= f.label :synth %><br />
     <%= f.file_field :synth, :title => popup_info('sample_synth') %>
 
   </p>
   <p>
-    <%= f.label 'Solvent Name' %><br />
+    <%= f.label :coshh_name %><br />
     <%= f.text_field :coshh_name, :title => popup_info('sample_coshh_name') %>
   </p>
   <p>
-    <%= f.label 'Description' %><br />
+    <%= f.label :coshh_desc %><br />
     <%= f.text_field :coshh_desc, :title => popup_info('sample_coshh_desc') %>
   </p>
   <p>
-    <%= f.label 'Handling Information' %><br />
+    <%= f.label :coshh_info %><br />
     <%= f.text_area :coshh_info, :rows => 3, :title => popup_info('sample_coshh_info') %>
   </p>
   <p>
@@ -53,7 +53,7 @@ is created.
   </p>
 
   <p>
-    <%= f.label 'Data Zip File' %><br />
+    <%= f.label :zipdata %><br />
     <% if @sample.zipdata? %>
       A data file has been uploaded.<br /> 
     <% else %>
@@ -63,7 +63,7 @@ is created.
   </p>
 
   <p>
-    <%= f.label 'Sample Image File' %><br />
+    <%= f.label :sampleimage %><br />
     <% if @sample.sampleimage? %>
       An image has been uploaded.<br />
     <% else %>
@@ -73,7 +73,7 @@ is created.
   </p>
 
   <p>
-    <%= f.label 'Reference Article' %><br />
+    <%= f.label :reference %><br />
     <% if @sample.reference? %>
       A reference link has been added.<br />
     <% else %>

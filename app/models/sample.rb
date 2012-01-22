@@ -4,6 +4,30 @@ class Sample < ActiveRecord::Base
   belongs_to :user
   belongs_to :flag
 
+HUMANIZED_ATTRIBUTES = {
+
+  :userref        => "your reference",
+  :code           => "sample code",
+  :cif            => "chemical formula",
+  :synth          => "synthetic route diagram",
+  :coshh_name     => "solvent name",
+  :coshh_desc     => "sample description",
+  :coshh_info     => "COSHH handling information",
+  :params         => "parameters field",
+  :reference      => "published reference",
+  :zipdata        => "data file",
+  :sampleimage    => "sample image file",
+  :cost_code      => "cost centre code",
+
+}
+
+def self.human_attribute_name(attr, options={})
+
+  HUMANIZED_ATTRIBUTES[attr.to_sym] || super
+
+end
+
+  validates :reference,	 :uniqueness => true, :allow_blank => true
   validates :code,	 :uniqueness => true
   validates :cif,        :presence => true
   validates :synth,      :presence => true
@@ -13,7 +37,7 @@ class Sample < ActiveRecord::Base
   validates :params,     :presence => true
   validates :priority,   :format => {
     :with     => %r{^[1-9]$},
-    :message  => 'must be a single integer between 1 and 9.'
+    :message  => 'must be a single integer between 1 and 9'
   }
   validates :userref,    :format => {
     :with     => %r{^[A-Z,a-z,0-9]+$},

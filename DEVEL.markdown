@@ -2720,6 +2720,42 @@ Now, I added the following before_filter to the
 which prevents a user with a disabled (i.e. not enabled) account from
 logging in.
 
+Validations and User Friendly Field Headings
+============================================
+Needed an efficient way to make validation messages easier to understand
+since the field names are rather terse. Did this by adding
+the following code near the top of the sample model file to
+map sample field names to more user-friendly versions. This automatically
+maps labels like `:field` to its corresponding user-friendly form.
+
+```
+HUMANIZED_ATTRIBUTES = {
+
+  :userref        => "your reference",
+  :code           => "sample code",
+  :cif            => "chemical formula",
+  :synth          => "synthetic route diagram",
+  :coshh_name     => "solvent name",
+  :coshh_desc     => "sample description",
+  :coshh_info     => "COSHH handling information",
+  :params         => "parameters field",
+  :reference      => "published reference",
+  :zipdata        => "data file",
+  :sampleimage    => "sample image file",
+  :cost_code      => "cost centre code",
+
+}
+
+def self.human_attribute_name(attr, options={})
+
+  HUMANIZED_ATTRIBUTES[attr.to_sym] || super
+
+end
+```
+
+After this, the samples form was edited to refer back to the labels rather
+than explicity type out a user string.
+
 
 TODO: Generating Sample Data
 ============================
