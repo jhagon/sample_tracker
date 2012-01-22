@@ -2667,6 +2667,60 @@ listings (but not the sample queue). Also added pagination to samples lists
 in user and group views and cleaned up the HTML by putting pagination
 statements and samples tables within paragraphs for clarity.
 
+Adding an 'Enabled' Flag to User Accounts
+=========================================
+Did this via a standard migration:
+
+```
+class AddActiveToUser < ActiveRecord::Migration
+  def self.up
+    add_column :users, :active, :boolean, :default => true
+  end
+
+  def self.down
+    remove_column :users, :active
+  end
+end
+```
+
+Here, I called the flag `active` but decided to rename this because I
+thought (possibly incorrectly) that this flag clashed with some devise code.
+So, I renamed it to `enabled` via another migration:
+
+```
+class RenameActiveFlagInUsers < ActiveRecord::Migration
+  def self.up
+    rename_column :users, :active, :enabled
+  end
+
+  def self.down
+    rename_column :users, :enabled, :active
+  end
+end
+```
+
+Now, I added the following before_filter to the 
+`application_controller.rb` file:
+
+```
+  before_filter :is_account_enabled?
+.
+.
+.
+
+  def is_account_enabled?
+    if current_user.present? && !current_user.enabled?
+      sign_out current_user
+      flash[:error] = "Sorry! this account is currently disabled."
+      redirect_to root_path
+    end
+  end
+```
+
+which prevents a user with a disabled (i.e. not enabled) account from
+logging in.
+
+
 TODO: Generating Sample Data
 ============================
 Use Faker to generate a large number of users and samples so that we can

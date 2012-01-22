@@ -167,3 +167,12 @@ For specific files do:
 ```
 git checkout path/to/file/to/revert
 ```
+
+Recovering the Complete Application from GitHub
+===============================================
+
+Just do this:
+
+```
+git clone git@github.com:jhagon/sample_tracker.git
+```

@@ -10,7 +10,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120122091902) do
+ActiveRecord::Schema.define(:version => 20120122105834) do
 
   create_table "assets", :force => true do |t|
     t.string   "document"
@@ -110,7 +110,7 @@ ActiveRecord::Schema.define(:version => 20120122091902) do
     t.string   "firstname"
     t.string   "lastname"
     t.boolean  "leader",                                :default => false
-    t.boolean  "active",                                :default => true
+    t.boolean  "enabled",                               :default => true
   end
 
   add_index "users", ["email"], :name => "index_users_on_email", :unique => true

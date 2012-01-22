@@ -11,18 +11,18 @@
 </p>
 
 <p>
-  <strong>Active?</strong>
-  <%=@user.active? ? 'yes' : 'no' %>
+  <strong>Account Enabled?</strong>
+  <%=@user.enabled ? 'yes' : 'no' %>
 </p>
 
 <p>
   <strong>Group Leader?</strong>
-  <%=@user.leader? ? 'yes' : 'no' %>
+  <%=@user.leader ? 'yes' : 'no' %>
 </p>
 
 <p>
   <strong>Administrator?</strong>
-  <%=@user.admin? ? 'yes' : 'no' %>
+  <%=@user.admin ? 'yes' : 'no' %>
 </p>
 
 <%= link_to "Back", :back %>
