@@ -2756,6 +2756,52 @@ end
 After this, the samples form was edited to refer back to the labels rather
 than explicity type out a user string.
 
+Sorting, Paging and Searching for User List
+===================================
+Sorting was done in a similar way to other index lists except that an
+extra `sort_column` controller method was required. This was called
+`sort_user_column`:
+
+```
+  def sort_user_column
+    cols = User.column_names + Group.column_names
+    cols.include?(params[:sort]) ? params[:sort] : "lastname"
+  end
+```
+
+and the index method was altered:
+
+```
+  def index
+    @users=User.page(params[:page]).per_page(ITEMS_PER_PAGE).find( :all,
+      :joins => :group,
+      :order => "#{sort_user_column} #{sort_direction}",
+      :conditions => ['lastname LIKE ?', "%#{params[:search]}%"])
+  end
+```
+
+The sort_direction helper was unchanged. Paging was added by
+`will_paginate` as in earlier index listings. Searching was
+also implemented as before on the lastname field of the user.
+The code in the view was slightly different:
+
+```
+<% form_tag '/user', :method => 'get' do %>
+  <p>
+    <%= text_field_tag :search, params[:search] %>
+    <%= submit_tag "Search", :name => nil %>
+  </p>
+
+<% end %>
+```
+
+Note that we explicitly put in the '/user' index path rather than use
+the `user_path` method which does not work and gives
+a routing error. This might be because
+`user_path` is really referring to the devise users route rather
+than the user (without the 's') index route. Putting the user
+index route in explicitly solved the problem.
+
 
 TODO: Generating Sample Data
 ============================

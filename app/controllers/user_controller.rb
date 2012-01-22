@@ -1,6 +1,6 @@
 class UserController < ApplicationController
 
-  helper_method :sort_column, :sort_direction
+  helper_method :sort_column, :sort_user_column, :sort_direction
 
   before_filter :authenticate_user!
   before_filter :must_be_user_or_admin, :only => [:show, :edit, :update]
@@ -9,7 +9,10 @@ class UserController < ApplicationController
   load_and_authorize_resource
   
   def index
-    @users = User.all
+    @users=User.page(params[:page]).per_page(ITEMS_PER_PAGE).find( :all,
+      :joins => :group,
+      :order => "#{sort_user_column} #{sort_direction}",
+      :conditions => ['lastname LIKE ?', "%#{params[:search]}%"])
   end
   
   def new
@@ -60,8 +63,14 @@ class UserController < ApplicationController
 private
 
   def sort_column
-    cols = Sample.column_names + Flag.column_names
+    cols = Sample.column_names + Flag.column_names +
+           User.column_names + Group.column_names
     cols.include?(params[:sort]) ? params[:sort] : "code"
+  end
+
+  def sort_user_column
+    cols = User.column_names + Group.column_names
+    cols.include?(params[:sort]) ? params[:sort] : "lastname"
   end
 
   def sort_direction

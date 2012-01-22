@@ -7,10 +7,11 @@
     <%= submit_tag "Search", :name => nil %>
   </p>
 
+<% end %>
+
 <p>
 <%= will_paginate @samples %>
 </p>
-<% end %>
 
 <% if (@samples.size != 0) %>
 <p>

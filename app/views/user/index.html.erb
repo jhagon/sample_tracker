@@ -1,11 +1,30 @@
 <% title "Users" %>
 
-<table>
+<% form_tag '/user', :method => 'get' do %>
+  <p>
+    <%= text_field_tag :search, params[:search] %>
+    <%= submit_tag "Search", :name => nil %>
+  </p>
+
+<% end %>
+
+
+<p>
+<%= will_paginate @users %>
+</p>
+
+<% if (@users.size != 0) %>
+<p>
+<table class="pretty">
   <tr>
-    <th>First Name</th>
-    <th>Last name</th>
-    <th>Group</th>
+    <th><%= sortable "firstname", "First Name" %></th>
+    <th><%= sortable "lastname", "Last Name" %></th>
+    <th><%= sortable "group_desc", "Group Description" %></th>
+    <th></th>
+    <th></th>
+    <th></th>
   </tr>
+
   <% for user in @users %>
     <tr>
       <td><%= user.firstname %></td>
@@ -17,5 +36,7 @@
     </tr>
   <% end %>
 </table>
+</p>
+<% end %>
 
 <p><%= link_to "New User", new_user_path %></p>
