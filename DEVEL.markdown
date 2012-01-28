@@ -2802,6 +2802,198 @@ a routing error. This might be because
 than the user (without the 's') index route. Putting the user
 index route in explicitly solved the problem.
 
+Some Additions to the Sample Model
+==================================
+Needed to add 3 extra fields to the sample model: a 'sensitivity' field
+to indicate one (or more) things that the sample is sensitive to;
+a 'storage requirements' field (e.g. bench, fridge, freezer, dark);
+a general comments box for the user to add any extra details (for example
+what kind of glassware the sample is stored in) thought to be relevant.
+
+The first two of these will require extra models which we call
+'sensitivity' and 'store'. The last one, merely requires an extra text
+field in the sample model which we call 'comments'.
+We create the new models via the usual nifty-scaffold generator:
+
+```
+rails generate nifty:scaffold Sensitivity name:string description:text
+
+rails generate nifty:scaffold Store name:string description:text
+```
+
+Now, rather like hazards, it is possible that there could be more
+than one storage type required per sample and also more than one
+type of sensitivity per sample. This will require the setting up of
+many-to-many relationships between the new models and the sample model.
+
+We must therefore set up join tables for these possibilities.
+So for sensitivities, we need:
+
+```
+rails generate migration create_samples_sensitivities
+```
+
+with the following content:
+
+```
+class CreateSamplesSensitivities < ActiveRecord::Migration
+  def self.up
+    create_table :samples_sensitivities, :id => false do |t|
+      t.references :sample, :null => false
+      t.references :sensitivity, :null => false
+    end
+  end
+
+  def self.down
+    drop_table :samples_sensitivities
+  end
+end
+```
+
+Smilarly, for stores, we need:
+
+```
+rails generate migration create_samples_stores
+```
+
+with the following content:
+
+```
+class CreateSamplesStores < ActiveRecord::Migration
+  def self.up
+    create_table :samples_stores, :id => false do |t|
+      t.references :sample, :null => false
+      t.references :store, :null => false
+    end
+  end
+
+  def self.down
+    drop_table :samples_stores
+  end
+end
+```
+
+Also, we need the following entries in the sample and store/sensitivity models
+respectively (the files `sample.rb` and `sensitivity.rb`/`store.rb` in app/models):
+
+```
+  has_and_belongs_to_many :sensitivities # sample.rb
+  has_and_belongs_to_many :stores # sample.rb
+
+  has_and_belongs_to_many :samples # sensitivity.rb
+  has_and_belongs_to_many :samples # store.rb
+```
+
+In the sample form, we can now add a set of checkboxes thus:
+
+```
+    <% for sensitivity in Sensitivity.find(:all) %>
+    <div>
+      <%= check_box_tag "sample[sensitivity_ids][]", sensitivity.id, @sample.sensitivities.include?(sensitivity) %>
+      <%= sensitivity.description %>
+    </div>
+    <% end %>
+```
+
+NOTE: for the above to work, you need to set :sensitivity_ids in the
+attr_accessible flag of the sample model:
+
+```
+class Sample < ActiveRecord::Base
+  attr_accessible :sensitivity_ids, :hazard_ids, :code, :cif, :synth, :coshh_name, :coshh_desc, :coshh_info, :coshh_haz, :params, :status, :priority, :powd, :chiral, :cost_code, :barcode
+  has_and_belongs_to_many :sensitivities
+```
+
+Finally, we add a comments field to the sample model:
+
+```
+rails generate migration add_comments_to_sample comments:text
+```
+
+All that remains to do is add these to the samples form view:
+
+```
+  <p>
+    <%= f.label "Sample Sensitivity Information" %><br />
+    <% for sensitivity in Sensitivity.find(:all) %>
+    <div>
+      <%= check_box_tag "sample[sensitivity_ids][]", sensitivity.id, @sample.sensitivities.include?(sensitivity) %>
+      <%= "#{sensitivity.name}: #{sensitivity.description}" %>
+    </div>
+    <% end %>
+  </p>
+
+  <p>
+    <%= f.label "Sample Storage Information" %><br />
+    <% for store in Store.find(:all) %>
+    <div>
+      <%= check_box_tag "sample[store_ids][]", store.id, @sample.stores.include?(store) %>
+      <%= "#{store.name}: #{store.description}" %>
+    </div>
+    <% end %>
+  </p>
+
+  <p>
+    <%= f.label :comments %><br />
+    <%= f.text_area :comments, :rows => 2, :title => popup_info('sample_comments') %>
+  </p>
+```
+
+Validating Storage and Sensitivity Information
+==============================================
+We require that the user explicitly check at least one box in these categories.
+The validation code for this is straightforward. We define two
+custom validation methods and refer to them at the top of the
+sample model file:
+
+```
+  validate :must_specify_sensitivity
+  validate :must_specify_store
+```
+
+The methods look like this:
+
+```
+  def must_specify_sensitivity
+    if (sensitivities.size == 0 )
+      errors.add('', 'you must specify sample sensitivity')
+    end
+  end
+
+  def must_specify_store
+    if (stores.size == 0 )
+      errors.add('', 'you must specify sample storage requirements')
+    end
+  end
+```
+
+In addition, we define one further validation in the sample model
+requiring that if the user selects 'other' for either storage or sensitivity, 
+they must have a non-blank entry in comments:
+
+```
+  def comment_must_not_be_blank_if_other_specified
+    found_other = false
+    for s in stores
+      if (s.name == 'other')
+        found_other = true
+      end
+    end
+    for s in sensitivities
+      if (s.name == 'other')
+        found_other = true
+      end
+    end
+    if ( found_other && ( comments =~ /^\s*$/ || comments.nil?) )
+      errors.add('', "you have specified  'other' for either samples or storage - please give details in the comments box")
+    end
+  end
+```
+
+Of course, this doesn't stop people putting an entry in comments which
+does not specify the storage or sensitivity when they have selected 'other'
+but it at least prevents a blank entry if they do select 'other'.
+
 
 TODO: Generating Sample Data
 ============================

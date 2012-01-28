@@ -1,4 +1,8 @@
 SampleTracker::Application.routes.draw do
+  resources :stores
+
+  resources :sensitivities
+
   resources :popups
 
   resources :flags

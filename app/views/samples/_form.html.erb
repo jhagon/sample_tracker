@@ -29,22 +29,49 @@ is created.
   </p>
   <p>
     <%= f.label :coshh_info %><br />
-    <%= f.text_area :coshh_info, :rows => 3, :title => popup_info('sample_coshh_info') %>
-  </p>
-  <p>
-    <%= f.label "Chemical Hazard Information" %><br />
-    <% for hazard in Hazard.find(:all) %>
-    <div>
-      <%= check_box_tag "sample[hazard_ids][]", hazard.id, @sample.hazards.include?(hazard) %>
-      <%= hazard.hazard_desc %>
-    </div>
-    <% end %>
+    <%= f.text_area :coshh_info, :rows => 2, :title => popup_info('sample_coshh_info') %>
   </p>
 
   <p>
     <%= f.label :params %><br />
     <%= f.text_field :params, :title => popup_info('sample_params') %>
   </p>
+
+  <p>
+    <%= f.label "Chemical Hazard Information" %><br />
+    <% for hazard in Hazard.find(:all) %>
+    <div>
+      <%= check_box_tag "sample[hazard_ids][]", hazard.id, @sample.hazards.include?(hazard) %>
+      <%= "#{hazard.hazard_abbr}: #{hazard.hazard_desc}" %>
+    </div>
+    <% end %>
+  </p>
+
+  <p>
+    <%= f.label "Sample Sensitivity Information" %><br />
+    <% for sensitivity in Sensitivity.find(:all) %>
+    <div>
+      <%= check_box_tag "sample[sensitivity_ids][]", sensitivity.id, @sample.sensitivities.include?(sensitivity) %>
+      <%= "#{sensitivity.name}: #{sensitivity.description}" %>
+    </div>
+    <% end %>
+  </p>
+
+  <p>
+    <%= f.label "Sample Storage Information" %><br />
+    <% for store in Store.find(:all) %>
+    <div>
+      <%= check_box_tag "sample[store_ids][]", store.id, @sample.stores.include?(store) %>
+      <%= "#{store.name}: #{store.description}" %>
+    </div>
+    <% end %>
+  </p>
+
+  <p>
+    <%= f.label :comments %><br />
+    <%= f.text_area :comments, :rows => 2, :title => popup_info('sample_comments') %>
+  </p>
+
   <% if user_signed_in? and current_user.admin? %>
   <p>
   <div><%= f.label "Status Flag" %><br />

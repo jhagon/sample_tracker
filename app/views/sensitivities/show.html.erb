@@ -1,0 +1,16 @@
+<% title "Sensitivity" %>
+
+<p>
+  <strong>Name:</strong>
+  <%= @sensitivity.name %>
+</p>
+<p>
+  <strong>Description:</strong>
+  <%= @sensitivity.description %>
+</p>
+
+<p>
+  <%= link_to "Edit", edit_sensitivity_path(@sensitivity) %> |
+  <%= link_to "Destroy", @sensitivity, :confirm => 'Are you sure?', :method => :delete %> |
+  <%= link_to "View All", sensitivities_path %>
+</p>

@@ -1,0 +1,19 @@
+<% title "Sensitivities" %>
+
+<table>
+  <tr>
+    <th>Name</th>
+    <th>Description</th>
+  </tr>
+  <% for sensitivity in @sensitivities %>
+    <tr>
+      <td><%= sensitivity.name %></td>
+      <td><%= sensitivity.description %></td>
+      <td><%= link_to "Show", sensitivity %></td>
+      <td><%= link_to "Edit", edit_sensitivity_path(sensitivity) %></td>
+      <td><%= link_to "Destroy", sensitivity, :confirm => 'Are you sure?', :method => :delete %></td>
+    </tr>
+  <% end %>
+</table>
+
+<p><%= link_to "New Sensitivity", new_sensitivity_path %></p>

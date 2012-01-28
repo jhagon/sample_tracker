@@ -1,6 +1,8 @@
 class Sample < ActiveRecord::Base
-  attr_accessible :hazard_ids, :code, :cif, :synth, :coshh_name, :coshh_desc, :coshh_info, :coshh_haz, :params, :priority, :powd, :chiral, :cost_code, :barcode, :user_id, :flag_id, :userref, :zipdata, :sampleimage, :reference
+  attr_accessible :store_ids, :sensitivity_ids, :hazard_ids, :code, :cif, :synth, :coshh_name, :coshh_desc, :coshh_info, :coshh_haz, :params, :priority, :powd, :chiral, :cost_code, :barcode, :user_id, :flag_id, :userref, :zipdata, :sampleimage, :reference, :comments
   has_and_belongs_to_many :hazards
+  has_and_belongs_to_many :sensitivities
+  has_and_belongs_to_many :stores
   belongs_to :user
   belongs_to :flag
 
@@ -27,6 +29,10 @@ def self.human_attribute_name(attr, options={})
 
 end
 
+  validate :must_specify_sensitivity
+  validate :must_specify_store
+  validate :comment_must_not_be_blank_if_other_specified
+
   validates :reference,	 :uniqueness => true, :allow_blank => true
   validates :code,	 :uniqueness => true
   validates :cif,        :presence => true
@@ -43,6 +49,7 @@ end
     :with     => %r{^[A-Z,a-z,0-9]+$},
     :message  => 'must be alphanumeric sequence of characters without spaces.'
   }
+  validates :cost_code,  :presence => true
 
   mount_uploader :synth, SynthUploader
   mount_uploader :zipdata, ZipdataUploader
@@ -56,6 +63,35 @@ end
     if (self.flag_id_changed?)
       flag=Flag.find(self.flag_id_was)
       SampleMailer.sample_update(self, flag).deliver
+    end
+  end
+
+  def must_specify_sensitivity
+    if (sensitivities.size == 0 )
+      errors.add('', 'you must specify sample sensitivity')
+    end
+  end
+
+  def must_specify_store
+    if (stores.size == 0 )
+      errors.add('', 'you must specify sample storage requirements')
+    end
+  end
+ 
+  def comment_must_not_be_blank_if_other_specified
+    found_other = false
+    for s in stores
+      if (s.name == 'other')
+        found_other = true
+      end 
+    end
+    for s in sensitivities
+      if (s.name == 'other')
+        found_other = true
+      end 
+    end
+    if ( found_other && ( comments =~ /^\s*$/ || comments.nil?) )
+      errors.add('', "you have specified  'other' for either samples or storage - please give details in the comments box")
     end
   end
 
