@@ -2994,6 +2994,40 @@ Of course, this doesn't stop people putting an entry in comments which
 does not specify the storage or sensitivity when they have selected 'other'
 but it at least prevents a blank entry if they do select 'other'.
 
+User Switching for Admins
+=========================
+A very useful feature for admins is the ability to 'become' an ordinary
+user quickly to check for problems or to submit samples on behalf of a
+user. The code to do this is surprisingly simple. In the users controller
+we just need to add the following code:
+
+```
+def become
+    return unless current_user.is_an_admin?
+    sign_in User.find(params[:id]), :bypass => true
+    sign_in(:user, User.find(params[:id]))
+    redirect_to root_url # or user_root_url
+  end
+```
+
+Then, a link to `/users/become/[:id]` will automatically log an admin in as
+that user. Note the `sign_in` call. The `:bypass => true` option is used
+so that `last_sign_in_at` and `current_sign_in` aren't updated when 
+becoming the user, otherwise the user may see that he has signed in 
+recently and not understand why. However, if this behaviour is not
+desired, the call can be replaced with the following:
+
+```
+sign_in(:user, User.find(params[:id]))
+```
+
+which will update the `last_sign_in_at` and `current_sign_in` values.
+Now, we can add a 'Become' link to the user index view in
+`app/views/user/index.html.erb`:      
+
+```
+<td><%= link_to "Become", "/users/become/#{user.id}" %></td>
+```
 
 TODO: Generating Sample Data
 ============================

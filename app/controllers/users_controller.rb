@@ -6,6 +6,12 @@ class UsersController < ApplicationController
   before_filter :must_be_user_or_admin, :only => [:show, :edit, :update]
   before_filter :admin_required, :only => [:index, :destroy]
 
+  def become
+    return unless current_user.admin?
+    # sign_in(:user, User.find(params[:id]))
+    sign_in User.find(params[:id]), :bypass => true
+    redirect_to root_url # or user_root_url
+  end
 
   def index
     @users = User.all
