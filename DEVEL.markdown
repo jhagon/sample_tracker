@@ -3002,10 +3002,10 @@ user. The code to do this is surprisingly simple. In the users controller
 we just need to add the following code:
 
 ```
-def become
-    return unless current_user.is_an_admin?
+  def become
+    return unless current_user.admin?
+    # sign_in(:user, User.find(params[:id]))
     sign_in User.find(params[:id]), :bypass => true
-    sign_in(:user, User.find(params[:id]))
     redirect_to root_url # or user_root_url
   end
 ```
@@ -3028,6 +3028,21 @@ Now, we can add a 'Become' link to the user index view in
 ```
 <td><%= link_to "Become", "/users/become/#{user.id}" %></td>
 ```
+
+For graceful error messages and a belt-and-braces approach, we also
+add `:become` to the before filter in the users controller:
+
+```
+before_filter :admin_required, :only => [:index, :destroy, :become]
+```
+
+Updating the Samples Show Views
+===============================
+The extra samples fields required an update to the show views for
+both the HTML and PDF cases. This was straightforward, an extension
+of what was done previously for the hazards list. The PDF code was
+further modified to make the code a little more compact and easier to
+edit in future.
 
 TODO: Generating Sample Data
 ============================

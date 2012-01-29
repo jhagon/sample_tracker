@@ -4,7 +4,7 @@ class UsersController < ApplicationController
 
   before_filter :authenticate_user!
   before_filter :must_be_user_or_admin, :only => [:show, :edit, :update]
-  before_filter :admin_required, :only => [:index, :destroy]
+  before_filter :admin_required, :only => [:index, :destroy, :become]
 
   def become
     return unless current_user.admin?
