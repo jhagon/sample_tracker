@@ -20,6 +20,9 @@
     <th><%= sortable "firstname", "First Name" %></th>
     <th><%= sortable "lastname", "Last Name" %></th>
     <th><%= sortable "group_desc", "Group Description" %></th>
+    <th><%= sortable "enabled", "E" %></th>
+    <th><%= sortable "leader", "L" %></th>
+    <th><%= sortable "admin", "A" %></th>
     <th></th>
     <th></th>
     <th></th>
@@ -31,6 +34,9 @@
       <td><%= user.firstname %></td>
       <td><%= user.lastname %></td>
       <td><%= user.group.group_desc %></td>
+      <td><%= user.enabled ? 'Y' : 'N' %></td>
+      <td><%= user.leader ? 'Y' : 'N' %></td>
+      <td><%= user.admin ? 'Y' : 'N' %></td>
       <td><%= link_to "Become", "/users/become/#{user.id}" %></td>
       <td><%= link_to "Show", user %></td>
       <td><%= link_to "Edit", edit_user_path(user) %></td>
