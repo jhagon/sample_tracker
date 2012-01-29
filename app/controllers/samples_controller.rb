@@ -87,6 +87,8 @@ class SamplesController < ApplicationController
 
   def show
     @hazards = Hazard.find(:all)
+    @stores = Store.find(:all)
+    @sensitivities = Sensitivity.find(:all)
     @sample = Sample.find(params[:id])
     respond_to do |format|
       format.html

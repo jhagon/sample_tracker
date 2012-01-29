@@ -105,7 +105,32 @@
       <li><%=hazard.hazard_desc + "(" + hazard.hazard_abbr + ")"%></li>
     <% end %>
   <% end %>
+  </ul>
 </p>
+
+<p>
+  <strong>Storage Requirements</strong>
+  <ul>
+  <% for store in @stores %>
+    <% if @sample.stores.include? store%>
+      <li><%="#{store.name}: #{store.description}"%></li>
+    <% end %>
+  <% end %>
+  </ul>
+</p>
+
+<p>
+  <strong>Sample Sensitivity</strong>
+  <ul>
+  <% for sensitivity in @sensitivities %>
+    <% if @sample.sensitivities.include? sensitivity %>
+      <li><%="#{sensitivity.name}: #{sensitivity.description}"%></li>
+    <% end %>
+  <% end %>
+  </ul>
+</p>
+
+
 <% if current_user.admin? %>
 <p id="pdf_link">
   <%= link_to "Edit", edit_sample_path(@sample) %> |

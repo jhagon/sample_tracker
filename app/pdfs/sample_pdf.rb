@@ -4,6 +4,8 @@ class SamplePdf < Prawn::Document
     super(page_size: "A4")
     @sample = sample
     @hazards = Hazard.find(:all)
+    @stores = Store.find(:all)
+    @sensitivities = Sensitivity.find(:all)
     header
     structure
     sample_code
@@ -150,51 +152,39 @@ class SamplePdf < Prawn::Document
       boxwidth = bounds.right - bounds.left
       boxheight = bounds.top - bounds.bottom
       stroke_bounds
+
+      font_size = 8
+      box1_posx = boxwidth*0.5+5
+      box1_posy = bounds.top-10
+      box1_wid  = (boxwidth*0.5-20)/3
+      box1_hgt  = boxheight-20
+
+      box2_posx = box1_posx + box1_wid + 5
+      box2_posy = box1_posy
+      box2_wid  = box1_wid
+      box2_hgt  = box1_hgt
+
+      box3_posx = box2_posx + box1_wid + 5
+      box3_posy = box1_posy
+      box3_wid  = box1_wid
+      box3_hgt  = box1_hgt
+
+      fill_color "eeeeee"
+      fill_rectangle [box1_posx ,box1_posy+5], box1_wid, box1_hgt+10
+      fill_rectangle [box2_posx ,box2_posy+5], box2_wid, box2_hgt+10
+      fill_rectangle [box3_posx ,box3_posy+5], box3_wid, box3_hgt+10
+      fill_color "000000"
+
       bounding_box([bounds.left+10 ,bounds.top-10], :width => boxwidth*0.5-20, :height => boxheight-20) do
         text "<b>Name of Solvent:</b>  #{@sample.coshh_name}", :size => 10, :inline_format => true
         text "<b>Description of Sample:</b>  #{@sample.coshh_desc}", :size => 10, :inline_format => true
-        text "<b>Hazards and Procedures:</b>  #{@sample.coshh_info}", :size => 10, :inline_format => true
+        text "<b>Handling Procedures:</b>  #{@sample.coshh_info}", :size => 10, :inline_format => true
+        text "<b>User Comments:</b>  #{@sample.comments}", :size => 10, :inline_format => true
       end
-      bounding_box([boxwidth*0.5+10 ,bounds.top-10], :width => boxwidth*0.5-20, :height => boxheight-20) do
-        text "<b>Hazard Categories:</b>", :size => 10, :inline_format => true
-        move_down 12
-        for hazard in @hazards
-          if @sample.hazards.include? hazard
-            str = "#{hazard.hazard_desc} (#{hazard.hazard_abbr})"
-            text str, :size => 10, :inline_format => true
-          end
-        end 
 
-      end
-    end
-
-
-  end
-
-  def coshh_summary
-
-    text_box "Supplied COSHH Information", size: 8, style: :bold, align: :left, :at => [195,118]
-    bounding_box([195,108], :width => 330, :height => 100) do
-      boxwidth = bounds.right - bounds.left
-      boxheight = bounds.top - bounds.bottom
-      stroke_bounds
-      bounding_box([bounds.left+10 ,bounds.top-10], :width => boxwidth*0.5-20, :height => boxheight-20) do
-        text "<b>Name of Solvent:</b>  #{@sample.coshh_name}", :size => 8, :inline_format => true
-          font_size = 8
-        if (@sample.coshh_desc.split(/[^-a-zA-Z]/).size > 30)
-          font_size = 6
-        end
-        text "<b>Description of Sample:</b>  #{@sample.coshh_desc}", :size => font_size, :inline_format => true
-          font_size = 8
-        if (@sample.coshh_info.split(/[^-a-zA-Z]/).size > 30)
-          font_size = 6
-        end
-        text "<b>Hazards and Procedures:</b>  #{@sample.coshh_info}", :size => font_size, :inline_format => true
-      end
-      bounding_box([boxwidth*0.5+10 ,bounds.top-10], :width => boxwidth*0.5-20, :height => boxheight-20) do
-        text "<b>Hazard Categories:</b>", :size => 8, :inline_format => true
-        move_down 12
-        font_size = 8
+      bounding_box([box1_posx+5 ,box1_posy-5], :width => box1_wid-10, :height => box1_hgt-10) do
+        text "<b>Hazards:</b>", :size => font_size, :inline_format => true
+        move_down 10
         if (@sample.hazards.count > 5)
           font_size = 6
         end
@@ -209,9 +199,145 @@ class SamplePdf < Prawn::Document
         end
       end
 
+      bounding_box([box2_posx+5 ,box2_posy-5], :width => box2_wid-10, :height => box2_hgt-10) do
+        text "<b>Storage:</b>", :size => font_size, :inline_format => true
+        move_down 6
+        if (@sample.stores.count > 5)
+          font_size = 6
+        end
+        if (@sample.stores.count < 6)
+          font_size = 8
+        end
+        for store in @stores
+          if @sample.stores.include? store
+            str = store.name
+            text str, :size => font_size, :inline_format => true
+          end
+        end
+      end
+
+      bounding_box([box3_posx+5 ,box3_posy-5], :width => box3_wid-10, :height => box3_hgt-10) do
+        text "<b>Sensitivity:</b>", :size => font_size, :inline_format => true
+        move_down 6
+        if (@sample.sensitivities.count > 5)
+          font_size = 6
+        end
+        if (@sample.sensitivities.count < 6)
+          font_size = 8
+        end
+        for sense in @sensitivities
+          if @sample.sensitivities.include? sense
+            str = sense.name
+            text str, :size => font_size, :inline_format => true
+          end
+        end
+      end
+
     end
+
+
+  end
+
+  def coshh_summary
+  
+    font_size = 8
+    if (@sample.coshh_info.split(/[^-a-zA-Z]/).size +
+        @sample.comments.split(/[^-a-zA-Z]/).size > 60)
+     font_size = 5
+    end
+
+
+    text_box "Supplied COSHH Information", size: 8, style: :bold, align: :left, :at => [195,118]
+    bounding_box([195,108], :width => 330, :height => 100) do
+      boxwidth = bounds.right - bounds.left
+      boxheight = bounds.top - bounds.bottom
+      stroke_bounds
+      bounding_box([bounds.left+10 ,bounds.top-10], :width => boxwidth*0.5-20, :height => boxheight-20) do
+        text "<b>Name of Solvent:</b>  #{@sample.coshh_name}", :size => font_size, :inline_format => true
+        text "<b>Description of Sample:</b>  #{@sample.coshh_desc}", :size => font_size, :inline_format => true
+        text "<b>Handling Procedures:</b>  #{@sample.coshh_info}", :size => font_size, :inline_format => true
+        text "<b>User Comments:</b>  #{@sample.comments}", :size => font_size, :inline_format => true
+      end
+      font_size = 6
+      box1_posx = boxwidth*0.5+5
+      box1_posy = bounds.top-10
+      box1_wid  = (boxwidth*0.5-20)/3
+      box1_hgt  = boxheight-20
+
+      box2_posx = box1_posx + box1_wid + 5
+      box2_posy = box1_posy
+      box2_wid  = box1_wid
+      box2_hgt  = box1_hgt
+    
+      box3_posx = box2_posx + box1_wid + 5
+      box3_posy = box1_posy
+      box3_wid  = box1_wid
+      box3_hgt  = box1_hgt
+
+      fill_color "eeeeee"
+      fill_rectangle [box1_posx ,box1_posy+2], box1_wid, box1_hgt+4
+      fill_rectangle [box2_posx ,box2_posy+2], box2_wid, box2_hgt+4
+      fill_rectangle [box3_posx ,box3_posy+2], box3_wid, box3_hgt+4
+      fill_color "000000"
+
+      bounding_box([box1_posx+2 ,box1_posy-2], :width => box1_wid-4, :height => box1_hgt-4) do
+        text "<b>Hazards:</b>", :size => font_size, :inline_format => true
+        move_down 6
+        if (@sample.hazards.count > 5)
+          font_size = 5
+        end
+        if (@sample.hazards.count < 6)
+          font_size = 6
+        end
+        for hazard in @hazards
+          if @sample.hazards.include? hazard
+            str = "#{hazard.hazard_desc} (#{hazard.hazard_abbr})"
+            text str, :size => font_size, :inline_format => true
+          end
+        end
+      end
+
+      bounding_box([box2_posx+2 ,box2_posy-2], :width => box2_wid-4, :height => box2_hgt-4) do
+        text "<b>Storage:</b>", :size => font_size, :inline_format => true
+        move_down 6
+        if (@sample.stores.count > 5)
+          font_size = 5
+        end
+        if (@sample.stores.count < 6)
+          font_size = 6
+        end
+        for store in @stores
+          if @sample.stores.include? store
+            str = store.name
+            text str, :size => font_size, :inline_format => true
+          end
+        end
+      end
+
+      bounding_box([box3_posx+2 ,box3_posy-2], :width => box3_wid-4, :height => box3_hgt-4) do
+        text "<b>Sensitivity:</b>", :size => font_size, :inline_format => true
+        move_down 6
+        if (@sample.sensitivities.count > 5)
+          font_size = 5
+        end
+        if (@sample.sensitivities.count < 6)
+          font_size = 6
+        end
+        for sense in @sensitivities
+          if @sample.sensitivities.include? sense
+            str = sense.name
+            text str, :size => font_size, :inline_format => true
+          end
+        end
+      end
+
+
+    end
+
+    font_size = 6
+
     font("Helvetica") do
-      draw_text "School of Chemistry Crystallography Service, Newcastle University", :size => 6, :at => [195,0], :style => :italic
+      draw_text "School of Chemistry Crystallography Service, Newcastle University", :size => font_size, :at => [195,0], :style => :italic
     end
 
   end

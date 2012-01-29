@@ -36,6 +36,8 @@
   <div id="admin_nav">
     <% if user_signed_in? and current_user.admin?%>
       Admin Tools:
+      <%= link_to 'Samples', samples_path %> |
+      <%= link_to 'Users', '/user' %> |
       <%= link_to 'Hazards', hazards_path %> |
       <%= link_to 'User Groups', groups_path %> |
       <%= link_to 'Assets', assets_path %> |
@@ -44,11 +46,9 @@
       <%= link_to 'Storage', stores_path %> |
       <%= link_to 'Sensitivity', sensitivities_path %> |
       <%= link_to 'Status Flags', flags_path %> |
-      <%= link_to 'Samples', samples_path %> |
       <%= link_to 'Find Bar Code', :controller => "samples",
                                    :action => "findbarcode",
-                                   :id => current_user.id %> |
-      <%= link_to 'Users', '/user' %>
+                                   :id => current_user.id %>
     <% else %>
     <% end %>
   </div>
