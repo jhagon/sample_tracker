@@ -8,7 +8,22 @@ module ApplicationHelper
   end
 
   def neat_time(date)
-     date.strftime("%d/%m/%Y") + date.strftime("(%I:%M%P)")
+    date.strftime("%d/%m/%Y") + date.strftime("(%I:%M%P)")
   end
+
+  def create_menu
+    @pages = Page.find_all_by_menu(true)
+      ulist = ''
+    if (@pages)
+      ulist = '<ul>'
+      for page in @pages
+        url = "/#{page.permalink}"
+        ulist = ulist + "<li>#{link_to page.permalink, url}</li>"
+      end
+      ulist = ulist + '</ul>'
+      ulist
+    end  
+  end
+
 
 end

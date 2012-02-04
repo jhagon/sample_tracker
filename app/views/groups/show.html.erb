@@ -29,10 +29,12 @@
     <th><%= sortable "powd", "Powd?" %></th>
     <th><%= sortable "chiral", "Chiral?" %></th>
     <th><%= sortable "cost_code", "Cost Code" %></th>
+    <th></th>
+    <th></th>
   </tr>
 
   <% for sample in @samples %>
-    <tr>
+    <tr class="<%= cycle :odd, :even %>">
       <td><%= sample.code %></td>
       <td><%= sample.userref %></td>
       <td><%= sample.params %></td>
@@ -44,6 +46,8 @@
       <td><%= sample.chiral %></td>
       <td><%= sample.cost_code %></td>
       <td><%= link_to "Show", sample %></td>
+      <td><%= link_to "PDF", sample_path(sample, :format => "pdf") %></td>
+
     </tr>
   <% end %>
 </table>

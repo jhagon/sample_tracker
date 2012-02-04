@@ -23,7 +23,7 @@
     <th><%= sortable "name", "Status" %></th>
     <th><%= sortable "created_at", "Submitted" %></th>
     <th><%= sortable "updated_at", "Updated" %></th>
-    <th><%= sortable "priority", "Priority" %></th>
+    <th><%= sortable "priority", "Pri" %></th>
 <!--    <th><%= sortable "powd", "Powd?" %></th> -->
 <!--    <th><%= sortable "chiral", "Chiral?" %></th> -->
 <!--    <th><%= sortable "cost_code", "Cost Code" %></th> -->
@@ -31,7 +31,7 @@
     <th><%= sortable "group_abbr", "Group" %></th>
   </tr>
   <% for sample in @samples %>
-    <tr>
+    <tr class="<%= cycle :odd, :even %>">
       <td><%= sample.code %></td>
       <td><%= sample.userref %></td>
 <!--      <td><%= sample.params %></td> -->

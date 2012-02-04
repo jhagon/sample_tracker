@@ -41,13 +41,50 @@ a {
   margin-left: 160px;
 }
 
+#menu_nav {
+  text-align: center;
+}
+
+#menu_nav h3 {
+  margin: 0;
+  padding: 3px;
+  display: block;
+  background-color: #666;
+  color: #fff;
+}
+
+#menu_nav ul {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  border-bottom: 1px solid #999;
+}
+
+#menu_nav a {
+  color: #000;
+  font-size: 1em;
+  text-transform: uppercase;
+  text-decoration: none;
+  border: 1px solid #999;
+  border-bottom:none;
+  padding: 3px;
+  display: block;
+  background-color: #e7e7e7;
+}
+
+#menu_nav a:hover {
+  font-weight: bold;
+  background: #fff;
+}
+
+
 #user_nav {
   text-align: center;
 }
 
 #user_nav h3 {
   margin: 0;
-  padding: 7px 5px;
+  padding: 3px;
   display: block;
   background-color: #666;
   color: #fff;
@@ -67,7 +104,7 @@ a {
   text-decoration: none;
   border: 1px solid #999;
   border-bottom:none;
-  padding: 7px 5px;
+  padding: 3px;
   display: block;
   background-color: #e7e7e7;
 }
@@ -82,7 +119,7 @@ a {
 
 #admin_nav h3 {
   margin: 0;
-  padding: 7px 5px;
+  padding: 3px;
   display: block;
   background-color: #666;
   color: #fff;
@@ -102,7 +139,7 @@ a {
   text-decoration: none;
   border: 1px solid #999;
   border-bottom:none;
-  padding: 7px 5px;
+  padding: 3px;
   display: block;
   background-color: #e7e7e7;
 }
@@ -191,4 +228,12 @@ table.pretty {
 
 .pretty th .desc { 
   background-image: url(/images/down_arrow.gif); 
+}
+
+tr.even {
+  background-color: #fff;
+}
+
+tr.odd {
+  background-color:#eee;
 }

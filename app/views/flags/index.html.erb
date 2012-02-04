@@ -6,7 +6,7 @@
     <th>Description</th>
   </tr>
   <% for flag in @flags %>
-    <tr>
+    <tr class="<%= cycle :odd, :even %>">
       <td><%= flag.name %></td>
       <td><%= flag.description %></td>
       <td><%= link_to "Show", flag %></td>

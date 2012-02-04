@@ -3211,6 +3211,107 @@ This is what the top of the layout file (`app/views/layouts/application.html.erb
 .
 ```
 
+CSS Styling: List Formatting
+============================
+For a model index page we add some code to do alternate colouring of
+rows. There is a nice rails helper for this. For example, in the
+samples listing view (in the part that loops through all the samples) the
+code for a table row (`<tr>`) is replaced with:
+
+```
+    <tr class="<%= cycle :odd, :even %>">
+```
+
+Then all that is needed is to add a couple of entries in the stylesheet:
+
+```
+tr.even {
+  background-color: #fff;
+}
+
+tr.odd {
+  background-color:#eee;
+}
+```
+
+We modify the other list views in the same way.
+
+PDF Rendering Bugfix
+====================
+There was a problem in dealing with situations where a sample may not have
+any COSHH information. This shouldn't happen, but may occur if old samples
+are imported into the database. The `coshh_summary` method was changed to:
+
+```
+  def coshh_summary
+
+    font_size = 8
+    if (!@sample.coshh_info)
+      if (@sample.coshh_info.split(/[^-a-zA-Z]/).size +
+        @sample.comments.split(/[^-a-zA-Z]/).size > 60)
+        font_size = 5
+      end
+    end
+```
+
+Other Page Enhancements
+=======================
+The samples listing is shortened by narrowing the priority field
+and using a smaller font.
+Added a basic set of static links to the nav menu.
+
+Adding Pages to Main Menu
+=========================
+Decided to add an extra boolean variable to the pages model. This
+variable, when selected would automatically add a link to the main
+left hand menu for static pages.
+
+```
+rails generate migration add_menu_to_page menu:boolean
+```
+
+Now we add some extra CSS code for another class which we call
+`menu_nav` with similar entries to `admin_nav` and `user_nav` which
+we saw earlier. To process the pages we define a new helper method
+called `create_menu` in `app/helpers/application_helper.rb`:
+
+```
+  def create_menu
+    @pages = Page.find_all_by_menu(true)
+      ulist = ''
+    if (@pages)
+      ulist = '<ul>'
+      for page in @pages
+        url = "/#{page.permalink}"
+        ulist = ulist + "<li>#{link_to page.permalink, url}</li>"
+      end
+      ulist = ulist + '</ul>'
+      ulist
+    end
+  end
+```
+
+This method creates a UL list of all those pages which have the
+menu option ticked. The main layout code in
+`app/views/layouts/application.html.erb` is modified to add these menu
+items to the top of the left hand menu whether the user is logged in or
+not (we don't mind an unregistered user seeing these pages):
+
+```
+  <div id="nav_container">
+    <div id="menu_nav">
+      <h3> Information </h3>
+        <%= create_menu.html_safe %>
+      </div>
+```
+
+The code above is added to the top of the menu that a signed-in user sees.
+The same code is also added to the menu if a user is not logged in.
+The same block of code appears twice in the view --- the logic needs
+to be changed so that it appears only once.
+
+
+
 TODO: Generating Sample Data
 ============================
 Use Faker to generate a large number of users and samples so that we can

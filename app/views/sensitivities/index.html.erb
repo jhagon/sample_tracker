@@ -6,7 +6,7 @@
     <th>Description</th>
   </tr>
   <% for sensitivity in @sensitivities %>
-    <tr>
+    <tr class="<%= cycle :odd, :even %>">
       <td><%= sensitivity.name %></td>
       <td><%= sensitivity.description %></td>
       <td><%= link_to "Show", sensitivity %></td>

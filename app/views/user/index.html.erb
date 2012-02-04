@@ -30,7 +30,7 @@
   </tr>
 
   <% for user in @users %>
-    <tr>
+    <tr class="<%= cycle :odd, :even %>">
       <td><%= user.firstname %></td>
       <td><%= user.lastname %></td>
       <td><%= user.group.group_desc %></td>

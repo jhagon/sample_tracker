@@ -20,7 +20,7 @@ number is lower for multiple samples submitted on the same day.
   <% page_num = params[:page].to_i > 0 ? params[:page].to_i : 1 %>
   <% days =  1 + (page_num - 1) * 5%>
   <% for sample in @samples %>
-    <tr>
+    <tr class="<%= cycle :odd, :even %>">
       <td><%= sample.code %></td>
       <td><%= sample.userref %></td>
       <td><%= neat_time(sample.created_at) %></td>

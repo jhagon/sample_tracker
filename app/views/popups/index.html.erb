@@ -6,7 +6,7 @@
     <th>Description</th>
   </tr>
   <% for popup in @popups %>
-    <tr>
+    <tr class="<%= cycle :odd, :even %>">
       <td><%= popup.name %></td>
       <td><%= popup.description %></td>
       <td><%= link_to "Show", popup %></td>

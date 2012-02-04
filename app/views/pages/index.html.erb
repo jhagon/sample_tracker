@@ -7,7 +7,7 @@
     <th>Content</th>
   </tr>
   <% for page in @pages %>
-    <tr>
+    <tr class="<%= cycle :odd, :even %>">
       <td><%= page.name %></td>
       <td><%= page.permalink %></td>
       <td><%= truncate(page.content, :length => 80) %></td>

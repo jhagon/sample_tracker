@@ -10,7 +10,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120128170543) do
+ActiveRecord::Schema.define(:version => 20120204200822) do
 
   create_table "assets", :force => true do |t|
     t.string   "document"
@@ -51,6 +51,7 @@ ActiveRecord::Schema.define(:version => 20120128170543) do
     t.text     "content"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.boolean  "menu"
   end
 
   create_table "popups", :force => true do |t|

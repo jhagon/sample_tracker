@@ -6,7 +6,7 @@
     <th>Description</th>
   </tr>
   <% for store in @stores %>
-    <tr>
+    <tr class="<%= cycle :odd, :even %>">
       <td><%= store.name %></td>
       <td><%= store.description %></td>
       <td><%= link_to "Show", store %></td>

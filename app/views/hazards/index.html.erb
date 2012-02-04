@@ -6,7 +6,7 @@
     <th>Hazard Abbr</th>
   </tr>
   <% for hazard in @hazards %>
-    <tr>
+    <tr class="<%= cycle :odd, :even %>">
       <td><%= hazard.hazard_desc %></td>
       <td><%= hazard.hazard_abbr %></td>
       <td><%= link_to "Show", hazard %></td>

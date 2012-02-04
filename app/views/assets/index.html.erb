@@ -6,7 +6,7 @@
     <th>Description</th>
   </tr>
   <% for asset in @assets %>
-    <tr>
+    <tr class="<%= cycle :odd, :even %>">
       <td><%= asset.document %></td>
       <td><%= asset.description %></td>
       <td><%= link_to "Show", asset %></td>

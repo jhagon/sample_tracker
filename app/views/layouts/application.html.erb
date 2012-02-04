@@ -17,7 +17,12 @@
       </p>
       </div>
   <div id="nav_container">
-  <div id="user_nav">
+    <div id="menu_nav">
+      <h3> Information </h3>
+        <%= create_menu.html_safe %>
+      </div>
+
+    <div id="user_nav">
       <h3>User Tools</h3>
       <ul>
         <li>
@@ -52,6 +57,12 @@
       <%= link_to "Sign in", new_user_session_path %>
         </p>
       </div>
+  <div id="nav_container">
+      <div id="menu_nav">
+        <h3> Information </h3>
+          <%= create_menu.html_safe %>
+      </div>
+  </div>
     <% end %>
   </div>
 

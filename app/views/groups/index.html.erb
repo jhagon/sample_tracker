@@ -6,7 +6,7 @@
     <th>Group Desc</th>
   </tr>
   <% for group in @groups %>
-    <tr>
+    <tr class="<%= cycle :odd, :even %>">
       <td><%= group.group_abbr %></td>
       <td><%= group.group_desc %></td>
       <td><%= link_to "Show", group %></td>

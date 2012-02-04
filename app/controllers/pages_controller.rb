@@ -2,7 +2,7 @@ class PagesController < ApplicationController
   before_filter :admin_required, :only => [ :new, :create, :index, :edit,
                                             :update, :destroy ]
   def home
-    @page = Page.find_by_permalink('about')
+    @page = Page.find_by_permalink('home')
   end
   def index
     @pages = Page.all
