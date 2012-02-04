@@ -3157,6 +3157,60 @@ This produces an acceptable menu down the left hand side. The login status
 is now flush-right along the top and the page container is a variable width
 and can fill the whole page if necessary.
 
+Of course, this also necessitated some changes in the main layout file.
+This is what the top of the layout file (`app/views/layouts/application.html.erb`) looks like now:
+
+```
+    <% if user_signed_in? %>
+      <div id="top_container">
+      <p>
+      Signed in as <%= current_user.email %>. Not you?
+      <%= link_to "Sign out", destroy_user_session_path, :method => :delete %>
+      </p>
+      </div>
+  <div id="nav_container">
+  <div id="user_nav">
+      <h3>User Tools</h3>
+      <ul>
+        <li>
+      <%= link_to 'My Profile', "/users/show/#{current_user.id}" %>
+        </li>
+        <li>
+      <%= link_to 'My Samples', "/samples/userindex/#{current_user.id}" %>
+        </li>
+      <% if user_signed_in? and (current_user.admin? or current_user.leader?) %>
+        <li>
+        <%= link_to 'My Group Samples', :controller => "groups",
+                                        :action => "show",
+                                        :id => current_user.group.id %>
+        </li>
+      <% end %>
+        <li>
+        <%= link_to 'Sample Queue',     :controller => "samples",
+                                        :action => "queue",
+                                        :id => current_user.id %>
+        </li>
+        <li>
+      <%= link_to 'Submit New Sample', new_sample_path %>
+        </li>
+        <li>
+      <%= link_to 'Home', root_url %>
+        </li>
+      </ul>
+    <% else %>
+      <div id="top_container">
+        <p>
+      <%= link_to "Sign up", new_user_registration_path %> or
+      <%= link_to "Sign in", new_user_session_path %>
+        </p>
+      </div>
+    <% end %>
+  </div>
+.
+.
+.
+```
+
 TODO: Generating Sample Data
 ============================
 Use Faker to generate a large number of users and samples so that we can
