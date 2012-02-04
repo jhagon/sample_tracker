@@ -9,48 +9,95 @@
   </head>
   <body>
 
-  <div id="user_nav">
     <% if user_signed_in? %>
+      <div id="top_container">
+      <p>
       Signed in as <%= current_user.email %>. Not you?
       <%= link_to "Sign out", destroy_user_session_path, :method => :delete %>
-      <br />
-      User Tools:
-      <%= link_to 'My Profile', "/users/show/#{current_user.id}" %> |
-      <%= link_to 'My Samples', "/samples/userindex/#{current_user.id}" %> |
+      </p>
+      </div>
+  <div id="nav_container">
+  <div id="user_nav">
+      <h3>User Tools</h3>
+      <ul>
+        <li>
+      <%= link_to 'My Profile', "/users/show/#{current_user.id}" %>
+        </li>
+        <li>
+      <%= link_to 'My Samples', "/samples/userindex/#{current_user.id}" %>
+        </li>
       <% if user_signed_in? and (current_user.admin? or current_user.leader?) %>
+        <li>
         <%= link_to 'My Group Samples', :controller => "groups", 
                                         :action => "show",
-                                        :id => current_user.group.id %> |
+                                        :id => current_user.group.id %>
+        </li>
       <% end %>
+        <li>
         <%= link_to 'Sample Queue',     :controller => "samples", 
                                         :action => "queue",
-                                        :id => current_user.id %> |
-      <%= link_to 'Submit New Sample', new_sample_path %> |
+                                        :id => current_user.id %>
+        </li>
+        <li>
+      <%= link_to 'Submit New Sample', new_sample_path %>
+        </li>
+        <li>
       <%= link_to 'Home', root_url %>
+        </li>
+      </ul>
     <% else %>
+      <div id="top_container">
+        <p>
       <%= link_to "Sign up", new_user_registration_path %> or
       <%= link_to "Sign in", new_user_session_path %>
+        </p>
+      </div>
     <% end %>
   </div>
 
   <div id="admin_nav">
     <% if user_signed_in? and current_user.admin?%>
-      Admin Tools:
-      <%= link_to 'Samples', samples_path %> |
-      <%= link_to 'Users', '/user' %> |
-      <%= link_to 'Hazards', hazards_path %> |
-      <%= link_to 'User Groups', groups_path %> |
-      <%= link_to 'Assets', assets_path %> |
-      <%= link_to 'Pages', pages_path %> |
-      <%= link_to 'Popups', popups_path %> |
-      <%= link_to 'Storage', stores_path %> |
-      <%= link_to 'Sensitivity', sensitivities_path %> |
-      <%= link_to 'Status Flags', flags_path %> |
+      <h3>Admin Tools</h3>
+      <ul>
+        <li>
       <%= link_to 'Find Bar Code', :controller => "samples",
                                    :action => "findbarcode",
                                    :id => current_user.id %>
+        </li>
+        <li>
+      <%= link_to 'Samples', samples_path %>
+        </li>
+        <li>
+      <%= link_to 'Users', '/user' %>
+        </li>
+        <li>
+      <%= link_to 'Hazards', hazards_path %>
+        </li>
+        <li>
+      <%= link_to 'User Groups', groups_path %>
+        </li>
+        <li>
+      <%= link_to 'Assets', assets_path %>
+        </li>
+        <li>
+      <%= link_to 'Pages', pages_path %>
+        </li>
+        <li>
+      <%= link_to 'Popups', popups_path %>
+        </li>
+        <li>
+      <%= link_to 'Storage', stores_path %>
+        </li>
+        <li>
+      <%= link_to 'Sensitivity', sensitivities_path %>
+        </li>
+        <li>
+      <%= link_to 'Status Flags', flags_path %>
+        </li>
+      <ul>
     <% else %>
     <% end %>
+  </div>
   </div>
 
 

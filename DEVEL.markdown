@@ -3044,6 +3044,119 @@ of what was done previously for the hazards list. The PDF code was
 further modified to make the code a little more compact and easier to
 edit in future.
 
+CSS Styling: Main Layout
+========================
+First styled the main layout as follows:
+
+* A full-width top container for login status and possibly other data.
+* A navigation menu down the left hand side. This stacks the user and
+admin menus and has a fixed width of 150px.
+* The main container section which shows sample lists etc.
+
+First modified the existing css styling for the main object with
+id 'container' and then added further ids 'top_container', 'admin_nav',
+'user_nav' and 'nav_container'. 'nav-container' is a container for both
+the admin and user navigation containers. Here is the relevant part of the
+style file `public/stylesheets/application.css`): 
+
+```
+#top_container p{
+  text-align: right;
+  margin: 0px;
+  padding: 0px;
+}
+
+#nav_container {
+  width: 150px;
+  float: left;
+  margin-top: 10px;
+}
+
+#container {
+/*  width: 75%;
+    margin: 0 auto; */
+  background-color: #FFF;
+  padding: 20px 40px;
+  border: solid 1px #999;
+  margin-top: 10px;
+  margin-left: 160px;
+}
+
+#user_nav {
+  text-align: center;
+}
+
+#user_nav h3 {
+  margin: 0;
+  padding: 7px 5px;
+  display: block;
+  background-color: #666;
+  color: #fff;
+}
+
+#user_nav ul {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  border-bottom: 1px solid #999;
+}
+
+#user_nav a {
+  color: #000;
+  font-size: 1em;
+  text-transform: uppercase;
+  text-decoration: none;
+  border: 1px solid #999;
+  border-bottom:none;
+  padding: 7px 5px;
+  display: block;
+  background-color: #e7e7e7;
+}
+#user_nav a:hover {
+  font-weight: bold;
+  background: #fff;
+}
+
+#admin_nav {
+  text-align: center;
+}
+
+#admin_nav h3 {
+  margin: 0;
+  padding: 7px 5px;
+  display: block;
+  background-color: #666;
+  color: #fff;
+}
+
+#admin_nav ul {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  border-bottom: 1px solid #999;
+}
+
+#admin_nav a {
+  color: #000;
+  font-size: 1em;
+  text-transform: uppercase;
+  text-decoration: none;
+  border: 1px solid #999;
+  border-bottom:none;
+  padding: 7px 5px;
+  display: block;
+  background-color: #e7e7e7;
+}
+#admin_nav a:hover {
+  font-weight: bold;
+  background: #fff;
+}
+```
+
+This produces an acceptable menu down the left hand side. The login status
+is now flush-right along the top and the page container is a variable width
+and can fill the whole page if necessary.
+
 TODO: Generating Sample Data
 ============================
 Use Faker to generate a large number of users and samples so that we can
