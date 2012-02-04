@@ -3259,6 +3259,7 @@ Other Page Enhancements
 The samples listing is shortened by narrowing the priority field
 and using a smaller font.
 Added a basic set of static links to the nav menu.
+Added alternate row colours for all index pages.
 
 Adding Pages to Main Menu
 =========================
