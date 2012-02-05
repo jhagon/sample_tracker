@@ -39,6 +39,7 @@ a {
   border: solid 1px #999;
   margin-top: 10px;
   margin-left: 160px;
+  min-height: 600px;
 }
 
 #menu_nav {
@@ -236,4 +237,68 @@ tr.even {
 
 tr.odd {
   background-color:#eee;
+}
+
+label {
+  float: left;
+  width: 20em;
+  color: green;
+}
+
+.box {
+  float: none;
+  font-size:75%;
+  width: 20em;
+  height: 20em;
+  border: solid 1px;
+  background-color: #eee;
+  margin-right:1em;
+}
+
+.box label {
+  float: none;
+}
+
+.rbox {
+  float: right;
+  font-size:75%;
+  width: 20em;
+  height: 20em;
+  border: solid 1px;
+  background-color: #eee;
+  margin:1em;
+}
+
+.lbox label {
+  float: none;
+}
+
+.lbox {
+  float: left;
+  font-size:75%;
+  width: 20em;
+  height: 24em; 
+  border: solid 1px;
+  background-color: #eee;
+  margin-right:1em;
+  margin-bottom:2em;
+}
+
+.rbox label {
+  float: none;
+}
+
+
+
+.boxadmin {
+  float: right;
+  border: solid 1px;
+  background-color: #eee;
+  padding: 1em;
+}
+
+p.boxed {
+  border: solid 1px;
+  background-color: #eee;
+  color: blue;
 }

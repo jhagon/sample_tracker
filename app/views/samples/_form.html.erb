@@ -1,81 +1,12 @@
 <%= form_for @sample, :html => {:multipart => true} do |f| %>
   <%= f.error_messages %>
-  <p>
-<b>Note:</b> a unique code and a barcode will be
-automatically generated on submission of this form when a new sample
-is created. For synthetic route files, please use either the JPG or PNG
-bitmap image format. 
-Note that for security reasons, if there are validation errors 
-in the form, you will have to re-select the names of uploaded files.
+  <p style="font-size:75%;border: solid 1px;padding:3px;background-color:#eee;">
+<b>Note:</b> <%=SAMPLE_INTRO_TEXT%>
     <%= f.hidden_field :code %>
-  </p>
-  <p>
-    <%= f.label :userref %><br />
-    <%= f.text_field :userref, :title => popup_info('sample_yourref')%>
-  </p>
-  <p>
-    <%= f.label :cif %><br />
-    <%= f.text_field :cif, :title => popup_info('sample_cif') %>
-  </p>
-  <p>
-    <%= f.label :synth %><br />
-    <%= f.file_field :synth, :title => popup_info('sample_synth') %>
-
-  </p>
-  <p>
-    <%= f.label :coshh_name %><br />
-    <%= f.text_field :coshh_name, :title => popup_info('sample_coshh_name') %>
-  </p>
-  <p>
-    <%= f.label :coshh_desc %><br />
-    <%= f.text_field :coshh_desc, :title => popup_info('sample_coshh_desc') %>
-  </p>
-  <p>
-    <%= f.label :coshh_info %><br />
-    <%= f.text_area :coshh_info, :rows => 2, :title => popup_info('sample_coshh_info') %>
-  </p>
-
-  <p>
-    <%= f.label :params %><br />
-    <%= f.text_field :params, :title => popup_info('sample_params') %>
-  </p>
-
-  <p>
-    <%= f.label "Chemical Hazard Information" %><br />
-    <% for hazard in Hazard.find(:all) %>
-    <div>
-      <%= check_box_tag "sample[hazard_ids][]", hazard.id, @sample.hazards.include?(hazard) %>
-      <%= "#{hazard.hazard_abbr}: #{hazard.hazard_desc}" %>
-    </div>
-    <% end %>
-  </p>
-
-  <p>
-    <%= f.label "Sample Sensitivity Information" %><br />
-    <% for sensitivity in Sensitivity.find(:all) %>
-    <div>
-      <%= check_box_tag "sample[sensitivity_ids][]", sensitivity.id, @sample.sensitivities.include?(sensitivity) %>
-      <%= "#{sensitivity.name}: #{sensitivity.description}" %>
-    </div>
-    <% end %>
-  </p>
-
-  <p>
-    <%= f.label "Sample Storage Information" %><br />
-    <% for store in Store.find(:all) %>
-    <div>
-      <%= check_box_tag "sample[store_ids][]", store.id, @sample.stores.include?(store) %>
-      <%= "#{store.name}: #{store.description}" %>
-    </div>
-    <% end %>
-  </p>
-
-  <p>
-    <%= f.label :comments %><br />
-    <%= f.text_area :comments, :rows => 2, :title => popup_info('sample_comments') %>
   </p>
 
   <% if user_signed_in? and current_user.admin? %>
+  <div class="boxadmin">
   <p>
   <div><%= f.label "Status Flag" %><br />
   <%= select(:sample, :flag_id, Flag.all.collect {|f| [ f.name, f.id ] })
@@ -85,7 +16,7 @@ in the form, you will have to re-select the names of uploaded files.
   <p>
     <%= f.label :zipdata %><br />
     <% if @sample.zipdata? %>
-      A data file has been uploaded.<br /> 
+      A data file has been uploaded.<br />
     <% else %>
       No data has yet been uploaded. <br />
     <% end %>
@@ -111,29 +42,88 @@ in the form, you will have to re-select the names of uploaded files.
     <% end %>
     <%= f.text_field :reference %>
   </p>
-
+  </div>
   <% end %>
 
+  <p>
+    <%= f.label :userref %>
+    <%= f.text_field :userref, :title => popup_info('sample_yourref')%>
+  </p>
+  <p>
+    <%= f.label :cif %>
+    <%= f.text_field :cif, :title => popup_info('sample_cif') %>
+  </p>
+  <p>
+    <%= f.label :synth %>
+    <%= f.file_field :synth, :title => popup_info('sample_synth') %>
 
   </p>
   <p>
-    <%= f.label :priority %><br />
+    <%= f.label :coshh_name %>
+    <%= f.text_field :coshh_name, :title => popup_info('sample_coshh_name') %>
+  </p>
+  <p>
+    <%= f.label :coshh_desc %>
+    <%= f.text_field :coshh_desc, :title => popup_info('sample_coshh_desc') %>
+  </p>
+  <p>
+    <%= f.label :coshh_info %>
+    <%= f.text_area :coshh_info, :rows => 2, :title => popup_info('sample_coshh_info') %>
+  </p>
+
+  <p>
+    <%= f.label :params %>
+    <%= f.text_field :params, :title => popup_info('sample_params') %>
+  </p>
+
+  <p>
+    <%= f.label :priority %>
     <%= f.text_field :priority, :title => popup_info('sample_priority') %>
   </p>
   <p>
-    <%= f.label :powd %><br />
+    <%= f.label :powd %>
     <%= f.check_box :powd, :title => popup_info('sample_powd') %>
   </p>
   <p>
-    <%= f.label :chiral %><br />
+    <%= f.label :chiral %>
     <%= f.check_box :chiral, :title => popup_info('sample_chiral') %>
   </p>
   <p>
-    <%= f.label :cost_code %><br />
+    <%= f.label :cost_code %>
     <%= f.text_field :cost_code, :title => popup_info('sample_cost_code') %>
   </p>
+
   <p>
-    <%= f.hidden_field :barcode %>
+    <%= f.label :comments %>
+    <%= f.text_area :comments, :rows => 2, :title => popup_info('sample_comments') %>
   </p>
-  <p><%= f.submit %></p>
+
+    <div class="lbox">
+    <%= f.label "Chemical Hazard Information" %><br />
+    <% for hazard in Hazard.find(:all) %>
+      <%= check_box_tag "sample[hazard_ids][]", hazard.id, @sample.hazards.include?(hazard) %>
+      <%= "#{hazard.hazard_abbr}: #{hazard.hazard_desc}" %><br />
+    <% end %>
+    </div>
+
+    <div class="lbox">
+    <%= f.label "Sample Sensitivity Information" %><br />
+    <% for sensitivity in Sensitivity.find(:all) %>
+      <%= check_box_tag "sample[sensitivity_ids][]", sensitivity.id, @sample.sensitivities.include?(sensitivity), :title => sensitivity.description %>
+      <%= "#{sensitivity.name}" %><br />
+    <% end %>
+    </div>
+ 
+    <div class="lbox">
+    <%= f.label "Sample Storage Information" %><br />
+    <% for store in Store.find(:all) %>
+      <%= check_box_tag "sample[store_ids][]", store.id, @sample.stores.include?(store), :title => store.description %>
+      <%= "#{store.name}" %><br />
+    <% end %>
+    </div>
+
+  <p style="clear:left;">
+    <%= f.hidden_field :barcode %>
+    <%= f.submit %>
+  </p>
 <% end %>

@@ -33,13 +33,12 @@
   <tr>
     <th><%= sortable "code", "Code" %></th>
     <th><%= sortable "userref", "Ref" %></th>
-    <th><%= sortable "params", "Params" %></th>
     <th><%= sortable "name", "Status" %></th>
     <th><%= sortable "created_at", "Submitted" %></th>
     <th><%= sortable "updated_at", "Updated" %></th>
     <th><%= sortable "priority", "Priority" %></th>
-    <th><%= sortable "powd", "Powd?" %></th>
-    <th><%= sortable "chiral", "Chiral?" %></th>
+    <th><%= sortable "powd", "Pow?" %></th>
+    <th><%= sortable "chiral", "Chi?" %></th>
     <th><%= sortable "cost_code", "Cost Code" %></th>
     <th></th>
     <th></th>
@@ -49,16 +48,21 @@
     <tr class="<%= cycle :odd, :even %>">
       <td><%= sample.code %></td>
       <td><%= sample.userref %></td>
-      <td><%= sample.params %></td>
       <td><%= sample.flag.name %></td>
       <td><%= neat_time(sample.created_at) %></td>
       <td><%= neat_time(sample.updated_at) %></td>
       <td><%= sample.priority %></td>
-      <td><%= sample.powd %></td>
-      <td><%= sample.chiral %></td>
+      <td><%= sample.powd ? 'yes' : 'no'%></td>
+      <td><%= sample.chiral ? 'yes' : 'no'%></td>
       <td><%= sample.cost_code %></td>
-      <td><%= link_to "Show", sample %></td>
-      <td><%= link_to "PDF", sample_path(sample, :format => "pdf") %></td>
+      <td><%= link_to image_tag("/images/show.gif",
+              :title => "Show",
+              :alt   => "Show"),
+            sample %></td>
+      <td><%= link_to image_tag("/images/pdf.png",
+              :title => "PDF",
+              :alt   => "PDF"),
+            sample_path(sample, :format => "pdf") %></td>
 
     </tr>
   <% end %>

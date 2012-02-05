@@ -3423,6 +3423,17 @@ We do a similar thing for the user samples page --- in fact we merge it with
 the user profile page and eliminate the separate user samples page. This makes
 the left hand menu more compact.
 
+Further View Refinements
+========================
+Replaced the sample and User listing links with icons and also added
+some popup titles on some of the column headers where appropriate.
+Added some styling to the sample form. 
+
+TODO: Further Styling
+=====================
+When time permits, style the admin forms and improve the look of the
+HTML version of the sample display.
+
 
 TODO: Generating Sample Data
 ============================

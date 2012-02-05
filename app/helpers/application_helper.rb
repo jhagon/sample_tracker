@@ -8,7 +8,7 @@ module ApplicationHelper
   end
 
   def neat_time(date)
-    date.strftime("%d/%m/%Y") + date.strftime("(%I:%M%P)")
+    date.strftime("%d/%m/%Y") + ' ' + date.strftime("(%I:%M%P)")
   end
 
   def create_menu

@@ -43,11 +43,25 @@
 <!--      <td><%= sample.chiral %></td> -->
 <!--      <td><%= sample.cost_code %></td> -->
       <td><%= "#{sample.user.firstname} #{sample.user.lastname}"  %></td>
-      <td><%= "#{sample.user.group.group_desc}"  %></td>
-      <td><%= link_to "Show", sample %></td>
-      <td><%= link_to "PDF", sample_path(sample, :format => "pdf") %></td>
-      <td><%= link_to "Edit", edit_sample_path(sample) %></td>
-      <td><%= link_to "Destroy", sample, :confirm => 'Are you sure?', :method => :delete %></td>
+      <td><%= "#{sample.user.group.group_abbr}"  %></td>
+      <td><%= link_to image_tag("/images/show.gif", 
+              :title => "Show",
+              :alt   => "Show"),
+            sample %></td>
+      <td><%= link_to image_tag("/images/pdf.png",
+              :title => "PDF",
+              :alt   => "PDF"),
+            sample_path(sample, :format => "pdf") %></td>
+      <td><%= link_to image_tag("/images/edit.gif", 
+              :title => "Edit",
+              :alt   => "Edit"),
+            edit_sample_path(sample) %></td>
+      <td><%= link_to image_tag("/images/delete.gif", 
+              :title => "Delete",
+              :alt   => "Delete"),
+            sample,
+            :confirm => 'Are you sure?',
+            :method => :delete %></td>
     </tr>
   <% end %>
 </table>

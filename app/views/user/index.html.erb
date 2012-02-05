@@ -3,7 +3,7 @@
 <% form_tag '/user', :method => 'get' do %>
   <p>
     <%= text_field_tag :search, params[:search] %>
-    <%= submit_tag "Search", :name => nil %>
+    <%= submit_tag "Search Last Name", :name => nil %>
   </p>
 
 <% end %>
@@ -20,9 +20,9 @@
     <th><%= sortable "firstname", "First Name" %></th>
     <th><%= sortable "lastname", "Last Name" %></th>
     <th><%= sortable "group_desc", "Group Description" %></th>
-    <th><%= sortable "enabled", "E" %></th>
-    <th><%= sortable "leader", "L" %></th>
-    <th><%= sortable "admin", "A" %></th>
+    <th title="Account Enabled?"><%= sortable "enabled", "E" %></th>
+    <th title="Group Leader?"><%= sortable "leader", "L" %></th>
+    <th title="Administrator?"><%= sortable "admin", "A" %></th>
     <th></th>
     <th></th>
     <th></th>
@@ -37,10 +37,25 @@
       <td><%= user.enabled ? 'Y' : 'N' %></td>
       <td><%= user.leader ? 'Y' : 'N' %></td>
       <td><%= user.admin ? 'Y' : 'N' %></td>
-      <td><%= link_to "Become", "/users/become/#{user.id}" %></td>
-      <td><%= link_to "Show", user %></td>
-      <td><%= link_to "Edit", edit_user_path(user) %></td>
-      <td><%= link_to "Destroy", user, :confirm => 'Are you sure?', :method => :delete %></td>
+      <td><%= link_to image_tag("/images/person.gif",
+              :title => "Become This User",
+              :alt   => "Become This User"),
+            "/users/become/#{user.id}" %></td>
+      <td><%= link_to image_tag("/images/show.gif",
+              :title => "Show User",
+              :alt   => "Show User"),
+            user %></td>
+      <td><%= link_to image_tag("/images/edit.gif",
+              :title => "Edit User",
+              :alt   => "Edit User"),
+            edit_user_path(user) %></td>
+      <td><%= link_to image_tag("/images/delete.gif",
+              :title => "Delete User",
+              :alt   => "Delete User"),
+            user,
+            :confirm => 'Are you sure?',
+            :method => :delete %></td>
+
     </tr>
   <% end %>
 </table>
