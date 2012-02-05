@@ -1,11 +1,5 @@
-<% title "Samples for #{current_user.firstname} #{current_user.lastname}" %>
+<% title "Sample Search Result for #{current_user.firstname} #{current_user.lastname}" %>
 
-<% form_tag samples_path, :method => 'get' do %>
-  <p>
-    <%= text_field_tag :search, params[:search] %>
-    <%= submit_tag "Search", :name => nil %>
-  </p>
-<% end %>
 <p>
 <%= will_paginate @samples %>
 </p>
@@ -51,4 +45,4 @@
 </table>
 </p>
 
-<p><%= link_to "New Sample", new_sample_path %></p>
+<p><%= link_to "Back", :back %></p>

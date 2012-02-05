@@ -28,9 +28,6 @@
         <li>
       <%= link_to 'My Profile', "/users/show/#{current_user.id}" %>
         </li>
-        <li>
-      <%= link_to 'My Samples', "/samples/userindex/#{current_user.id}" %>
-        </li>
       <% if user_signed_in? and (current_user.admin? or current_user.leader?) %>
         <li>
         <%= link_to 'My Group Samples', :controller => "groups", 
@@ -45,9 +42,6 @@
         </li>
         <li>
       <%= link_to 'Submit New Sample', new_sample_path %>
-        </li>
-        <li>
-      <%= link_to 'Home', root_url %>
         </li>
       </ul>
     <% else %>

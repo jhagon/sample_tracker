@@ -12,7 +12,7 @@ module ApplicationHelper
   end
 
   def create_menu
-    @pages = Page.find_all_by_menu(true)
+    @pages = Page.find_all_by_menu(true, :order => 'priority')
       ulist = ''
     if (@pages)
       ulist = '<ul>'

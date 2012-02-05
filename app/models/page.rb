@@ -1,3 +1,3 @@
 class Page < ActiveRecord::Base
-  attr_accessible :name, :permalink, :content, :menu
+  attr_accessible :name, :permalink, :content, :menu, :priority
 end

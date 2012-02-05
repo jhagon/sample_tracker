@@ -1,27 +1,6 @@
-<% title "Group" %>
+<% title "Group Samples Search Result" %>
 
-<p>
-  <strong>Group Abbreviation:</strong>
-  <%= @group.group_abbr %>
-</p>
-<p>
-  <strong>Group Description:</strong>
-  <%= @group.group_desc %>
-</p>
-
-<h3><%="Samples List for this Group" %></h3>
-
-<% if @samples.count > 0 %>
-
-  <% form_tag "#{samples_path}/groupindex/#{@group.id}", :method => 'get' do %>
-    <p>
-      <%= text_field_tag :search, params[:search] %>
-      <%= submit_tag "Search by Sample Code", :name => nil %>
-    </p>
-
-  <% end %>
-
-<% end %>
+<h3><%="Group Samples Search Result" %></h3>
 
 <p>
 <%= will_paginate @samples %>
@@ -73,7 +52,5 @@ This group has no samples!
 
 
 <p>
-  <%= link_to "Edit", edit_group_path(@group) %> |
-  <%= link_to "Destroy", @group, :confirm => 'Are you sure?', :method => :delete %> |
-  <%= link_to "View All", groups_path %>
+  <%= link_to "Back", :back %> 
 </p>

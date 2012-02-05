@@ -3306,10 +3306,122 @@ not (we don't mind an unregistered user seeing these pages):
 ```
 
 The code above is added to the top of the menu that a signed-in user sees.
-The same code is also added to the menu if a user is not logged in.
-The same block of code appears twice in the view --- the logic needs
+The same code is also added in the part where  a user is not logged in.
+The same block of code appears twice in the view --- the logic really needs
 to be changed so that it appears only once.
 
+Ordering the Static Pages in the Menu
+=====================================
+The previous technique works well but has one flaw --- there is no way to
+order the pages as they appear in the menu. The default ordering is simply
+alphabetical. To get around this, we add an extra parameter to the page
+model called `order`. This is an integer used to determine the order of
+appearance of a static page in the menu. Low numbers will have priority
+and if two pages have the same order number, then they will be sorted
+alphabetically. So, we create another migration:
+
+```
+rails generate migration add_order_to_page order:integer
+```
+
+I realised later that calling this field `order` might conflict with some
+of the ordering methods. So, via  a migration the name was changed to
+`priority`. It is now a simple matter to change the helper code which
+renders the top menu in the file `app/helpers/application_helper.rb`:
+
+```
+@pages = Page.find_all_by_menu(true, :order => 'priority')
+```
+
+This completes the menu customization.
+
+More Minor View Changes and Global Variables
+============================================
+It seems sensible to add a link to the Textile documentation on the edit
+page form. Since such links may appear in more than one place and are
+liable to change, we first set these up in the `config/environment.rb` file
+near the bottom for easy reference:
+
+```
+###################  SPECIFIC GLOBAL VARS ####################
+TEXTILE_REF_URL = "http://redcloth.org/textile/"
+TEXTILE_QUICK_REF_URL = "http://en.wikipedia.org/wiki/Textile_%28markup_language%29"
+```
+
+So, for example, in the page edit view, we add the following links:
+
+```
+  <%= link_to "Textile Reference Manual", TEXTILE_REF_URL :target => 'blank'%> |
+  <%= link_to "Textile Quick Reference", TEXTILE_QUICK_REF_URL :target => 'blank'%>
+```
+
+The link to the textile quick reference page was removed from the page
+show view (for administrators) since it's really only in edit mode that they
+may need the textile reference links.
+
+Tweaked some of the search buttons to indicate clearly which field is being
+searched. In particular, the sample search buttons now have the label
+'Search by Sample Code'.
+
+Removed the 'Home' link from the 'User Tools' part of the menu since it now
+appears in the 'Information' section at the top of the left hand menu.
+
+Bugfix to User/Group Leader Search
+=============================
+There was a bug in the sample search for group leaders. To correct this,
+the following method was employed. first, the controller code was altered
+for the show action (`app/controllers/groups_controller.rb`):
+
+```
+  def show
+    @group = Group.find(params[:id])
+
+    @samples=Sample.page(params[:page]).per_page(ITEMS_PER_PAGE).where("(code LIKE '#{current_user.group.group_abbr}%') AND (code LIKE '%#{params[:search]}%')").joins(:flag, {:user => :group}).order("#{sort_column} #{sort_direction}")
+
+  end
+```
+
+This adds the correct samples listing. Now, the view must be changed as well:
+
+```
+.
+.
+.
+<h3><%="Samples List for this Group" %></h3>
+
+<% form_tag "#{samples_path}/groupindex/#{@group.id}", :method => 'get' do %>
+  <p>
+    <%= text_field_tag :search, params[:search] %>
+    <%= submit_tag "Search by Sample Code", :name => nil %>
+  </p>
+
+<% end %>
+.
+.
+.
+```
+
+The key change is that we now point the form to the samples groupindex
+action because it is this action which group leaders have permissions on,
+not the overall samples index. The groupindex view is changed slightly to
+reflect the fact that it is now created only as the result of a sample search.
+The samples controller actions look like this:
+
+```
+  def groupindex
+    @samples=Sample.page(params[:page]).per_page(ITEMS_PER_PAGE).where("(code LIKE '#{current_user.group.group_abbr}%') AND (code LIKE '%#{params[:search]}%')").joins(:flag, {:user => :group}).order("#{sort_column} #{sort_direction}")
+#                          :joins => [:flag, {:user => :group}],
+  end
+
+  def userindex
+    @samples=Sample.page(params[:page]).per_page(ITEMS_PER_PAGE).where("(user_id = '#{current_user.id}') AND (code LIKE '%#{params[:search]}%')").joins(:flag, {:user => :group}).order("#{sort_column} #{sort_direction}")
+#                          :joins => [:flag, {:user => :group}],
+  end
+```
+
+We do a similar thing for the user samples page --- in fact we merge it with
+the user profile page and eliminate the separate user samples page. This makes
+the left hand menu more compact.
 
 
 TODO: Generating Sample Data
