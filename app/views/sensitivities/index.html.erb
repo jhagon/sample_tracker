@@ -1,17 +1,32 @@
 <% title "Sensitivities" %>
 
-<table>
+<table class="pretty">
   <tr>
     <th>Name</th>
     <th>Description</th>
+    <th></th>
+    <th></th>
+    <th></th>
   </tr>
   <% for sensitivity in @sensitivities %>
     <tr class="<%= cycle :odd, :even %>">
       <td><%= sensitivity.name %></td>
       <td><%= sensitivity.description %></td>
-      <td><%= link_to "Show", sensitivity %></td>
-      <td><%= link_to "Edit", edit_sensitivity_path(sensitivity) %></td>
-      <td><%= link_to "Destroy", sensitivity, :confirm => 'Are you sure?', :method => :delete %></td>
+      <td><%= link_to image_tag("/images/show.gif",
+              :title => "Show",
+              :alt   => "Show"),
+            sensitivity %></td>
+      <td><%= link_to image_tag("/images/edit.gif",
+              :title => "Edit",
+              :alt   => "Edit"),
+            edit_sensitivity_path(sensitivity) %></td>
+      <td><%= link_to image_tag("/images/delete.gif",
+              :title => "Delete",
+              :alt   => "Delete"),
+            sensitivity,
+            :confirm => 'Are you sure?',
+            :method => :delete %></td>
+
     </tr>
   <% end %>
 </table>

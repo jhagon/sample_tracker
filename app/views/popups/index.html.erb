@@ -1,17 +1,32 @@
 <% title "Popups" %>
 
-<table>
+<table class="pretty">
   <tr>
     <th>Name</th>
     <th>Description</th>
+    <th></th>
+    <th></th>
+    <th></th>
   </tr>
   <% for popup in @popups %>
     <tr class="<%= cycle :odd, :even %>">
       <td><%= popup.name %></td>
       <td><%= popup.description %></td>
-      <td><%= link_to "Show", popup %></td>
-      <td><%= link_to "Edit", edit_popup_path(popup) %></td>
-      <td><%= link_to "Destroy", popup, :confirm => 'Are you sure?', :method => :delete %></td>
+      <td><%= link_to image_tag("/images/show.gif",
+              :title => "Show",
+              :alt   => "Show"),
+            popup %></td>
+      <td><%= link_to image_tag("/images/edit.gif",
+              :title => "Edit",
+              :alt   => "Edit"),
+            edit_popup_path(popup) %></td>
+      <td><%= link_to image_tag("/images/delete.gif",
+              :title => "Delete",
+              :alt   => "Delete"),
+            popup,
+            :confirm => 'Are you sure?',
+            :method => :delete %></td>
+
     </tr>
   <% end %>
 </table>

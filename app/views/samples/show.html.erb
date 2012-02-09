@@ -1,126 +1,67 @@
 <% title "Sample #{@sample.code}" %>
-<p> 
+<p>
 <%= link_to "Show as PDF", "#{sample_path(@sample)}.pdf" %>
 </p>
-<p>
-  <strong>Your Ref:</strong>
-  <%= @sample.userref %>
-</p>
-<p>
-  <strong>Chemical Formula:</strong>
-  <%= @sample.cif %>
-</p>
-<p>
-  <strong>Synthetic Route:</strong><br/>
-  <%= link_to   image_tag( @sample.synth_url(:thumb).to_s, 
+
+  <div class="boxadmin">
+  <p>
+  Status:
+  <span class="highlight"><%= @sample.flag.name %>
+    </span>
+  </p>
+
+  <p>
+    Sample Data:
+<% if @sample.zipdata? %>
+    <%= link_to 'available', @sample.zipdata_url.to_s  %>
+  <% else %>
+    not yet available
+  <% end %>
+
+  </p>
+
+  <p>
+  Sample Image:
+  <% if @sample.sampleimage? %>
+    <%= link_to  'available',
+                  @sample.sampleimage_url.to_s,
+                  :target => "_blank"  %>
+  <% else %>
+    not yet available
+  <% end %>
+
+  </p>
+
+  <p>
+  Published Reference:
+  <% if @sample.reference? %>
+    <%= link_to 'available', @sample.reference  %>
+  <% else %>
+    not yet available
+  <% end %>
+  </p>
+  </div>
+
+  <p>
+    <%= :userref %>: <%= @sample.userref %>
+  </p>
+
+  <p>
+    <%= :cif %>: <%= @sample.cif %>
+  </p>
+
+  <p>
+    <%= :synth %>: <%= @sample.synth %><br />
+  <%= link_to   image_tag( @sample.synth_url(:thumb).to_s,
                 :title => "Click for full size view in new window or tab.",
                 :alt => "Click for full size view in new window or tab."),
                 @sample.synth_url.to_s,
                 :target => "_blank"  %>
-</p>
-<p>
-  <strong>Solvent Name:</strong>
-  <%= @sample.coshh_name %>
-</p>
-<p>
-  <strong>Description:</strong>
-  <%= @sample.coshh_desc %>
-</p>
-<p>
-  <strong>Handling Information:</strong>
-  <%= @sample.coshh_info %>
-</p>
-<p>
-  <strong>Params:</strong>
-  <%= @sample.params %>
-</p>
-<p>
-  <strong>Status Flag:</strong>
-  <%= @sample.flag.name %>
-</p>
-<p>
-  <strong>Updated:</strong>
-  <%= @sample.updated_at.localtime %>
-</p>
 
-<p>
-  <strong>Analysis Data:</strong>
-  <% if @sample.zipdata? %>
-    <%= link_to 'Data Available', @sample.zipdata_url.to_s  %>
-  <% else %>
-    Data not yet available.
-  <% end %>
-</p>
+  </p>
 
-<p>
-  <strong>Analysis Image:</strong>
-  <% if @sample.sampleimage? %>
-    <%= link_to   image_tag( @sample.sampleimage_url(:thumb).to_s,
-                  :title => "Click for full size view in new window or tab.",
-                  :alt => "Click for full size view in new window or tab."),
-                  @sample.sampleimage_url.to_s,
-                  :target => "_blank"  %>
-  <% else %>
-    Image not yet available.
-  <% end %>
-</p>
-
-<p>
-  <strong>Reference Link:</strong>
-  <% if @sample.reference? %>
-    <%= link_to @sample.reference, @sample.reference  %>
-  <% else %>
-    A reference URL is not yet available.
-  <% end %>
-</p>
-
-
-<p>
-  <strong>Priority:</strong>
-  <%= @sample.priority %>
-</p>
-<p>
-  <strong>Powder Diffraction Required?:</strong>
-  <%= @sample.powd ? 'Yes' : 'No'%>
-</p>
-<p>
-  <strong>Chiral Molecule?:</strong>
-  <%= @sample.chiral ? 'Yes' : 'No'%>
-</p>
-<p>
-  <strong>Cost Code:</strong>
-  <%= @sample.cost_code %>
-</p>
-<p>
-  <strong>Barcode:</strong>
-  <%= @sample.barcode %><br />
-  <%= image_tag url_for(:controller => "samples", :action => "show_barcode", :id => @sample.id) %>
-
-</p>
-<p>
-  <strong>Hazard Categories</strong>
-  <ul>
-  <% for hazard in @hazards %>
-    <% if @sample.hazards.include? hazard%>
-      <li><%=hazard.hazard_desc + "(" + hazard.hazard_abbr + ")"%></li>
-    <% end %>
-  <% end %>
-  </ul>
-</p>
-
-<p>
-  <strong>Storage Requirements</strong>
-  <ul>
-  <% for store in @stores %>
-    <% if @sample.stores.include? store%>
-      <li><%="#{store.name}: #{store.description}"%></li>
-    <% end %>
-  <% end %>
-  </ul>
-</p>
-
-<p>
-  <strong>Sample Sensitivity</strong>
+    <div class="rbox">
+    Sensitivity Information
   <ul>
   <% for sensitivity in @sensitivities %>
     <% if @sample.sensitivities.include? sensitivity %>
@@ -128,13 +69,59 @@
     <% end %>
   <% end %>
   </ul>
-</p>
+    </div>
 
+    <div class="rbox">
+    Storage Requirements
+  <ul>
+  <% for store in @stores %>
+    <% if @sample.stores.include? store%>
+      <li><%="#{store.name}: #{store.description}"%></li>
+    <% end %>
+  <% end %>
+  </ul>
+  </div>
 
-<% if current_user.admin? %>
-<p id="pdf_link">
-  <%= link_to "Edit", edit_sample_path(@sample) %> |
-  <%= link_to "Destroy", @sample, :confirm => 'Are you sure?', :method => :delete %> |
-  <%= link_to "View All", samples_path %>
-</p>
-<% end %>
+    <div class="rbox">
+    Chemical Hazard Information
+  <ul>
+  <% for hazard in @hazards %>
+    <% if @sample.hazards.include? hazard%>
+      <li><%=hazard.hazard_desc + "(" + hazard.hazard_abbr + ")"%></li>
+    <% end %>
+  <% end %>
+  </ul>
+
+    </div>
+
+<p>
+    <%= :coshh_name %>: <%= @sample.coshh_name %>
+  </p>
+  <p>
+    <%= :coshh_desc %>: <%= @sample.coshh_desc %>
+  </p>
+  <p>
+    <%= :coshh_info %>: <%= @sample.coshh_info %>
+  </p>
+
+  <p>
+    <%= :params %>: <%= @sample.params %>
+  </p>
+
+  <p>
+    <%= :priority %>: <%= @sample.priority %>
+  </p>
+  <p>
+    <%= :powd %>: <%= @sample.powd ? 'yes' : 'no' %>
+  </p>
+  <p>
+    <%= :chiral %>: <%= @sample.chiral ? 'yes' : 'no' %>
+  </p>
+  <p>
+    <%= :cost_code %>: <%= @sample.cost_code %>
+  </p>
+
+  <p>
+    <%= :comments %>: <%= @sample.comments %>
+  </p>
+

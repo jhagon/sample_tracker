@@ -252,7 +252,7 @@ label {
   height: 20em;
   border: solid 1px;
   background-color: #eee;
-  margin-right:1em;
+  margin:1em;
 }
 
 .box label {
@@ -262,11 +262,12 @@ label {
 .rbox {
   float: right;
   font-size:75%;
-  width: 20em;
   height: 20em;
+  width: auto;
   border: solid 1px;
   background-color: #eee;
-  margin:1em;
+  padding: 1em;
+  margin: 0 0 0 5px;
 }
 
 .lbox label {
@@ -297,8 +298,22 @@ label {
   padding: 1em;
 }
 
+.boxadminnf {
+  float: none;
+  border: solid 1px;
+  background-color: #eee;
+  padding: 1em;
+}
+
+
 p.boxed {
   border: solid 1px;
   background-color: #eee;
   color: blue;
+}
+
+.highlight {
+  font-weight:bold;
+  color:white;
+  background-color:black;
 }

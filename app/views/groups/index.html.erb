@@ -1,17 +1,32 @@
 <% title "Groups" %>
 
-<table>
+<table class="pretty">
   <tr>
     <th>Group Abbr</th>
     <th>Group Desc</th>
+    <th></th>
+    <th></th>
+    <th></th>
   </tr>
   <% for group in @groups %>
     <tr class="<%= cycle :odd, :even %>">
       <td><%= group.group_abbr %></td>
       <td><%= group.group_desc %></td>
-      <td><%= link_to "Show", group %></td>
-      <td><%= link_to "Edit", edit_group_path(group) %></td>
-      <td><%= link_to "Destroy", group, :confirm => 'Are you sure?', :method => :delete %></td>
+      <td><%= link_to image_tag("/images/show.gif",
+              :title => "Show",
+              :alt   => "Show"),
+            group %></td>
+      <td><%= link_to image_tag("/images/edit.gif",
+              :title => "Edit",
+              :alt   => "Edit"),
+            edit_group_path(group) %></td>
+      <td><%= link_to image_tag("/images/delete.gif",
+              :title => "Delete",
+              :alt   => "Delete"),
+            group,
+            :confirm => 'Are you sure?',
+            :method => :delete %></td>
+
     </tr>
   <% end %>
 </table>

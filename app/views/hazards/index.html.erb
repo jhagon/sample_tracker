@@ -1,17 +1,32 @@
 <% title "Hazards" %>
 
-<table>
+<table class="pretty">
   <tr>
     <th>Hazard Desc</th>
     <th>Hazard Abbr</th>
+    <th>  </th>
+    <th>  </th>
+    <th>  </th>
   </tr>
   <% for hazard in @hazards %>
     <tr class="<%= cycle :odd, :even %>">
       <td><%= hazard.hazard_desc %></td>
       <td><%= hazard.hazard_abbr %></td>
-      <td><%= link_to "Show", hazard %></td>
-      <td><%= link_to "Edit", edit_hazard_path(hazard) %></td>
-      <td><%= link_to "Destroy", hazard, :confirm => 'Are you sure?', :method => :delete %></td>
+      <td><%= link_to image_tag("/images/show.gif",
+              :title => "Show",
+              :alt   => "Show"),
+            hazard %></td>
+      <td><%= link_to image_tag("/images/edit.gif",
+              :title => "Edit",
+              :alt   => "Edit"),
+            edit_hazard_path(hazard) %></td>
+      <td><%= link_to image_tag("/images/delete.gif",
+              :title => "Delete",
+              :alt   => "Delete"),
+            hazard,
+            :confirm => 'Are you sure?',
+            :method => :delete %></td>
+
     </tr>
   <% end %>
 </table>

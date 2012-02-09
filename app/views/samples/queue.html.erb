@@ -18,7 +18,7 @@ number is lower for multiple samples submitted on the same day.
     <th>Wait Time</th>
   </tr>
   <% page_num = params[:page].to_i > 0 ? params[:page].to_i : 1 %>
-  <% days =  1 + (page_num - 1) * 5%>
+  <% days =  1 + (page_num - 1) * ITEMS_PER_PAGE%>
   <% for sample in @samples %>
     <tr class="<%= cycle :odd, :even %>">
       <td><%= sample.code %></td>

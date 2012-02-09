@@ -1,19 +1,34 @@
 <% title "Pages" %>
 
-<table>
+<table class="pretty">
   <tr>
     <th>Name</th>
     <th>Permalink</th>
     <th>Content</th>
+    <th></th>
+    <th></th>
+    <th></th>
   </tr>
   <% for page in @pages %>
     <tr class="<%= cycle :odd, :even %>">
       <td><%= page.name %></td>
       <td><%= page.permalink %></td>
       <td><%= truncate(page.content, :length => 80) %></td>
-      <td><%= link_to "Show", page %></td>
-      <td><%= link_to "Edit", edit_page_path(page) %></td>
-      <td><%= link_to "Destroy", page, :confirm => 'Are you sure?', :method => :delete %></td>
+      <td><%= link_to image_tag("/images/show.gif",
+              :title => "Show",
+              :alt   => "Show"),
+            page %></td>
+      <td><%= link_to image_tag("/images/edit.gif",
+              :title => "Edit",
+              :alt   => "Edit"),
+            edit_page_path(page) %></td>
+      <td><%= link_to image_tag("/images/delete.gif",
+              :title => "Delete",
+              :alt   => "Delete"),
+            page,
+            :confirm => 'Are you sure?',
+            :method => :delete %></td>
+
     </tr>
   <% end %>
 </table>

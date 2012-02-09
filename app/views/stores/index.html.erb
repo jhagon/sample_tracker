@@ -1,17 +1,32 @@
 <% title "Stores" %>
 
-<table>
+<table class="pretty">
   <tr>
     <th>Name</th>
     <th>Description</th>
+    <th></th>
+    <th></th>
+    <th></th>
   </tr>
   <% for store in @stores %>
     <tr class="<%= cycle :odd, :even %>">
       <td><%= store.name %></td>
       <td><%= store.description %></td>
-      <td><%= link_to "Show", store %></td>
-      <td><%= link_to "Edit", edit_store_path(store) %></td>
-      <td><%= link_to "Destroy", store, :confirm => 'Are you sure?', :method => :delete %></td>
+      <td><%= link_to image_tag("/images/show.gif",
+              :title => "Show",
+              :alt   => "Show"),
+            store %></td>
+      <td><%= link_to image_tag("/images/edit.gif",
+              :title => "Edit",
+              :alt   => "Edit"),
+            edit_store_path(store) %></td>
+      <td><%= link_to image_tag("/images/delete.gif",
+              :title => "Delete",
+              :alt   => "Delete"),
+            store,
+            :confirm => 'Are you sure?',
+            :method => :delete %></td>
+
     </tr>
   <% end %>
 </table>
