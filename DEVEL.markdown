@@ -3428,12 +3428,21 @@ Further View Refinements
 Replaced the sample and User listing links with icons and also added
 some popup titles on some of the column headers where appropriate.
 Added some styling to the sample form. 
-
-TODO: Further Styling
-=====================
-When time permits, style the admin forms and improve the look of the
+Also styled the admin forms and improved the look of the
 HTML version of the sample display.
 
+Solved Problem with 'Delete' Operation in IE9
+=============================================
+Simple solution in the end --- solved by leaving all the devise stuff 
+alone and simply adding an extra line in the `devise_scope :user` block in 
+the `config/routes.rb` file:
+```
+  devise_scope :user do
+    get '/login' => 'devise/sessions#new'
+    get '/logout' => 'devise/sessions#destroy'
+    get '/users/sign_out' => 'devise/sessions#destroy'
+  end
+```
 
 TODO: Generating Sample Data
 ============================

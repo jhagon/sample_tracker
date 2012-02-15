@@ -12,6 +12,7 @@ SampleTracker::Application.routes.draw do
   devise_scope :user do
     get '/login' => 'devise/sessions#new'
     get '/logout' => 'devise/sessions#destroy'
+    get '/users/sign_out' => 'devise/sessions#destroy'
   end
 
   resources :user, :controller => "user"
