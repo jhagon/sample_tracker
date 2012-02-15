@@ -91,7 +91,7 @@ end
       end 
     end
     if ( found_other && ( comments =~ /^\s*$/ || comments.nil?) )
-      errors.add('', "you have specified  'other' for either samples or storage - please give details in the comments box")
+      errors.add('', "you have specified  'other' for either sensitivity or storage - please give details in the comments box")
     end
   end
 

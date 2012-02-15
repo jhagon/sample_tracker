@@ -58,7 +58,7 @@ class SamplesController < ApplicationController
      @samples=Sample.page(params[:page]).per_page(ITEMS_PER_PAGE).find( :all,
        :joins => [:flag],
        :order => "created_at ASC",
-       :conditions => [" flags.id = samples.flag_id AND flags.name = 'SUBMITTED'"])
+       :conditions => [" flags.id = samples.flag_id AND flags.name NOT LIKE '%%FAILED%%' AND flags.name NOT LIKE '%%COMPLETED%%' AND flags.name NOT LIKE '%%WITHDRAWN%%'"])
 
   end
 

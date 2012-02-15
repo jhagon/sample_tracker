@@ -3444,6 +3444,60 @@ the `config/routes.rb` file:
   end
 ```
 
+Sample Introductory Text
+========================
+The introductory text at the top of the sample form is now editable via
+a global variable stored in the `SPECIFIC GLOBAL VARS` section of
+`config/environment.rb`:
+
+```
+SAMPLE_INTRO_TEXT = "a unique code and a barcode will be
+automatically generated on submission of this form when a new sample
+is created. For synthetic route files, please use either the JPG or PNG
+bitmap image format.
+Note further that for security reasons, if there are validation errors
+in the form, you will have to re-select the names of uploaded files.
+Also remeber to set the priority number, the form will not validate unless
+you do this (if you are not going to submit several samples in a short
+space of time we suggest setting the priority number to 1)."
+```
+
+Some Extra Sample Fields
+========================
+Added 3 simple text fields to the sample model: colour, size and shape.
+These can be modified only by administrators but viewed by users.
+
+Sample Queue Criteria
+=====================
+Samples appear in the queue unless their status flag is one of the
+following:
+
+* COMPLETED
+* WITHDRAWN
+* FAILED*
+
+the latter meaning any ststus flag that begins with the string `FAILED`.
+To do this, the `queue` action in the samples controller was changed to:
+
+```
+  def queue
+     @samples=Sample.page(params[:page]).per_page(ITEMS_PER_PAGE).find( :all,
+       :joins => [:flag],
+       :order => "created_at ASC",
+       :conditions => [" flags.id = samples.flag_id AND flags.name NOT LIKE '%%FAILED%%' AND flags.name NOT LIKE '%%COMPLETED%%' AND flags.name NOT LIKE '%%WITHDRAWN%%'"])
+```
+
+Note the double percent signs - need to do this because rails uses printf
+internally and % on its own is a special character - so escape it with
+two % signs.
+
+Because the queue now contains samples which can have different status flags
+(not just `SUBMITTED`, we add the status of the sample to the list:
+
+```
+      <td><%= sample.flag.name %></td>
+```
+
 TODO: Generating Sample Data
 ============================
 Use Faker to generate a large number of users and samples so that we can
