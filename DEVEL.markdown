@@ -3508,6 +3508,18 @@ the user to sign in. This was easily accomplished by editing the
   before_filter :authenticate_user!, :except => :queue
 ```
 
+Can now add the queue to the main menu by creating a queue page using the
+page model. the page itself contains the following code:
+
+```
+<meta HTTP-EQUIV="REFRESH" content="0; url=http://localhost:3000/samples/queue/2">
+You should shortly be directed to the sample queue. If this does not happen, please "click here":http://localhost:3000/samples/queue/2.
+```
+
+Note that we can put HTML in the page and it will be interpreted.
+The page does a redirect to the samples queue. If that fails it falls back
+to a simple link.
+
 TODO: Generating Sample Data
 ============================
 Use Faker to generate a large number of users and samples so that we can
