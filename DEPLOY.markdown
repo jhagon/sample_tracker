@@ -62,8 +62,26 @@ Add this line to config/environments/production.rb:
   # standard mailer setup
   config.action_mailer.delivery_method = :sendmail
 ```
-Finally, need to initialize the production database:
+
+Database Migration
+==================
+
+To initialize a brand new production database:
 
 ```
 rake db:setup RAILS_ENV="production"
 ```
+
+To apply migrations to a production database:
+
+```
+export RAILS_ENV=production
+rake db:migrate
+```
+
+May need (for completeness) to add humanized references to new fields in sample model file.
+
+NOW SOMETHING VERY IMPORTANT!!!
+===============================
+
+Remember to always save not only the database, but the public folder as well in the production database because this contains sample images and other files.
