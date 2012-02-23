@@ -3498,6 +3498,16 @@ Because the queue now contains samples which can have different status flags
       <td><%= sample.flag.name %></td>
 ```
 
+Removing Authentication for Queue Display
+=========================================
+It was decided that the queue should be displayable without requiring
+the user to sign in. This was easily accomplished by editing the
+`before_filter` line in the samples controller:
+
+```
+  before_filter :authenticate_user!, :except => :queue
+```
+
 TODO: Generating Sample Data
 ============================
 Use Faker to generate a large number of users and samples so that we can

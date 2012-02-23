@@ -1,7 +1,7 @@
 class SamplesController < ApplicationController
   helper_method :sort_column, :sort_direction
 
-  before_filter :authenticate_user!
+  before_filter :authenticate_user!, :except => :queue
   before_filter :must_be_creator_or_leader_or_admin, 
     :only => [:show]
   before_filter :admin_required, :only => [:index, :findbarcode, :edit, :update, :destroy]
