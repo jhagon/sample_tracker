@@ -2,4 +2,10 @@
 
 <%= render 'form' %>
 
-<p><%= link_to "Back to List", pages_path %></p>
+
+<p>
+  <%= link_to "View All", pages_path %> |
+  <%= link_to "Textile Reference Manual", TEXTILE_REF_URL, :target => 'blank'%> |
+  <%= link_to "Textile Quick Reference", TEXTILE_QUICK_REF_URL, :target => 'blank'%>
+</p>
+
