@@ -1,6 +1,9 @@
 <% title "Sample #{@sample.code}" %>
 <p>
 <%= link_to "Show as PDF", "#{sample_path(@sample)}.pdf" %>
+<% if current_user.admin? %>
+| <%= link_to "Edit Sample", "#{edit_sample_path(@sample)}" %>
+<% end %>
 </p>
 
   <div class="boxadmin">
@@ -72,7 +75,6 @@
     not yet available
   <% end %>
   </p>
-
 
   </div>
 
