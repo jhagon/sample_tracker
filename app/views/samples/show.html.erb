@@ -1,6 +1,6 @@
 <% title "Sample #{@sample.code}" %>
 <p>
-<%= link_to "Show as PDF", "#{sample_path(@sample)}.pdf" %>
+<%= link_to "Show PDF Receipt", "#{sample_path(@sample)}.pdf" %>
 <% if current_user.admin? %>
 | <%= link_to "Edit Sample", "#{edit_sample_path(@sample)}" %>
 <% end %>
@@ -87,14 +87,27 @@
   </p>
 
   <p>
-    <%= :synth %>: <%= @sample.synth %><br />
   <%= link_to   image_tag( @sample.synth_url(:thumb).to_s,
-                :title => "Click for full size view in new window or tab.",
-                :alt => "Click for full size view in new window or tab."),
+                :title => "Synthetic Route: Click for full size view in new window or tab.",
+                :alt => "Synthetic Route: Click for full size view in new window or tab."),
                 @sample.synth_url.to_s,
                 :target => "_blank"  %>
 
   </p>
+
+  <% if @sample.sampleimage? %>
+
+  <p>
+  <%= link_to   image_tag( @sample.sampleimage_url(:thumb).to_s,
+                :title => "Sample Image: Click for full size view in new window or tab.",
+                :alt => "Sample Image: Click for full size view in new window or tab."),
+                @sample.sampleimage_url.to_s,
+                :target => "_blank"  %>
+
+  </p>
+
+  <% end %>
+
 
   <div style="clear:right;display:block;">
 
