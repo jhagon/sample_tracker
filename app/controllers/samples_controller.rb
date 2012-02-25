@@ -67,12 +67,17 @@ class SamplesController < ApplicationController
   end
 
   def index
+
+  unless params['search_field']
+    params['search_field'] = 'code'
+  end
+  
   #   @samples=Sample.all( :joins => [:flag, {:user => :group}], 
   #                        :order => "#{sort_column} #{sort_direction}")
-      @samples=Sample.page(params[:page]).per_page(ITEMS_PER_PAGE).find( :all,
-        :joins => [:flag, {:user => :group}],                  
-        :order => "#{sort_column} #{sort_direction}",
-        :conditions => ['code LIKE ?', "%#{params[:search]}%"])
+  @samples=Sample.page(params[:page]).per_page(ITEMS_PER_PAGE).find( :all,
+    :joins => [:flag, {:user => :group}],                  
+    :order => "#{sort_column} #{sort_direction}",
+    :conditions => ["#{params['search_field']} LIKE ?", "%#{params[:search]}%"])
   end
 
   def groupindex

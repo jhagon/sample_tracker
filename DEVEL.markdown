@@ -3520,6 +3520,66 @@ Note that we can put HTML in the page and it will be interpreted.
 The page does a redirect to the samples queue. If that fails it falls back
 to a simple link.
 
+Additions to Sample Show/Edit Views
+===================================
+The sampleimage thumbnail (with link to full resolution image is now
+displayed on the show page if available. Some minor edits to links.
+Also added an edit link to the show page for administrators.
+Also, updates to colour, size and shape didn't register because I forgot to
+make the attributes accessible. This was quickly fixed in the model.
+
+Improvements to Sample Searching
+================================
+Added the facility to search either by code or user reference. This required
+first an edit to the `samples.index.html.erb` view:
+
+```
+<% if params[:search_field] == 'code' %>
+  <% code_selected = 'selected' %>
+  <% userref_selected = '' %>
+<% else %>
+  <% code_selected = '' %>
+  <% userref_selected = 'selected' %>
+<% end %>
+  <p>
+    <%= text_field_tag :search, params[:search] %> Search By:
+    <%= select_tag "search_field", "<option #{code_selected} value=\"#{:code}\">Sample Code</option><option #{userref_selected} value=\"#{:userref}\">User Reference</option>".html_safe %>
+    <%= submit_tag "Search", :name => nil %>
+  </p>
+
+<% end %>
+  <form method="link" action="/samples"><input type="submit" value="Reset Search"></form>
+```
+
+Then, the controller index action was changed:
+
+```
+  def index
+
+  unless params['search_field']
+    params['search_field'] = 'code'
+  end
+
+  #   @samples=Sample.all( :joins => [:flag, {:user => :group}], 
+  #                        :order => "#{sort_column} #{sort_direction}")
+  @samples=Sample.page(params[:page]).per_page(ITEMS_PER_PAGE).find( :all,
+    :joins => [:flag, {:user => :group}],
+    :order => "#{sort_column} #{sort_direction}",
+    :conditions => ["#{params['search_field']} LIKE ?", "%#{params[:search]}%"])
+  end
+```
+
+A new parameter called `search_field` was added and selected via a 
+`select_tag` call in the view file. Also, in the view file was some
+code (which should probably go elsewhere) which auto-selected the 'code'
+field in the select list if the `search_field` parameter was equal to
+'code', which it will be whenever the samples button on the menu is pressed.
+Else, the 'userref' field is pre-selected. the code is a bit clunky and
+there are probably more elegant ways to do it, but it seems to work.
+Finally a reset button was added to clear the search form --- in fact this
+button is just another form which links to the samples index URL and so
+effectively starts a new search.
+
 TODO: Generating Sample Data
 ============================
 Use Faker to generate a large number of users and samples so that we can
