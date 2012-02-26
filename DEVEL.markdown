@@ -3580,6 +3580,42 @@ Finally a reset button was added to clear the search form --- in fact this
 button is just another form which links to the samples index URL and so
 effectively starts a new search.
 
+Adding Group Leaders to EMails
+==============================
+This was done by adding the following code to the `app/mailers/sample_mailer.rb`
+file:
+
+```
+  def sample_receipt(sample)
+
+  # First, create cc list. This will be all group leaders.
+  #
+
+  group_leaders = User.where("group_id = ?", sample.user.group_id).where(:leader => true)
+
+  # if sample user is a group leader, remove him from cc list.
+
+  group_leaders = group_leaders.where("id <> ?", sample.user.id)
+
+  # now create cc list from group leader emails.
+  # need to produce a simple array of emails for the argument to cc.
+  # do this with map (also known as collect):
+
+  cclist = group_leaders.map {|x| x.email}
+
+    @sample = sample
+    @greeting = "Hello"
+    mail(:to => "#{sample.user.firstname} #{sample.user.lastname} <#{sample.user.email}>", :cc => cclist, :subject => "Crystallography Service: New Sample Submission Acknowledgement")
+  end
+```
+
+The above code is for the sample receipt email method. The sample update method
+is almost identical. Note that group leaders are added via a cc list and
+that a group leader cc is omitted if the submitter is a group leader, thus
+avoiding sending two emails to the same user.
+There were some minor changes made to the email views to reflect the fact
+that group leaders also receive emails.
+
 TODO: Generating Sample Data
 ============================
 Use Faker to generate a large number of users and samples so that we can

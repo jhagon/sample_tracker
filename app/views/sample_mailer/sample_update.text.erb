@@ -1,7 +1,9 @@
-Dear <%="#{@sample.user.firstname} #{@sample.user.lastname}"%>
+Dear User
 
-This is to inform you that the status for your sample
-<%=@sample.code%> (your ref <%=@sample.userref%>) has changed as follows:
+This is to inform you that the status of sample
+<%=@sample.code%> (your ref <%=@sample.userref%>) submitted by
+<%="#{@sample.user.firstname} #{@sample.user.lastname}"%> 
+has changed as follows:
 
 <%="New Status: #{@sample.flag.name} (#{@sample.flag.description}"%>
 
@@ -9,5 +11,8 @@ This is to inform you that the status for your sample
 
 <%= link_to "Link to Full Sample Information", "#{sample_url(@sample, 
              :host => MAIL_HOST)}" %>
+
+Copies of this email are sent to both sample submitters and their
+research group leaders (where different).
 
 Newcastle Crystallography Service

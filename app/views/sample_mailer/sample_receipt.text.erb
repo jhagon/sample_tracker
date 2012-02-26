@@ -1,6 +1,7 @@
-Dear <%="#{@sample.user.firstname} #{@sample.user.lastname}"%>
+Dear User
 
 New Sample Submission Code: <%=@sample.code%> (your ref <%=@sample.userref%>)
+Submitted By: <%="#{@sample.user.firstname} #{@sample.user.lastname}"%>
 
 
 your sample analysis request has been received. Please download a
@@ -13,5 +14,8 @@ You will be informed via email of any
 changes in the status of your sample.
 
 <%= "#{sample_path(@sample, :host => MAIL_HOST)}.pdf" %>
+
+Copies of this email are sent to both sample submitters and their
+research group leaders (where different).
 
 Newcastle Crystallography Service
