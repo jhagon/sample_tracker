@@ -1,0 +1,1290 @@
+This is pdfTeX, Version 3.1415926-1.40.10 (TeX Live 2009/Debian) (format=pdflatex 2011.4.5)  26 FEB 2012 17:31
+entering extended mode
+ %&-line parsing enabled.
+**admin_guide.tex
+(./admin_guide.tex
+LaTeX2e <2009/09/24>
+Babel <v3.8l> and hyphenation patterns for english, usenglishmax, dumylang, noh
+yphenation, farsi, arabic, croatian, bulgarian, ukrainian, russian, czech, slov
+ak, danish, dutch, finnish, french, basque, ngerman, german, german-x-2009-06-1
+9, ngerman-x-2009-06-19, ibycus, monogreek, greek, ancientgreek, hungarian, san
+skrit, italian, latin, latvian, lithuanian, mongolian2a, mongolian, bokmal, nyn
+orsk, romanian, irish, coptic, serbian, turkish, welsh, esperanto, uppersorbian
+, estonian, indonesian, interlingua, icelandic, kurmanji, slovenian, polish, po
+rtuguese, spanish, galician, catalan, swedish, ukenglish, pinyin, loaded.
+(/usr/share/texmf-texlive/tex/latex/base/article.cls
+Document Class: article 2007/10/19 v1.4h Standard LaTeX document class
+(/usr/share/texmf-texlive/tex/latex/base/size12.clo
+File: size12.clo 2007/10/19 v1.4h Standard LaTeX file (size option)
+)
+\c@part=\count79
+\c@section=\count80
+\c@subsection=\count81
+\c@subsubsection=\count82
+\c@paragraph=\count83
+\c@subparagraph=\count84
+\c@figure=\count85
+\c@table=\count86
+\abovecaptionskip=\skip41
+\belowcaptionskip=\skip42
+\bibindent=\dimen102
+)
+(/usr/share/texmf-texlive/tex/latex/geometry/geometry.sty
+Package: geometry 2008/12/21 v4.2 Page Geometry
+
+(/usr/share/texmf-texlive/tex/latex/graphics/keyval.sty
+Package: keyval 1999/03/16 v1.13 key=value parser (DPC)
+\KV@toks@=\toks14
+)
+(/usr/share/texmf-texlive/tex/generic/oberdiek/ifpdf.sty
+Package: ifpdf 2009/04/10 v2.0 Provides the ifpdf switch (HO)
+Package ifpdf Info: pdfTeX in pdf mode detected.
+)
+(/usr/share/texmf-texlive/tex/generic/oberdiek/ifvtex.sty
+Package: ifvtex 2008/11/04 v1.4 Switches for detecting VTeX and its modes (HO)
+Package ifvtex Info: VTeX not detected.
+)
+\Gm@cnth=\count87
+\Gm@cntv=\count88
+\c@Gm@tempcnt=\count89
+\Gm@bindingoffset=\dimen103
+\Gm@wd@mp=\dimen104
+\Gm@odd@mp=\dimen105
+\Gm@even@mp=\dimen106
+\Gm@dimlist=\toks15
+
+(/usr/share/texmf-texlive/tex/xelatex/xetexconfig/geometry.cfg))
+(/usr/share/texmf-texlive/tex/latex/base/fontenc.sty
+Package: fontenc 2005/09/27 v1.99g Standard LaTeX package
+
+(/usr/share/texmf-texlive/tex/latex/base/t1enc.def
+File: t1enc.def 2005/09/27 v1.99g Standard LaTeX file
+LaTeX Font Info:    Redeclaring font encoding T1 on input line 43.
+))
+(/usr/share/texmf-texlive/tex/latex/psnfss/times.sty
+Package: times 2005/04/12 PSNFSS-v9.2a (SPQR) 
+)
+(/usr/share/texmf-texlive/tex/latex/psnfss/helvet.sty
+Package: helvet 2005/04/12 PSNFSS-v9.2a (WaS) 
+)
+(/usr/local/share/texmf/tex/latex/mtpro2/mtpro2.sty
+Package: mtpro2 2006/05/03 v1.1 MathTimePro II font support (PCTeX/WaS)
+LaTeX Font Info:    Try loading font information for T1+ptm on input line 79.
+
+(/usr/share/texmf-texlive/tex/latex/psnfss/t1ptm.fd
+File: t1ptm.fd 2001/06/04 font definitions for T1/ptm.
+)
+\c@mv@heavy=\count90
+LaTeX Font Info:    Redeclaring symbol font `operators' on input line 103.
+LaTeX Font Info:    Encoding `OT1' has changed to `T1' for symbol font
+(Font)              `operators' in the math version `normal' on input line 103.
+
+LaTeX Font Info:    Overwriting symbol font `operators' in version `normal'
+(Font)                  OT1/cmr/m/n --> T1/ptm/m/n on input line 103.
+LaTeX Font Info:    Encoding `OT1' has changed to `T1' for symbol font
+(Font)              `operators' in the math version `bold' on input line 103.
+LaTeX Font Info:    Overwriting symbol font `operators' in version `bold'
+(Font)                  OT1/cmr/bx/n --> T1/ptm/m/n on input line 103.
+LaTeX Font Info:    Encoding `OT1' has changed to `T1' for symbol font
+(Font)              `operators' in the math version `heavy' on input line 103.
+LaTeX Font Info:    Overwriting symbol font `operators' in version `heavy'
+(Font)                  OT1/cmr/m/n --> T1/ptm/m/n on input line 103.
+LaTeX Font Info:    Redeclaring symbol font `letters' on input line 104.
+LaTeX Font Info:    Encoding `OML' has changed to `LMP1' for symbol font
+(Font)              `letters' in the math version `normal' on input line 104.
+LaTeX Font Info:    Overwriting symbol font `letters' in version `normal'
+(Font)                  OML/cmm/m/it --> LMP1/mtt/m/it on input line 104.
+LaTeX Font Info:    Encoding `OML' has changed to `LMP1' for symbol font
+(Font)              `letters' in the math version `bold' on input line 104.
+LaTeX Font Info:    Overwriting symbol font `letters' in version `bold'
+(Font)                  OML/cmm/b/it --> LMP1/mtt/m/it on input line 104.
+LaTeX Font Info:    Encoding `OML' has changed to `LMP1' for symbol font
+(Font)              `letters' in the math version `heavy' on input line 104.
+LaTeX Font Info:    Overwriting symbol font `letters' in version `heavy'
+(Font)                  OML/cmm/m/it --> LMP1/mtt/m/it on input line 104.
+LaTeX Font Info:    Redeclaring symbol font `symbols' on input line 105.
+LaTeX Font Info:    Encoding `OMS' has changed to `LMP2' for symbol font
+(Font)              `symbols' in the math version `normal' on input line 105.
+LaTeX Font Info:    Overwriting symbol font `symbols' in version `normal'
+(Font)                  OMS/cmsy/m/n --> LMP2/mtt/m/n on input line 105.
+LaTeX Font Info:    Encoding `OMS' has changed to `LMP2' for symbol font
+(Font)              `symbols' in the math version `bold' on input line 105.
+LaTeX Font Info:    Overwriting symbol font `symbols' in version `bold'
+(Font)                  OMS/cmsy/b/n --> LMP2/mtt/m/n on input line 105.
+LaTeX Font Info:    Encoding `OMS' has changed to `LMP2' for symbol font
+(Font)              `symbols' in the math version `heavy' on input line 105.
+LaTeX Font Info:    Overwriting symbol font `symbols' in version `heavy'
+(Font)                  OMS/cmsy/m/n --> LMP2/mtt/m/n on input line 105.
+LaTeX Font Info:    Redeclaring symbol font `largesymbols' on input line 106.
+LaTeX Font Info:    Encoding `OMX' has changed to `LMP3' for symbol font
+(Font)              `largesymbols' in the math version `normal' on input line 1
+06.
+LaTeX Font Info:    Overwriting symbol font `largesymbols' in version `normal'
+(Font)                  OMX/cmex/m/n --> LMP3/mtt/m/n on input line 106.
+LaTeX Font Info:    Encoding `OMX' has changed to `LMP3' for symbol font
+(Font)              `largesymbols' in the math version `bold' on input line 106
+.
+LaTeX Font Info:    Overwriting symbol font `largesymbols' in version `bold'
+(Font)                  OMX/cmex/m/n --> LMP3/mtt/m/n on input line 106.
+LaTeX Font Info:    Encoding `OMX' has changed to `LMP3' for symbol font
+(Font)              `largesymbols' in the math version `heavy' on input line 10
+6.
+LaTeX Font Info:    Overwriting symbol font `largesymbols' in version `heavy'
+(Font)                  OMX/cmex/m/n --> LMP3/mtt/m/n on input line 106.
+LaTeX Font Info:    Overwriting symbol font `operators' in version `bold'
+(Font)                  T1/ptm/m/n --> T1/ptm/b/n on input line 108.
+LaTeX Font Info:    Overwriting symbol font `letters' in version `bold'
+(Font)                  LMP1/mtt/m/it --> LMP1/mtt/b/it on input line 109.
+LaTeX Font Info:    Overwriting symbol font `symbols' in version `bold'
+(Font)                  LMP2/mtt/m/n --> LMP2/mtt/b/n on input line 110.
+LaTeX Font Info:    Overwriting symbol font `largesymbols' in version `bold'
+(Font)                  LMP3/mtt/m/n --> LMP3/mtt/b/n on input line 111.
+LaTeX Font Info:    Overwriting symbol font `symbols' in version `heavy'
+(Font)                  LMP2/mtt/m/n --> LMP2/mtt/eb/n on input line 112.
+LaTeX Font Info:    Overwriting symbol font `largesymbols' in version `heavy'
+(Font)                  LMP3/mtt/m/n --> LMP3/mtt/eb/n on input line 113.
+\pointcount@=\count91
+LaTeX Font Info:    Redeclaring math alphabet \mathbf on input line 133.
+LaTeX Font Info:    Overwriting math alphabet `\mathbf' in version `normal'
+(Font)                  OT1/cmr/bx/n --> T1/ptm/b/n on input line 133.
+LaTeX Font Info:    Overwriting math alphabet `\mathbf' in version `bold'
+(Font)                  OT1/cmr/bx/n --> T1/ptm/b/n on input line 133.
+LaTeX Font Info:    Overwriting math alphabet `\mathbf' in version `heavy'
+(Font)                  OT1/cmr/bx/n --> T1/ptm/b/n on input line 133.
+LaTeX Font Info:    Redeclaring math alphabet \mathit on input line 134.
+LaTeX Font Info:    Overwriting math alphabet `\mathit' in version `normal'
+(Font)                  OT1/cmr/m/it --> T1/ptm/m/it on input line 134.
+LaTeX Font Info:    Overwriting math alphabet `\mathit' in version `bold'
+(Font)                  OT1/cmr/bx/it --> T1/ptm/m/it on input line 134.
+LaTeX Font Info:    Overwriting math alphabet `\mathit' in version `heavy'
+(Font)                  OT1/cmr/m/it --> T1/ptm/m/it on input line 134.
+LaTeX Font Info:    Redeclaring math alphabet \mathsf on input line 135.
+LaTeX Font Info:    Overwriting math alphabet `\mathsf' in version `normal'
+(Font)                  OT1/cmss/m/n --> T1/phv/m/n on input line 135.
+LaTeX Font Info:    Overwriting math alphabet `\mathsf' in version `bold'
+(Font)                  OT1/cmss/bx/n --> T1/phv/m/n on input line 135.
+LaTeX Font Info:    Overwriting math alphabet `\mathsf' in version `heavy'
+(Font)                  OT1/cmss/m/n --> T1/phv/m/n on input line 135.
+LaTeX Font Info:    Redeclaring math alphabet \mathtt on input line 136.
+LaTeX Font Info:    Overwriting math alphabet `\mathtt' in version `normal'
+(Font)                  OT1/cmtt/m/n --> T1/pcr/m/n on input line 136.
+LaTeX Font Info:    Overwriting math alphabet `\mathtt' in version `bold'
+(Font)                  OT1/cmtt/m/n --> T1/pcr/m/n on input line 136.
+LaTeX Font Info:    Overwriting math alphabet `\mathtt' in version `heavy'
+(Font)                  OT1/cmtt/m/n --> T1/pcr/m/n on input line 136.
+LaTeX Font Info:    Overwriting math alphabet `\mathit' in version `bold'
+(Font)                  T1/ptm/m/it --> T1/ptm/b/it on input line 137.
+LaTeX Font Info:    Overwriting math alphabet `\mathsf' in version `bold'
+(Font)                  T1/phv/m/n --> T1/phv/b/n on input line 138.
+LaTeX Font Info:    Overwriting math alphabet `\mathtt' in version `bold'
+(Font)                  T1/pcr/m/n --> T1/pcr/b/n on input line 139.
+LaTeX Font Info:    Overwriting math alphabet `\mathcal' in version `bold'
+(Font)                  OMS/cmsy/m/n --> OMS/cmsy/b/n on input line 183.
+LaTeX Font Info:    Redeclaring math symbol \imath on input line 211.
+LaTeX Font Info:    Redeclaring math symbol \jmath on input line 212.
+LaTeX Font Info:    Overwriting math alphabet `\MTPScript' in version `bold'
+(Font)                  U/mt2ms/m/it --> U/mt2ms/b/it on input line 273.
+LaTeX Font Info:    Overwriting math alphabet `\MTPFrak' in version `bold'
+(Font)                  U/mt2mf/m/n --> U/mt2mf/b/n on input line 277.
+LaTeX Font Info:    Redeclaring math symbol \alpha on input line 333.
+LaTeX Font Info:    Redeclaring math symbol \beta on input line 334.
+LaTeX Font Info:    Redeclaring math symbol \gamma on input line 335.
+LaTeX Font Info:    Redeclaring math symbol \delta on input line 336.
+LaTeX Font Info:    Redeclaring math symbol \epsilon on input line 337.
+LaTeX Font Info:    Redeclaring math symbol \zeta on input line 338.
+LaTeX Font Info:    Redeclaring math symbol \eta on input line 339.
+LaTeX Font Info:    Redeclaring math symbol \theta on input line 340.
+LaTeX Font Info:    Redeclaring math symbol \iota on input line 341.
+LaTeX Font Info:    Redeclaring math symbol \kappa on input line 342.
+LaTeX Font Info:    Redeclaring math symbol \lambda on input line 343.
+LaTeX Font Info:    Redeclaring math symbol \mu on input line 344.
+LaTeX Font Info:    Redeclaring math symbol \nu on input line 345.
+LaTeX Font Info:    Redeclaring math symbol \xi on input line 346.
+LaTeX Font Info:    Redeclaring math symbol \pi on input line 347.
+LaTeX Font Info:    Redeclaring math symbol \rho on input line 348.
+LaTeX Font Info:    Redeclaring math symbol \sigma on input line 349.
+LaTeX Font Info:    Redeclaring math symbol \tau on input line 350.
+LaTeX Font Info:    Redeclaring math symbol \upsilon on input line 351.
+LaTeX Font Info:    Redeclaring math symbol \phi on input line 352.
+LaTeX Font Info:    Redeclaring math symbol \chi on input line 353.
+LaTeX Font Info:    Redeclaring math symbol \psi on input line 354.
+LaTeX Font Info:    Redeclaring math symbol \omega on input line 355.
+LaTeX Font Info:    Redeclaring math symbol \varepsilon on input line 356.
+LaTeX Font Info:    Redeclaring math symbol \vartheta on input line 357.
+LaTeX Font Info:    Redeclaring math symbol \varpi on input line 358.
+LaTeX Font Info:    Redeclaring math symbol \varrho on input line 359.
+LaTeX Font Info:    Redeclaring math symbol \varsigma on input line 360.
+LaTeX Font Info:    Redeclaring math symbol \varphi on input line 361.
+LaTeX Font Info:    Redeclaring math symbol \Delta on input line 386.
+LaTeX Font Info:    Redeclaring math symbol \Theta on input line 387.
+LaTeX Font Info:    Redeclaring math symbol \Lambda on input line 388.
+LaTeX Font Info:    Redeclaring math symbol \Xi on input line 389.
+LaTeX Font Info:    Redeclaring math symbol \Pi on input line 390.
+LaTeX Font Info:    Redeclaring math symbol \Sigma on input line 391.
+LaTeX Font Info:    Redeclaring math symbol \Upsilon on input line 392.
+LaTeX Font Info:    Redeclaring math symbol \Phi on input line 393.
+LaTeX Font Info:    Redeclaring math symbol \Psi on input line 394.
+LaTeX Font Info:    Redeclaring math symbol \Omega on input line 395.
+LaTeX Font Info:    Redeclaring math symbol \triangleleft on input line 440.
+LaTeX Font Info:    Redeclaring math symbol \triangleright on input line 441.
+LaTeX Font Info:    Redeclaring math symbol \ddagger on input line 442.
+LaTeX Font Info:    Redeclaring math symbol \dagger on input line 443.
+LaTeX Font Info:    Redeclaring math symbol \ldotp on input line 446.
+LaTeX Font Info:    Redeclaring math accent \vec on input line 457.
+LaTeX Font Info:    Redeclaring math accent \grave on input line 458.
+LaTeX Font Info:    Redeclaring math accent \acute on input line 459.
+LaTeX Font Info:    Redeclaring math accent \check on input line 460.
+LaTeX Font Info:    Redeclaring math accent \breve on input line 461.
+LaTeX Font Info:    Redeclaring math accent \bar on input line 462.
+LaTeX Font Info:    Redeclaring math accent \hat on input line 463.
+LaTeX Font Info:    Redeclaring math accent \dot on input line 464.
+LaTeX Font Info:    Redeclaring math accent \tilde on input line 465.
+LaTeX Font Info:    Redeclaring math accent \ddot on input line 466.
+LaTeX Font Info:    Redeclaring math accent \mathring on input line 467.
+LaTeX Font Info:    Redeclaring math symbol \braceld on input line 468.
+LaTeX Font Info:    Redeclaring math symbol \bracerd on input line 469.
+LaTeX Font Info:    Redeclaring math symbol \bracelu on input line 470.
+LaTeX Font Info:    Redeclaring math symbol \braceru on input line 471.
+LaTeX Font Info:    Redeclaring math symbol \mathparagraph on input line 472.
+LaTeX Font Info:    Redeclaring math symbol \mathsection on input line 473.
+LaTeX Font Info:    Redeclaring math symbol \hbar on input line 517.
+\prePbox@=\box26
+\Pbox@=\box27
+\LRbox@=\box28
+\HATbox@=\box29
+\TDbox@=\box30
+\CHbox@=\box31
+\preSbox@=\box32
+\Sbox@=\box33
+\SQcount@=\count92
+\SQRTbox@=\box34
+\UPROOT@=\count93
+\LEFTROOT@=\count94
+\limtype@=\count95
+\xlfont@=\count96
+\xlposition@=\count97
+\xlposition@ii=\count98
+\optype@=\count99
+\x@count=\count100
+\maxXLscripts@=\dimen107
+\symAMSa=\mathgroup4
+LaTeX Font Info:    Overwriting symbol font `AMSa' in version `bold'
+(Font)                  U/mt2sya/m/n --> U/mt2sya/b/n on input line 1247.
+LaTeX Font Info:    Overwriting symbol font `AMSa' in version `heavy'
+(Font)                  U/mt2sya/m/n --> U/mt2sya/eb/n on input line 1248.
+LaTeX Font Info:    Redeclaring math symbol \npreceq on input line 1415.
+LaTeX Font Info:    Redeclaring math symbol \nsucceq on input line 1416.
+LaTeX Font Info:    Redeclaring math symbol \nsubseteq on input line 1442.
+LaTeX Font Info:    Redeclaring math symbol \nsupseteq on input line 1443.
+LaTeX Font Info:    Redeclaring math symbol \mathsterling on input line 1554.
+)
+(/usr/share/texmf-texlive/tex/latex/titlesec/titlesec.sty
+Package: titlesec 2007/08/12 v2.8 Sectioning titles
+\ttl@box=\box35
+\beforetitleunit=\skip43
+\aftertitleunit=\skip44
+\ttl@plus=\dimen108
+\ttl@minus=\dimen109
+\ttl@toksa=\toks16
+\titlewidth=\dimen110
+\titlewidthlast=\dimen111
+\titlewidthfirst=\dimen112
+)
+(/usr/local/share/texmf/tex/latex/caption/caption.sty
+Package: caption 2008/08/24 v3.1j Customizing captions (AR)
+
+(/usr/local/share/texmf/tex/latex/caption/caption3.sty
+Package: caption3 2008/08/24 v3.1j caption3 kernel (AR)
+\captionmargin=\dimen113
+\captionmargin@=\dimen114
+\captionwidth=\dimen115
+\caption@indent=\dimen116
+\caption@parindent=\dimen117
+\caption@hangindent=\dimen118
+)
+\c@ContinuedFloat=\count101
+)
+(/usr/share/texmf-texlive/tex/latex/fancybox/fancybox.sty
+Package: fancybox 2000/09/19 1.3
+
+Style option: `fancybox' v1.3 <2000/09/19> (tvz)
+\@fancybox=\box36
+\shadowsize=\dimen119
+\@Sbox=\box37
+\do@VerbBox=\toks17
+\the@fancyput=\toks18
+\this@fancyput=\toks19
+\EndVerbatimTokens=\toks20
+\Verbatim@Outfile=\write3
+\Verbatim@Infile=\read1
+) (/usr/share/texmf-texlive/tex/latex/fancyhdr/fancyhdr.sty
+\fancy@headwidth=\skip45
+\f@ncyO@elh=\skip46
+\f@ncyO@erh=\skip47
+\f@ncyO@olh=\skip48
+\f@ncyO@orh=\skip49
+\f@ncyO@elf=\skip50
+\f@ncyO@erf=\skip51
+\f@ncyO@olf=\skip52
+\f@ncyO@orf=\skip53
+)
+(/usr/share/texmf-texlive/tex/latex/rotating/rotating.sty
+Package: rotating 2009/03/28 v2.16a rotated objects in LaTeX
+
+(/usr/share/texmf-texlive/tex/latex/graphics/graphicx.sty
+Package: graphicx 1999/02/16 v1.0f Enhanced LaTeX Graphics (DPC,SPQR)
+
+(/usr/share/texmf-texlive/tex/latex/graphics/graphics.sty
+Package: graphics 2009/02/05 v1.0o Standard LaTeX Graphics (DPC,SPQR)
+
+(/usr/share/texmf-texlive/tex/latex/graphics/trig.sty
+Package: trig 1999/03/16 v1.09 sin cos tan (DPC)
+)
+(/etc/texmf/tex/latex/config/graphics.cfg
+File: graphics.cfg 2009/08/28 v1.8 graphics configuration of TeX Live
+)
+Package graphics Info: Driver file: pdftex.def on input line 91.
+
+(/usr/share/texmf-texlive/tex/latex/pdftex-def/pdftex.def
+File: pdftex.def 2009/08/25 v0.04m Graphics/color for pdfTeX
+\Gread@gobject=\count102
+))
+\Gin@req@height=\dimen120
+\Gin@req@width=\dimen121
+)
+(/usr/share/texmf-texlive/tex/latex/base/ifthen.sty
+Package: ifthen 2001/05/26 v1.1c Standard LaTeX ifthen package (DPC)
+)
+\c@r@tfl@t=\count103
+\rotFPtop=\skip54
+\rotFPbot=\skip55
+\rot@float@box=\box38
+\rot@mess@toks=\toks21
+)
+(/usr/local/share/texmf/tex/latex/picins/picins.sty
+Option `picins' Version 3.0 Sep. 1992, TH Darmstadt/HRZ
+\@BILD=\box39
+\@TEXT=\box40
+\d@breite=\dimen122
+\d@hoehe=\dimen123
+\d@xoff=\dimen124
+\d@yoff=\dimen125
+\d@shad=\dimen126
+\d@dash=\dimen127
+\d@boxl=\dimen128
+\d@pichskip=\dimen129
+\d@tmp=\dimen130
+\d@tmpa=\dimen131
+\d@bskip=\dimen132
+\hsiz@=\dimen133
+\p@getot@l=\dimen134
+\c@breite=\count104
+\c@hoehe=\count105
+\c@xoff=\count106
+\c@yoff=\count107
+\c@pos=\count108
+\c@shad=\count109
+\c@dash=\count110
+\c@boxl=\count111
+\c@zeilen=\count112
+\@changemode=\count113
+\c@piccaption=\count114
+\c@piccaptionpos=\count115
+\c@picpos=\count116
+\c@whole=\count117
+\c@half=\count118
+\c@tmp=\count119
+\c@tmpa=\count120
+\c@tmpb=\count121
+\c@tmpc=\count122
+\c@tmpd=\count123
+\d@leftskip=\skip56
+\ptoti=\dimen135
+\ptotii=\dimen136
+\env@box=\box41
+\d@envdp=\dimen137
+\c@hsize=\count124
+\c@envdp=\count125
+\d@envb=\dimen138
+)
+(/usr/local/share/texmf/tex/latex/base/tex/latex/pgf/frontendlayer/tikz.sty
+(/usr/local/share/texmf/tex/latex/base/tex/latex/pgf/basiclayer/pgf.sty
+(/usr/local/share/texmf/tex/latex/base/tex/latex/pgf/utilities/pgfrcs.sty
+(/usr/local/share/texmf/tex/latex/base/tex/generic/pgf/utilities/pgfutil-common
+.tex
+\pgfutil@everybye=\toks22
+)
+(/usr/local/share/texmf/tex/latex/base/tex/generic/pgf/utilities/pgfutil-latex.
+def
+\pgfutil@abb=\box42
+ (/usr/share/texmf-texlive/tex/latex/ms/everyshi.sty
+Package: everyshi 2001/05/15 v3.00 EveryShipout Package (MS)
+))
+(/usr/local/share/texmf/tex/latex/base/tex/generic/pgf/utilities/pgfrcs.code.te
+x
+Package: pgfrcs 2010/10/25 v2.10 (rcs-revision 1.24)
+))
+Package: pgf 2008/01/15 v2.10 (rcs-revision 1.12)
+ (/usr/local/share/texmf/tex/latex/base/tex/latex/pgf/basiclayer/pgfcore.sty (/
+usr/local/share/texmf/tex/latex/base/tex/latex/pgf/systemlayer/pgfsys.sty
+(/usr/local/share/texmf/tex/latex/base/tex/generic/pgf/systemlayer/pgfsys.code.
+tex
+Package: pgfsys 2010/06/30 v2.10 (rcs-revision 1.37)
+
+(/usr/local/share/texmf/tex/latex/base/tex/generic/pgf/utilities/pgfkeys.code.t
+ex
+\pgfkeys@pathtoks=\toks23
+\pgfkeys@temptoks=\toks24
+
+(/usr/local/share/texmf/tex/latex/base/tex/generic/pgf/utilities/pgfkeysfiltere
+d.code.tex
+\pgfkeys@tmptoks=\toks25
+))
+\pgf@x=\dimen139
+\pgf@y=\dimen140
+\pgf@xa=\dimen141
+\pgf@ya=\dimen142
+\pgf@xb=\dimen143
+\pgf@yb=\dimen144
+\pgf@xc=\dimen145
+\pgf@yc=\dimen146
+\w@pgf@writea=\write4
+\r@pgf@reada=\read2
+\c@pgf@counta=\count126
+\c@pgf@countb=\count127
+\c@pgf@countc=\count128
+\c@pgf@countd=\count129
+
+(/usr/local/share/texmf/tex/latex/base/tex/generic/pgf/systemlayer/pgf.cfg
+File: pgf.cfg 2008/05/14  (rcs-revision 1.7)
+)
+Package pgfsys Info: Driver file for pgf: pgfsys-pdftex.def on input line 900.
+
+(/usr/local/share/texmf/tex/latex/base/tex/generic/pgf/systemlayer/pgfsys-pdfte
+x.def
+File: pgfsys-pdftex.def 2009/05/22  (rcs-revision 1.26)
+
+(/usr/local/share/texmf/tex/latex/base/tex/generic/pgf/systemlayer/pgfsys-commo
+n-pdf.def
+File: pgfsys-common-pdf.def 2008/05/19  (rcs-revision 1.10)
+)))
+(/usr/local/share/texmf/tex/latex/base/tex/generic/pgf/systemlayer/pgfsyssoftpa
+th.code.tex
+File: pgfsyssoftpath.code.tex 2008/07/18  (rcs-revision 1.7)
+\pgfsyssoftpath@smallbuffer@items=\count130
+\pgfsyssoftpath@bigbuffer@items=\count131
+)
+(/usr/local/share/texmf/tex/latex/base/tex/generic/pgf/systemlayer/pgfsysprotoc
+ol.code.tex
+File: pgfsysprotocol.code.tex 2006/10/16  (rcs-revision 1.4)
+)) (/usr/local/share/texmf/tex/latex/xcolor/xcolor.sty
+Package: xcolor 2004/07/04 v2.00 LaTeX color extensions (UK)
+
+(/etc/texmf/tex/latex/config/color.cfg
+File: color.cfg 2007/01/18 v1.5 color configuration of teTeX/TeXLive
+)
+Package xcolor Info: Driver file: pdftex.def on input line 136.
+Package xcolor Info: Color model `cmy' added on input line 972.
+Package xcolor Info: Color model `hsb' added on input line 980.
+Package xcolor Info: Color model `HTML' added on input line 1000.
+Package xcolor Info: Color model `HSB' added on input line 1006.
+Package xcolor Info: Color model `Gray' added on input line 1012.
+)
+(/usr/local/share/texmf/tex/latex/base/tex/generic/pgf/basiclayer/pgfcore.code.
+tex
+Package: pgfcore 2010/04/11 v2.10 (rcs-revision 1.7)
+
+(/usr/local/share/texmf/tex/latex/base/tex/generic/pgf/math/pgfmath.code.tex
+(/usr/local/share/texmf/tex/latex/base/tex/generic/pgf/math/pgfmathcalc.code.te
+x
+(/usr/local/share/texmf/tex/latex/base/tex/generic/pgf/math/pgfmathutil.code.te
+x)
+(/usr/local/share/texmf/tex/latex/base/tex/generic/pgf/math/pgfmathparser.code.
+tex
+\pgfmath@dimen=\dimen147
+\pgfmath@count=\count132
+\pgfmath@box=\box43
+\pgfmath@toks=\toks26
+\pgfmath@stack@operand=\toks27
+\pgfmath@stack@operation=\toks28
+)
+(/usr/local/share/texmf/tex/latex/base/tex/generic/pgf/math/pgfmathfunctions.co
+de.tex
+(/usr/local/share/texmf/tex/latex/base/tex/generic/pgf/math/pgfmathfunctions.ba
+sic.code.tex)
+(/usr/local/share/texmf/tex/latex/base/tex/generic/pgf/math/pgfmathfunctions.tr
+igonometric.code.tex)
+(/usr/local/share/texmf/tex/latex/base/tex/generic/pgf/math/pgfmathfunctions.ra
+ndom.code.tex)
+(/usr/local/share/texmf/tex/latex/base/tex/generic/pgf/math/pgfmathfunctions.co
+mparison.code.tex)
+(/usr/local/share/texmf/tex/latex/base/tex/generic/pgf/math/pgfmathfunctions.ba
+se.code.tex)
+(/usr/local/share/texmf/tex/latex/base/tex/generic/pgf/math/pgfmathfunctions.ro
+und.code.tex)
+(/usr/local/share/texmf/tex/latex/base/tex/generic/pgf/math/pgfmathfunctions.mi
+sc.code.tex)))
+(/usr/local/share/texmf/tex/latex/base/tex/generic/pgf/math/pgfmathfloat.code.t
+ex
+\c@pgfmathroundto@lastzeros=\count133
+))
+(/usr/local/share/texmf/tex/latex/base/tex/generic/pgf/basiclayer/pgfcorepoints
+.code.tex
+File: pgfcorepoints.code.tex 2010/04/09  (rcs-revision 1.20)
+\pgf@picminx=\dimen148
+\pgf@picmaxx=\dimen149
+\pgf@picminy=\dimen150
+\pgf@picmaxy=\dimen151
+\pgf@pathminx=\dimen152
+\pgf@pathmaxx=\dimen153
+\pgf@pathminy=\dimen154
+\pgf@pathmaxy=\dimen155
+\pgf@xx=\dimen156
+\pgf@xy=\dimen157
+\pgf@yx=\dimen158
+\pgf@yy=\dimen159
+\pgf@zx=\dimen160
+\pgf@zy=\dimen161
+)
+(/usr/local/share/texmf/tex/latex/base/tex/generic/pgf/basiclayer/pgfcorepathco
+nstruct.code.tex
+File: pgfcorepathconstruct.code.tex 2010/08/03  (rcs-revision 1.24)
+\pgf@path@lastx=\dimen162
+\pgf@path@lasty=\dimen163
+)
+(/usr/local/share/texmf/tex/latex/base/tex/generic/pgf/basiclayer/pgfcorepathus
+age.code.tex
+File: pgfcorepathusage.code.tex 2008/04/22  (rcs-revision 1.12)
+\pgf@shorten@end@additional=\dimen164
+\pgf@shorten@start@additional=\dimen165
+)
+(/usr/local/share/texmf/tex/latex/base/tex/generic/pgf/basiclayer/pgfcorescopes
+.code.tex
+File: pgfcorescopes.code.tex 2010/09/08  (rcs-revision 1.34)
+\pgfpic=\box44
+\pgf@hbox=\box45
+\pgf@layerbox@main=\box46
+\pgf@picture@serial@count=\count134
+)
+(/usr/local/share/texmf/tex/latex/base/tex/generic/pgf/basiclayer/pgfcoregraphi
+cstate.code.tex
+File: pgfcoregraphicstate.code.tex 2008/04/22  (rcs-revision 1.9)
+\pgflinewidth=\dimen166
+)
+(/usr/local/share/texmf/tex/latex/base/tex/generic/pgf/basiclayer/pgfcoretransf
+ormations.code.tex
+File: pgfcoretransformations.code.tex 2009/06/10  (rcs-revision 1.11)
+\pgf@pt@x=\dimen167
+\pgf@pt@y=\dimen168
+\pgf@pt@temp=\dimen169
+)
+(/usr/local/share/texmf/tex/latex/base/tex/generic/pgf/basiclayer/pgfcorequick.
+code.tex
+File: pgfcorequick.code.tex 2008/10/09  (rcs-revision 1.3)
+)
+(/usr/local/share/texmf/tex/latex/base/tex/generic/pgf/basiclayer/pgfcoreobject
+s.code.tex
+File: pgfcoreobjects.code.tex 2006/10/11  (rcs-revision 1.2)
+)
+(/usr/local/share/texmf/tex/latex/base/tex/generic/pgf/basiclayer/pgfcorepathpr
+ocessing.code.tex
+File: pgfcorepathprocessing.code.tex 2008/10/09  (rcs-revision 1.8)
+)
+(/usr/local/share/texmf/tex/latex/base/tex/generic/pgf/basiclayer/pgfcorearrows
+.code.tex
+File: pgfcorearrows.code.tex 2008/04/23  (rcs-revision 1.11)
+)
+(/usr/local/share/texmf/tex/latex/base/tex/generic/pgf/basiclayer/pgfcoreshade.
+code.tex
+File: pgfcoreshade.code.tex 2008/11/23  (rcs-revision 1.13)
+\pgf@max=\dimen170
+\pgf@sys@shading@range@num=\count135
+)
+(/usr/local/share/texmf/tex/latex/base/tex/generic/pgf/basiclayer/pgfcoreimage.
+code.tex
+File: pgfcoreimage.code.tex 2010/03/25  (rcs-revision 1.16)
+
+(/usr/local/share/texmf/tex/latex/base/tex/generic/pgf/basiclayer/pgfcoreextern
+al.code.tex
+File: pgfcoreexternal.code.tex 2010/09/01  (rcs-revision 1.17)
+\pgfexternal@startupbox=\box47
+))
+(/usr/local/share/texmf/tex/latex/base/tex/generic/pgf/basiclayer/pgfcorelayers
+.code.tex
+File: pgfcorelayers.code.tex 2010/08/27  (rcs-revision 1.2)
+)
+(/usr/local/share/texmf/tex/latex/base/tex/generic/pgf/basiclayer/pgfcoretransp
+arency.code.tex
+File: pgfcoretransparency.code.tex 2008/01/17  (rcs-revision 1.2)
+)
+(/usr/local/share/texmf/tex/latex/base/tex/generic/pgf/basiclayer/pgfcorepatter
+ns.code.tex
+File: pgfcorepatterns.code.tex 2009/07/02  (rcs-revision 1.3)
+)))
+(/usr/local/share/texmf/tex/latex/base/tex/generic/pgf/modules/pgfmoduleshapes.
+code.tex
+File: pgfmoduleshapes.code.tex 2010/09/09  (rcs-revision 1.13)
+\pgfnodeparttextbox=\box48
+)
+(/usr/local/share/texmf/tex/latex/base/tex/generic/pgf/modules/pgfmoduleplot.co
+de.tex
+File: pgfmoduleplot.code.tex 2010/10/22  (rcs-revision 1.8)
+)
+(/usr/local/share/texmf/tex/latex/base/tex/latex/pgf/compatibility/pgfcomp-vers
+ion-0-65.sty
+Package: pgfcomp-version-0-65 2007/07/03 v2.10 (rcs-revision 1.7)
+\pgf@nodesepstart=\dimen171
+\pgf@nodesepend=\dimen172
+)
+(/usr/local/share/texmf/tex/latex/base/tex/latex/pgf/compatibility/pgfcomp-vers
+ion-1-18.sty
+Package: pgfcomp-version-1-18 2007/07/23 v2.10 (rcs-revision 1.1)
+))
+(/usr/local/share/texmf/tex/latex/base/tex/latex/pgf/utilities/pgffor.sty
+(/usr/local/share/texmf/tex/latex/base/tex/latex/pgf/utilities/pgfkeys.sty
+(/usr/local/share/texmf/tex/latex/base/tex/generic/pgf/utilities/pgfkeys.code.t
+ex))
+(/usr/local/share/texmf/tex/latex/base/tex/generic/pgf/utilities/pgffor.code.te
+x
+Package: pgffor 2010/03/23 v2.10 (rcs-revision 1.18)
+\pgffor@iter=\dimen173
+\pgffor@skip=\dimen174
+\pgffor@stack=\toks29
+\pgffor@toks=\toks30
+))
+(/usr/local/share/texmf/tex/latex/base/tex/generic/pgf/frontendlayer/tikz/tikz.
+code.tex
+Package: tikz 2010/10/13 v2.10 (rcs-revision 1.76)
+
+(/usr/local/share/texmf/tex/latex/base/tex/generic/pgf/libraries/pgflibraryplot
+handlers.code.tex
+File: pgflibraryplothandlers.code.tex 2010/05/31 v2.10 (rcs-revision 1.15)
+\pgf@plot@mark@count=\count136
+\pgfplotmarksize=\dimen175
+)
+\tikz@lastx=\dimen176
+\tikz@lasty=\dimen177
+\tikz@lastxsaved=\dimen178
+\tikz@lastysaved=\dimen179
+\tikzleveldistance=\dimen180
+\tikzsiblingdistance=\dimen181
+\tikz@figbox=\box49
+\tikz@tempbox=\box50
+\tikztreelevel=\count137
+\tikznumberofchildren=\count138
+\tikznumberofcurrentchild=\count139
+\tikz@fig@count=\count140
+
+(/usr/local/share/texmf/tex/latex/base/tex/generic/pgf/modules/pgfmodulematrix.
+code.tex
+File: pgfmodulematrix.code.tex 2010/08/24  (rcs-revision 1.4)
+\pgfmatrixcurrentrow=\count141
+\pgfmatrixcurrentcolumn=\count142
+\pgf@matrix@numberofcolumns=\count143
+)
+\tikz@expandcount=\count144
+
+(/usr/local/share/texmf/tex/latex/base/tex/generic/pgf/frontendlayer/tikz/libra
+ries/tikzlibrarytopaths.code.tex
+File: tikzlibrarytopaths.code.tex 2008/06/17 v2.10 (rcs-revision 1.2)
+)))
+(/usr/local/share/texmf/tex/latex/base/tex/generic/pgf/frontendlayer/tikz/libra
+ries/tikzlibraryshapes.code.tex
+File: tikzlibraryshapes.code.tex 2008/01/09 v2.10 (rcs-revision 1.1)
+
+(/usr/local/share/texmf/tex/latex/base/tex/generic/pgf/frontendlayer/tikz/libra
+ries/tikzlibraryshapes.geometric.code.tex
+File: tikzlibraryshapes.geometric.code.tex 2008/01/09 v2.10 (rcs-revision 1.1)
+
+(/usr/local/share/texmf/tex/latex/base/tex/generic/pgf/libraries/shapes/pgflibr
+aryshapes.geometric.code.tex
+File: pgflibraryshapes.geometric.code.tex 2008/06/26 v2.10 (rcs-revision 1.1)
+))
+(/usr/local/share/texmf/tex/latex/base/tex/generic/pgf/frontendlayer/tikz/libra
+ries/tikzlibraryshapes.misc.code.tex
+File: tikzlibraryshapes.misc.code.tex 2008/01/09 v2.10 (rcs-revision 1.1)
+
+(/usr/local/share/texmf/tex/latex/base/tex/generic/pgf/libraries/shapes/pgflibr
+aryshapes.misc.code.tex
+File: pgflibraryshapes.misc.code.tex 2008/10/07 v2.10 (rcs-revision 1.3)
+))
+(/usr/local/share/texmf/tex/latex/base/tex/generic/pgf/frontendlayer/tikz/libra
+ries/tikzlibraryshapes.symbols.code.tex
+File: tikzlibraryshapes.symbols.code.tex 2008/01/09 v2.10 (rcs-revision 1.1)
+
+(/usr/local/share/texmf/tex/latex/base/tex/generic/pgf/libraries/shapes/pgflibr
+aryshapes.symbols.code.tex
+File: pgflibraryshapes.symbols.code.tex 2009/10/27 v2.10 (rcs-revision 1.3)
+))
+(/usr/local/share/texmf/tex/latex/base/tex/generic/pgf/frontendlayer/tikz/libra
+ries/tikzlibraryshapes.arrows.code.tex
+File: tikzlibraryshapes.arrows.code.tex 2008/01/09 v2.10 (rcs-revision 1.1)
+
+(/usr/local/share/texmf/tex/latex/base/tex/generic/pgf/libraries/shapes/pgflibr
+aryshapes.arrows.code.tex
+File: pgflibraryshapes.arrows.code.tex 2008/06/26 v2.10 (rcs-revision 1.1)
+))
+(/usr/local/share/texmf/tex/latex/base/tex/generic/pgf/frontendlayer/tikz/libra
+ries/tikzlibraryshapes.callouts.code.tex
+(/usr/local/share/texmf/tex/latex/base/tex/generic/pgf/libraries/shapes/pgflibr
+aryshapes.callouts.code.tex))
+(/usr/local/share/texmf/tex/latex/base/tex/generic/pgf/frontendlayer/tikz/libra
+ries/tikzlibraryshapes.multipart.code.tex
+File: tikzlibraryshapes.multipart.code.tex 2008/01/09 v2.10 (rcs-revision 1.1)
+
+(/usr/local/share/texmf/tex/latex/base/tex/generic/pgf/libraries/shapes/pgflibr
+aryshapes.multipart.code.tex
+File: pgflibraryshapes.multipart.code.tex 2010/01/07 v2.10 (rcs-revision 1.2)
+\pgfnodepartlowerbox=\box51
+\pgfnodeparttwobox=\box52
+\pgfnodepartthreebox=\box53
+\pgfnodepartfourbox=\box54
+\pgfnodeparttwentybox=\box55
+\pgfnodepartnineteenbox=\box56
+\pgfnodeparteighteenbox=\box57
+\pgfnodepartseventeenbox=\box58
+\pgfnodepartsixteenbox=\box59
+\pgfnodepartfifteenbox=\box60
+\pgfnodepartfourteenbox=\box61
+\pgfnodepartthirteenbox=\box62
+\pgfnodeparttwelvebox=\box63
+\pgfnodepartelevenbox=\box64
+\pgfnodeparttenbox=\box65
+\pgfnodepartninebox=\box66
+\pgfnodeparteightbox=\box67
+\pgfnodepartsevenbox=\box68
+\pgfnodepartsixbox=\box69
+\pgfnodepartfivebox=\box70
+)))
+(/usr/local/share/texmf/tex/latex/base/tex/generic/pgf/frontendlayer/tikz/libra
+ries/tikzlibraryarrows.code.tex
+File: tikzlibraryarrows.code.tex 2008/01/09 v2.10 (rcs-revision 1.1)
+
+(/usr/local/share/texmf/tex/latex/base/tex/generic/pgf/libraries/pgflibraryarro
+ws.code.tex
+File: pgflibraryarrows.code.tex 2008/10/27 v2.10 (rcs-revision 1.9)
+\arrowsize=\dimen182
+)) (/usr/share/texmf-texlive/tex/latex/hyperref/hyperref.sty
+Package: hyperref 2009/10/09 v6.79a Hypertext links for LaTeX
+
+(/usr/share/texmf-texlive/tex/generic/ifxetex/ifxetex.sty
+Package: ifxetex 2009/01/23 v0.5 Provides ifxetex conditional
+)
+(/usr/share/texmf-texlive/tex/latex/oberdiek/hycolor.sty
+Package: hycolor 2009/10/02 v1.5 Code for color options of hyperref/bookmark (H
+O)
+
+(/usr/share/texmf-texlive/tex/latex/oberdiek/xcolor-patch.sty
+Package: xcolor-patch 2009/10/02 xcolor patch
+))
+\@linkdim=\dimen183
+\Hy@linkcounter=\count145
+\Hy@pagecounter=\count146
+
+(/usr/share/texmf-texlive/tex/latex/hyperref/pd1enc.def
+File: pd1enc.def 2009/10/09 v6.79a Hyperref: PDFDocEncoding definition (HO)
+)
+(/usr/share/texmf-texlive/tex/generic/oberdiek/etexcmds.sty
+Package: etexcmds 2007/12/12 v1.2 Prefix for e-TeX command names (HO)
+
+(/usr/share/texmf-texlive/tex/generic/oberdiek/infwarerr.sty
+Package: infwarerr 2007/09/09 v1.2 Providing info/warning/message (HO)
+)
+Package etexcmds Info: Could not find \expanded.
+(etexcmds)             That can mean that you are not using pdfTeX 1.50 or
+(etexcmds)             that some package has redefined \expanded.
+(etexcmds)             In the latter case, load this package earlier.
+)
+(/usr/share/texmf-texlive/tex/latex/latexconfig/hyperref.cfg
+File: hyperref.cfg 2002/06/06 v1.2 hyperref configuration of TeXLive
+)
+(/usr/share/texmf-texlive/tex/latex/oberdiek/kvoptions.sty
+Package: kvoptions 2009/08/13 v3.4 Keyval support for LaTeX options (HO)
+
+(/usr/share/texmf-texlive/tex/generic/oberdiek/kvsetkeys.sty
+Package: kvsetkeys 2009/07/30 v1.5 Key value parser with default handler suppor
+t (HO)
+))
+Package hyperref Info: Hyper figures OFF on input line 2975.
+Package hyperref Info: Link nesting OFF on input line 2980.
+Package hyperref Info: Hyper index ON on input line 2983.
+Package hyperref Info: Plain pages OFF on input line 2990.
+Package hyperref Info: Backreferencing OFF on input line 2995.
+
+Implicit mode ON; LaTeX internals redefined
+Package hyperref Info: Bookmarks ON on input line 3191.
+(/usr/local/share/texmf/tex/latex/misc/url.sty
+\Urlmuskip=\muskip10
+Package: url 2003/11/24  ver 3.0  Verb mode for urls, etc.
+)
+LaTeX Info: Redefining \url on input line 3428.
+
+(/usr/share/texmf-texlive/tex/generic/oberdiek/bitset.sty
+Package: bitset 2007/09/28 v1.0 Data type bit set (HO)
+
+(/usr/share/texmf-texlive/tex/generic/oberdiek/intcalc.sty
+Package: intcalc 2007/09/27 v1.1 Expandable integer calculations (HO)
+)
+(/usr/share/texmf-texlive/tex/generic/oberdiek/bigintcalc.sty
+Package: bigintcalc 2007/11/11 v1.1 Expandable big integer calculations (HO)
+
+(/usr/share/texmf-texlive/tex/generic/oberdiek/pdftexcmds.sty
+Package: pdftexcmds 2009/09/23 v0.6 LuaTeX support for pdfTeX utility functions
+ (HO)
+
+(/usr/share/texmf-texlive/tex/generic/oberdiek/ifluatex.sty
+Package: ifluatex 2009/04/17 v1.2 Provides the ifluatex switch (HO)
+Package ifluatex Info: LuaTeX not detected.
+)
+(/usr/share/texmf-texlive/tex/generic/oberdiek/ltxcmds.sty
+Package: ltxcmds 2009/08/05 v1.0 Some LaTeX kernel commands for general use (HO
+)
+)
+Package pdftexcmds Info: LuaTeX not detected.
+Package pdftexcmds Info: \pdf@primitive is available.
+Package pdftexcmds Info: \pdf@ifprimitive is available.
+)))
+\Fld@menulength=\count147
+\Field@Width=\dimen184
+\Fld@charsize=\dimen185
+\Field@toks=\toks31
+Package hyperref Info: Hyper figures OFF on input line 4377.
+Package hyperref Info: Link nesting OFF on input line 4382.
+Package hyperref Info: Hyper index ON on input line 4385.
+Package hyperref Info: backreferencing OFF on input line 4392.
+Package hyperref Info: Link coloring OFF on input line 4397.
+Package hyperref Info: Link coloring with OCG OFF on input line 4402.
+Package hyperref Info: PDF/A mode OFF on input line 4407.
+
+(/usr/share/texmf-texlive/tex/generic/oberdiek/atbegshi.sty
+Package: atbegshi 2008/07/31 v1.9 At begin shipout hook (HO)
+)
+\Hy@abspage=\count148
+\c@Item=\count149
+\c@Hfootnote=\count150
+)
+*hyperref using driver hpdftex*
+(/usr/share/texmf-texlive/tex/latex/hyperref/hpdftex.def
+File: hpdftex.def 2009/10/09 v6.79a Hyperref driver for pdfTeX
+\Fld@listcount=\count151
+) (./admin_guide.aux)
+\openout1 = `admin_guide.aux'.
+
+LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 48.
+LaTeX Font Info:    ... okay on input line 48.
+LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 48.
+LaTeX Font Info:    ... okay on input line 48.
+LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 48.
+LaTeX Font Info:    ... okay on input line 48.
+LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 48.
+LaTeX Font Info:    ... okay on input line 48.
+LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 48.
+LaTeX Font Info:    ... okay on input line 48.
+LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 48.
+LaTeX Font Info:    ... okay on input line 48.
+LaTeX Font Info:    Checking defaults for LMP1/mtt/m/it on input line 48.
+LaTeX Font Info:    ... okay on input line 48.
+LaTeX Font Info:    Checking defaults for LMP2/mtt/m/n on input line 48.
+LaTeX Font Info:    ... okay on input line 48.
+LaTeX Font Info:    Checking defaults for LMP3/mtt/m/n on input line 48.
+LaTeX Font Info:    ... okay on input line 48.
+LaTeX Font Info:    Checking defaults for PD1/pdf/m/n on input line 48.
+LaTeX Font Info:    ... okay on input line 48.
+
+*geometry auto-detecting driver*
+*geometry detected driver: pdftex*
+-------------------- Geometry parameters
+paper: a4paper
+landscape: --
+twocolumn: --
+twoside: --
+asymmetric: --
+h-parts: 72.26999pt, 452.9679pt, 72.26999pt
+v-parts: 72.26999pt, 700.50687pt, 72.26999pt
+hmarginratio: --
+vmarginratio: --
+lines: --
+heightrounded: --
+bindingoffset: 0.0pt
+truedimen: --
+includehead: --
+includefoot: --
+includemp: --
+driver: pdftex
+-------------------- Page layout dimensions and switches
+\paperwidth  597.50787pt
+\paperheight 845.04684pt
+\textwidth  452.9679pt
+\textheight 700.50687pt
+\oddsidemargin  0.0pt
+\evensidemargin 0.0pt
+\topmargin  -37.0pt
+\headheight 12.0pt
+\headsep    25.0pt
+\footskip   30.0pt
+\marginparwidth 44.0pt
+\marginparsep   10.0pt
+\columnsep  10.0pt
+\skip\footins  10.8pt plus 4.0pt minus 2.0pt
+\hoffset 0.0pt
+\voffset 0.0pt
+\mag 1000
+
+(1in=72.27pt, 1cm=28.45pt)
+-----------------------
+Package caption Info: Begin \AtBeginDocument code.
+Package caption Info: hyperref package is loaded.
+Package caption Info: picins package is loaded.
+Package caption Info: rotating package is loaded.
+Package caption Info: End \AtBeginDocument code.
+(/usr/share/texmf/tex/context/base/supp-pdf.mkii
+[Loading MPS to PDF converter (version 2006.09.02).]
+\scratchcounter=\count152
+\scratchdimen=\dimen186
+\scratchbox=\box71
+\nofMPsegments=\count153
+\nofMParguments=\count154
+\everyMPshowfont=\toks32
+\MPscratchCnt=\count155
+\MPscratchDim=\dimen187
+\MPnumerator=\count156
+\everyMPtoPDFconversion=\toks33
+) ABD: EveryShipout initializing macros
+Package hyperref Info: Link coloring OFF on input line 48.
+
+(/usr/share/texmf-texlive/tex/latex/hyperref/nameref.sty
+Package: nameref 2007/05/29 v2.31 Cross-referencing by name of section
+
+(/usr/share/texmf-texlive/tex/latex/oberdiek/refcount.sty
+Package: refcount 2008/08/11 v3.1 Data extraction from references (HO)
+)
+\c@section@level=\count157
+)
+LaTeX Info: Redefining \ref on input line 48.
+LaTeX Info: Redefining \pageref on input line 48.
+ (./admin_guide.out) (./admin_guide.out)
+\@outlinefile=\write5
+\openout5 = `admin_guide.out'.
+
+\AtBeginShipoutBox=\box72
+LaTeX Font Info:    Try loading font information for T1+phv on input line 50.
+ (/usr/share/texmf-texlive/tex/latex/psnfss/t1phv.fd
+File: t1phv.fd 2001/06/04 scalable font definitions for T1/phv.
+)
+LaTeX Font Info:    Font shape `T1/phv/m/n' will be
+(Font)              scaled to size 19.08076pt on input line 50.
+LaTeX Font Info:    Font shape `T1/phv/bx/n' in size <20.74> not available
+(Font)              Font shape `T1/phv/b/n' tried instead on input line 50.
+LaTeX Font Info:    Font shape `T1/phv/b/n' will be
+(Font)              scaled to size 19.08076pt on input line 50.
+LaTeX Font Info:    Font shape `T1/ptm/bx/n' in size <10.95> not available
+(Font)              Font shape `T1/ptm/b/n' tried instead on input line 50.
+
+[1
+
+{/var/lib/texmf/fonts/map/pdftex/updmap/pdftex.map
+
+pdfTeX warning: pdflatex (file /var/lib/texmf/fonts/map/pdftex/updmap/pdftex.ma
+p): fontmap entry for `cmbr10' already exists, duplicates ignored
+
+
+pdfTeX warning: pdflatex (file /var/lib/texmf/fonts/map/pdftex/updmap/pdftex.ma
+p): fontmap entry for `cmbr17' already exists, duplicates ignored
+
+
+pdfTeX warning: pdflatex (file /var/lib/texmf/fonts/map/pdftex/updmap/pdftex.ma
+p): fontmap entry for `cmbr8' already exists, duplicates ignored
+
+
+pdfTeX warning: pdflatex (file /var/lib/texmf/fonts/map/pdftex/updmap/pdftex.ma
+p): fontmap entry for `cmbr9' already exists, duplicates ignored
+
+
+pdfTeX warning: pdflatex (file /var/lib/texmf/fonts/map/pdftex/updmap/pdftex.ma
+p): fontmap entry for `cmbras10' already exists, duplicates ignored
+
+
+pdfTeX warning: pdflatex (file /var/lib/texmf/fonts/map/pdftex/updmap/pdftex.ma
+p): fontmap entry for `cmbras8' already exists, duplicates ignored
+
+
+pdfTeX warning: pdflatex (file /var/lib/texmf/fonts/map/pdftex/updmap/pdftex.ma
+p): fontmap entry for `cmbras9' already exists, duplicates ignored
+
+
+pdfTeX warning: pdflatex (file /var/lib/texmf/fonts/map/pdftex/updmap/pdftex.ma
+p): fontmap entry for `cmbrbs10' already exists, duplicates ignored
+
+
+pdfTeX warning: pdflatex (file /var/lib/texmf/fonts/map/pdftex/updmap/pdftex.ma
+p): fontmap entry for `cmbrbs8' already exists, duplicates ignored
+
+
+pdfTeX warning: pdflatex (file /var/lib/texmf/fonts/map/pdftex/updmap/pdftex.ma
+p): fontmap entry for `cmbrbs9' already exists, duplicates ignored
+
+
+pdfTeX warning: pdflatex (file /var/lib/texmf/fonts/map/pdftex/updmap/pdftex.ma
+p): fontmap entry for `cmbrbx10' already exists, duplicates ignored
+
+
+pdfTeX warning: pdflatex (file /var/lib/texmf/fonts/map/pdftex/updmap/pdftex.ma
+p): fontmap entry for `cmbrmb10' already exists, duplicates ignored
+
+
+pdfTeX warning: pdflatex (file /var/lib/texmf/fonts/map/pdftex/updmap/pdftex.ma
+p): fontmap entry for `cmbrmi10' already exists, duplicates ignored
+
+
+pdfTeX warning: pdflatex (file /var/lib/texmf/fonts/map/pdftex/updmap/pdftex.ma
+p): fontmap entry for `cmbrmi8' already exists, duplicates ignored
+
+
+pdfTeX warning: pdflatex (file /var/lib/texmf/fonts/map/pdftex/updmap/pdftex.ma
+p): fontmap entry for `cmbrmi9' already exists, duplicates ignored
+
+
+pdfTeX warning: pdflatex (file /var/lib/texmf/fonts/map/pdftex/updmap/pdftex.ma
+p): fontmap entry for `cmbrsl10' already exists, duplicates ignored
+
+
+pdfTeX warning: pdflatex (file /var/lib/texmf/fonts/map/pdftex/updmap/pdftex.ma
+p): fontmap entry for `cmbrsl17' already exists, duplicates ignored
+
+
+pdfTeX warning: pdflatex (file /var/lib/texmf/fonts/map/pdftex/updmap/pdftex.ma
+p): fontmap entry for `cmbrsl8' already exists, duplicates ignored
+
+
+pdfTeX warning: pdflatex (file /var/lib/texmf/fonts/map/pdftex/updmap/pdftex.ma
+p): fontmap entry for `cmbrsl9' already exists, duplicates ignored
+
+
+pdfTeX warning: pdflatex (file /var/lib/texmf/fonts/map/pdftex/updmap/pdftex.ma
+p): fontmap entry for `cmbrsy10' already exists, duplicates ignored
+
+
+pdfTeX warning: pdflatex (file /var/lib/texmf/fonts/map/pdftex/updmap/pdftex.ma
+p): fontmap entry for `cmbrsy8' already exists, duplicates ignored
+
+
+pdfTeX warning: pdflatex (file /var/lib/texmf/fonts/map/pdftex/updmap/pdftex.ma
+p): fontmap entry for `cmbrsy9' already exists, duplicates ignored
+
+
+pdfTeX warning: pdflatex (file /var/lib/texmf/fonts/map/pdftex/updmap/pdftex.ma
+p): fontmap entry for `cmsltl10' already exists, duplicates ignored
+
+
+pdfTeX warning: pdflatex (file /var/lib/texmf/fonts/map/pdftex/updmap/pdftex.ma
+p): fontmap entry for `cmtl10' already exists, duplicates ignored
+
+
+pdfTeX warning: pdflatex (file /var/lib/texmf/fonts/map/pdftex/updmap/pdftex.ma
+p): fontmap entry for `ebbx10' already exists, duplicates ignored
+
+
+pdfTeX warning: pdflatex (file /var/lib/texmf/fonts/map/pdftex/updmap/pdftex.ma
+p): fontmap entry for `ebmo10' already exists, duplicates ignored
+
+
+pdfTeX warning: pdflatex (file /var/lib/texmf/fonts/map/pdftex/updmap/pdftex.ma
+p): fontmap entry for `ebmo17' already exists, duplicates ignored
+
+
+pdfTeX warning: pdflatex (file /var/lib/texmf/fonts/map/pdftex/updmap/pdftex.ma
+p): fontmap entry for `ebmo8' already exists, duplicates ignored
+
+
+pdfTeX warning: pdflatex (file /var/lib/texmf/fonts/map/pdftex/updmap/pdftex.ma
+p): fontmap entry for `ebmo9' already exists, duplicates ignored
+
+
+pdfTeX warning: pdflatex (file /var/lib/texmf/fonts/map/pdftex/updmap/pdftex.ma
+p): fontmap entry for `ebmr10' already exists, duplicates ignored
+
+
+pdfTeX warning: pdflatex (file /var/lib/texmf/fonts/map/pdftex/updmap/pdftex.ma
+p): fontmap entry for `ebmr17' already exists, duplicates ignored
+
+
+pdfTeX warning: pdflatex (file /var/lib/texmf/fonts/map/pdftex/updmap/pdftex.ma
+p): fontmap entry for `ebmr8' already exists, duplicates ignored
+
+
+pdfTeX warning: pdflatex (file /var/lib/texmf/fonts/map/pdftex/updmap/pdftex.ma
+p): fontmap entry for `ebmr9' already exists, duplicates ignored
+
+
+pdfTeX warning: pdflatex (file /var/lib/texmf/fonts/map/pdftex/updmap/pdftex.ma
+p): fontmap entry for `ebso10' already exists, duplicates ignored
+
+
+pdfTeX warning: pdflatex (file /var/lib/texmf/fonts/map/pdftex/updmap/pdftex.ma
+p): fontmap entry for `ebso17' already exists, duplicates ignored
+
+
+pdfTeX warning: pdflatex (file /var/lib/texmf/fonts/map/pdftex/updmap/pdftex.ma
+p): fontmap entry for `ebso8' already exists, duplicates ignored
+
+
+pdfTeX warning: pdflatex (file /var/lib/texmf/fonts/map/pdftex/updmap/pdftex.ma
+p): fontmap entry for `ebso9' already exists, duplicates ignored
+
+
+pdfTeX warning: pdflatex (file /var/lib/texmf/fonts/map/pdftex/updmap/pdftex.ma
+p): fontmap entry for `ebsr10' already exists, duplicates ignored
+
+
+pdfTeX warning: pdflatex (file /var/lib/texmf/fonts/map/pdftex/updmap/pdftex.ma
+p): fontmap entry for `ebsr17' already exists, duplicates ignored
+
+
+pdfTeX warning: pdflatex (file /var/lib/texmf/fonts/map/pdftex/updmap/pdftex.ma
+p): fontmap entry for `ebsr8' already exists, duplicates ignored
+
+
+pdfTeX warning: pdflatex (file /var/lib/texmf/fonts/map/pdftex/updmap/pdftex.ma
+p): fontmap entry for `ebsr9' already exists, duplicates ignored
+
+
+pdfTeX warning: pdflatex (file /var/lib/texmf/fonts/map/pdftex/updmap/pdftex.ma
+p): fontmap entry for `ebtl10' already exists, duplicates ignored
+
+
+pdfTeX warning: pdflatex (file /var/lib/texmf/fonts/map/pdftex/updmap/pdftex.ma
+p): fontmap entry for `ebto10' already exists, duplicates ignored
+
+
+pdfTeX warning: pdflatex (file /var/lib/texmf/fonts/map/pdftex/updmap/pdftex.ma
+p): fontmap entry for `mtex' already exists, duplicates ignored
+
+
+pdfTeX warning: pdflatex (file /var/lib/texmf/fonts/map/pdftex/updmap/pdftex.ma
+p): fontmap entry for `mtex' already exists, duplicates ignored
+
+
+pdfTeX warning: pdflatex (file /var/lib/texmf/fonts/map/pdftex/updmap/pdftex.ma
+p): fontmap entry for `mtsy' already exists, duplicates ignored
+
+
+pdfTeX warning: pdflatex (file /var/lib/texmf/fonts/map/pdftex/updmap/pdftex.ma
+p): fontmap entry for `rmtmi' already exists, duplicates ignored
+
+
+pdfTeX warning: pdflatex (file /var/lib/texmf/fonts/map/pdftex/updmap/pdftex.ma
+p): fontmap entry for `tbbx10' already exists, duplicates ignored
+
+
+pdfTeX warning: pdflatex (file /var/lib/texmf/fonts/map/pdftex/updmap/pdftex.ma
+p): fontmap entry for `tbmo10' already exists, duplicates ignored
+
+
+pdfTeX warning: pdflatex (file /var/lib/texmf/fonts/map/pdftex/updmap/pdftex.ma
+p): fontmap entry for `tbmo17' already exists, duplicates ignored
+
+
+pdfTeX warning: pdflatex (file /var/lib/texmf/fonts/map/pdftex/updmap/pdftex.ma
+p): fontmap entry for `tbmo8' already exists, duplicates ignored
+
+
+pdfTeX warning: pdflatex (file /var/lib/texmf/fonts/map/pdftex/updmap/pdftex.ma
+p): fontmap entry for `tbmo9' already exists, duplicates ignored
+
+
+pdfTeX warning: pdflatex (file /var/lib/texmf/fonts/map/pdftex/updmap/pdftex.ma
+p): fontmap entry for `tbmr10' already exists, duplicates ignored
+
+
+pdfTeX warning: pdflatex (file /var/lib/texmf/fonts/map/pdftex/updmap/pdftex.ma
+p): fontmap entry for `tbmr17' already exists, duplicates ignored
+
+
+pdfTeX warning: pdflatex (file /var/lib/texmf/fonts/map/pdftex/updmap/pdftex.ma
+p): fontmap entry for `tbmr8' already exists, duplicates ignored
+
+
+pdfTeX warning: pdflatex (file /var/lib/texmf/fonts/map/pdftex/updmap/pdftex.ma
+p): fontmap entry for `tbmr9' already exists, duplicates ignored
+
+
+pdfTeX warning: pdflatex (file /var/lib/texmf/fonts/map/pdftex/updmap/pdftex.ma
+p): fontmap entry for `tbso10' already exists, duplicates ignored
+
+
+pdfTeX warning: pdflatex (file /var/lib/texmf/fonts/map/pdftex/updmap/pdftex.ma
+p): fontmap entry for `tbso17' already exists, duplicates ignored
+
+
+pdfTeX warning: pdflatex (file /var/lib/texmf/fonts/map/pdftex/updmap/pdftex.ma
+p): fontmap entry for `tbso8' already exists, duplicates ignored
+
+
+pdfTeX warning: pdflatex (file /var/lib/texmf/fonts/map/pdftex/updmap/pdftex.ma
+p): fontmap entry for `tbso9' already exists, duplicates ignored
+
+
+pdfTeX warning: pdflatex (file /var/lib/texmf/fonts/map/pdftex/updmap/pdftex.ma
+p): fontmap entry for `tbsr10' already exists, duplicates ignored
+
+
+pdfTeX warning: pdflatex (file /var/lib/texmf/fonts/map/pdftex/updmap/pdftex.ma
+p): fontmap entry for `tbsr17' already exists, duplicates ignored
+
+
+pdfTeX warning: pdflatex (file /var/lib/texmf/fonts/map/pdftex/updmap/pdftex.ma
+p): fontmap entry for `tbsr8' already exists, duplicates ignored
+
+
+pdfTeX warning: pdflatex (file /var/lib/texmf/fonts/map/pdftex/updmap/pdftex.ma
+p): fontmap entry for `tbsr9' already exists, duplicates ignored
+
+
+pdfTeX warning: pdflatex (file /var/lib/texmf/fonts/map/pdftex/updmap/pdftex.ma
+p): fontmap entry for `tbtl10' already exists, duplicates ignored
+
+
+pdfTeX warning: pdflatex (file /var/lib/texmf/fonts/map/pdftex/updmap/pdftex.ma
+p): fontmap entry for `tbto10' already exists, duplicates ignored
+}]
+LaTeX Font Info:    Font shape `T1/phv/m/n' will be
+(Font)              scaled to size 11.03998pt on input line 59.
+LaTeX Font Info:    Font shape `T1/phv/bx/n' in size <12> not available
+(Font)              Font shape `T1/phv/b/n' tried instead on input line 59.
+LaTeX Font Info:    Font shape `T1/phv/b/n' will be
+(Font)              scaled to size 11.03998pt on input line 59.
+LaTeX Font Info:    Font shape `T1/phv/bx/n' in size <17.28> not available
+(Font)              Font shape `T1/phv/b/n' tried instead on input line 59.
+LaTeX Font Info:    Font shape `T1/phv/b/n' will be
+(Font)              scaled to size 15.89755pt on input line 59.
+ (./admin_guide.toc)
+\tf@toc=\write6
+\openout6 = `admin_guide.toc'.
+
+
+
+Package Fancyhdr Warning: \headheight is too small (12.0pt): 
+ Make it at least 14.49998pt.
+ We now make it that large for the rest of the document.
+ This may cause the page layout to be inconsistent, however.
+
+[2] (./admin_guide.aux) ) 
+Here is how much of TeX's memory you used:
+ 17133 strings out of 493848
+ 321680 string characters out of 1152824
+ 410129 words of memory out of 3000000
+ 20062 multiletter control sequences out of 15000+50000
+ 65995 words of font info for 56 fonts, out of 3000000 for 9000
+ 714 hyphenation exceptions out of 8191
+ 56i,11n,56p,431b,300s stack positions out of 5000i,500n,10000p,200000b,50000s
+{/usr/share/texmf-texlive/fonts/enc/dvips/base/8r.enc}
+</usr/share/texmf-texlive/fonts/type1/urw/helvetic/uhvb8a.pfb></usr/share/texmf
+-texlive/fonts/type1/urw/times/utmb8a.pfb></usr/share/texmf-texlive/fonts/type1
+/urw/times/utmr8a.pfb></usr/share/texmf-texlive/fonts/type1/urw/times/utmr8a.pf
+b></usr/share/texmf-texlive/fonts/type1/urw/times/utmri8a.pfb>
+Output written on admin_guide.pdf (2 pages, 47667 bytes).
+PDF statistics:
+ 40 PDF objects out of 1000 (max. 8388607)
+ 3 named destinations out of 1000 (max. 500000)
+ 13 words of extra memory for PDF output out of 10000 (max. 10000000)
+

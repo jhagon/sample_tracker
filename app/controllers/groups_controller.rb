@@ -6,7 +6,8 @@ class GroupsController < ApplicationController
   before_filter :must_be_leader_or_admin, :only => :show
 
   def index
-    @groups = Group.all
+#    @groups = Group.all
+    @groups=Group.page(params[:page]).per_page(ITEMS_PER_PAGE).find( :all)
   end
 
 

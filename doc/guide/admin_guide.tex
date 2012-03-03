@@ -1,0 +1,61 @@
+\documentclass[12pt]{article}
+\usepackage[a4paper,margin=1in]{geometry}
+\usepackage[T1]{fontenc}
+\usepackage{times}
+\usepackage[scaled=0.92]{helvet}
+\usepackage{mtpro2}
+\usepackage[sf,bf]{titlesec}
+\usepackage[font=small,width=0.7\textwidth]{caption}
+\usepackage{fancybox}
+\usepackage{fancyhdr}
+\usepackage{rotating}
+\usepackage{picins,graphicx}
+\usepackage{tikz}
+\usetikzlibrary{shapes,arrows}
+\usepackage[pdftex]{hyperref}
+\title{\sffamily\bfseries Crystallography Service Sample Database Administrator's Guide}
+\author{J.P.Hagon\\Computer Systems Support\\School of Chemistry}
+\date{\today}
+\renewcommand{\abstractname}{Introduction}
+\renewcommand{\thefootnote}{\fnsymbol{footnote}}
+%
+\definecolor{skyblue}{rgb}{0.422,0.648,0.801}
+%
+% Use these directives to change the appearance of example boxes.
+%
+\tikzstyle{plainbox} = [draw=blue, fill=skyblue!20, thin,
+    rectangle, rounded corners, inner sep=5pt, inner ysep=5pt]
+\tikzstyle{exmplbox} = [draw=blue, fill=skyblue!20, thin,
+    rectangle, rounded corners, inner sep=5pt, inner ysep=15pt]
+\tikzstyle{exmpltitle} =[draw=blue,fill=skyblue!50, text=white, thin]
+%
+% Headers
+%
+\pagestyle{fancy}
+%
+% define tikz block styles for flowcharts
+%
+\tikzstyle{decision} = [diamond, draw, fill=skyblue!20, 
+    text width=4.5em, text badly centered, node distance=3cm, inner sep=0pt]
+\tikzstyle{block} = [rectangle, draw, fill=skyblue!20, 
+    text width=5em, text centered, rounded corners, minimum height=4em]
+\tikzstyle{wideblock} = [rectangle, draw, fill=skyblue!20, 
+    text width=10em, text centered, rounded corners, minimum height=4em]
+\tikzstyle{line} = [draw, -latex']
+\tikzstyle{cloud} = [draw, ellipse,fill=red!20, node distance=3cm,
+    minimum height=2em]
+%
+\begin{document}
+\maketitle
+\begin{abstract}
+This guide is intended for staff who administer the Newcastle University
+Crystallography Service Sample Database.
+The database is implemented using the \emph{ruby} language and version 3 of 
+\href{http://rubyonrails.org}{Ruby on Rails}.
+The web interface is hosted on an \emph{Apache} server running on an
+\emph{Ubuntu} linux system.
+\end{abstract}
+\newpage
+\tableofcontents
+\newpage
+\end{document}

@@ -1,5 +1,7 @@
 class SampleMailer < ActionMailer::Base
-  default :from => "Crystallography Service <ncrystal@ncl.ac.uk>"
+  CRYS_EMAIL = "xray.cryst@ncl.ac.uk"
+  LOCAL_ADMIN_EMAIL = "crysadmin@milkyway.ncl.ac.uk"
+  default :from => "Crystallography Service <#{CRYS_EMAIL}>"
 
   # Subject can be set in your I18n file at config/locales/en.yml
   # with the following lookup:
@@ -28,6 +30,16 @@ class SampleMailer < ActionMailer::Base
     @greeting = "Hello"
     mail(:to => "#{sample.user.firstname} #{sample.user.lastname} <#{sample.user.email}>", :cc => cclist, :subject => "Crystallography Service: New Sample Submission Acknowledgement")
   end
+
+  def sample_request(sample)
+
+    @sample = sample
+    @greeting = "Hello"
+    mail(:to => "Crystallography Service <#{CRYS_EMAIL}>", 
+         :from => "#{LOCAL_ADMIN_EMAIL}",
+         :subject => "#{sample.user.firstname} #{sample.user.lastname}: New Sample Submission Request")
+  end
+
 
   def sample_update(sample, old_flag)
 
