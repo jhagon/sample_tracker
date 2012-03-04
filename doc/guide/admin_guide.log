@@ -1,7 +1,7 @@
-This is pdfTeX, Version 3.1415926-1.40.10 (TeX Live 2009/Debian) (format=pdflatex 2011.4.5)  26 FEB 2012 17:31
+This is pdfTeX, Version 3.1415926-1.40.10 (TeX Live 2009/Debian) (format=pdflatex 2011.4.5)  4 MAR 2012 18:32
 entering extended mode
  %&-line parsing enabled.
-**admin_guide.tex
+**admin_guide
 (./admin_guide.tex
 LaTeX2e <2009/09/24>
 Babel <v3.8l> and hyphenation patterns for english, usenglishmax, dumylang, noh
@@ -979,6 +979,22 @@ LaTeX Font Info:    Font shape `T1/phv/b/n' will be
 (Font)              scaled to size 19.08076pt on input line 50.
 LaTeX Font Info:    Font shape `T1/ptm/bx/n' in size <10.95> not available
 (Font)              Font shape `T1/ptm/b/n' tried instead on input line 50.
+LaTeX Font Info:    Font shape `T1/phv/m/n' will be
+(Font)              scaled to size 11.03998pt on input line 59.
+LaTeX Font Info:    Font shape `T1/phv/bx/n' in size <12> not available
+(Font)              Font shape `T1/phv/b/n' tried instead on input line 59.
+LaTeX Font Info:    Font shape `T1/phv/b/n' will be
+(Font)              scaled to size 11.03998pt on input line 59.
+LaTeX Font Info:    Font shape `T1/phv/bx/n' in size <17.28> not available
+(Font)              Font shape `T1/phv/b/n' tried instead on input line 59.
+LaTeX Font Info:    Font shape `T1/phv/b/n' will be
+(Font)              scaled to size 15.89755pt on input line 59.
+LaTeX Font Info:    Font shape `T1/phv/bx/n' in size <14.4> not available
+(Font)              Font shape `T1/phv/b/n' tried instead on input line 60.
+LaTeX Font Info:    Font shape `T1/phv/b/n' will be
+(Font)              scaled to size 13.24796pt on input line 60.
+LaTeX Font Info:    Font shape `T1/ptm/bx/n' in size <12> not available
+(Font)              Font shape `T1/ptm/b/n' tried instead on input line 79.
 
 [1
 
@@ -1247,20 +1263,9 @@ p): fontmap entry for `tbtl10' already exists, duplicates ignored
 pdfTeX warning: pdflatex (file /var/lib/texmf/fonts/map/pdftex/updmap/pdftex.ma
 p): fontmap entry for `tbto10' already exists, duplicates ignored
 }]
-LaTeX Font Info:    Font shape `T1/phv/m/n' will be
-(Font)              scaled to size 11.03998pt on input line 59.
-LaTeX Font Info:    Font shape `T1/phv/bx/n' in size <12> not available
-(Font)              Font shape `T1/phv/b/n' tried instead on input line 59.
-LaTeX Font Info:    Font shape `T1/phv/b/n' will be
-(Font)              scaled to size 11.03998pt on input line 59.
-LaTeX Font Info:    Font shape `T1/phv/bx/n' in size <17.28> not available
-(Font)              Font shape `T1/phv/b/n' tried instead on input line 59.
-LaTeX Font Info:    Font shape `T1/phv/b/n' will be
-(Font)              scaled to size 15.89755pt on input line 59.
- (./admin_guide.toc)
-\tf@toc=\write6
-\openout6 = `admin_guide.toc'.
 
+LaTeX Warning: No positions in optional float specifier.
+               Default added (so using `!tbp') on input line 119.
 
 
 Package Fancyhdr Warning: \headheight is too small (12.0pt): 
@@ -1268,23 +1273,27 @@ Package Fancyhdr Warning: \headheight is too small (12.0pt):
  We now make it that large for the rest of the document.
  This may cause the page layout to be inconsistent, however.
 
-[2] (./admin_guide.aux) ) 
+[2] [3] [4] (./admin_guide.toc)
+\tf@toc=\write6
+\openout6 = `admin_guide.toc'.
+
+ [5] (./admin_guide.aux) ) 
 Here is how much of TeX's memory you used:
- 17133 strings out of 493848
- 321680 string characters out of 1152824
- 410129 words of memory out of 3000000
- 20062 multiletter control sequences out of 15000+50000
- 65995 words of font info for 56 fonts, out of 3000000 for 9000
+ 17395 strings out of 493848
+ 326386 string characters out of 1152824
+ 427129 words of memory out of 3000000
+ 20304 multiletter control sequences out of 15000+50000
+ 105490 words of font info for 76 fonts, out of 3000000 for 9000
  714 hyphenation exceptions out of 8191
- 56i,11n,56p,431b,300s stack positions out of 5000i,500n,10000p,200000b,50000s
-{/usr/share/texmf-texlive/fonts/enc/dvips/base/8r.enc}
-</usr/share/texmf-texlive/fonts/type1/urw/helvetic/uhvb8a.pfb></usr/share/texmf
--texlive/fonts/type1/urw/times/utmb8a.pfb></usr/share/texmf-texlive/fonts/type1
-/urw/times/utmr8a.pfb></usr/share/texmf-texlive/fonts/type1/urw/times/utmr8a.pf
-b></usr/share/texmf-texlive/fonts/type1/urw/times/utmri8a.pfb>
-Output written on admin_guide.pdf (2 pages, 47667 bytes).
+ 56i,11n,61p,427b,875s stack positions out of 5000i,500n,10000p,200000b,50000s
+{/usr/share/texmf-texlive/fonts/enc/dvips/base/8r.enc
+}</usr/share/texmf-texlive/fonts/type1/urw/helvetic/uhvb8a.pfb></usr/share/texm
+f-texlive/fonts/type1/urw/times/utmb8a.pfb></usr/share/texmf-texlive/fonts/type
+1/urw/times/utmr8a.pfb></usr/share/texmf-texlive/fonts/type1/urw/times/utmr8a.p
+fb></usr/share/texmf-texlive/fonts/type1/urw/times/utmri8a.pfb>
+Output written on admin_guide.pdf (5 pages, 77746 bytes).
 PDF statistics:
- 40 PDF objects out of 1000 (max. 8388607)
- 3 named destinations out of 1000 (max. 500000)
- 13 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 97 PDF objects out of 1000 (max. 8388607)
+ 15 named destinations out of 1000 (max. 500000)
+ 69 words of extra memory for PDF output out of 10000 (max. 10000000)
 
