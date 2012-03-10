@@ -3616,6 +3616,56 @@ avoiding sending two emails to the same user.
 There were some minor changes made to the email views to reflect the fact
 that group leaders also receive emails.
 
+Global Variables
+================
+Added an extra global variable called `QUEUE_INTRO_TEXT` to the global vars
+section of `config/environment.rb`.
+
+Will need to send an email to the crystallography address when a sample
+request is submitted.
+
+First edit create action of sample controller to add an extra SampleMailer
+action called sample_request:
+
+```
+  def create
+    # @sample = Sample.new(params[:sample])
+    @sample = current_user.samples.build params[:sample]
+    if @sample.save
+      SampleMailer.sample_receipt(@sample).deliver
+      SampleMailer.sample_request(@sample).deliver
+      redirect_to @sample, :notice => "Sample request registered. You will receive a receipt and confirmation via email."
+    else
+      render :action => 'new'
+    end
+  end
+```
+
+For some reason these constants weren't picked up in the
+`config/environment.rb` file so they were instead placed in
+in `app/mailers/sample_mailer.rb`
+and use one of these to set the default 'from:' and the other is used
+as a from address for the sample_request email which goes to xray.cryst:
+
+```
+  CRYS_EMAIL = "xray.cryst@ncl.ac.uk"
+  LOCAL_ADMIN_EMAIL = "crysadmin@milkyway.ncl.ac.uk"
+  default :from => "Crystallography Service <#{CRYS_EMAIL}>"
+```
+
+in `app/mailers/sample_mailer.rb` we add a new method called `sample_request`:
+
+```
+  def sample_request(sample)
+
+    @sample = sample
+    @greeting = "Hello"
+    mail(:to => "Crystallography Service <#{CRYS_EMAIL}>",
+         :from => "#{LOCAL_ADMIN_EMAIL}"
+         :subject => "#{sample.user.firstname} #{sample.user.lastname}: New Sample Submission Request")
+  end
+```
+
 Status Popups in Sample Queue
 =============================
 Added a popup description of the status when hovering the mouse over the
