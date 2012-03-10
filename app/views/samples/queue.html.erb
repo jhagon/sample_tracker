@@ -25,7 +25,7 @@
       <td><%= sample.userref %></td>
       <td><%= neat_time(sample.created_at) %></td>
       <td><%= sample.priority %></td>
-      <td><%= sample.flag.name %></td>
+      <td title="<%= sample.flag.description %>"><%= sample.flag.name %></td>
       <td><%= pluralize(days, 'Day') %></td>
     </tr>
     <% days = days + 1%>
