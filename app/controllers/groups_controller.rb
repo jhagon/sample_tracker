@@ -10,14 +10,15 @@ class GroupsController < ApplicationController
     @groups=Group.page(params[:page]).per_page(ITEMS_PER_PAGE).find( :all)
   end
 
-
-  def show
+ def show
     @group = Group.find(params[:id])
+    if current_user.admin
+      @samples=@group.samples.page(params[:page]).per_page(ITEMS_PER_PAGE).all( :joins => :flag,
+      :order => "#{sort_column} #{sort_direction}")
+    else
+      @samples=Sample.page(params[:page]).per_page(ITEMS_PER_PAGE).where("(code LIKE '#{current_user.group.group_abbr}%') AND (code LIKE '%#{params[:search]}%')").joins(:flag, {:user => :group}).order("#{sort_column} #{sort_direction}")
+    end
 
-    @samples=Sample.page(params[:page]).per_page(ITEMS_PER_PAGE).where("(code LIKE '#{current_user.group.group_abbr}%') AND (code LIKE '%#{params[:search]}%')").joins(:flag, {:user => :group}).order("#{sort_column} #{sort_direction}")
-
-#    @samples=@group.samples.page(params[:page]).per_page(ITEMS_PER_PAGE).all( :joins => :flag,
-#    :order => "#{sort_column} #{sort_direction}")
   end
 
   def new

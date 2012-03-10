@@ -240,10 +240,10 @@ class SamplePdf < Prawn::Document
 
   def coshh_summary
   
-    font_size = 8
+    font_size = 6
     if (@sample.coshh_info)
       if (@sample.coshh_info.split(/\s+/).size +
-        @sample.comments.split(/\s+/).size > 50)
+        @sample.comments.split(/\s+/).size > 30)
         font_size = 5
       end
     end
