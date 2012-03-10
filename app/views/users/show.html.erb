@@ -31,12 +31,22 @@
 <% if @samples.count > 0 %>
 
   <% form_tag "#{samples_path}/userindex/#{@user.id}", :method => 'get' do %>
-    <p>
-      <%= text_field_tag :search, params[:search] %>
-      <%= submit_tag "Search by Sample Code", :name => nil %>
-    </p>
 
-  <% end %>
+    <% if params[:search_field] == 'code' %>
+      <% code_selected = 'selected' %>
+      <% userref_selected = '' %>
+    <% else %>
+      <% code_selected = '' %>
+      <% userref_selected = 'selected' %>
+    <% end %>
+  <p>
+    <%= text_field_tag :search, params[:search] %> Search By:
+    <%= select_tag "search_field", "<option #{code_selected} value=\"#{:code}\">Sample Code</option><option #{userref_selected} value=\"#{:userref}\">User Reference</option>".html_safe %>
+    <%= submit_tag "Search", :name => nil %>
+  </p>
+
+<% end %>
+  <form method="link" action=<% "/users/show/#{@user.id}" %>><input type="submit" value="Reset Search"></form>
 
 <% end %>
 

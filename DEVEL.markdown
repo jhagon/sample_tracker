@@ -3616,6 +3616,119 @@ avoiding sending two emails to the same user.
 There were some minor changes made to the email views to reflect the fact
 that group leaders also receive emails.
 
+Status Popups in Sample Queue
+=============================
+Added a popup description of the status when hovering the mouse over the
+status field in the sample queue. Very easy, simply made this change to
+`app/views/samples/queue.html.erb`:
+
+```
+      <td title="<%= sample.flag.description %>"><%= sample.flag.name %></td>
+```
+
+Fixed Group Listing Bug for Admins
+==================================
+When going to the group show page, the samples list showed those for the
+administrator's group rather than the actual group being shown.
+Changing the group show controller code to this below seems to work:
+
+```
+ def show
+    @group = Group.find(params[:id])
+    if current_user.admin
+      @samples=@group.samples.page(params[:page]).per_page(ITEMS_PER_PAGE).all( :joins => :flag,
+      :order => "#{sort_column} #{sort_direction}")
+    else
+      @samples=Sample.page(params[:page]).per_page(ITEMS_PER_PAGE).where("(code LIKE '#{current_user.group.group_abbr}%') AND (code LIKE '%#{params[:search]}%')").joins(:flag, {:user => :group}).order("#{sort_column} #{sort_direction}")
+    end
+
+  end
+```
+
+In the above code, we check if the user is an admin. If he is then we
+simply list the samples for the group. If he isn't then we list the
+samples for the current user's group.
+
+Fixed Group Sample Listing View
+===============================
+Also, when listing group samples, for a group leader the edit, destroy and list links should not be there. Modify the groups show page thus:
+
+```
+<% if current_user.admin %>
+
+<p>
+  <%= link_to "Edit", edit_group_path(@group) %> |
+  <%= link_to "Destroy", @group, :confirm => 'Are you sure?', :method => :delete %> |
+  <%= link_to "View All", groups_path %>
+</p>
+
+<% else %>
+
+<p>
+</p>
+
+<% end %>
+```
+
+Added Search by Ref Facility to User Profile Page
+=================================================
+To do this, changed the userindex action in samples to:
+
+```
+  def userindex
+    @samples=Sample.page(params[:page]).per_page(ITEMS_PER_PAGE).where("(user_id = '#{current_user.id}') AND (#{params['search_field']} LIKE '%#{params[:search]}%')").joins(:flag, {:user => :group}).order("#{sort_column} #{sort_direction}")
+#                          :joins => [:flag, {:user => :group}],
+  end
+```
+
+and edited the view in `app/views/users/show.html.erb` to:
+
+```
+<h3><%="Samples List for this User" %></h3>
+
+<% if @samples.count > 0 %>
+
+  <% form_tag "#{samples_path}/userindex/#{@user.id}", :method => 'get' do %>
+
+    <% if params[:search_field] == 'code' %>
+      <% code_selected = 'selected' %>
+      <% userref_selected = '' %>
+    <% else %>
+      <% code_selected = '' %>
+      <% userref_selected = 'selected' %>
+    <% end %>
+  <p>
+    <%= text_field_tag :search, params[:search] %> Search By:
+    <%= select_tag "search_field", "<option #{code_selected} value=\"#{:code}\">Sample Code</option><option #{userref_selected} value=\"#{:userref}\">User Reference</option>".html_safe %>
+    <%= submit_tag "Search", :name => nil %>
+  </p>
+
+<% end %>
+  <form method="link" action=<% "/users/show/#{@user.id}" %>><input type="submit" value="Reset Search"></form>
+
+<% end %>
+```
+
+Finally, (in retrospect not necessary I think, but does no harm) edit the
+users controller in `app/controllers/users_controller.rb`:
+
+```
+  def show
+    @user = User.find(params[:id])
+
+    unless params['search_field']
+      params['search_field'] = 'code'
+    end
+
+    @samples=Sample.page(params[:page]).per_page(ITEMS_PER_PAGE).where("(user_id = '#{current_user.id}') AND (#{params['search_field']} LIKE '%#{params[:search]}%')").joins(:flag, {:user => :group}).order("#{sort_column} #{sort_direction}")
+
+  end
+```
+
+I think this is unnecessary because when invoked, the search_field is always
+set to 'code', so might as well leave it as is. However, this may be
+useful later.
+
 TODO: Generating Sample Data
 ============================
 Use Faker to generate a large number of users and samples so that we can
