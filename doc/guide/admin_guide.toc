@@ -5,3 +5,11 @@
 \contentsline {subsection}{\numberline {1.4}Samples}{2}{subsection.1.4}
 \contentsline {subsection}{\numberline {1.5}Public Pages}{2}{subsection.1.5}
 \contentsline {section}{\numberline {2}The Database}{2}{section.2}
+\contentsline {subsection}{\numberline {2.1}The Samples Table}{2}{subsection.2.1}
+\contentsline {subsection}{\numberline {2.2}The Users Table}{5}{subsection.2.2}
+\contentsline {subsection}{\numberline {2.3}The Stores, Hazards and Sensitivities Tables}{5}{subsection.2.3}
+\contentsline {subsection}{\numberline {2.4}The Groups Table}{6}{subsection.2.4}
+\contentsline {subsection}{\numberline {2.5}Other Tables}{6}{subsection.2.5}
+\contentsline {subsubsection}{\numberline {2.5.1}The Pages Table}{6}{subsubsection.2.5.1}
+\contentsline {subsubsection}{\numberline {2.5.2}The Assets Table}{6}{subsubsection.2.5.2}
+\contentsline {subsubsection}{\numberline {2.5.3}The Popups Table}{7}{subsubsection.2.5.3}

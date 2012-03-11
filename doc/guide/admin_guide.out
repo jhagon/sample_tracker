@@ -5,3 +5,11 @@
 \BOOKMARK [2][-]{subsection.1.4}{Samples}{section.1}
 \BOOKMARK [2][-]{subsection.1.5}{Public Pages}{section.1}
 \BOOKMARK [1][-]{section.2}{The Database}{}
+\BOOKMARK [2][-]{subsection.2.1}{The Samples Table}{section.2}
+\BOOKMARK [2][-]{subsection.2.2}{The Users Table}{section.2}
+\BOOKMARK [2][-]{subsection.2.3}{The Stores, Hazards and Sensitivities Tables}{section.2}
+\BOOKMARK [2][-]{subsection.2.4}{The Groups Table}{section.2}
+\BOOKMARK [2][-]{subsection.2.5}{Other Tables}{section.2}
+\BOOKMARK [3][-]{subsubsection.2.5.1}{The Pages Table}{subsection.2.5}
+\BOOKMARK [3][-]{subsubsection.2.5.2}{The Assets Table}{subsection.2.5}
+\BOOKMARK [3][-]{subsubsection.2.5.3}{The Popups Table}{subsection.2.5}
