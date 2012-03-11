@@ -8,6 +8,7 @@
 \usepackage[sf,bf]{titlesec}
 \usepackage[font=small,width=0.7\textwidth]{caption}
 \usepackage{fancybox}
+\usepackage{enumerate}
 \usepackage{fancyhdr}
 \usepackage{rotating}
 \usepackage{picins,graphicx}
@@ -160,7 +161,151 @@ HTML, an administrator can use a text-based markup language called
 which can produce sophisticated web pages with all the usual constructs
 such as headings, paragraphs, floating elements, tables and images.
 
-\section{The Database}
+\section{Web Management Guide}
+\subsection{Introduction}
+In this section we describe the web management interface to the
+sample tracking database. When a manager is logged-in, the home page of
+the system looks similar to that shown in Figure \ref{fig:homepage}
+
+\begin{figure}[!h]
+\begin{center}
+\includegraphics[width=0.75\textwidth]{homepage}
+\caption{Administrator's view of home page.\label{fig:homepage}}
+\end{center}
+\end{figure}
+
+There are three parts to this browser view:
+\begin{enumerate}[(i)]
+\item
+a main display showing the contents of a page of information;
+\item
+a menu on the left side of the browser window;
+\item
+login information and a \verb=sign_out= link above the main display on
+the right.
+\end{enumerate}
+
+The left side menu consists of three sections:
+\begin{description}
+\item[Information]
+These links point to \emph{static} pages which can be created by an
+administrator. the administrator can also add extra links to the
+information section. We describe how to do this in \S\ref{sec:static}.
+\item[User Tools]
+These tools allow a user to view his sample list, submit a new sample
+and view his profile information. Additionally, if a user is also a group
+leader, he will have access to the \emph{My Group Samples} link for listing
+all samples in the user's group.
+\item[Admin Tools]
+This is the main set of web-based tools for administrators. We will
+describe each of these in the next section.
+\end{description}
+\subsection{Adding Static Pages}\label{sec:static}
+Clicking the \emph{PAGES} link in the \emph{Admin Tools} sub-menu 
+produces the pages index shown in Figure \ref{fig:pageidx}.
+This shows a list of pages. For each of these pages is a set of buttons
+allowing the administrator to show, edit or delete the page as shown in
+Figure \ref{fig:showeditdelete}.
+These buttons are used throughout the database editing pages on the web server.
+At the bottom of the list is a link to create a new page.
+
+\begin{figure}[!h]
+\begin{center}
+\includegraphics{show}\quad
+\includegraphics{edit}\quad
+\includegraphics{delete}
+\end{center}
+\caption{The \emph{show}, \emph{edit} and \emph{delete} buttons.
+\label{fig:showeditdelete}}
+\end{figure}
+
+\begin{figure}[!h]
+\begin{center}
+\includegraphics[width=0.75\textwidth]{pageidx}
+\caption{The pages index view.\label{fig:pageidx}}
+\end{center}
+\end{figure}
+
+\piccaption{The page edit view.\label{fig:editpage}}
+\parpic[r]{\includegraphics[width=0.4\textwidth]{editpage}}
+Figure \ref{fig:editpage} shows the page editor --- a very simple form
+for entering/changing text. This example shows the home page data. 
+the content is entered in a markup language called Textile\footnote{You are 
+allowed to mix HTML and Textile together.}. You can also specify the name
+of the page (this will be used to set the HTML title attribute and a
+permalink\footnote{A tag which is used as a basis for a concise URL.}.
+At the bottom are links to the Textile Reference Manual, the page view
+and the pages index. the page can be referred to via the URL:
+\begin{verbatim}
+<server name>/permalink
+\end{verbatim}
+thus making static page addressing very simple.
+An alternative URL which can be generally used for any page is:
+\begin{verbatim}
+<server name>/pages/<id>
+\end{verbatim}
+but the permalink-based URL is what you'd almost always use in practice.
+If, for some reason, you want to use the id-based URL, but don't know
+what the id is, then just click the 'show' icon in the pages index for
+the page you're interested in and look at the URL in the web browser window.
+
+Note that there is also a checkbox labelled \emph{Menu}. If this is
+checked then the page is added to the left hand \emph{Information} menu
+of static pages. The \emph{Priority} parameter is an integer that
+determines the order of the page in the menu. If two pages have the same
+priority their order is determined alphabetically.
+
+\subsection{Uploading General Files to the Server}
+You can upload arbitrary files to the server. These files are referred
+to as `assets' and can be uploaded via the \emph{ASSETS} link in the
+\emph{Admin Tools} menu. Clicking on this link will take you to the
+assets index page which looks very similar to the pages index described
+in the previous section.
+each index entry tells you the pathname of the file on the server,
+together with a description of what the file contains. Often these files
+will be images or documents (e.g. PDF files) that you want to link to
+on one of the static web pages created as described in the previous
+section.
+
+At the bottom of the asset index list is a link to create a new asset.
+Clicking this takes you to a simple menu where you can browse for a file
+to upload to the server. Clicking the \emph{Create Asset} button will
+then upload the file to the server. It will then be listed in the
+asset index with an entry under the \emph{Document} column pointing
+to its location in the file system. This location has the general form:
+\begin{verbatim}
+/uploads/asset/document/<id>/<filename>
+\end{verbatim}
+Here, \verb=<filename>= is the actual name of the uploaded file as it was
+when it was uploaded. \verb=<id>= is the database id the document has
+in the \verb=assets= table described in detail in \S\ref{sec:database}.
+The actual URL of the document is then:
+\begin{verbatim}
+<servername>/uploads/asset/document/<id>/<filename>
+\end{verbatim}
+
+\subsection{Creating Users and Groups}
+A user must belong to a group, so it is advisable to create a group for a
+user before the user is created. Creating a user group is straightforward
+via the \emph{USER GROUPS} link in the \emph{Admin Tools} menu.
+As usual, this will take you to an index of existing groups, with a link
+to create a new group at the bottom. Creating a new group merely requires
+that you enter two fields:
+\begin{enumerate}[(i)]
+\item
+a 3-letter group abbreviation (it \emph{must} be three letters);
+\item
+a longer group description.
+\end{enumerate}
+
+Users can be created in two ways; they can self-register by clicking
+on the link top-right on the home page or they can be created by an
+administrator. In either case the form used to create and register a new
+user is the same.
+
+
+\section{The Database}\label{sec:database}
+\subsection{Introduction}
 The core of the system is the database which holds information about 
 users, samples etc. In this section we describe the whole database
 structure (or \emph{schema} in database parlance).
@@ -353,6 +498,12 @@ another string used to provide a short, quick URL for the page.
 a text field which contains the page content. This is expected to be written
 in  \href{http://en.wikipedia.org/wiki/Textile_%28markup_language%29}{Textile}
 markup language (although a mixture of pure HTML and Textile can be used.
+\item[menu]
+a boolean specifying whether this page should appear on the
+\emph{Information Menu}.
+\item[priority]
+an integer specifying a priority for ordering the page on the
+\emph{Information Menu}.
 \end{description}
 
 \subsubsection{The Assets Table}
@@ -417,6 +568,8 @@ appropriate field in the sample submission form.
   name:string \\
   permalink:string \\
   content:text \\
+  menu:boolean \\
+  priority:int \\
   created\_at: datetime \\
   updated\_at: datetime};
 

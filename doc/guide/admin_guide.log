@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.1415926-1.40.10 (TeX Live 2009/Debian) (format=pdflatex 2011.4.5)  11 MAR 2012 13:35
+This is pdfTeX, Version 3.1415926-1.40.10 (TeX Live 2009/Debian) (format=pdflatex 2011.4.5)  11 MAR 2012 18:42
 entering extended mode
  %&-line parsing enabled.
 **admin_guide
@@ -381,7 +381,11 @@ Style option: `fancybox' v1.3 <2000/09/19> (tvz)
 \EndVerbatimTokens=\toks20
 \Verbatim@Outfile=\write3
 \Verbatim@Infile=\read1
-) (/usr/share/texmf-texlive/tex/latex/fancyhdr/fancyhdr.sty
+) (/usr/share/texmf-texlive/tex/latex/tools/enumerate.sty
+Package: enumerate 1999/03/05 v3.00 enumerate extensions (DPC)
+\@enLab=\toks21
+)
+(/usr/share/texmf-texlive/tex/latex/fancyhdr/fancyhdr.sty
 \fancy@headwidth=\skip45
 \f@ncyO@elh=\skip46
 \f@ncyO@erh=\skip47
@@ -423,7 +427,7 @@ Package: ifthen 2001/05/26 v1.1c Standard LaTeX ifthen package (DPC)
 \rotFPtop=\skip54
 \rotFPbot=\skip55
 \rot@float@box=\box38
-\rot@mess@toks=\toks21
+\rot@mess@toks=\toks22
 )
 (/usr/local/share/texmf/tex/latex/picins/picins.sty
 Option `picins' Version 3.0 Sep. 1992, TH Darmstadt/HRZ
@@ -476,7 +480,7 @@ Option `picins' Version 3.0 Sep. 1992, TH Darmstadt/HRZ
 (/usr/local/share/texmf/tex/latex/base/tex/latex/pgf/utilities/pgfrcs.sty
 (/usr/local/share/texmf/tex/latex/base/tex/generic/pgf/utilities/pgfutil-common
 .tex
-\pgfutil@everybye=\toks22
+\pgfutil@everybye=\toks23
 )
 (/usr/local/share/texmf/tex/latex/base/tex/generic/pgf/utilities/pgfutil-latex.
 def
@@ -497,12 +501,12 @@ Package: pgfsys 2010/06/30 v2.10 (rcs-revision 1.37)
 
 (/usr/local/share/texmf/tex/latex/base/tex/generic/pgf/utilities/pgfkeys.code.t
 ex
-\pgfkeys@pathtoks=\toks23
-\pgfkeys@temptoks=\toks24
+\pgfkeys@pathtoks=\toks24
+\pgfkeys@temptoks=\toks25
 
 (/usr/local/share/texmf/tex/latex/base/tex/generic/pgf/utilities/pgfkeysfiltere
 d.code.tex
-\pgfkeys@tmptoks=\toks25
+\pgfkeys@tmptoks=\toks26
 ))
 \pgf@x=\dimen139
 \pgf@y=\dimen140
@@ -568,9 +572,9 @@ tex
 \pgfmath@dimen=\dimen147
 \pgfmath@count=\count132
 \pgfmath@box=\box43
-\pgfmath@toks=\toks26
-\pgfmath@stack@operand=\toks27
-\pgfmath@stack@operation=\toks28
+\pgfmath@toks=\toks27
+\pgfmath@stack@operand=\toks28
+\pgfmath@stack@operation=\toks29
 )
 (/usr/local/share/texmf/tex/latex/base/tex/generic/pgf/math/pgfmathfunctions.co
 de.tex
@@ -713,8 +717,8 @@ x
 Package: pgffor 2010/03/23 v2.10 (rcs-revision 1.18)
 \pgffor@iter=\dimen173
 \pgffor@skip=\dimen174
-\pgffor@stack=\toks29
-\pgffor@toks=\toks30
+\pgffor@stack=\toks30
+\pgffor@toks=\toks31
 ))
 (/usr/local/share/texmf/tex/latex/base/tex/generic/pgf/frontendlayer/tikz/tikz.
 code.tex
@@ -911,7 +915,7 @@ Package pdftexcmds Info: \pdf@ifprimitive is available.
 \Fld@menulength=\count147
 \Field@Width=\dimen184
 \Fld@charsize=\dimen185
-\Field@toks=\toks31
+\Field@toks=\toks32
 Package hyperref Info: Hyper figures OFF on input line 4377.
 Package hyperref Info: Link nesting OFF on input line 4382.
 Package hyperref Info: Hyper index ON on input line 4385.
@@ -934,33 +938,33 @@ File: hpdftex.def 2009/10/09 v6.79a Hyperref driver for pdfTeX
 ) (./admin_guide.aux)
 \openout1 = `admin_guide.aux'.
 
-LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 49.
-LaTeX Font Info:    ... okay on input line 49.
-LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 49.
-LaTeX Font Info:    ... okay on input line 49.
-LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 49.
-LaTeX Font Info:    ... okay on input line 49.
-LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 49.
-LaTeX Font Info:    ... okay on input line 49.
-LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 49.
-LaTeX Font Info:    ... okay on input line 49.
-LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 49.
-LaTeX Font Info:    ... okay on input line 49.
-LaTeX Font Info:    Checking defaults for TS1/cmr/m/n on input line 49.
-LaTeX Font Info:    Try loading font information for TS1+cmr on input line 49.
+LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 50.
+LaTeX Font Info:    ... okay on input line 50.
+LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 50.
+LaTeX Font Info:    ... okay on input line 50.
+LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 50.
+LaTeX Font Info:    ... okay on input line 50.
+LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 50.
+LaTeX Font Info:    ... okay on input line 50.
+LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 50.
+LaTeX Font Info:    ... okay on input line 50.
+LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 50.
+LaTeX Font Info:    ... okay on input line 50.
+LaTeX Font Info:    Checking defaults for TS1/cmr/m/n on input line 50.
+LaTeX Font Info:    Try loading font information for TS1+cmr on input line 50.
 
 (/usr/share/texmf-texlive/tex/latex/base/ts1cmr.fd
 File: ts1cmr.fd 1999/05/25 v2.5h Standard LaTeX font definitions
 )
-LaTeX Font Info:    ... okay on input line 49.
-LaTeX Font Info:    Checking defaults for LMP1/mtt/m/it on input line 49.
-LaTeX Font Info:    ... okay on input line 49.
-LaTeX Font Info:    Checking defaults for LMP2/mtt/m/n on input line 49.
-LaTeX Font Info:    ... okay on input line 49.
-LaTeX Font Info:    Checking defaults for LMP3/mtt/m/n on input line 49.
-LaTeX Font Info:    ... okay on input line 49.
-LaTeX Font Info:    Checking defaults for PD1/pdf/m/n on input line 49.
-LaTeX Font Info:    ... okay on input line 49.
+LaTeX Font Info:    ... okay on input line 50.
+LaTeX Font Info:    Checking defaults for LMP1/mtt/m/it on input line 50.
+LaTeX Font Info:    ... okay on input line 50.
+LaTeX Font Info:    Checking defaults for LMP2/mtt/m/n on input line 50.
+LaTeX Font Info:    ... okay on input line 50.
+LaTeX Font Info:    Checking defaults for LMP3/mtt/m/n on input line 50.
+LaTeX Font Info:    ... okay on input line 50.
+LaTeX Font Info:    Checking defaults for PD1/pdf/m/n on input line 50.
+LaTeX Font Info:    ... okay on input line 50.
 
 *geometry auto-detecting driver*
 *geometry detected driver: pdftex*
@@ -1015,13 +1019,13 @@ Package caption Info: End \AtBeginDocument code.
 \scratchbox=\box71
 \nofMPsegments=\count153
 \nofMParguments=\count154
-\everyMPshowfont=\toks32
+\everyMPshowfont=\toks33
 \MPscratchCnt=\count155
 \MPscratchDim=\dimen187
 \MPnumerator=\count156
-\everyMPtoPDFconversion=\toks33
+\everyMPtoPDFconversion=\toks34
 ) ABD: EveryShipout initializing macros
-Package hyperref Info: Link coloring OFF on input line 49.
+Package hyperref Info: Link coloring OFF on input line 50.
 
 (/usr/share/texmf-texlive/tex/latex/hyperref/nameref.sty
 Package: nameref 2007/05/29 v2.31 Cross-referencing by name of section
@@ -1031,41 +1035,41 @@ Package: refcount 2008/08/11 v3.1 Data extraction from references (HO)
 )
 \c@section@level=\count157
 )
-LaTeX Info: Redefining \ref on input line 49.
-LaTeX Info: Redefining \pageref on input line 49.
+LaTeX Info: Redefining \ref on input line 50.
+LaTeX Info: Redefining \pageref on input line 50.
  (./admin_guide.out) (./admin_guide.out)
 \@outlinefile=\write5
 \openout5 = `admin_guide.out'.
 
 \AtBeginShipoutBox=\box72
-LaTeX Font Info:    Try loading font information for T1+phv on input line 51.
+LaTeX Font Info:    Try loading font information for T1+phv on input line 52.
  (/usr/share/texmf-texlive/tex/latex/psnfss/t1phv.fd
 File: t1phv.fd 2001/06/04 scalable font definitions for T1/phv.
 )
 LaTeX Font Info:    Font shape `T1/phv/m/n' will be
-(Font)              scaled to size 19.08076pt on input line 51.
+(Font)              scaled to size 19.08076pt on input line 52.
 LaTeX Font Info:    Font shape `T1/phv/bx/n' in size <20.74> not available
-(Font)              Font shape `T1/phv/b/n' tried instead on input line 51.
+(Font)              Font shape `T1/phv/b/n' tried instead on input line 52.
 LaTeX Font Info:    Font shape `T1/phv/b/n' will be
-(Font)              scaled to size 19.08076pt on input line 51.
+(Font)              scaled to size 19.08076pt on input line 52.
 LaTeX Font Info:    Font shape `T1/ptm/bx/n' in size <10.95> not available
-(Font)              Font shape `T1/ptm/b/n' tried instead on input line 51.
+(Font)              Font shape `T1/ptm/b/n' tried instead on input line 52.
 LaTeX Font Info:    Font shape `T1/phv/m/n' will be
-(Font)              scaled to size 11.03998pt on input line 60.
+(Font)              scaled to size 11.03998pt on input line 61.
 LaTeX Font Info:    Font shape `T1/phv/bx/n' in size <12> not available
-(Font)              Font shape `T1/phv/b/n' tried instead on input line 60.
-LaTeX Font Info:    Font shape `T1/phv/b/n' will be
-(Font)              scaled to size 11.03998pt on input line 60.
-LaTeX Font Info:    Font shape `T1/phv/bx/n' in size <17.28> not available
-(Font)              Font shape `T1/phv/b/n' tried instead on input line 60.
-LaTeX Font Info:    Font shape `T1/phv/b/n' will be
-(Font)              scaled to size 15.89755pt on input line 60.
-LaTeX Font Info:    Font shape `T1/phv/bx/n' in size <14.4> not available
 (Font)              Font shape `T1/phv/b/n' tried instead on input line 61.
 LaTeX Font Info:    Font shape `T1/phv/b/n' will be
-(Font)              scaled to size 13.24796pt on input line 61.
+(Font)              scaled to size 11.03998pt on input line 61.
+LaTeX Font Info:    Font shape `T1/phv/bx/n' in size <17.28> not available
+(Font)              Font shape `T1/phv/b/n' tried instead on input line 61.
+LaTeX Font Info:    Font shape `T1/phv/b/n' will be
+(Font)              scaled to size 15.89755pt on input line 61.
+LaTeX Font Info:    Font shape `T1/phv/bx/n' in size <14.4> not available
+(Font)              Font shape `T1/phv/b/n' tried instead on input line 62.
+LaTeX Font Info:    Font shape `T1/phv/b/n' will be
+(Font)              scaled to size 13.24796pt on input line 62.
 LaTeX Font Info:    Font shape `T1/ptm/bx/n' in size <12> not available
-(Font)              Font shape `T1/ptm/b/n' tried instead on input line 80.
+(Font)              Font shape `T1/ptm/b/n' tried instead on input line 81.
 
 [1
 
@@ -1336,141 +1340,167 @@ p): fontmap entry for `tbto10' already exists, duplicates ignored
 }]
 
 LaTeX Warning: No positions in optional float specifier.
-               Default added (so using `!tbp') on input line 120.
+               Default added (so using `!tbp') on input line 121.
 
-LaTeX Font Info:    Try loading font information for T1+cmtt on input line 173.
+<homepage.png, id=105, 983.92593pt x 716.6775pt>
+File: homepage.png Graphic file (type png)
+ <use homepage.png>
+
+LaTeX Warning: `!h' float specifier changed to `!ht'.
+
+LaTeX Font Info:    Try loading font information for T1+cmtt on input line 184.
 
 (/usr/share/texmf-texlive/tex/latex/base/t1cmtt.fd
 File: t1cmtt.fd 1999/05/25 v2.5h Standard LaTeX font definitions
 )
-Overfull \hbox (1.25235pt too wide) in paragraph at lines 188--194
-[]\T1/ptm/m/n/12 a string, au-to-mat-i-cally gen-er-ated by the sys-tem hav-ing
- the gen-eral form []\T1/cmtt/m/n/12 AAA-AA-YY-1111
- []
-
 
 Package Fancyhdr Warning: \headheight is too small (12.0pt): 
  Make it at least 14.49998pt.
  We now make it that large for the rest of the document.
  This may cause the page layout to be inconsistent, however.
 
-[2] [3] [4] [5] [6]
+[2] [3] <show.png, id=124, 16.06pt x 16.06pt>
+File: show.png Graphic file (type png)
+ <use show.png>
+<edit.png, id=126, 16.06pt x 16.06pt>
+File: edit.png Graphic file (type png)
+ <use edit.png>
+<delete.png, id=127, 16.06pt x 16.06pt>
+File: delete.png Graphic file (type png)
+ <use delete.png>
+<pageidx.png, id=128, 983.92593pt x 716.6775pt>
+File: pageidx.png Graphic file (type png)
+ <use pageidx.png>
+
+LaTeX Warning: `!h' float specifier changed to `!ht'.
+
+<editpage.png, id=129, 414.79968pt x 545.78906pt>
+File: editpage.png Graphic file (type png)
+ <use editpage.png> [4 <./homepage.png (PNG copy)> <./show.png> <./edit.png> <.
+/delete.png>] [5 <./pageidx.png (PNG copy)> <./editpage.png>] [6]
+Overfull \hbox (1.25235pt too wide) in paragraph at lines 333--339
+[]\T1/ptm/m/n/12 a string, au-to-mat-i-cally gen-er-ated by the sys-tem hav-ing
+ the gen-eral form []\T1/cmtt/m/n/12 AAA-AA-YY-1111
+ []
+
+[7] [8] [9]
 \pgf@layerbox@background=\box73
 \pgf@layerboxsaved@background=\box74
 
-Underfull \hbox (badness 1173) in paragraph at lines 561--561
+Underfull \hbox (badness 1173) in paragraph at lines 714--714
  [][][][] 
  []
 
 
-Underfull \hbox (badness 1173) in paragraph at lines 562--562
+Underfull \hbox (badness 1173) in paragraph at lines 715--715
  [][][][] 
  []
 
 
-Underfull \hbox (badness 1173) in paragraph at lines 563--563
+Underfull \hbox (badness 1173) in paragraph at lines 716--716
  [][][][] 
  []
 
 
-Underfull \hbox (badness 1173) in paragraph at lines 564--564
+Underfull \hbox (badness 1173) in paragraph at lines 717--717
  [][][][] 
  []
 
 
-Underfull \hbox (badness 1173) in paragraph at lines 565--565
+Underfull \hbox (badness 1173) in paragraph at lines 718--718
  [][][][] 
  []
 
 
-Underfull \hbox (badness 1173) in paragraph at lines 566--566
+Underfull \hbox (badness 1173) in paragraph at lines 719--719
  [][][][] 
  []
 
 
-Underfull \hbox (badness 1173) in paragraph at lines 567--567
+Underfull \hbox (badness 1173) in paragraph at lines 720--720
  [][][][] 
  []
 
 
-Underfull \hbox (badness 1173) in paragraph at lines 568--568
+Underfull \hbox (badness 1173) in paragraph at lines 721--721
  [][][][] 
  []
 
 
-Underfull \hbox (badness 1173) in paragraph at lines 570--570
+Underfull \hbox (badness 1173) in paragraph at lines 723--723
  [][][][] 
  []
 
 
-Underfull \hbox (badness 1173) in paragraph at lines 571--571
+Underfull \hbox (badness 1173) in paragraph at lines 724--724
  [][][][] 
  []
 
 
-Underfull \hbox (badness 1173) in paragraph at lines 573--573
+Underfull \hbox (badness 1173) in paragraph at lines 726--726
  [][][][] 
  []
 
 
-Underfull \hbox (badness 1173) in paragraph at lines 575--575
+Underfull \hbox (badness 1173) in paragraph at lines 728--728
  [][][][] 
  []
 
 
-Underfull \hbox (badness 1173) in paragraph at lines 576--576
+Underfull \hbox (badness 1173) in paragraph at lines 729--729
  [][][][] 
  []
 
 
-Underfull \hbox (badness 1173) in paragraph at lines 577--577
+Underfull \hbox (badness 1173) in paragraph at lines 730--730
  [][][][] 
  []
 
 
-Underfull \hbox (badness 1173) in paragraph at lines 579--579
+Underfull \hbox (badness 1173) in paragraph at lines 732--732
  [][][][] 
  []
 
 
-Underfull \hbox (badness 1173) in paragraph at lines 580--580
+Underfull \hbox (badness 1173) in paragraph at lines 733--733
  [][][][] 
  []
 
 
-Underfull \hbox (badness 1173) in paragraph at lines 581--581
+Underfull \hbox (badness 1173) in paragraph at lines 734--734
  [][][][] 
  []
 
 
-Overfull \hbox (5.40602pt too wide) in paragraph at lines 609--609
+Overfull \hbox (5.40602pt too wide) in paragraph at lines 762--762
 [] [] 
  []
 
-[7] [8] (./admin_guide.toc)
+[10] [11] (./admin_guide.toc)
 \tf@toc=\write6
 \openout6 = `admin_guide.toc'.
 
- [9] (./admin_guide.aux) ) 
+ [12] (./admin_guide.aux) ) 
 Here is how much of TeX's memory you used:
- 17964 strings out of 493848
- 336375 string characters out of 1152824
- 430212 words of memory out of 3000000
- 20847 multiletter control sequences out of 15000+50000
- 110062 words of font info for 81 fonts, out of 3000000 for 9000
+ 18057 strings out of 493848
+ 337649 string characters out of 1152824
+ 430580 words of memory out of 3000000
+ 20911 multiletter control sequences out of 15000+50000
+ 131858 words of font info for 91 fonts, out of 3000000 for 9000
  714 hyphenation exceptions out of 8191
- 56i,11n,62p,491b,911s stack positions out of 5000i,500n,10000p,200000b,50000s
-{/usr/share/texmf/fonts/enc/dvips/cm-super/cm-super-t
-1.enc}{/usr/share/texmf-texlive/fonts/enc/dvips/base/8r.enc}</usr/share/texmf/f
-onts/type1/public/cm-super/sftt1095.pfb></usr/share/texmf/fonts/type1/public/cm
--super/sftt1200.pfb></usr/share/texmf-texlive/fonts/type1/urw/helvetic/uhvb8a.p
-fb></usr/share/texmf-texlive/fonts/type1/urw/times/utmb8a.pfb></usr/share/texmf
--texlive/fonts/type1/urw/times/utmr8a.pfb></usr/share/texmf-texlive/fonts/type1
-/urw/times/utmr8a.pfb></usr/share/texmf-texlive/fonts/type1/urw/times/utmri8a.p
-fb>
-Output written on admin_guide.pdf (9 pages, 138413 bytes).
+ 56i,11n,62p,492b,911s stack positions out of 5000i,500n,10000p,200000b,50000s
+{/usr/share/texmf/fonts/enc/dvips/cm-super/cm-super-
+t1.enc}{/usr/share/texmf-texlive/fonts/enc/dvips/base/8r.enc}</usr/local/share/
+texmf/fonts/type1/pctex/mtpro2/mt2mis.pfb></usr/local/share/texmf/fonts/type1/p
+ctex/mtpro2/mt2sys.pfb></usr/share/texmf/fonts/type1/public/cm-super/sftt1095.p
+fb></usr/share/texmf/fonts/type1/public/cm-super/sftt1200.pfb></usr/share/texmf
+-texlive/fonts/type1/urw/helvetic/uhvb8a.pfb></usr/share/texmf-texlive/fonts/ty
+pe1/urw/times/utmb8a.pfb></usr/share/texmf-texlive/fonts/type1/urw/times/utmr8a
+.pfb></usr/share/texmf-texlive/fonts/type1/urw/times/utmr8a.pfb></usr/share/tex
+mf-texlive/fonts/type1/urw/times/utmri8a.pfb>
+Output written on admin_guide.pdf (12 pages, 558807 bytes).
 PDF statistics:
- 170 PDF objects out of 1000 (max. 8388607)
- 27 named destinations out of 1000 (max. 500000)
- 133 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 255 PDF objects out of 1000 (max. 8388607)
+ 47 named destinations out of 1000 (max. 500000)
+ 211 words of extra memory for PDF output out of 10000 (max. 10000000)
 

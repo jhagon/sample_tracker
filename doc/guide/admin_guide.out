@@ -4,12 +4,18 @@
 \BOOKMARK [2][-]{subsection.1.3}{Groups}{section.1}
 \BOOKMARK [2][-]{subsection.1.4}{Samples}{section.1}
 \BOOKMARK [2][-]{subsection.1.5}{Public Pages}{section.1}
-\BOOKMARK [1][-]{section.2}{The Database}{}
-\BOOKMARK [2][-]{subsection.2.1}{The Samples Table}{section.2}
-\BOOKMARK [2][-]{subsection.2.2}{The Users Table}{section.2}
-\BOOKMARK [2][-]{subsection.2.3}{The Stores, Hazards and Sensitivities Tables}{section.2}
-\BOOKMARK [2][-]{subsection.2.4}{The Groups Table}{section.2}
-\BOOKMARK [2][-]{subsection.2.5}{Other Tables}{section.2}
-\BOOKMARK [3][-]{subsubsection.2.5.1}{The Pages Table}{subsection.2.5}
-\BOOKMARK [3][-]{subsubsection.2.5.2}{The Assets Table}{subsection.2.5}
-\BOOKMARK [3][-]{subsubsection.2.5.3}{The Popups Table}{subsection.2.5}
+\BOOKMARK [1][-]{section.2}{Web Management Guide}{}
+\BOOKMARK [2][-]{subsection.2.1}{Introduction}{section.2}
+\BOOKMARK [2][-]{subsection.2.2}{Adding Static Pages}{section.2}
+\BOOKMARK [2][-]{subsection.2.3}{Uploading General Files to the Server}{section.2}
+\BOOKMARK [2][-]{subsection.2.4}{Creating Users and Groups}{section.2}
+\BOOKMARK [1][-]{section.3}{The Database}{}
+\BOOKMARK [2][-]{subsection.3.1}{Introduction}{section.3}
+\BOOKMARK [2][-]{subsection.3.2}{The Samples Table}{section.3}
+\BOOKMARK [2][-]{subsection.3.3}{The Users Table}{section.3}
+\BOOKMARK [2][-]{subsection.3.4}{The Stores, Hazards and Sensitivities Tables}{section.3}
+\BOOKMARK [2][-]{subsection.3.5}{The Groups Table}{section.3}
+\BOOKMARK [2][-]{subsection.3.6}{Other Tables}{section.3}
+\BOOKMARK [3][-]{subsubsection.3.6.1}{The Pages Table}{subsection.3.6}
+\BOOKMARK [3][-]{subsubsection.3.6.2}{The Assets Table}{subsection.3.6}
+\BOOKMARK [3][-]{subsubsection.3.6.3}{The Popups Table}{subsection.3.6}
