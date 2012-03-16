@@ -7,6 +7,7 @@
 
   <% if user_signed_in? and current_user.admin? %>
   <div class="boxadmin">
+  <h3>Results, Data and Feedback</h3>
   <p>
   <div><%= f.label "Status Flag" %><br />
   <%= select(:sample, :flag_id, Flag.all.collect {|f| [ f.name, f.id ] })
@@ -57,6 +58,13 @@
     <%= f.label :shape %><br />
     <%= f.text_field :shape %>
   </p>
+
+  <p>
+    <%= f.label :feedback %><br />
+    
+    <%= f.text_area :feedback, :cols => 35, :rows => 6 %>
+  </p>
+
   </div>
   <% end %>
 

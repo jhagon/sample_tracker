@@ -3779,6 +3779,45 @@ I think this is unnecessary because when invoked, the search_field is always
 set to 'code', so might as well leave it as is. However, this may be
 useful later.
 
+Adding a Feedback Field to the Sample Model
+===========================================
+This is a text field used by crystallography staff to provide feedback
+about the sample to the user. We use a standard migration for this:
+
+```
+rails generate migration add_feedback_to_samples feedback:text
+```
+
+then remember to add :feedback as an accessible attribute in the 
+`app/models/sample.rb` file.
+
+Now we must add a text field to the sample form in the 'restricted' area
+available only to administrators in the sample form in
+`/app/views/samples/_form.html.erb`:
+
+```
+  <p>
+    <%= f.label :feedback %><br />
+    <%= f.text_area :feedback, :cols => 35, :rows => 6 %>
+  </p>
+```
+
+Finally, we amend the show page for the sample in 
+`/app/views/samples/show.html.erb`:
+
+```
+  <p>
+  Feedback: <br />
+  <div style="padding: 2px;border: solid 1px; background: #fff;">
+  <% if @sample.feedback? %>
+    <%= @sample.feedback  %>
+  <% else %>
+    not yet available
+  <% end %>
+  </div>
+  </p>
+```
+
 TODO: Generating Sample Data
 ============================
 Use Faker to generate a large number of users and samples so that we can

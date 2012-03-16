@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.1415926-1.40.10 (TeX Live 2009/Debian) (format=pdflatex 2011.4.5)  11 MAR 2012 18:42
+This is pdfTeX, Version 3.1415926-1.40.10 (TeX Live 2009/Debian) (format=pdflatex 2011.4.5)  16 MAR 2012 19:01
 entering extended mode
  %&-line parsing enabled.
 **admin_guide
@@ -1387,11 +1387,6 @@ Overfull \hbox (1.25235pt too wide) in paragraph at lines 333--339
 \pgf@layerbox@background=\box73
 \pgf@layerboxsaved@background=\box74
 
-Underfull \hbox (badness 1173) in paragraph at lines 714--714
- [][][][] 
- []
-
-
 Underfull \hbox (badness 1173) in paragraph at lines 715--715
  [][][][] 
  []
@@ -1427,7 +1422,7 @@ Underfull \hbox (badness 1173) in paragraph at lines 721--721
  []
 
 
-Underfull \hbox (badness 1173) in paragraph at lines 723--723
+Underfull \hbox (badness 1173) in paragraph at lines 722--722
  [][][][] 
  []
 
@@ -1437,12 +1432,12 @@ Underfull \hbox (badness 1173) in paragraph at lines 724--724
  []
 
 
-Underfull \hbox (badness 1173) in paragraph at lines 726--726
+Underfull \hbox (badness 1173) in paragraph at lines 725--725
  [][][][] 
  []
 
 
-Underfull \hbox (badness 1173) in paragraph at lines 728--728
+Underfull \hbox (badness 1173) in paragraph at lines 727--727
  [][][][] 
  []
 
@@ -1457,7 +1452,7 @@ Underfull \hbox (badness 1173) in paragraph at lines 730--730
  []
 
 
-Underfull \hbox (badness 1173) in paragraph at lines 732--732
+Underfull \hbox (badness 1173) in paragraph at lines 731--731
  [][][][] 
  []
 
@@ -1472,7 +1467,12 @@ Underfull \hbox (badness 1173) in paragraph at lines 734--734
  []
 
 
-Overfull \hbox (5.40602pt too wide) in paragraph at lines 762--762
+Underfull \hbox (badness 1173) in paragraph at lines 735--735
+ [][][][] 
+ []
+
+
+Overfull \hbox (5.40602pt too wide) in paragraph at lines 763--763
 [] [] 
  []
 
@@ -1498,7 +1498,7 @@ fb></usr/share/texmf/fonts/type1/public/cm-super/sftt1200.pfb></usr/share/texmf
 pe1/urw/times/utmb8a.pfb></usr/share/texmf-texlive/fonts/type1/urw/times/utmr8a
 .pfb></usr/share/texmf-texlive/fonts/type1/urw/times/utmr8a.pfb></usr/share/tex
 mf-texlive/fonts/type1/urw/times/utmri8a.pfb>
-Output written on admin_guide.pdf (12 pages, 558807 bytes).
+Output written on admin_guide.pdf (12 pages, 558823 bytes).
 PDF statistics:
  255 PDF objects out of 1000 (max. 8388607)
  47 named destinations out of 1000 (max. 500000)

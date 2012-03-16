@@ -76,6 +76,17 @@
   <% end %>
   </p>
 
+  <p>
+  Feedback: <br />
+  <div style="padding: 2px;border: solid 1px; background: #fff;">
+  <% if @sample.feedback? %>
+    <%= @sample.feedback  %>
+  <% else %>
+    No feedback given.
+  <% end %>
+  </div>
+  </p>
+
   </div>
 
   <p>
