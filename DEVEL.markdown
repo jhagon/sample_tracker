@@ -3476,7 +3476,7 @@ following:
 * WITHDRAWN
 * FAILED*
 
-the latter meaning any ststus flag that begins with the string `FAILED`.
+the latter meaning any status flag that begins with the string `FAILED`.
 To do this, the `queue` action in the samples controller was changed to:
 
 ```

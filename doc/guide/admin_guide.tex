@@ -22,6 +22,7 @@
 \renewcommand{\thefootnote}{\fnsymbol{footnote}}
 %
 \definecolor{skyblue}{rgb}{0.422,0.648,0.801}
+\definecolor{darkgreen}{rgb}{0.0,0.4,0.0}
 %
 % Use these directives to change the appearance of example boxes.
 %
@@ -58,6 +59,8 @@ description of the software interface and the database itself so that
 administrators can recover from situations such as a forgotton
 administrator password.
 \end{abstract}
+\tableofcontents
+\newpage
 \section{General Description of the System}
 \subsection{Introduction}
 The system consists of a \emph{front-end} which is used by users
@@ -254,6 +257,10 @@ checked then the page is added to the left hand \emph{Information} menu
 of static pages. The \emph{Priority} parameter is an integer that
 determines the order of the page in the menu. If two pages have the same
 priority their order is determined alphabetically.
+A good practice is to initially assign priorities in units of, say, 10.
+Subsequently, if a new page is created, there are then plenty of 'spare'
+priority numbers which can be used to add menu links in between
+existing links --- otherwise existing priority numbers may need to be tweaked.
 
 \subsection{Uploading General Files to the Server}
 You can upload arbitrary files to the server. These files are referred
@@ -302,6 +309,196 @@ Users can be created in two ways; they can self-register by clicking
 on the link top-right on the home page or they can be created by an
 administrator. In either case the form used to create and register a new
 user is the same.
+
+\subsection{Sample Management}
+
+In this section we give a complete description of the sample management
+workflow.
+\begin{enumerate}[(i)]
+\item
+First, a user fills out a sample submission form online. This form is
+shown in Figure \ref{fig:sampleform}. This figure shows the
+submission form from the point of view of both a non-administrative user
+and an administrator.
+\begin{figure}[!h]
+\begin{center}
+\includegraphics[width=0.45\textwidth]{sampleformuser}
+\quad
+\includegraphics[width=0.45\textwidth]{sampleformadmin}
+\caption{User's view (left) and administrator's view (right)
+of the sample submission form.\label{fig:sampleform}}
+\end{center}
+\end{figure}
+
+The bits that an ordinary user doesn't see are those parts of the sample
+fields that are subsequently filled in by an administrator in the course
+of sample processing.
+
+There is a lot of validation built into the form making it very unlikely
+that a form will be submitted with incomplete information.
+Table \ref{table:samplevalidations} gives a complete list of
+validation checks. If a validation check fails on submission of the form,
+the user will be presented with the \emph{Invalid Fields} box which will
+tell him which fields have not been entered correctly and what is
+required. An extreme example of this is shown in Figure
+\ref{fig:invalidfields} which shows what happens when none of the fields
+in the form are filled-in.
+
+\begin{figure}[!h]
+\begin{center}
+\includegraphics[width=0.45\textwidth]{invalidfields}
+\quad
+\includegraphics[width=0.45\textwidth]{invalidfieldsbox}
+\caption{Illustrating what happens when an invalid form is submitted.
+The user sees an \emph{Invalid Fields} box (shown enlarged on the right).
+In this case, an administrative user has failed to fill in any of the fields
+--- hopefully a very rare occurrence!\label{fig:invalidfields}}
+\end{center}
+\end{figure}
+
+\item
+(On successful submission of the sample form, the user and group leaders) 
+will receive a
+confirmation email containing a link to the \emph{Sample Receipt} ---
+a PDF file containing the user input information as well as a unique code
+identifying the user, user group and sample and a unique barcode.
+The email has the following general form with the tags in angle
+brackets filled-in automatically:
+
+\footnotesize
+\begin{verbatim}
+Dear User
+
+New Sample Submission Code: <SAMPLE CODE> (your ref <SAMPLE USERREF>)
+Submitted By: <USER FULL NAME>
+
+
+your sample analysis request has been received. Please download a
+receipt using the link below. Please quote the sample code in any
+correspondence.
+
+There is a tear-off slip at the bottom
+of the receipt which you should attach to your sample.
+You will be informed via email of any
+changes in the status of your sample.
+
+<LINK TO SAMPLE RECEIPT>
+
+Copies of this email are sent to both sample submitters and their
+research group leaders (where different).
+
+Newcastle Crystallography Service
+\end{verbatim}
+\normalsize
+
+A tear-off slip at the bottom of the sample receipt
+containing the barcode, sample code and provided user
+reference as well as essential COSHH information can be attached to the
+actual sample itself.
+Figure \ref{fig:samplereceipt} shows a typical sample receipt.
+
+The receipt is generated on-the-fly from the supplied sample information. 
+To perform the generation of the PDF, the well-known 
+\href{http://prawn.majesticseacreature.com/}{Prawn} ruby library is used.
+Once the sample has been submitted, a user can regenerate the sample receipt
+at any time via a PDF link button in the sample list on his profile page
+shown in Figure \ref{fig:userprofile}.
+
+\begin{figure}[!h]
+\begin{center}
+\fcolorbox{darkgreen}{white}{\includegraphics[width=0.9\textwidth]{samplereceipt}}
+\caption{Example of a sample receipt (the actual size is A4).
+Note the tear-off slip at the bottom. The receipt is generated
+on-the-fly from the supplied sample information. The green border
+is not part of the PDF rendering, it is used here merely to show
+the A4 page border.\label{fig:samplereceipt}}
+\end{center}
+\end{figure}
+
+\begin{figure}[!h]
+\begin{center}
+\includegraphics[width=0.65\textwidth]{userprofile}
+\quad
+\includegraphics{pdf.png}
+\caption{User profile page showing sample list with PDF icon (shown
+enlarged bottom right).\label{fig:userprofile}}
+\end{center}
+\end{figure}
+
+\item
+Next, the user brings his sample (with attached slip) for analysis and
+at this point he should also see it in the sample queue.
+\item
+Initially the sample will have a status of \verb=SUBMITTED=. At various
+points in the analysis, this status will be changed by crystallography
+staff. Whenever the status is changed, an email is sent to both the user
+and group leaders informing them of the change. The text of the email
+looks similar to this:
+
+
+\footnotesize
+\begin{verbatim}
+Dear User
+
+This is to inform you that the status of sample
+<SAMPLE CODE> (your ref <SAMPLE USERREF>) submitted by
+<USER FULL NAME>
+has changed as follows:
+
+New Status: <NEW STATUS FLAG> <NEW STATUS FLAG DESCRIPTION>
+
+Old Status: <OLD STATUS FLAG> <OLD STATUS FLAG DESCRIPTION>
+
+<LINK TO FULL SAMPLE INFORMATION>
+
+Copies of this email are sent to both sample submitters and their
+research group leaders (where different).
+
+Newcastle Crystallography Service
+\end{verbatim}
+\normalsize
+
+\item
+When crystallography staff have uploaded all results files (docx, res and
+sample image) to the server and added any additional text feedback for
+the sample, they will flag the sample as \verb=COMPLETED= and the process
+will end. The sample data will continue to be available to users
+(and administrators) indefinately after that.
+
+Results files (docx and res) will usually be made available in a single 
+zip file, with
+the sample image in a separate file. The files are uploaded by
+administrators using the sample edit form shown in 
+Figure \ref{fig:sampleeditform}. Note that only administrators have access
+to the sample edit form.
+Users will see the information in a slightly different way, not as a form
+but as a standard 'show' page. This view is shown in
+Figure \ref{fig:sampleeditform}.Note that if administrators do not fill in the feedback section, then a
+default message `No feedback given.' is seen on the relevant part of the
+sample show page. This is also illustrated in 
+Figure \ref{fig:sampleshowpage}.
+
+\begin{figure}[!h]
+\begin{center}
+\includegraphics[width=0.75\textwidth]{sampleeditform}
+\caption{A fully complete sample edit form.\label{fig:sampleeditform}}
+\end{center}
+\end{figure}
+
+\begin{figure}[!h]
+\begin{center}
+\includegraphics[width=0.60\textwidth]{sampleshowpage}
+\quad
+\includegraphics[width=0.30\textwidth]{sampleresults}
+\caption{The user's view of a completed sample (left). On the right is
+an enlarged view of the results section. Note also that a thumbnail image
+of the sample is displayed. This thumbnail, when clicked, will show the
+full-size image which can then be downloaded if desired.\label{fig:sampleshowpage}}
+\end{center}
+\end{figure}
+
+
+\end{enumerate}
 
 
 \section{The Database}\label{sec:database}
@@ -384,6 +581,9 @@ a string holding information about the colour of a sample after analysis.
 a string holding information about the size of a sample after analysis.
 \item[shape]
 a string holding information about the shape of a sample after analysis.
+\item[feedback]
+a text field containing any additional comments on the sample by
+crystallography staff.
 \end{description}
 
 \subsection{The Users Table}
@@ -540,6 +740,23 @@ in the corresponding \verb=name= field.
 The \verb=popups= table, as its name implies, provides descriptive
 text in popup boxes whenever a user hovers the mouse over the
 appropriate field in the sample submission form.
+
+\subsubsection{The Flags Table}
+This table stores a set of status flags together with a more verbose
+description of what the flag means. 
+
+\begin{description}
+\item[name]
+a string containing the name of the status flag, e.g. 
+\verb=SUBMITTED=, \verb=COMPLETED= etc. There can be any number of flags
+but the aforementioned flags must be present because when the sample is
+originally submitted it is, by default, given the status
+\verb=SUBMITTED=. Also, when analysis is finished, the sample queue list
+will omit all samples which have had the \verb=COMPLETED= flag set
+or have a status flag which begins with the string \verb=FAILED=.
+\item[description]
+a text field giving a detailed description of the associated flag name.
+\end{description}
 
 \begin{sidewaysfigure}
 \captionsetup{width=25cm}
@@ -762,7 +979,4 @@ indicated with lines joining the relevant fields. Note that the tables
 are \emph{join tables} which serve only to facilitate a many-to-many
 relationship between the tables they link.\label{fig:database_schema}}
 \end{sidewaysfigure}
-\newpage
-\tableofcontents
-\newpage
 \end{document}

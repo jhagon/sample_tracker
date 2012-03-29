@@ -1,21 +1,23 @@
-\contentsline {section}{\numberline {1}General Description of the System}{1}{section.1}
-\contentsline {subsection}{\numberline {1.1}Introduction}{1}{subsection.1.1}
-\contentsline {subsection}{\numberline {1.2}Users}{1}{subsection.1.2}
-\contentsline {subsection}{\numberline {1.3}Groups}{2}{subsection.1.3}
-\contentsline {subsection}{\numberline {1.4}Samples}{2}{subsection.1.4}
-\contentsline {subsection}{\numberline {1.5}Public Pages}{2}{subsection.1.5}
-\contentsline {section}{\numberline {2}Web Management Guide}{2}{section.2}
-\contentsline {subsection}{\numberline {2.1}Introduction}{2}{subsection.2.1}
-\contentsline {subsection}{\numberline {2.2}Adding Static Pages}{4}{subsection.2.2}
-\contentsline {subsection}{\numberline {2.3}Uploading General Files to the Server}{6}{subsection.2.3}
-\contentsline {subsection}{\numberline {2.4}Creating Users and Groups}{6}{subsection.2.4}
-\contentsline {section}{\numberline {3}The Database}{6}{section.3}
-\contentsline {subsection}{\numberline {3.1}Introduction}{6}{subsection.3.1}
-\contentsline {subsection}{\numberline {3.2}The Samples Table}{7}{subsection.3.2}
-\contentsline {subsection}{\numberline {3.3}The Users Table}{8}{subsection.3.3}
-\contentsline {subsection}{\numberline {3.4}The Stores, Hazards and Sensitivities Tables}{8}{subsection.3.4}
-\contentsline {subsection}{\numberline {3.5}The Groups Table}{9}{subsection.3.5}
-\contentsline {subsection}{\numberline {3.6}Other Tables}{9}{subsection.3.6}
-\contentsline {subsubsection}{\numberline {3.6.1}The Pages Table}{9}{subsubsection.3.6.1}
-\contentsline {subsubsection}{\numberline {3.6.2}The Assets Table}{10}{subsubsection.3.6.2}
-\contentsline {subsubsection}{\numberline {3.6.3}The Popups Table}{10}{subsubsection.3.6.3}
+\contentsline {section}{\numberline {1}General Description of the System}{3}{section.1}
+\contentsline {subsection}{\numberline {1.1}Introduction}{3}{subsection.1.1}
+\contentsline {subsection}{\numberline {1.2}Users}{3}{subsection.1.2}
+\contentsline {subsection}{\numberline {1.3}Groups}{3}{subsection.1.3}
+\contentsline {subsection}{\numberline {1.4}Samples}{3}{subsection.1.4}
+\contentsline {subsection}{\numberline {1.5}Public Pages}{5}{subsection.1.5}
+\contentsline {section}{\numberline {2}Web Management Guide}{5}{section.2}
+\contentsline {subsection}{\numberline {2.1}Introduction}{5}{subsection.2.1}
+\contentsline {subsection}{\numberline {2.2}Adding Static Pages}{6}{subsection.2.2}
+\contentsline {subsection}{\numberline {2.3}Uploading General Files to the Server}{7}{subsection.2.3}
+\contentsline {subsection}{\numberline {2.4}Creating Users and Groups}{8}{subsection.2.4}
+\contentsline {subsection}{\numberline {2.5}Sample Management}{8}{subsection.2.5}
+\contentsline {section}{\numberline {3}The Database}{10}{section.3}
+\contentsline {subsection}{\numberline {3.1}Introduction}{10}{subsection.3.1}
+\contentsline {subsection}{\numberline {3.2}The Samples Table}{13}{subsection.3.2}
+\contentsline {subsection}{\numberline {3.3}The Users Table}{14}{subsection.3.3}
+\contentsline {subsection}{\numberline {3.4}The Stores, Hazards and Sensitivities Tables}{15}{subsection.3.4}
+\contentsline {subsection}{\numberline {3.5}The Groups Table}{15}{subsection.3.5}
+\contentsline {subsection}{\numberline {3.6}Other Tables}{15}{subsection.3.6}
+\contentsline {subsubsection}{\numberline {3.6.1}The Pages Table}{16}{subsubsection.3.6.1}
+\contentsline {subsubsection}{\numberline {3.6.2}The Assets Table}{16}{subsubsection.3.6.2}
+\contentsline {subsubsection}{\numberline {3.6.3}The Popups Table}{16}{subsubsection.3.6.3}
+\contentsline {subsubsection}{\numberline {3.6.4}The Flags Table}{16}{subsubsection.3.6.4}
