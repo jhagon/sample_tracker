@@ -1,0 +1,73 @@
+\NeedsTeXFormat{LaTeX2e}
+\ProvidesPackage{exmplbox}[2011/04/29 v0.9 (JPH)]
+\RequirePackage{tikz}
+\usetikzlibrary{shapes,decorations}
+%
+% == Start Here ==
+%
+% We need to save the node
+% Every append after command might be useful to have this code
+%
+\def\savelastnode{\pgfextra\edef\tmpA{\tikzlastnode}\endpgfextra}
+\def\restorelastnode{\pgfextra\edef\tikzlastnode{\tmpA}\endpgfextra}
+% Define default boxes and box title styles
+\tikzstyle{plainbox} = [draw=black, fill=yellow!20, thin,
+    rectangle, rounded corners, inner sep=10pt, inner ysep=20pt]
+\tikzstyle{exmplbox} = [draw=black, fill=yellow!20, thin,
+    rectangle, rounded corners, inner sep=10pt, inner ysep=20pt]
+\tikzstyle{exmpltitle} =[fill=black, text=white]
+\tikzstyle{title} = [append after command={%
+    \savelastnode node[exmpltitle,rounded corners,right=10pt] at (\tikzlastnode.north west)%
+    {#1}\restorelastnode}]
+%
+%
+%
+\newcounter{exmplcnt}
+\setcounter{exmplcnt}{0}
+\newenvironment{example}[2][0.7]
+{%
+\stepcounter{exmplcnt}
+\par\noindent
+\begin{center}
+\begin{tikzpicture}
+\node [exmplbox,title=Example \arabic{exmplcnt}#2] (box)\bgroup%
+\begin{minipage}{#1\textwidth}
+}%
+{%
+\end{minipage}
+\egroup;
+\end{tikzpicture}
+\end{center}
+\par\noindent
+}
+\newenvironment{titleblock}[2][0.7]%
+{%
+\par\noindent
+\begin{center}
+\begin{tikzpicture}
+\node [exmplbox,title=#2] (box)\bgroup%
+\begin{minipage}{#1\textwidth}
+}%
+{%
+\end{minipage}
+\egroup;
+\end{tikzpicture}
+\end{center}
+\par\noindent
+}
+\newenvironment{plainblock}[1][0.7]%
+{%
+\par\noindent
+\begin{center}
+\begin{tikzpicture}
+\node [plainbox] (box)\bgroup%
+\begin{minipage}{#1\textwidth}
+}%
+{%
+\end{minipage}
+\egroup;
+\end{tikzpicture}
+\end{center}
+\par\noindent
+}
+

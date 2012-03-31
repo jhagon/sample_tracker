@@ -13,6 +13,7 @@
 \usepackage{rotating}
 \usepackage{picins,graphicx}
 \usepackage{tikz}
+\usepackage{example}
 \usetikzlibrary{shapes,arrows}
 \usepackage[pdftex]{hyperref}
 \title{\sffamily\bfseries Crystallography Service Sample Database Administrator's Guide}
@@ -501,6 +502,107 @@ full-size image which can then be downloaded if desired.\label{fig:sampleshowpag
 
 
 \end{enumerate}
+
+\subsection{Sample Search and Display Tools}
+It is important that both administrators, group leaders and users can
+find information about a particular sample or group of samples.
+In this section we describe the tools that are available to quickly find
+the sample data you need.
+
+\begin{figure}[!h]
+\begin{center}
+\includegraphics[width=0.75\textwidth]{sampleindex}
+\caption{An administrator's view of the full sample index. 
+In this case the red arrow next to the header in the \emph{Code}
+column indicates that the list has been sorted by sample code in
+ascending order (the default sorting).\label{fig:sampleindex}}
+\end{center}
+\end{figure}
+
+For administrators, the usual starting point will be the main sample
+index page shown in Figure \ref{fig:sampleindex}.
+By default, this index is sorted by sample code in \emph{ascending} order.
+This is indicated by a small red arrow pointing upwards next to the header
+text in the \emph{Sample Code} column. 
+Clicking the header text of the \emph{Sample Code} column will reverse the
+order --- i.e. it will now be \emph{descending} order. This is indicated
+by a blue arrow pointing downwards.
+The list can be sorted on any other of the displayed columns simply by
+clicking the column header. repeated clicking on the same column header
+will toggle the sort order between ascending/descending.
+
+The number of samples displayed per page can also be controlled by the
+user. By default, this number is set by a global variable,
+\verb=ITEMS_PER_PAGE= defined in the \verb=config/environment.rb= file\footnote{See the \emph{System Management} section for further details.}.
+However, it can be easily changed by selecting the desired value from
+a drop-down list in the search form above the sample list.
+After the choice is made, the list will be re-paginated according to
+the selected value. Note that for a full samples listing, the search box
+itself must be empty when you do this.
+
+\begin{figure}[!h]
+\begin{center}
+\includegraphics[width=0.75\textwidth]{searchform}
+\caption{The sample index search form. This is usually found
+above the list of samples in most of the sample index pages.
+\label{fig:searchform}}
+\end{center}
+\end{figure}
+
+To narrow down the list of samples you need to type something into
+the search box in the search form above the sample list. This search form
+is common to most of the sample listing pages and is shown in
+Figure \ref{fig:searchform}.
+You can search
+on two fields: the sample code or the user reference. When you perform
+a search, the results will be paginated according to the setting of the
+pagination parameter described above. Note that search results can be
+sorted as before by clicking the header text of the column that you
+wish to sort by.
+Below the search form is a reset button which resets all the search
+and pagination parameters to their default values.
+
+\begin{plainblock}
+Note that searches are \emph{not} cumulative --- they are always made
+with respect to the full set of samples. In other words if you perform
+a second search after an initial search, the results of the second search
+will be exactly the same as if it had been performed first.
+\end{plainblock}
+
+\subsubsection{BarCode Scanning}
+\piccaption{A Zebex scanner.\label{fig:zebex}}
+\parpic[r]{\includegraphics[width=0.3\textwidth]{zebex}}
+As mentioned earlier, each sample has associated with it a unique
+barcode and it may sometimes be convenient to scan a sample barcode
+and have the associated sample record displayed to the screen.
+To this end, the system has a very simple interface which allows
+a simple low-cost USB scanner such as the \emph{Zebex} scanner shown in 
+Figure \ref{fig:zebex} to be used to extract a barcode.
+The approach taken to facilitate this is brute force.
+
+In the \emph{Admin Tools} menu is a link called \emph{Find Bar Code}.
+Clicking this takes the user to a very simple form with just a single
+entry field for a bar code. Now, assuming that the scanner is plugged in to
+the same PC, if the mouse is clicked in the search box, then when the
+scanner scans the barcode (usually a button needs to be pressed on the 
+scanner) the actual code will magically appear in the box. Pressing
+the search button on the form should then produce the matching sample
+(see Figure \ref{fig:barcodeform}. 
+
+For this to work correctly, the
+barcode scanner needs to be put in \emph{keyboard emulation} mode.
+Most scanners are capable of doing this, including the Zebex.
+Of course, you can also type in the bar code by hand if you don't
+have access to a scanner.
+
+\begin{figure}[!h]
+\begin{center}
+\fcolorbox{darkgreen}{white}{%
+\includegraphics[width=0.75\textwidth]{barcodeform}}
+\caption{A successful search using the \emph{Find Bar Code} form.
+\label{fig:barcodeform}}
+\end{center}
+\end{figure}
 
 
 \section{The Database}\label{sec:database}

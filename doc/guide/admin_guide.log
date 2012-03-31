@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.1415926-1.40.10 (TeX Live 2009/Debian) (format=pdflatex 2011.4.5)  31 MAR 2012 08:58
+This is pdfTeX, Version 3.1415926-1.40.10 (TeX Live 2009/Debian) (format=pdflatex 2011.4.5)  31 MAR 2012 19:39
 entering extended mode
  %&-line parsing enabled.
 **admin_guide
@@ -755,7 +755,13 @@ File: pgfmodulematrix.code.tex 2010/08/24  (rcs-revision 1.4)
 (/usr/local/share/texmf/tex/latex/base/tex/generic/pgf/frontendlayer/tikz/libra
 ries/tikzlibrarytopaths.code.tex
 File: tikzlibrarytopaths.code.tex 2008/06/17 v2.10 (rcs-revision 1.2)
-)))
+))) (./example.sty
+
+LaTeX Warning: You have requested package `example',
+               but the package provides `exmplbox'.
+
+Package: exmplbox 2011/04/29 v0.9 (JPH)
+
 (/usr/local/share/texmf/tex/latex/base/tex/generic/pgf/frontendlayer/tikz/libra
 ries/tikzlibraryshapes.code.tex
 File: tikzlibraryshapes.code.tex 2008/01/09 v2.10 (rcs-revision 1.1)
@@ -825,13 +831,30 @@ File: pgflibraryshapes.multipart.code.tex 2010/01/07 v2.10 (rcs-revision 1.2)
 \pgfnodepartfivebox=\box70
 )))
 (/usr/local/share/texmf/tex/latex/base/tex/generic/pgf/frontendlayer/tikz/libra
+ries/tikzlibrarydecorations.code.tex
+(/usr/local/share/texmf/tex/latex/base/tex/generic/pgf/modules/pgfmoduledecorat
+ions.code.tex
+\pgfdecoratedcompleteddistance=\dimen182
+\pgfdecoratedremainingdistance=\dimen183
+\pgfdecoratedinputsegmentcompleteddistance=\dimen184
+\pgfdecoratedinputsegmentremainingdistance=\dimen185
+\pgf@decorate@distancetomove=\dimen186
+\pgf@decorate@repeatstate=\count145
+\pgfdecorationsegmentamplitude=\dimen187
+\pgfdecorationsegmentlength=\dimen188
+)
+\tikz@lib@dec@box=\box71
+)
+\c@exmplcnt=\count146
+)
+(/usr/local/share/texmf/tex/latex/base/tex/generic/pgf/frontendlayer/tikz/libra
 ries/tikzlibraryarrows.code.tex
 File: tikzlibraryarrows.code.tex 2008/01/09 v2.10 (rcs-revision 1.1)
 
 (/usr/local/share/texmf/tex/latex/base/tex/generic/pgf/libraries/pgflibraryarro
 ws.code.tex
 File: pgflibraryarrows.code.tex 2008/10/27 v2.10 (rcs-revision 1.9)
-\arrowsize=\dimen182
+\arrowsize=\dimen189
 )) (/usr/share/texmf-texlive/tex/latex/hyperref/hyperref.sty
 Package: hyperref 2009/10/09 v6.79a Hypertext links for LaTeX
 
@@ -845,9 +868,9 @@ O)
 (/usr/share/texmf-texlive/tex/latex/oberdiek/xcolor-patch.sty
 Package: xcolor-patch 2009/10/02 xcolor patch
 ))
-\@linkdim=\dimen183
-\Hy@linkcounter=\count145
-\Hy@pagecounter=\count146
+\@linkdim=\dimen190
+\Hy@linkcounter=\count147
+\Hy@pagecounter=\count148
 
 (/usr/share/texmf-texlive/tex/latex/hyperref/pd1enc.def
 File: pd1enc.def 2009/10/09 v6.79a Hyperref: PDFDocEncoding definition (HO)
@@ -912,9 +935,9 @@ Package pdftexcmds Info: LuaTeX not detected.
 Package pdftexcmds Info: \pdf@primitive is available.
 Package pdftexcmds Info: \pdf@ifprimitive is available.
 )))
-\Fld@menulength=\count147
-\Field@Width=\dimen184
-\Fld@charsize=\dimen185
+\Fld@menulength=\count149
+\Field@Width=\dimen191
+\Fld@charsize=\dimen192
 \Field@toks=\toks32
 Package hyperref Info: Hyper figures OFF on input line 4377.
 Package hyperref Info: Link nesting OFF on input line 4382.
@@ -927,44 +950,44 @@ Package hyperref Info: PDF/A mode OFF on input line 4407.
 (/usr/share/texmf-texlive/tex/generic/oberdiek/atbegshi.sty
 Package: atbegshi 2008/07/31 v1.9 At begin shipout hook (HO)
 )
-\Hy@abspage=\count148
-\c@Item=\count149
-\c@Hfootnote=\count150
+\Hy@abspage=\count150
+\c@Item=\count151
+\c@Hfootnote=\count152
 )
 *hyperref using driver hpdftex*
 (/usr/share/texmf-texlive/tex/latex/hyperref/hpdftex.def
 File: hpdftex.def 2009/10/09 v6.79a Hyperref driver for pdfTeX
-\Fld@listcount=\count151
+\Fld@listcount=\count153
 ) (./admin_guide.aux)
 \openout1 = `admin_guide.aux'.
 
-LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 51.
-LaTeX Font Info:    ... okay on input line 51.
-LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 51.
-LaTeX Font Info:    ... okay on input line 51.
-LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 51.
-LaTeX Font Info:    ... okay on input line 51.
-LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 51.
-LaTeX Font Info:    ... okay on input line 51.
-LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 51.
-LaTeX Font Info:    ... okay on input line 51.
-LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 51.
-LaTeX Font Info:    ... okay on input line 51.
-LaTeX Font Info:    Checking defaults for TS1/cmr/m/n on input line 51.
-LaTeX Font Info:    Try loading font information for TS1+cmr on input line 51.
+LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 52.
+LaTeX Font Info:    ... okay on input line 52.
+LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 52.
+LaTeX Font Info:    ... okay on input line 52.
+LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 52.
+LaTeX Font Info:    ... okay on input line 52.
+LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 52.
+LaTeX Font Info:    ... okay on input line 52.
+LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 52.
+LaTeX Font Info:    ... okay on input line 52.
+LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 52.
+LaTeX Font Info:    ... okay on input line 52.
+LaTeX Font Info:    Checking defaults for TS1/cmr/m/n on input line 52.
+LaTeX Font Info:    Try loading font information for TS1+cmr on input line 52.
 
 (/usr/share/texmf-texlive/tex/latex/base/ts1cmr.fd
 File: ts1cmr.fd 1999/05/25 v2.5h Standard LaTeX font definitions
 )
-LaTeX Font Info:    ... okay on input line 51.
-LaTeX Font Info:    Checking defaults for LMP1/mtt/m/it on input line 51.
-LaTeX Font Info:    ... okay on input line 51.
-LaTeX Font Info:    Checking defaults for LMP2/mtt/m/n on input line 51.
-LaTeX Font Info:    ... okay on input line 51.
-LaTeX Font Info:    Checking defaults for LMP3/mtt/m/n on input line 51.
-LaTeX Font Info:    ... okay on input line 51.
-LaTeX Font Info:    Checking defaults for PD1/pdf/m/n on input line 51.
-LaTeX Font Info:    ... okay on input line 51.
+LaTeX Font Info:    ... okay on input line 52.
+LaTeX Font Info:    Checking defaults for LMP1/mtt/m/it on input line 52.
+LaTeX Font Info:    ... okay on input line 52.
+LaTeX Font Info:    Checking defaults for LMP2/mtt/m/n on input line 52.
+LaTeX Font Info:    ... okay on input line 52.
+LaTeX Font Info:    Checking defaults for LMP3/mtt/m/n on input line 52.
+LaTeX Font Info:    ... okay on input line 52.
+LaTeX Font Info:    Checking defaults for PD1/pdf/m/n on input line 52.
+LaTeX Font Info:    ... okay on input line 52.
 
 *geometry auto-detecting driver*
 *geometry detected driver: pdftex*
@@ -1014,18 +1037,18 @@ Package caption Info: rotating package is loaded.
 Package caption Info: End \AtBeginDocument code.
 (/usr/share/texmf/tex/context/base/supp-pdf.mkii
 [Loading MPS to PDF converter (version 2006.09.02).]
-\scratchcounter=\count152
-\scratchdimen=\dimen186
-\scratchbox=\box71
-\nofMPsegments=\count153
-\nofMParguments=\count154
+\scratchcounter=\count154
+\scratchdimen=\dimen193
+\scratchbox=\box72
+\nofMPsegments=\count155
+\nofMParguments=\count156
 \everyMPshowfont=\toks33
-\MPscratchCnt=\count155
-\MPscratchDim=\dimen187
-\MPnumerator=\count156
+\MPscratchCnt=\count157
+\MPscratchDim=\dimen194
+\MPnumerator=\count158
 \everyMPtoPDFconversion=\toks34
 ) ABD: EveryShipout initializing macros
-Package hyperref Info: Link coloring OFF on input line 51.
+Package hyperref Info: Link coloring OFF on input line 52.
 
 (/usr/share/texmf-texlive/tex/latex/hyperref/nameref.sty
 Package: nameref 2007/05/29 v2.31 Cross-referencing by name of section
@@ -1033,45 +1056,41 @@ Package: nameref 2007/05/29 v2.31 Cross-referencing by name of section
 (/usr/share/texmf-texlive/tex/latex/oberdiek/refcount.sty
 Package: refcount 2008/08/11 v3.1 Data extraction from references (HO)
 )
-\c@section@level=\count157
+\c@section@level=\count159
 )
-LaTeX Info: Redefining \ref on input line 51.
-LaTeX Info: Redefining \pageref on input line 51.
+LaTeX Info: Redefining \ref on input line 52.
+LaTeX Info: Redefining \pageref on input line 52.
  (./admin_guide.out) (./admin_guide.out)
 \@outlinefile=\write5
 \openout5 = `admin_guide.out'.
 
-\AtBeginShipoutBox=\box72
-LaTeX Font Info:    Try loading font information for T1+phv on input line 53.
+\AtBeginShipoutBox=\box73
+LaTeX Font Info:    Try loading font information for T1+phv on input line 54.
  (/usr/share/texmf-texlive/tex/latex/psnfss/t1phv.fd
 File: t1phv.fd 2001/06/04 scalable font definitions for T1/phv.
 )
 LaTeX Font Info:    Font shape `T1/phv/m/n' will be
-(Font)              scaled to size 19.08076pt on input line 53.
+(Font)              scaled to size 19.08076pt on input line 54.
 LaTeX Font Info:    Font shape `T1/phv/bx/n' in size <20.74> not available
-(Font)              Font shape `T1/phv/b/n' tried instead on input line 53.
+(Font)              Font shape `T1/phv/b/n' tried instead on input line 54.
 LaTeX Font Info:    Font shape `T1/phv/b/n' will be
-(Font)              scaled to size 19.08076pt on input line 53.
+(Font)              scaled to size 19.08076pt on input line 54.
 LaTeX Font Info:    Font shape `T1/ptm/bx/n' in size <10.95> not available
-(Font)              Font shape `T1/ptm/b/n' tried instead on input line 53.
+(Font)              Font shape `T1/ptm/b/n' tried instead on input line 54.
 LaTeX Font Info:    Font shape `T1/phv/m/n' will be
-(Font)              scaled to size 11.03998pt on input line 62.
+(Font)              scaled to size 11.03998pt on input line 63.
 LaTeX Font Info:    Font shape `T1/phv/bx/n' in size <12> not available
-(Font)              Font shape `T1/phv/b/n' tried instead on input line 62.
+(Font)              Font shape `T1/phv/b/n' tried instead on input line 63.
 LaTeX Font Info:    Font shape `T1/phv/b/n' will be
-(Font)              scaled to size 11.03998pt on input line 62.
+(Font)              scaled to size 11.03998pt on input line 63.
 LaTeX Font Info:    Font shape `T1/phv/bx/n' in size <17.28> not available
-(Font)              Font shape `T1/phv/b/n' tried instead on input line 62.
+(Font)              Font shape `T1/phv/b/n' tried instead on input line 63.
 LaTeX Font Info:    Font shape `T1/phv/b/n' will be
-(Font)              scaled to size 15.89755pt on input line 62.
+(Font)              scaled to size 15.89755pt on input line 63.
 
 (./admin_guide.toc
 LaTeX Font Info:    Font shape `T1/ptm/bx/n' in size <12> not available
 (Font)              Font shape `T1/ptm/b/n' tried instead on input line 1.
-)
-\tf@toc=\write6
-\openout6 = `admin_guide.toc'.
-
  [1
 
 {/var/lib/texmf/fonts/map/pdftex/updmap/pdftex.map
@@ -1338,7 +1357,11 @@ p): fontmap entry for `tbtl10' already exists, duplicates ignored
 
 pdfTeX warning: pdflatex (file /var/lib/texmf/fonts/map/pdftex/updmap/pdftex.ma
 p): fontmap entry for `tbto10' already exists, duplicates ignored
-}]
+}])
+\tf@toc=\write6
+\openout6 = `admin_guide.toc'.
+
+
 
 Package Fancyhdr Warning: \headheight is too small (12.0pt): 
  Make it at least 14.49998pt.
@@ -1347,54 +1370,54 @@ Package Fancyhdr Warning: \headheight is too small (12.0pt):
 
 [2]
 LaTeX Font Info:    Font shape `T1/phv/bx/n' in size <14.4> not available
-(Font)              Font shape `T1/phv/b/n' tried instead on input line 65.
+(Font)              Font shape `T1/phv/b/n' tried instead on input line 66.
 LaTeX Font Info:    Font shape `T1/phv/b/n' will be
-(Font)              scaled to size 13.24796pt on input line 65.
+(Font)              scaled to size 13.24796pt on input line 66.
 
 
 LaTeX Warning: No positions in optional float specifier.
-               Default added (so using `!tbp') on input line 124.
+               Default added (so using `!tbp') on input line 125.
 
-[3] [4] <homepage.png, id=150, 983.92593pt x 716.6775pt>
+[3] [4] <homepage.png, id=160, 983.92593pt x 716.6775pt>
 File: homepage.png Graphic file (type png)
  <use homepage.png>
-LaTeX Font Info:    Try loading font information for T1+cmtt on input line 187.
+LaTeX Font Info:    Try loading font information for T1+cmtt on input line 188.
 
 
 (/usr/share/texmf-texlive/tex/latex/base/t1cmtt.fd
 File: t1cmtt.fd 1999/05/25 v2.5h Standard LaTeX font definitions
-) [5 <./homepage.png (PNG copy)>] <show.png, id=163, 16.06pt x 16.06pt>
+) [5 <./homepage.png (PNG copy)>] <show.png, id=173, 16.06pt x 16.06pt>
 File: show.png Graphic file (type png)
  <use show.png>
-<edit.png, id=165, 16.06pt x 16.06pt>
+<edit.png, id=175, 16.06pt x 16.06pt>
 File: edit.png Graphic file (type png)
  <use edit.png>
-<delete.png, id=166, 16.06pt x 16.06pt>
+<delete.png, id=176, 16.06pt x 16.06pt>
 File: delete.png Graphic file (type png)
  <use delete.png>
-<pageidx.png, id=167, 983.92593pt x 716.6775pt>
+<pageidx.png, id=177, 983.92593pt x 716.6775pt>
 File: pageidx.png Graphic file (type png)
  <use pageidx.png>
-<editpage.png, id=168, 414.79968pt x 545.78906pt>
+<editpage.png, id=178, 414.79968pt x 545.78906pt>
 File: editpage.png Graphic file (type png)
  <use editpage.png> [6 <./show.png> <./edit.png> <./delete.png> <./pageidx.png 
-(PNG copy)>] [7 <./editpage.png>] <sampleformuser.png, id=194, 983.92593pt x 71
+(PNG copy)>] [7 <./editpage.png>] <sampleformuser.png, id=204, 983.92593pt x 71
 6.6775pt>
 File: sampleformuser.png Graphic file (type png)
 
 <use sampleformuser.png>
-<sampleformadmin.png, id=195, 983.92593pt x 716.6775pt>
+<sampleformadmin.png, id=205, 983.92593pt x 716.6775pt>
 File: sampleformadmin.png Graphic file (type png)
 
 <use sampleformadmin.png>
 
 LaTeX Warning: Reference `table:samplevalidations' on page 8 undefined on input
- line 339.
+ line 340.
 
-<invalidfields.png, id=197, 983.92593pt x 716.6775pt>
+<invalidfields.png, id=207, 983.92593pt x 716.6775pt>
 File: invalidfields.png Graphic file (type png)
  <use invalidfields.png>
-<invalidfieldsbox.png, id=198, 304.13625pt x 200.24812pt>
+<invalidfieldsbox.png, id=208, 304.13625pt x 200.24812pt>
 File: invalidfieldsbox.png Graphic file (type png)
 
 <use invalidfieldsbox.png>
@@ -1403,35 +1426,41 @@ LaTeX Warning: `!h' float specifier changed to `!ht'.
 
 [8 <./sampleformuser.png (PNG copy)> <./sampleformadmin.png (PNG copy)>]
 [9 <./invalidfields.png (PNG copy)> <./invalidfieldsbox.png (PNG copy)>]
-<samplereceipt.pdf, id=219, 597.51233pt x 845.0471pt>
+<samplereceipt.pdf, id=229, 597.51233pt x 845.0471pt>
 File: samplereceipt.pdf Graphic file (type pdf)
  <use samplereceipt.pdf>
 
 LaTeX Warning: `!h' float specifier changed to `!ht'.
 
-<userprofile.png, id=220, 983.92593pt x 716.6775pt>
+<userprofile.png, id=230, 983.92593pt x 716.6775pt>
 File: userprofile.png Graphic file (type png)
  <use userprofile.png>
-<pdf.png, id=221, 16.06pt x 16.06pt>
+<pdf.png, id=231, 16.06pt x 16.06pt>
 File: pdf.png Graphic file (type png)
  <use pdf.png>
 
 LaTeX Warning: `!h' float specifier changed to `!ht'.
 
-<sampleeditform.png, id=225, 983.92593pt x 716.6775pt>
+<sampleeditform.png, id=235, 983.92593pt x 716.6775pt>
 File: sampleeditform.png Graphic file (type png)
 
 <use sampleeditform.png>
 
 LaTeX Warning: `!h' float specifier changed to `!ht'.
 
-<sampleshowpage.png, id=226, 983.92593pt x 716.6775pt>
+<sampleshowpage.png, id=236, 983.92593pt x 716.6775pt>
 File: sampleshowpage.png Graphic file (type png)
 
-<use sampleshowpage.png> <sampleresults.png, id=227, 233.37187pt x 313.9228pt>
+<use sampleshowpage.png> <sampleresults.png, id=237, 233.37187pt x 313.9228pt>
 File: sampleresults.png Graphic file (type png)
 
 <use sampleresults.png>
+
+LaTeX Warning: `!h' float specifier changed to `!ht'.
+
+<sampleindex.png, id=238, 983.92593pt x 716.6775pt>
+File: sampleindex.png Graphic file (type png)
+ <use sampleindex.png>
 
 LaTeX Warning: `!h' float specifier changed to `!ht'.
 
@@ -1439,118 +1468,138 @@ LaTeX Warning: `!h' float specifier changed to `!ht'.
 
 LaTeX Warning: Text page 11 contains only floats.
 
-[11 <./samplereceipt.pdf>] [12 <./userprofile.png (PNG copy)> <./pdf.png> <./sa
-mpleeditform.png (PNG copy)>]
-Overfull \hbox (1.25235pt too wide) in paragraph at lines 532--538
+[11 <./samplereceipt.pdf>]
+Overfull \hbox (13.94934pt too wide) in paragraph at lines 534--542
+\T1/ptm/m/n/12 this num-ber is set by a global vari-able, []\T1/cmtt/m/n/12 ITE
+MS_PER_PAGE \T1/ptm/m/n/12 de-fined in the []\T1/cmtt/m/n/12 config/environment
+.rb
+ []
+
+[12 <./userprofile.png (PNG copy)> <./pdf.png> <./sampleeditform.png (PNG copy)
+>] <searchform.png, id=271, 545.03625pt x 54.2025pt>
+File: searchform.png Graphic file (type png)
+ <use searchform.png>
+[13 <./sampleshowpage.png (PNG copy)> <./sampleresults.png (PNG copy)> <./sampl
+eindex.png (PNG copy)>] <zebex.png, id=279, 210.03468pt x 249.18094pt>
+File: zebex.png Graphic file (type png)
+
+<use zebex.png> <barcodeform.png, id=282, 779.91376pt x 159.59625pt>
+File: barcodeform.png Graphic file (type png)
+
+<use barcodeform.png>
+
+LaTeX Warning: `!h' float specifier changed to `!ht'.
+
+[14 <./searchform.png (PNG copy)> <./zebex.png (PNG copy)>]
+Overfull \hbox (1.25235pt too wide) in paragraph at lines 634--640
 []\T1/ptm/m/n/12 a string, au-to-mat-i-cally gen-er-ated by the sys-tem hav-ing
  the gen-eral form []\T1/cmtt/m/n/12 AAA-AA-YY-1111
  []
 
-[13 <./sampleshowpage.png (PNG copy)> <./sampleresults.png (PNG copy)>]
-[14] [15] [16]
-\pgf@layerbox@background=\box73
-\pgf@layerboxsaved@background=\box74
+[15 <./barcodeform.png (PNG copy)>] [16] [17] [18]
+\pgf@layerbox@background=\box74
+\pgf@layerboxsaved@background=\box75
 
-Underfull \hbox (badness 1173) in paragraph at lines 934--934
+Underfull \hbox (badness 1173) in paragraph at lines 1036--1036
  [][][][] 
  []
 
 
-Underfull \hbox (badness 1173) in paragraph at lines 935--935
+Underfull \hbox (badness 1173) in paragraph at lines 1037--1037
  [][][][] 
  []
 
 
-Underfull \hbox (badness 1173) in paragraph at lines 936--936
+Underfull \hbox (badness 1173) in paragraph at lines 1038--1038
  [][][][] 
  []
 
 
-Underfull \hbox (badness 1173) in paragraph at lines 937--937
+Underfull \hbox (badness 1173) in paragraph at lines 1039--1039
  [][][][] 
  []
 
 
-Underfull \hbox (badness 1173) in paragraph at lines 938--938
+Underfull \hbox (badness 1173) in paragraph at lines 1040--1040
  [][][][] 
  []
 
 
-Underfull \hbox (badness 1173) in paragraph at lines 939--939
+Underfull \hbox (badness 1173) in paragraph at lines 1041--1041
  [][][][] 
  []
 
 
-Underfull \hbox (badness 1173) in paragraph at lines 940--940
+Underfull \hbox (badness 1173) in paragraph at lines 1042--1042
  [][][][] 
  []
 
 
-Underfull \hbox (badness 1173) in paragraph at lines 941--941
+Underfull \hbox (badness 1173) in paragraph at lines 1043--1043
  [][][][] 
  []
 
 
-Underfull \hbox (badness 1173) in paragraph at lines 943--943
+Underfull \hbox (badness 1173) in paragraph at lines 1045--1045
  [][][][] 
  []
 
 
-Underfull \hbox (badness 1173) in paragraph at lines 944--944
+Underfull \hbox (badness 1173) in paragraph at lines 1046--1046
  [][][][] 
  []
 
 
-Underfull \hbox (badness 1173) in paragraph at lines 946--946
+Underfull \hbox (badness 1173) in paragraph at lines 1048--1048
  [][][][] 
  []
 
 
-Underfull \hbox (badness 1173) in paragraph at lines 948--948
+Underfull \hbox (badness 1173) in paragraph at lines 1050--1050
  [][][][] 
  []
 
 
-Underfull \hbox (badness 1173) in paragraph at lines 949--949
+Underfull \hbox (badness 1173) in paragraph at lines 1051--1051
  [][][][] 
  []
 
 
-Underfull \hbox (badness 1173) in paragraph at lines 950--950
+Underfull \hbox (badness 1173) in paragraph at lines 1052--1052
  [][][][] 
  []
 
 
-Underfull \hbox (badness 1173) in paragraph at lines 952--952
+Underfull \hbox (badness 1173) in paragraph at lines 1054--1054
  [][][][] 
  []
 
 
-Underfull \hbox (badness 1173) in paragraph at lines 953--953
+Underfull \hbox (badness 1173) in paragraph at lines 1055--1055
  [][][][] 
  []
 
 
-Underfull \hbox (badness 1173) in paragraph at lines 954--954
+Underfull \hbox (badness 1173) in paragraph at lines 1056--1056
  [][][][] 
  []
 
 
-Overfull \hbox (5.40602pt too wide) in paragraph at lines 982--982
+Overfull \hbox (5.40602pt too wide) in paragraph at lines 1084--1084
 [] [] 
  []
 
-[17] [18] (./admin_guide.aux)
+[19] [20] (./admin_guide.aux)
 
 LaTeX Warning: There were undefined references.
 
  ) 
 Here is how much of TeX's memory you used:
- 18139 strings out of 493848
- 339095 string characters out of 1152824
- 430580 words of memory out of 3000000
- 20962 multiletter control sequences out of 15000+50000
- 132171 words of font info for 92 fonts, out of 3000000 for 9000
+ 18552 strings out of 493848
+ 350893 string characters out of 1152824
+ 438174 words of memory out of 3000000
+ 21352 multiletter control sequences out of 15000+50000
+ 135019 words of font info for 94 fonts, out of 3000000 for 9000
  714 hyphenation exceptions out of 8191
  56i,12n,62p,494b,911s stack positions out of 5000i,500n,10000p,200000b,50000s
 {/usr/share/texmf/fonts/enc/dvips/cm-super/cm-super-t1.enc}{/usr/share/texmf-
@@ -1563,9 +1612,9 @@ per/sftt1200.pfb></usr/share/texmf-texlive/fonts/type1/urw/helvetic/uhvb8a.pfb>
 xlive/fonts/type1/urw/times/utmr8a.pfb></usr/share/texmf-texlive/fonts/type1/ur
 w/times/utmr8a.pfb></usr/share/texmf-texlive/fonts/type1/urw/times/utmri8a.pfb>
 
-Output written on admin_guide.pdf (18 pages, 1579690 bytes).
+Output written on admin_guide.pdf (20 pages, 1905261 bytes).
 PDF statistics:
- 339 PDF objects out of 1000 (max. 8388607)
- 67 named destinations out of 1000 (max. 500000)
- 277 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 374 PDF objects out of 1000 (max. 8388607)
+ 76 named destinations out of 1000 (max. 500000)
+ 313 words of extra memory for PDF output out of 10000 (max. 10000000)
 
