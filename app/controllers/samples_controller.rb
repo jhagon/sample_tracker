@@ -74,19 +74,29 @@ class SamplesController < ApplicationController
   
   #   @samples=Sample.all( :joins => [:flag, {:user => :group}], 
   #                        :order => "#{sort_column} #{sort_direction}")
-  @samples=Sample.page(params[:page]).per_page(ITEMS_PER_PAGE).find( :all,
+  @samples=Sample.page(params[:page]).per_page(samples_per_page.to_i).find( :all,
     :joins => [:flag, {:user => :group}],                  
     :order => "#{sort_column} #{sort_direction}",
     :conditions => ["#{params['search_field']} LIKE ?", "%#{params[:search]}%"])
   end
 
   def groupindex
-    @samples=Sample.page(params[:page]).per_page(ITEMS_PER_PAGE).where("(code LIKE '#{current_user.group.group_abbr}%') AND (code LIKE '%#{params[:search]}%')").joins(:flag, {:user => :group}).order("#{sort_column} #{sort_direction}")
+
+  unless params['search_field']
+    params['search_field'] = 'code'
+  end
+
+    @samples=Sample.page(params[:page]).per_page(samples_per_page.to_i).where("(code LIKE '#{current_user.group.group_abbr}%') AND (#{params['search_field']} LIKE '%#{params[:search]}%')").joins(:flag, {:user => :group}).order("#{sort_column} #{sort_direction}")
 #                          :joins => [:flag, {:user => :group}],
   end
 
   def userindex
-    @samples=Sample.page(params[:page]).per_page(ITEMS_PER_PAGE).where("(user_id = '#{current_user.id}') AND (#{params['search_field']} LIKE '%#{params[:search]}%')").joins(:flag, {:user => :group}).order("#{sort_column} #{sort_direction}")
+
+  unless params['search_field']
+    params['search_field'] = 'code'
+  end
+
+    @samples=Sample.page(params[:page]).per_page(samples_per_page.to_i).where("(user_id = '#{current_user.id}') AND (#{params['search_field']} LIKE '%#{params[:search]}%')").joins(:flag, {:user => :group}).order("#{sort_column} #{sort_direction}")
 #                          :joins => [:flag, {:user => :group}],
   end
 
@@ -145,6 +155,13 @@ class SamplesController < ApplicationController
   end
 
 private
+
+  def samples_per_page
+    if params[:per_page]
+      session[:samples_per_page] = params[:per_page]
+    end
+    session[:samples_per_page] || ITEMS_PER_PAGE
+  end
 
   def must_be_creator_or_leader_or_admin
     sample = Sample.find(params[:id])

@@ -23,11 +23,13 @@ HUMANIZED_ATTRIBUTES = {
 
 }
 
-def self.human_attribute_name(attr, options={})
+  def self.human_attribute_name(attr, options={})
+    HUMANIZED_ATTRIBUTES[attr.to_sym] || super
+  end
 
-  HUMANIZED_ATTRIBUTES[attr.to_sym] || super
-
-end
+  def self.per_page
+    ITEMS_PER_PAGE
+  end
 
   validate :must_specify_sensitivity
   validate :must_specify_store

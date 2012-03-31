@@ -1,12 +1,10 @@
-<% title "user Profile" %>
-
-<h2><%= "#{@user.firstname} #{@user.lastname}"%></h2>
+<% title "user Profile: #{@user.firstname} #{@user.lastname}" %>
 
 <p>
   <strong>Group</strong>
   <%= "#{@user.group.group_desc} (#{@user.group.group_abbr})" %>
-</p>
-<p>
+  &nbsp;&nbsp;
+  &nbsp;&nbsp;
   <strong>EMail</strong>
   <%=@user.email %>
 </p>
@@ -14,23 +12,29 @@
 <p>
   <strong>Account Enabled?</strong>
   <%=@user.enabled ? 'yes' : 'no' %>
-</p>
-
-<p>
+  &nbsp;&nbsp;
   <strong>Group Leader?</strong>
   <%=@user.leader ? 'yes' : 'no' %>
-</p>
-
-<p>
+  &nbsp;&nbsp;
   <strong>Administrator?</strong>
   <%=@user.admin ? 'yes' : 'no' %>
 </p>
+
+<p>
+  <strong>Last sign-in:</strong>&nbsp;<%=@user.last_sign_in_at%>
+  &nbsp;&nbsp;
+  <strong>Sign-in count:</strong>&nbsp;<%=@user.sign_in_count%><br />
+  <strong>Total samples for this user:</strong>&nbsp;<%=@samples.count%>
+<p>
 
 <h3><%="Samples List for this User" %></h3>
 
 <% if @samples.count > 0 %>
 
-  <% form_tag "#{samples_path}/userindex/#{@user.id}", :method => 'get' do %>
+
+  <% form_tag "#{samples_path}/userindex/#{@user.id}", 
+     :style => "padding:3px;background-color:#eee;display:table;border:1px solid;",
+     :method => 'get' do %>
 
     <% if params[:search_field] == 'code' %>
       <% code_selected = 'selected' %>
@@ -39,16 +43,19 @@
       <% code_selected = '' %>
       <% userref_selected = 'selected' %>
     <% end %>
-  <p>
-    <%= text_field_tag :search, params[:search] %> Search By:
-    <%= select_tag "search_field", "<option #{code_selected} value=\"#{:code}\">Sample Code</option><option #{userref_selected} value=\"#{:userref}\">User Reference</option>".html_safe %>
-    <%= submit_tag "Search", :name => nil %>
-  </p>
 
-<% end %>
+    Search For: <%= text_field_tag :search, params[:search] %> in:
+    <%= select_tag "search_field", "<option #{code_selected} value=\"#{:code}\">Sample Code</option><option #{userref_selected} value=\"#{:userref}\">User Reference</option>".html_safe %>
+    Display: <%= samples_per_page_select @samples%> items per page
+    <%= submit_tag "Search", :name => nil %>
+
+  <% end %>
+
+  <p>
   <form method="link" action=<% "/users/show/#{@user.id}" %>><input type="submit" value="Reset Search"></form>
 
-<% end %>
+  <% end %>
+  </p>
 
 <p>
 <%= will_paginate @samples %>

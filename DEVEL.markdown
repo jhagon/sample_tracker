@@ -3818,6 +3818,178 @@ Finally, we amend the show page for the sample in
   </p>
 ```
 
+Giving Users More Control over Pagination
+=========================================
+In the samples listings, an extra parameter was provided so that users
+can control the number of samples displayed per page. This was implemented
+in the following way. First, a default `per_page` parameter was defined
+in the sample model `app/models/sample.rb`:
+
+```
+  def self.per_page
+    ITEMS_PER_PAGE
+  end
+```
+
+Note that this uses the global default set up in the `config\environment.rb`
+file. The idea is that this will be used if no `:per_page` parameter was
+given to the `Sample.paginate` call.
+
+Next, we create a private helper method in the controller file
+`app/controllers/samples_controller.rb`:
+
+```
+  def samples_per_page
+    if params[:per_page]
+      session[:samples_per_page] = params[:per_page]
+    end
+    session[:samples_per_page] || ITEMS_PER_PAGE
+  end
+```
+
+This is used in the various samples controller actions (`index`,
+`groupindex` and `userindex`) as follows:
+
+```
+  @samples=Sample.page(params[:page]).per_page(samples_per_page.to_i).find( :all,
+    :joins => [:flag, {:user => :group}],
+    :order => "#{sort_column} #{sort_direction}",
+    :conditions => ["#{params['search_field']} LIKE ?", "%#{params[:search]}%"])
+```
+
+Note the explicit conversion to an integer. Basically we have replaced
+`per_page(ITEMS_PER_PAGE)` with `per_page(samples_per_page.to_i)`.
+
+So now the following will occur: if the `per_page` parameter was present,
+this will be used and saved to a session. If a session value existed already,
+it will be used. Otherwise `:samples_per_page` will be nil and set equal
+to the system default value, `ITEMS_PER_PAGE`.
+
+Now, we still need to generate a select box in the view so that users can
+actually select what pagination to use. To facilitate this, a helper method
+was defined in `app/helpers/samples_helper.rb`:
+
+```
+  def samples_per_page_select(collection = Sample)
+    select_tag :per_page, options_for_select([ITEMS_PER_PAGE,2,3,4,5,10,15,20,25,30,40,50,["\u{221E}", 1000000]],
+    collection.per_page)
+  end
+```
+
+where we have used the default value first in the select box list and then
+used a reasonable range of values up to a large (effectively infinite value
+of 1 million. Note that this last value is mapped to the string
+"\u{221E}" which is what the user will actually see in the select drop-down.
+This cryptic number is the unicode value for the infinity character.
+Now, we can add the necessary code in the various sample index views.
+Below is the modified code in `app/views/samples/index.html.erb`:
+
+```
+  <% form_tag samples_path,
+     :style => "padding:3px;background-color:#eee;display:table;border:1px solid;",
+     :method => 'get' do %>
+
+    <% if params[:search_field] == 'code' %>
+      <% code_selected = 'selected' %>
+      <% userref_selected = '' %>
+    <% else %>
+      <% code_selected = '' %>
+      <% userref_selected = 'selected' %>
+    <% end %>
+
+    Search For: <%= text_field_tag :search, params[:search] %> in:
+    <%= select_tag "search_field", "<option #{code_selected} value=\"#{:code}\">Sample Code</option><option #{userref_selected} value=\"#{:userref}\">User Reference</option>".html_safe %>
+    Display: <%= samples_per_page_select @samples%> items per page
+    <%= submit_tag "Search", :name => nil %>
+
+  <% end %>
+
+  <p>
+  <form method="link" action="/samples"><input type="submit" value="Reset Search"></form>
+```
+
+There are similar blocks of code for the `groupindex` and `userindex` views.
+We add similar code blocks in the views for the user and group show pages.
+For example, here is the modified code in `app/views/users/show.html.erb`:
+
+```
+<h3><%="Samples List for this User" %></h3>
+
+<% if @samples.count > 0 %>
+
+
+  <% form_tag "#{samples_path}/userindex/#{@user.id}",
+     :style => "padding:3px;background-color:#eee;display:table;border:1px solid;",
+     :method => 'get' do %>
+
+    <% if params[:search_field] == 'code' %>
+      <% code_selected = 'selected' %>
+      <% userref_selected = '' %>
+    <% else %>
+      <% code_selected = '' %>
+      <% userref_selected = 'selected' %>
+    <% end %>
+
+    Search For: <%= text_field_tag :search, params[:search] %> in:
+    <%= select_tag "search_field", "<option #{code_selected} value=\"#{:code}\">Sample Code</option><option #{userref_selected} value=\"#{:userref}\">User Reference</option>".html_safe %>
+    Display: <%= samples_per_page_select @samples%> items per page
+    <%= submit_tag "Search", :name => nil %>
+
+  <% end %>
+
+  <p>
+  <form method="link" action=<% "/users/show/#{@user.id}" %>><input type="submit" value="Reset Search"></form>
+
+  <% end %>
+  </p>
+```
+
+with similar code in `app/views/groups/show.html.erb`:
+
+```
+<h3><%="Samples List for this Group" %></h3>
+
+<% if @samples.count > 0 %>
+
+  <% form_tag "#{samples_path}/groupindex/#{@group.id}",
+     :style => "padding:3px;background-color:#eee;display:table;border:1px solid;",
+     :method => 'get' do %>
+
+    <% if params[:search_field] == 'code' %>
+      <% code_selected = 'selected' %>
+      <% userref_selected = '' %>
+    <% else %>
+      <% code_selected = '' %>
+      <% userref_selected = 'selected' %>
+    <% end %>
+
+    Search For: <%= text_field_tag :search, params[:search] %> in:
+    <%= select_tag "search_field", "<option #{code_selected} value=\"#{:code}\">Sample Code</option><option #{userref_selected} value=\"#{:userref}\">User Reference</option>".html_safe %>
+    Display: <%= samples_per_page_select @samples%> items per page
+    <%= submit_tag "Search", :name => nil %>
+
+  <% end %>
+
+  <p>
+  <form method="link" action=<% "/group/show/#{@group.id}" %>><input type="submit" value="Reset Search"></form>
+
+  <% end %>
+  </p>
+```
+
+Note further that the opportunity was taken to improve some of the styling of
+the pages, in particular the search form has an extra style parameter and
+some extra login stats have been added to the user profile page:
+
+```
+<p>
+  <strong>Last sign-in:</strong>&nbsp;<%=@user.last_sign_in_at%>
+  &nbsp;&nbsp;
+  <strong>Sign-in count:</strong>&nbsp;<%=@user.sign_in_count%><br />
+  <strong>Total samples for this user:</strong>&nbsp;<%=@samples.count%>
+<p>
+```
+
 TODO: Generating Sample Data
 ============================
 Use Faker to generate a large number of users and samples so that we can
