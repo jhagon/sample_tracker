@@ -12,14 +12,18 @@
 \BOOKMARK [2][-]{subsection.2.5}{Sample Management}{section.2}
 \BOOKMARK [2][-]{subsection.2.6}{Sample Search and Display Tools}{section.2}
 \BOOKMARK [3][-]{subsubsection.2.6.1}{BarCode Scanning}{subsection.2.6}
-\BOOKMARK [1][-]{section.3}{The Database}{}
+\BOOKMARK [1][-]{section.3}{System Internals}{}
 \BOOKMARK [2][-]{subsection.3.1}{Introduction}{section.3}
-\BOOKMARK [2][-]{subsection.3.2}{The Samples Table}{section.3}
-\BOOKMARK [2][-]{subsection.3.3}{The Users Table}{section.3}
-\BOOKMARK [2][-]{subsection.3.4}{The Stores, Hazards and Sensitivities Tables}{section.3}
-\BOOKMARK [2][-]{subsection.3.5}{The Groups Table}{section.3}
-\BOOKMARK [2][-]{subsection.3.6}{Other Tables}{section.3}
-\BOOKMARK [3][-]{subsubsection.3.6.1}{The Pages Table}{subsection.3.6}
-\BOOKMARK [3][-]{subsubsection.3.6.2}{The Assets Table}{subsection.3.6}
-\BOOKMARK [3][-]{subsubsection.3.6.3}{The Popups Table}{subsection.3.6}
-\BOOKMARK [3][-]{subsubsection.3.6.4}{The Flags Table}{subsection.3.6}
+\BOOKMARK [2][-]{subsection.3.2}{Basic Components of the System}{section.3}
+\BOOKMARK [3][-]{subsubsection.3.2.1}{Ruby Gems}{subsection.3.2}
+\BOOKMARK [1][-]{section.4}{The Database}{}
+\BOOKMARK [2][-]{subsection.4.1}{Introduction}{section.4}
+\BOOKMARK [2][-]{subsection.4.2}{The Samples Table}{section.4}
+\BOOKMARK [2][-]{subsection.4.3}{The Users Table}{section.4}
+\BOOKMARK [2][-]{subsection.4.4}{The Stores, Hazards and Sensitivities Tables}{section.4}
+\BOOKMARK [2][-]{subsection.4.5}{The Groups Table}{section.4}
+\BOOKMARK [2][-]{subsection.4.6}{Other Tables}{section.4}
+\BOOKMARK [3][-]{subsubsection.4.6.1}{The Pages Table}{subsection.4.6}
+\BOOKMARK [3][-]{subsubsection.4.6.2}{The Assets Table}{subsection.4.6}
+\BOOKMARK [3][-]{subsubsection.4.6.3}{The Popups Table}{subsection.4.6}
+\BOOKMARK [3][-]{subsubsection.4.6.4}{The Flags Table}{subsection.4.6}

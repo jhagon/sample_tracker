@@ -1,4 +1,4 @@
-\documentclass[12pt]{article}
+\documentclass[12pt,twoside]{article}
 \usepackage[a4paper,margin=1in]{geometry}
 \usepackage[T1]{fontenc}
 \usepackage{textcomp}
@@ -14,6 +14,7 @@
 \usepackage{picins,graphicx}
 \usepackage{tikz}
 \usepackage{example}
+\usepackage[super]{cite}
 \usetikzlibrary{shapes,arrows}
 \usepackage[pdftex]{hyperref}
 \title{\sffamily\bfseries Crystallography Service Sample Database Administrator's Guide}
@@ -67,14 +68,15 @@ administrator password.
 The system consists of a \emph{front-end} which is used by users
 and administrators to submit sample requests and upload analysis data. 
 This front-end is implemented using the 
-\href{http://www.ruby-lang.org/en/}{ruby} programming language and 
-version 3 of \href{http://rubyonrails.org}{Ruby on Rails}.
-The front-end is hosted on an \emph{Apache} server running on an
-\emph{Ubuntu} linux system. Technical details will be described elsewhere.
+ruby\cite{ruby} programming language and 
+version 3 of \emph{Ruby on Rails}\cite{rails}.
+The front-end is hosted on an \emph{Apache}\cite{apache} server running on an
+\emph{Ubuntu}\cite{ubuntu} linux system. 
+Technical details will be described elsewhere.
 
 The \emph{back-end} consists of a set of ruby programming libraries
 and a SQL database --- in this case 
-\href{http://www.sqlite.org/}{SQLite3}.
+\emph{SQLite3}\cite{sqlite}.
 More technical aspects of the back-end will be described elsewhere.
 
 \subsection{Users}
@@ -161,7 +163,7 @@ Such pages include the home page, general information pages and
 the sample queue. Public pages can be created and edited by an administrator
 using tools provided by the server software. rather than write pure
 HTML, an administrator can use a text-based markup language called
-\href{http://en.wikipedia.org/wiki/Textile_%28markup_language%29}{Textile}
+\emph{Textile}\cite{textile}
 which can produce sophisticated web pages with all the usual constructs
 such as headings, paragraphs, floating elements, tables and images.
 
@@ -588,7 +590,6 @@ scanner scans the barcode (usually a button needs to be pressed on the
 scanner) the actual code will magically appear in the box. Pressing
 the search button on the form should then produce the matching sample
 (see Figure \ref{fig:barcodeform}. 
-
 For this to work correctly, the
 barcode scanner needs to be put in \emph{keyboard emulation} mode.
 Most scanners are capable of doing this, including the Zebex.
@@ -604,6 +605,150 @@ have access to a scanner.
 \end{center}
 \end{figure}
 
+\section{System Internals}
+\subsection{Introduction}
+In this section we will explain lower-level aspects of the system.
+This includes the operating system, command shell, web server, 
+database, ruby language, ruby gems, and the rails3 system which is
+used to do most of the programming.
+
+\subsection{Basic Components of the System}
+To begin with, we will describe the components of the system from the
+operating system right up to the \emph{Rails3} software which is used
+to write the web interface to the sample database.
+Figure \ref{fig:systemcomponents} summarizes the main components and
+their relationships.
+
+\begin{figure}[!ht]
+\small
+\begin{center}
+\begin{tikzpicture}
+\node (os) at (0,1) [draw] {Operating System};
+\node (shell) at (0,0) [draw] {Shell};
+\node (web) at (-4,-1) [draw] {Web Server};
+\node (database) at (3.5,-1) [draw] {Database};
+\node (ruby) at (0,-1) [draw] {Ruby};
+\node (phusion) at (-4,-2) [draw] {Phusion};
+\node (gems) at (0,-2) [draw] {RubyGems};
+\node (prawn) at (-3,-3) [draw] {\scriptsize Prawn};
+\node (cwave) at (-1.5,-3) [draw] {\scriptsize Carrierwave};
+\node (devise) at (0,-3) [draw] {\scriptsize Devise};
+\node (cancan) at (1.5,-3) [draw] {\scriptsize Cancan};
+\node (willp) at (3.5,-3) [draw] {\scriptsize Will\_Paginate};
+\node (redcloth) at (5.5,-3) [draw] {\scriptsize Redcloth};
+\node (rails) at (0,-4.5) [draw] {Rails3};
+% draw lines
+\path [line] (os) -- (shell);
+\path [line] (shell) -| (web);
+\path [line] (shell) -| (database);
+\path [line] (shell) -- (ruby);
+\path [line] (web) -- (phusion);
+\path [line] (ruby) -- (gems);
+\path [line,<->] (ruby) -- (database);
+\path [line] (gems) -| (prawn);
+\path [line] (gems) -| (cwave);
+\path [line] (gems) -- (devise);
+\path [line] (gems) -| (cancan);
+\path [line] (gems) -| (willp);
+\path [line] (phusion) |- (rails);
+
+\path [line] (prawn) |- (rails);
+\path [line] (cwave) |- (rails);
+\path [line] (devise) -- (rails);
+\path [line] (cancan) |- (rails);
+\path [line] (willp) |- (rails);
+\path [line] (redcloth) |- (rails);
+
+\path [line] (database) -- (7,-1) |- (rails);
+\end{tikzpicture}
+\end{center}
+\normalsize
+\caption{The main components of the sample tracking system and their
+relationships. This diagram takes a `top-down' view starting with
+the operating system and moving through the various software layers
+down to the rails3 system itself on which the sample tracking software
+is based.\label{fig:systemcomponents}}
+\end{figure}
+
+Let's now look at each of these components individually:
+\begin{description}
+\item[Operating System]
+The system runs on a computer running the Ubuntu version of the
+linux operating system.
+The specific release used at present is \emph{Ubuntu 10.04.3 LTS}.
+Release 10.04 is also known via the codename `lucid'. LTS stands
+for 'Long Term Support'. Extended support for this version will
+last until 2014.
+\item[Shell]
+Access to most software on linux is vis a command shell. There are
+many different shells available, the default being the \emph{bash}
+shell. We will assume the use of bash throughout this guide, but
+other shells can be also be used with little, if any modification
+to the software itself.
+\end{description}
+
+Running under the shell are the three principal components of
+the system: a web server, database and the ruby programming language
+environment.
+\begin{description}
+\item[Web Server]
+The web server we use is the ubiquitous \emph{Apache}, specifically
+version 2.2.14.
+\item[Ruby]
+The version of ruby that comes with Ubuntu 10.04.3 is 1.8.7.
+Unfortunately, this version is not recent enough to run a rails3
+application. So, we use the \emph{Ruby Version Manager} to run a more
+recent version of ruby (1.9.2).
+\item[Database]
+Rails 3 requires a database application to store and retrieve sample data.
+We are using the \emph{SQLite3} database. This is a `lightweight' database
+which requires very little separate maintenance. In particular, it
+does not require a separate authentication process for acces, nor
+does it need to run a separate process in the background as with other
+database software such as \emph{mysql}.
+\end{description}
+
+There are two other components of the system which sit between the
+web server, ruby and database layer:
+
+\begin{description}
+\item[Phusion Passenger]
+\emph{Phusion Passenger} is an Apache module -- a `plugin' -- which
+interfaces a rails3 application to the Apache web server. It also supplies
+some debugging and error logging information which can be useful when
+things go wrong.
+\item[Ruby Gems]
+\emph{Ruby Gems} are extension libraries to ruby. Some of them are
+specific to rails3, but most are more general purpose and can be used in
+more general applications. The ruby gems used in the sample tracking
+application are described in the next section.
+\end{description}
+
+\subsubsection{Ruby Gems}
+The following Ruby Gems are used in the application:
+\begin{description}
+\item[cancan\cite{cancan}]
+This gem, written by well-known Rails programmer Ryan Bates is used for
+authorization. By this we mean controlling which parts of the application
+can be accessed by users. For example, some parts of the application can
+be accessed only by administrative users and others can be accessed by
+anyone --- even those who have not registered to use the system.
+\item[carrierwave\cite{carrierwave}]
+Carrierwave is used to manage the upload of various files to the application
+including data files, image files and general asset files.
+\item[devise\cite{devise}]
+Deivise is an authentication plugin to Rails which handles user data and
+user authentication. It provides related functionality such as forgotten
+password recovery (via email), user login statistics and more.
+\item[prawn\cite{prawn}]
+This is a ruby library for producing PDF files. It is used to
+auto-generate the sample receipts.
+\item[redcloth\cite{redcloth}]
+TRedCloth is a Ruby library used for parsing and display of Textile input.
+\item[will\_paginate\cite{willp}]
+Pagination of sample listings (and other things) is controlled in the
+application by this gem.
+\end{description}
 
 \section{The Database}\label{sec:database}
 \subsection{Introduction}
@@ -1083,4 +1228,20 @@ indicated with lines joining the relevant fields. Note that the tables
 are \emph{join tables} which serve only to facilitate a many-to-many
 relationship between the tables they link.\label{fig:database_schema}}
 \end{sidewaysfigure}
+
+\newpage
+\begin{thebibliography}{2}
+\bibitem{ruby} \url{http://www.ruby-lang.org/}
+\bibitem{rails} \url{http://rubyonrails.org/}
+\bibitem{apache} \url{http://www.apache.org/}
+\bibitem{ubuntu} \url{http://www.ubuntu.com/}
+\bibitem{sqlite} \url{http://www.sqlite.org/}
+\bibitem{textile} \url{http://en.wikipedia.org/wiki/Textile_%28markup_language%29}
+\bibitem{cancan} \url{https://github.com/ryanb/cancan}
+\bibitem{carrierwave} \url{https://github.com/jnicklas/carrierwave}
+\bibitem{devise} \url{https://github.com/plataformatec/devise/}
+\bibitem{prawn} \url{http://prawn.majesticseacreature.com/}
+\bibitem{redcloth} \url{http://redcloth.org/}
+\bibitem{willp} \url{https://github.com/mislav/will_paginate}
+\end{thebibliography}
 \end{document}
