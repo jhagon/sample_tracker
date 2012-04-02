@@ -630,12 +630,13 @@ their relationships.
 \node (ruby) at (0,-1) [draw] {Ruby};
 \node (phusion) at (-4,-2) [draw] {Phusion};
 \node (gems) at (0,-2) [draw] {RubyGems};
-\node (prawn) at (-3,-3) [draw] {\scriptsize Prawn};
+\node (cancan) at (-3,-3) [draw] {\scriptsize Cancan};
 \node (cwave) at (-1.5,-3) [draw] {\scriptsize Carrierwave};
 \node (devise) at (0,-3) [draw] {\scriptsize Devise};
-\node (cancan) at (1.5,-3) [draw] {\scriptsize Cancan};
-\node (willp) at (3.5,-3) [draw] {\scriptsize Will\_Paginate};
-\node (redcloth) at (5.5,-3) [draw] {\scriptsize Redcloth};
+\node (prawn) at (1.5,-3) [draw] {\scriptsize Prawn};
+\node (redcloth) at (3.0,-3) [draw] {\scriptsize Redcloth};
+\node (rmagick) at (4.5,-3) [draw] {\scriptsize RMagick};
+\node (willp) at (6.25,-3) [draw] {\scriptsize Will\_Paginate};
 \node (rails) at (0,-4.5) [draw] {Rails3};
 % draw lines
 \path [line] (os) -- (shell);
@@ -649,6 +650,7 @@ their relationships.
 \path [line] (gems) -| (cwave);
 \path [line] (gems) -- (devise);
 \path [line] (gems) -| (cancan);
+\path [line] (gems) -| (rmagick);
 \path [line] (gems) -| (willp);
 \path [line] (phusion) |- (rails);
 
@@ -659,7 +661,7 @@ their relationships.
 \path [line] (willp) |- (rails);
 \path [line] (redcloth) |- (rails);
 
-\path [line] (database) -- (7,-1) |- (rails);
+\path [line] (database) -- (7.5,-1) |- (rails);
 \end{tikzpicture}
 \end{center}
 \normalsize
@@ -745,6 +747,11 @@ This is a ruby library for producing PDF files. It is used to
 auto-generate the sample receipts.
 \item[redcloth\cite{redcloth}]
 TRedCloth is a Ruby library used for parsing and display of Textile input.
+\item[rmagick\cite{rmagick}]
+ImageMagick is a well known software application consisting of both
+libraries and utility programs for manipulation of bitmap graphic files.
+This gem interfaces the ImageMagick libraries to Ruby allowing
+ImageMagick routines to be called from within a Ruby program.
 \item[will\_paginate\cite{willp}]
 Pagination of sample listings (and other things) is controlled in the
 application by this gem.
@@ -1242,6 +1249,7 @@ relationship between the tables they link.\label{fig:database_schema}}
 \bibitem{devise} \url{https://github.com/plataformatec/devise/}
 \bibitem{prawn} \url{http://prawn.majesticseacreature.com/}
 \bibitem{redcloth} \url{http://redcloth.org/}
+\bibitem{rmagick} \url{http://rmagick.rubyforge.org/}
 \bibitem{willp} \url{https://github.com/mislav/will_paginate}
 \end{thebibliography}
 \end{document}
