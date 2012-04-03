@@ -37,7 +37,7 @@ class SamplePdf < Prawn::Document
     move_up 16
     text_box "Your Ref: #{@sample.userref}", size: 16, style: :bold, align: :right, :at => [250,bounds.top-84]
     intro_str = "Please check the details on this receipt. " +
-                "Changes can be made only by Crystallography staff." +
+                "Changes can be made only by Crystallography staff. " +
                 "Please use the tear-off slip at the bottom of the page and " +
                 "attach it to your sample. You will be automatically " +
                 "informed via e-mail of any changes to your sample status."
