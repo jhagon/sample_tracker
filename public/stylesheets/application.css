@@ -21,8 +21,13 @@ a {
 
 #top_container p{
   text-align: right;
+  color: #eee;
   margin: 0px;
   padding: 0px;
+}
+
+#top_container a{
+  color: #eee;
 }
 
 #nav_container {
