@@ -60,19 +60,20 @@ cd /usr/local/share
 mv jhagon-sample_tracker-b493e1b sample_tracker
 ```
 
-Now change to the `sample_tracker` directory and remove the production database (if it exists) and also the `public/uploads` direcory:
+Now change to the `sample_tracker` directory and remove the production database (if it exists) and also the `public` direcory:
 
 ```
 rm db/production.sqlite3
-rm -rf public/uploads
+rm -rf public
 ```
 
 Now we can copy the live production database we saved earlier along with the
-`public/uploads` directory which contains sample data files, images etc.
+`public` directory which contains sample data files, images etc as well as
+local static content such as stylesheets.
 
 ```
 cp <previous sample_tracker dir>/db/production.sqlite3 db
-cp -r <previous sample_tracker dir>/public/uploads public
+cp -r <previous sample_tracker dir>/public .
 ```
 
 We must now migrate the database to its new schema. First we must make
