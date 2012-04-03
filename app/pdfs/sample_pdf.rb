@@ -123,16 +123,17 @@ class SamplePdf < Prawn::Document
       image strucfile, :position => :center, :height => boxheight*0.9, :width => boxwidth*0.9
     stroke_bounds
     end
-    bounding_box([boxwidth+10 ,bounds.top-182], :width => boxwidth, :height => boxheight*0.25-5) do
+    bounding_box([boxwidth+10 ,bounds.top-182], :width => boxwidth, :height => boxheight*0.35-5) do
       bounding_box([5 ,bounds.top-5], :width => boxwidth-10, :height => boxheight-10) do
+        text "<b>Chemical Formula:</b> #{@sample.cif}", :size => 10, :inline_format => true
         text "<b>Powder Diffraction Required?</b> #{@sample.powd ? 'Yes' : 'No'}", :size => 10, :inline_format => true
         text "<b>Chiral Structure?</b> #{@sample.chiral ? 'Yes' : 'No'}", :size => 10, :inline_format => true
         text "<b>Your Priority Number:</b> #{@sample.priority}", :size => 10, :inline_format => true
       end
       stroke_bounds
     end
-    text_box "User Details", size: 12, style: :bold, align: :left, :at => [boxwidth+10,bounds.top-248]
-    bounding_box([boxwidth+10 ,bounds.top-262], :width => boxwidth, :height => boxheight*0.7 -22) do
+    text_box "User Details", size: 12, style: :bold, align: :left, :at => [boxwidth+10,bounds.top-268]
+    bounding_box([boxwidth+10 ,bounds.top-281], :width => boxwidth, :height => boxheight*0.6 -22) do
       bounding_box([5 ,bounds.top-5], :width => boxwidth-10, :height => boxheight-10) do
         text "<b>Submission Date:</b> #{@sample.created_at}", :size => 10, :inline_format => true
         text "<b>Submitted By:</b> #{@sample.user.firstname} #{@sample.user.lastname}", :size => 10, :inline_format => true
