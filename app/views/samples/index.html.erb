@@ -10,16 +10,27 @@
     <% case %>
     <% when params[:search_field] == 'code' %>
       <% code_selected = 'selected' %>
+      <% userref_selected = '' %>
+      <% status_selected = '' %>
     <% when params[:search_field] == 'userref' %>
+      <% code_selected = '' %>
       <% userref_selected = 'selected' %>
+      <% status_selected = '' %>
+    <% when params[:search_field] == 'status' %>
+      <% code_selected = '' %>
+      <% userref_selected = '' %>
+      <% status_selected = 'selected' %>
     <% else %>
       <% code_selected = 'selected' %>
+      <% userref_selected = '' %>
+      <% status_selected = '' %>
     <% end %>
 
     Search For: <%= text_field_tag :search, params[:search] %> in:
     <%= select_tag "search_field", 
     "<option #{code_selected} value=\"#{:code}\">Sample Code</option>
-     <option #{userref_selected} value=\"#{:userref}\">User Ref</option>".html_safe %>
+     <option #{userref_selected} value=\"#{:userref}\">User Ref</option>
+     <option #{status_selected} value=\"status\">Status</option>".html_safe %>
     Display: <%= samples_per_page_select @samples%> items per page
     <%= submit_tag "Search", :name => nil %>
 

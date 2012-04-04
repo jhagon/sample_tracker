@@ -71,13 +71,24 @@ class SamplesController < ApplicationController
   unless params['search_field']
     params['search_field'] = 'code'
   end
+
+  unless params['search_field'] == 'status'
   
-  #   @samples=Sample.all( :joins => [:flag, {:user => :group}], 
-  #                        :order => "#{sort_column} #{sort_direction}")
   @samples=Sample.page(params[:page]).per_page(samples_per_page.to_i).find( :all,
     :joins => [:flag, {:user => :group}],                  
     :order => "#{sort_column} #{sort_direction}",
-    :conditions => ["#{params['search_field']} LIKE ?", "%#{params[:search]}%"])
+    :conditions => ["#{params['search_field']} LIKE ?", 
+                    "%#{params[:search]}%"])
+  
+  else # search on status
+
+  @samples=Sample.page(params[:page]).per_page(samples_per_page.to_i).find( :all,
+    :joins => [:flag, {:user => :group}],                  
+    :order => "#{sort_column} #{sort_direction}",
+    :conditions => ["(flags.id = samples.flag_id) AND flags.name LIKE ? ", 
+                    "%#{params[:search]}%"])
+
+  end
   end
 
   def groupindex
@@ -86,8 +97,16 @@ class SamplesController < ApplicationController
     params['search_field'] = 'code'
   end
 
+  unless params['search_field'] == 'status'
+
     @samples=Sample.page(params[:page]).per_page(samples_per_page.to_i).where("(code LIKE '#{current_user.group.group_abbr}%') AND (#{params['search_field']} LIKE '%#{params[:search]}%')").joins(:flag, {:user => :group}).order("#{sort_column} #{sort_direction}")
-#                          :joins => [:flag, {:user => :group}],
+
+  else
+
+    @samples=Sample.page(params[:page]).per_page(samples_per_page.to_i).where("(code LIKE '#{current_user.group.group_abbr}%') AND (flags.id = samples.flag_id) AND (flags.name LIKE ? )", "%#{params[:search]}%").joins(:flag, {:user => :group}).order("#{sort_column} #{sort_direction}")
+
+  end
+
   end
 
   def userindex
@@ -96,8 +115,16 @@ class SamplesController < ApplicationController
     params['search_field'] = 'code'
   end
 
+  unless params['search_field'] == 'status'
+
     @samples=Sample.page(params[:page]).per_page(samples_per_page.to_i).where("(user_id = '#{current_user.id}') AND (#{params['search_field']} LIKE '%#{params[:search]}%')").joins(:flag, {:user => :group}).order("#{sort_column} #{sort_direction}")
-#                          :joins => [:flag, {:user => :group}],
+
+  else
+
+    @samples=Sample.page(params[:page]).per_page(samples_per_page.to_i).where("(user_id = '#{current_user.id}') AND (flags.id = samples.flag_id) AND (flags.name LIKE ? )", "%#{params[:search]}%").joins(:flag, {:user => :group}).order("#{sort_column} #{sort_direction}")
+
+  end
+
   end
 
   def show
