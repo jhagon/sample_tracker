@@ -538,6 +538,8 @@ user. By default, this number is set by a global variable,
 \verb=ITEMS_PER_PAGE= defined in the \verb=config/environment.rb= file\footnote{See the \emph{System Management} section for further details.}.
 However, it can be easily changed by selecting the desired value from
 a drop-down list in the search form above the sample list.
+The first entry in this list is always the value in the
+\verb=ITEMS_PER_PAGE= variable.
 After the choice is made, the list will be re-paginated according to
 the selected value. Note that for a full samples listing, the search box
 itself must be empty when you do this.
@@ -555,14 +557,16 @@ To narrow down the list of samples you need to type something into
 the search box in the search form above the sample list. This search form
 is common to most of the sample listing pages and is shown in
 Figure \ref{fig:searchform}.
-You can search
-on two fields: the sample code or the user reference. When you perform
+Currently You can search on three fields: 
+the sample code, the user reference or the status. When you perform
 a search, the results will be paginated according to the setting of the
 pagination parameter described above. Note that search results can be
 sorted as before by clicking the header text of the column that you
 wish to sort by.
 Below the search form is a reset button which resets all the search
-and pagination parameters to their default values.
+parameters (but not the pagination) to their default values.
+You can also use the standard SQL \verb=%= symbol as a `wildcard'
+character.
 
 \begin{plainblock}
 Note that searches are \emph{not} cumulative --- they are always made
@@ -605,9 +609,10 @@ have access to a scanner.
 \end{center}
 \end{figure}
 
-\section{System Internals}
+\section{System Management and Internals}
 \subsection{Introduction}
-In this section we will explain lower-level aspects of the system.
+In this section we will explain lower-level aspects of the system
+and its management.
 This includes the operating system, command shell, web server, 
 database, ruby language, ruby gems, and the rails3 system which is
 used to do most of the programming.
@@ -756,6 +761,61 @@ ImageMagick routines to be called from within a Ruby program.
 Pagination of sample listings (and other things) is controlled in the
 application by this gem.
 \end{description}
+
+\subsection{Web Server Management}
+Most of the time, you should need only
+two commands when managing the web server --- the commands to switch it on
+and off. To do this use:
+\begin{verbatim}
+sudo apache2ctl start|stop
+\end{verbatim}
+You would typically stop the server to do some maintenance such as editing
+a stylesheet or a major upgrade to the software.
+Occasionally you may need to change some server parameters in the
+web server configuration files. The main configuration file is
+\verb=/etc/apache2/apache2.conf=. You will rarely, if ever, need to
+change anything here unless you want to tweak the server performance (in
+which case you'll definately need to know what you're doing). This file
+does contain some parameters for the apache \emph{Phusion Passenger} 
+module which is needed to interface Rails with the apache server:
+\begin{verbatim}
+LoadModule passenger_module /usr/local/rvm/gems/ruby-1.9.2-p290/
+gems/passenger-3.0.9/ext/apache2/mod_passenger.so
+   PassengerRoot /usr/local/rvm/gems/ruby-1.9.2-p290/gems/passenger-3.0.9
+   PassengerRuby /usr/local/rvm/wrappers/ruby-1.9.2-p290/ruby
+\end{verbatim}
+These configuration lines are added as part of the installation of
+\emph{Phusion Passenger} and tell it where the ruby interpreter and
+passenger software reside in the file system.
+
+The \verb=apache2.conf= file also contains a line which refers to some other
+configuration files:
+\begin{verbatim}
+Include /etc/apache2/sites-enabled/
+\end{verbatim}
+The above line tells the server to get some further configuartion
+details from the contents of the directory
+\verb=/etc/apache2/sites-enabled=.
+\verb=sites-enabled= contains a file called \verb=000-default= which contains
+the descriptions of all the \emph{virtual hosts}\footnote{A single Apache
+web server can support multiple so-called virtual hosts which behave as
+separate web sites.}. The most important virtual host entry is the one
+for the host \verb=crystal.ncl.ac.uk=. Here is the entry in full:
+\begin{verbatim}
+<VirtualHost *:80>
+      ServerName crystal.ncl.ac.uk
+      DocumentRoot /usr/local/share/sample_tracker/public
+      <Directory "/usr/local/share/sample_tracker/public">
+         AllowOverride all
+         Options -MultiViews
+      </Directory>
+        ErrorLog /var/log/apache2/error-crystal.log
+</VirtualHost>
+\end{verbatim}
+For virtual hosting to work, any name given to a virtual host
+(e.g. in this case \verb=crystal.ncl.ac.uk=) must be an official alias
+for the actual apache web server (in this case \verb=milkyway.ncl.ac.uk=).
+We will now describe in detail what these directives mean.
 
 \section{The Database}\label{sec:database}
 \subsection{Introduction}
