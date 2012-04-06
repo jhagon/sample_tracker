@@ -1,30 +1,31 @@
-\BOOKMARK [1][-]{section.1}{General Description of the System}{}% 1
-\BOOKMARK [2][-]{subsection.1.1}{Introduction}{section.1}% 2
-\BOOKMARK [2][-]{subsection.1.2}{Users}{section.1}% 3
-\BOOKMARK [2][-]{subsection.1.3}{Groups}{section.1}% 4
-\BOOKMARK [2][-]{subsection.1.4}{Samples}{section.1}% 5
-\BOOKMARK [2][-]{subsection.1.5}{Public Pages}{section.1}% 6
-\BOOKMARK [1][-]{section.2}{Web Management Guide}{}% 7
-\BOOKMARK [2][-]{subsection.2.1}{Introduction}{section.2}% 8
-\BOOKMARK [2][-]{subsection.2.2}{Adding Static Pages}{section.2}% 9
-\BOOKMARK [2][-]{subsection.2.3}{Uploading General Files to the Server}{section.2}% 10
-\BOOKMARK [2][-]{subsection.2.4}{Creating Users and Groups}{section.2}% 11
-\BOOKMARK [2][-]{subsection.2.5}{Sample Management}{section.2}% 12
-\BOOKMARK [2][-]{subsection.2.6}{Sample Search and Display Tools}{section.2}% 13
-\BOOKMARK [3][-]{subsubsection.2.6.1}{BarCode Scanning}{subsection.2.6}% 14
-\BOOKMARK [1][-]{section.3}{System Management and Internals}{}% 15
-\BOOKMARK [2][-]{subsection.3.1}{Introduction}{section.3}% 16
-\BOOKMARK [2][-]{subsection.3.2}{Basic Components of the System}{section.3}% 17
-\BOOKMARK [3][-]{subsubsection.3.2.1}{Ruby Gems}{subsection.3.2}% 18
-\BOOKMARK [2][-]{subsection.3.3}{Web Server Management}{section.3}% 19
-\BOOKMARK [1][-]{section.4}{The Database}{}% 20
-\BOOKMARK [2][-]{subsection.4.1}{Introduction}{section.4}% 21
-\BOOKMARK [2][-]{subsection.4.2}{The Samples Table}{section.4}% 22
-\BOOKMARK [2][-]{subsection.4.3}{The Users Table}{section.4}% 23
-\BOOKMARK [2][-]{subsection.4.4}{The Stores, Hazards and Sensitivities Tables}{section.4}% 24
-\BOOKMARK [2][-]{subsection.4.5}{The Groups Table}{section.4}% 25
-\BOOKMARK [2][-]{subsection.4.6}{Other Tables}{section.4}% 26
-\BOOKMARK [3][-]{subsubsection.4.6.1}{The Pages Table}{subsection.4.6}% 27
-\BOOKMARK [3][-]{subsubsection.4.6.2}{The Assets Table}{subsection.4.6}% 28
-\BOOKMARK [3][-]{subsubsection.4.6.3}{The Popups Table}{subsection.4.6}% 29
-\BOOKMARK [3][-]{subsubsection.4.6.4}{The Flags Table}{subsection.4.6}% 30
+\BOOKMARK [1][-]{section.1}{General Description of the System}{}
+\BOOKMARK [2][-]{subsection.1.1}{Introduction}{section.1}
+\BOOKMARK [2][-]{subsection.1.2}{Users}{section.1}
+\BOOKMARK [2][-]{subsection.1.3}{Groups}{section.1}
+\BOOKMARK [2][-]{subsection.1.4}{Samples}{section.1}
+\BOOKMARK [2][-]{subsection.1.5}{Public Pages}{section.1}
+\BOOKMARK [1][-]{section.2}{Web Management Guide}{}
+\BOOKMARK [2][-]{subsection.2.1}{Introduction}{section.2}
+\BOOKMARK [2][-]{subsection.2.2}{Adding Static Pages}{section.2}
+\BOOKMARK [2][-]{subsection.2.3}{Uploading General Files to the Server}{section.2}
+\BOOKMARK [2][-]{subsection.2.4}{Creating Users and Groups}{section.2}
+\BOOKMARK [2][-]{subsection.2.5}{Sample Management}{section.2}
+\BOOKMARK [2][-]{subsection.2.6}{Sample Search and Display Tools}{section.2}
+\BOOKMARK [3][-]{subsubsection.2.6.1}{BarCode Scanning}{subsection.2.6}
+\BOOKMARK [1][-]{section.3}{System Management and Internals}{}
+\BOOKMARK [2][-]{subsection.3.1}{Introduction}{section.3}
+\BOOKMARK [2][-]{subsection.3.2}{Basic Components of the System}{section.3}
+\BOOKMARK [3][-]{subsubsection.3.2.1}{Ruby Gems}{subsection.3.2}
+\BOOKMARK [2][-]{subsection.3.3}{Web Server Management}{section.3}
+\BOOKMARK [2][-]{subsection.3.4}{Application File and Directory Management}{section.3}
+\BOOKMARK [1][-]{section.4}{The Database}{}
+\BOOKMARK [2][-]{subsection.4.1}{Introduction}{section.4}
+\BOOKMARK [2][-]{subsection.4.2}{The Samples Table}{section.4}
+\BOOKMARK [2][-]{subsection.4.3}{The Users Table}{section.4}
+\BOOKMARK [2][-]{subsection.4.4}{The Stores, Hazards and Sensitivities Tables}{section.4}
+\BOOKMARK [2][-]{subsection.4.5}{The Groups Table}{section.4}
+\BOOKMARK [2][-]{subsection.4.6}{Other Tables}{section.4}
+\BOOKMARK [3][-]{subsubsection.4.6.1}{The Pages Table}{subsection.4.6}
+\BOOKMARK [3][-]{subsubsection.4.6.2}{The Assets Table}{subsection.4.6}
+\BOOKMARK [3][-]{subsubsection.4.6.3}{The Popups Table}{subsection.4.6}
+\BOOKMARK [3][-]{subsubsection.4.6.4}{The Flags Table}{subsection.4.6}

@@ -15,7 +15,7 @@
 \usepackage{tikz}
 \usepackage{example}
 \usepackage[super]{cite}
-\usetikzlibrary{shapes,arrows}
+\usetikzlibrary{shapes,arrows,trees}
 \usepackage[pdftex]{hyperref}
 \title{\sffamily\bfseries Crystallography Service Sample Database Administrator's Guide}
 \author{J.P.Hagon\\Computer Systems Support\\School of Chemistry}
@@ -720,13 +720,13 @@ web server, ruby and database layer:
 
 \begin{description}
 \item[Phusion Passenger]
-\emph{Phusion Passenger} is an Apache module -- a `plugin' -- which
+is an Apache module -- a `plugin' -- which
 interfaces a rails3 application to the Apache web server. It also supplies
 some debugging and error logging information which can be useful when
 things go wrong.
 \item[Ruby Gems]
-\emph{Ruby Gems} are extension libraries to ruby. Some of them are
-specific to rails3, but most are more general purpose and can be used in
+are extension libraries to ruby. Some of them are
+specific to rails3, but most have wider applicability and can be used in
 more general applications. The ruby gems used in the sample tracking
 application are described in the next section.
 \end{description}
@@ -735,31 +735,30 @@ application are described in the next section.
 The following Ruby Gems are used in the application:
 \begin{description}
 \item[cancan\cite{cancan}]
-This gem, written by well-known Rails programmer Ryan Bates is used for
+written by well-known Rails programmer Ryan Bates is used for
 authorization. By this we mean controlling which parts of the application
 can be accessed by users. For example, some parts of the application can
 be accessed only by administrative users and others can be accessed by
 anyone --- even those who have not registered to use the system.
 \item[carrierwave\cite{carrierwave}]
-Carrierwave is used to manage the upload of various files to the application
+is used to manage the upload of various files to the application
 including data files, image files and general asset files.
 \item[devise\cite{devise}]
-Deivise is an authentication plugin to Rails which handles user data and
+is an authentication plugin to Rails which handles user data and
 user authentication. It provides related functionality such as forgotten
 password recovery (via email), user login statistics and more.
 \item[prawn\cite{prawn}]
-This is a ruby library for producing PDF files. It is used to
+is a ruby library for producing PDF files. It is used to
 auto-generate the sample receipts.
 \item[redcloth\cite{redcloth}]
-TRedCloth is a Ruby library used for parsing and display of Textile input.
+is a Ruby library used for parsing and display of Textile input.
 \item[rmagick\cite{rmagick}]
-ImageMagick is a well known software application consisting of both
+is a well-known software application consisting of both
 libraries and utility programs for manipulation of bitmap graphic files.
 This gem interfaces the ImageMagick libraries to Ruby allowing
 ImageMagick routines to be called from within a Ruby program.
 \item[will\_paginate\cite{willp}]
-Pagination of sample listings (and other things) is controlled in the
-application by this gem.
+is used to set up pagination of sample listings (and other things).
 \end{description}
 
 \subsection{Web Server Management}
@@ -816,6 +815,198 @@ For virtual hosting to work, any name given to a virtual host
 (e.g. in this case \verb=crystal.ncl.ac.uk=) must be an official alias
 for the actual apache web server (in this case \verb=milkyway.ncl.ac.uk=).
 We will now describe in detail what these directives mean.
+
+The first line is a tag which defines the beginning of a virtual host
+definition. It has the form \verb=<VirtualHost *:80>=. The number \verb=80=
+is the \emph{port number}\footnote{A port number defines a communications
+channel between computers on the Internet. Port 80 is usually
+used by the HTTP protocol for communication between web servers and browsers
+although other port numbers can be used.}.
+The last line is a closing tag, \verb=</VirtualHost>=. the lines in-between
+contain the directives which control the configuration of this host.
+\begin{description}
+\item[\texttt ServerName]
+This directive sets the name of the virtual host, in this case
+\verb=crystal.ncl.ac.uk=.
+\item[\texttt DocumentRoot]
+Sets the absolute path of the directory on the server which contains
+all static documents which can be \emph{directly} viewable on a web browser.
+No documents outside this directory can be viewed directly or downloaded.
+In this case, the document root is 
+\verb=/usr/local/share/sample_tracker/public=
+i.e. the \verb=public= directory within the full sample tracking application.
+This is a standard rails convention.
+\item[\texttt ErrorLog]
+Specifies the absolute path of the error log file for this virtual host.
+Here, it is set as \verb=/var/log/apache2/error-crystal.log=.
+\end{description}
+There is also a \verb=Directory= section in the virtual host definition.
+This has the form of an opening and closing tag with directives in-between.
+The opening tag has an argument which is the full path of the particular
+directory to which the directives apply. Note that the argument is in quotes.
+In this case the argument is the same directory as the document root.
+Note further that there may be more than one \verb=Directory= section.
+The directives are as follows:
+\begin{description}
+\item[\texttt AllowOverride]
+This directive controls whether directives contained in a file
+(conventionally called \verb=.htaccess= contained in a particular
+directory can override earlier configuration directives at the server
+configuration level. The argument refers to which type of directive
+can be overridden --- in this case \verb=all=.
+\item[\texttt Options]
+This sets a number of options when viewing files contained in the
+relevant directory. here, we have set the \verb=-MultiViews= option
+which allows a single document to be displayed in different ways dependent
+on browser capabilities.
+\end{description}
+
+\begin{plainblock}
+\begin{center}
+\bfseries Location of the Sample Tracking Application
+\end{center}
+It should be clear from the above that if you want to change the
+location of the sample tracking application you must edit the
+virtual host directive file and change the \verb=DocumentRoot= directive
+and \verb=Directory= section argument appropriately.
+\end{plainblock}
+
+We end this section on web management with a brief discussion about
+file permissions. Once you have uploaded the application and all its
+files to a suitable location you must make sure that the file permissions
+are correct. The correct permissions for all files are to set group
+ownership to \verb=root= and user ownership to \verb=nobody=\footnote{%
+\texttt{nobody} is a special user account available on most linux
+systems.}. This can be done with a simple one-line command:
+\begin{verbatim}
+sudo chown -R nobody.root <application document root>
+\end{verbatim}
+
+\subsection{Application File and Directory Management}
+In this section we describe the overall file and directory structure
+of the application. Some of the files contain parameters which can be
+changed to affect the behaviour of the application or the appearance
+of the views. The overall directory structure is shown in
+Figure \ref{fig:filestructure}.
+
+\begin{sidewaysfigure}
+\captionsetup{width=10cm}
+\begin{center}
+\scriptsize
+\begin{tikzpicture}
+\node (root) {application root}
+  [edge from parent fork down]
+
+  child {node {app}
+  child {
+    child {node {controllers}}
+    child {node {helpers}}
+    child {node {mailers}}
+    child {node {models}}
+    child {node {pdfs}}
+    child {node {uploaders}}
+    child {node {views}
+    child {
+    child {
+      child {node {assets}}
+      child {node {devise}}
+      child {node {flags}}
+      child {node {groups}}
+      child {node {hazards}}
+      child {node {pages}}
+      child {node {layouts}}
+      child {node {popups}}
+      child {node {sample\_mailer}}
+      child {node {samples}}
+      child {node {sensitivities}}
+      child {node {stores}}
+      child {node {user}}
+      child {node {users}}
+}
+}
+}
+}
+}
+%  child [missing] {}
+  child {node {autotest}}
+  child {node {config}
+    child {node {environments}}
+    child {node {initializers}}
+    child {node {locales}}
+}
+  child [missing] {}
+  child {node {db}
+    child {node {migrate}}
+}
+  child {node {doc}
+    child {node{guide}}
+}
+  child {node {lib}
+    child {node{tasks}}
+}
+  child {node {log}}
+  child {node {public}
+  child {
+  child {
+    child {node {images}}
+    child {node {javascripts}}
+    child {node {stylesheets}}
+    child {node {uploads}}
+}
+}
+}
+  child {node {script}}
+  child {node {spec}
+  child {
+  child {
+  child {
+    child {node {controllers}}
+    child {node {fixtures}}
+    child {node {helpers}}
+    child {node {mailers}}
+    child {node {models}}
+}
+}
+}
+}
+  child {node {tmp}
+  child {
+    child {node {cache}}
+    child {node {pids}}
+    child {node {sessions}}
+    child {node {sockets}}
+}
+}
+  child {node {vendor}
+    child {node {plugins}}
+}
+;
+\end{tikzpicture}
+\normalsize
+\end{center}
+\vspace{1cm}
+\caption{The application directory structure. Only directories are
+shown here. See text for a detailed explanation.
+\label{fig:filestructure}}
+\end{sidewaysfigure}
+
+The application root directory contains the following files:
+\begin{verbatim}
+config.ru Gemfile Gemfile.lock README.markdown
+\end{verbatim}
+\verb=README.markdown= is a brief summary of the application, written in
+\emph{markdown}, a simple markup language similar to Textile. The
+contents of this file are automatically displayed when viewing the home
+page of the application on GitHub.
+
+\verb=config.ru= is a file used to initialize the application via a
+special software interface called \emph{Rack}\footnote{Rack is part
+of the interface between a rails application and a web server.}.
+
+\verb=Gemfile= contains a list of gems required to run the application.
+\verb=Gemfile.lock= contains a list of all gems and their dependencies
+and is used to update or install additional gems for the application.
+In practice, only the \verb=Gemfile= is actually edited.
 
 \section{The Database}\label{sec:database}
 \subsection{Introduction}
