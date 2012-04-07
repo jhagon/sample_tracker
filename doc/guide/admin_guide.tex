@@ -1,6 +1,10 @@
 \documentclass[12pt,twoside]{article}
+%
+% declare a bold, tt font.
+\DeclareFontShape{OT1}{cmtt}{bx}{n}{<5><6><7><8><9><10><10.95><12><14.4><17.28><20.74><24.88>cmttb10}{}
+%
 \usepackage[a4paper,margin=1in]{geometry}
-\usepackage[T1]{fontenc}
+\usepackage[OT1]{fontenc}
 \usepackage{textcomp}
 \renewcommand{\rmdefault}{ptm}
 \usepackage[scaled=0.92]{helvet}
@@ -12,6 +16,7 @@
 \usepackage{fancyhdr}
 \usepackage{rotating}
 \usepackage{picins,graphicx}
+\usepackage[perpage,symbol]{footmisc}
 \usepackage{tikz}
 \usepackage{example}
 \usepackage[super]{cite}
@@ -21,7 +26,7 @@
 \author{J.P.Hagon\\Computer Systems Support\\School of Chemistry}
 \date{\today}
 \renewcommand{\abstractname}{Introduction}
-\renewcommand{\thefootnote}{\fnsymbol{footnote}}
+%\renewcommand{\thefootnote}{\fnsymbol{footnote}}
 %
 \definecolor{skyblue}{rgb}{0.422,0.648,0.801}
 \definecolor{darkgreen}{rgb}{0.0,0.4,0.0}
@@ -882,7 +887,7 @@ systems.}. This can be done with a simple one-line command:
 sudo chown -R nobody.root <application document root>
 \end{verbatim}
 
-\subsection{Application File and Directory Management}
+\subsection{File and Directory Management}
 In this section we describe the overall file and directory structure
 of the application. Some of the files contain parameters which can be
 changed to affect the behaviour of the application or the appearance
@@ -890,7 +895,7 @@ of the views. The overall directory structure is shown in
 Figure \ref{fig:filestructure}.
 
 \begin{sidewaysfigure}
-\captionsetup{width=10cm}
+\captionsetup{width=20cm}
 \begin{center}
 \scriptsize
 \begin{tikzpicture}
@@ -969,6 +974,7 @@ Figure \ref{fig:filestructure}.
 }
 }
 }
+  child [missing] {}
   child {node {tmp}
   child {
     child {node {cache}}
@@ -1007,6 +1013,215 @@ of the interface between a rails application and a web server.}.
 \verb=Gemfile.lock= contains a list of all gems and their dependencies
 and is used to update or install additional gems for the application.
 In practice, only the \verb=Gemfile= is actually edited.
+
+There are 12 directories directly under the application root:
+\subsubsection{The app Directory}
+This directory contains the bulk of the application code and templates 
+for most of the page views. It contains the following subdirectories:
+\begin{description}
+\item[controllers]
+as its name implies contains code which \emph{controls} the interface
+between the database and the browser. Each table in the database has its
+own controller code stored in a file in this directory. So, for example, the
+controller code for access to the samples table is contained in the file
+\verb=samples_controller.rb=. The \verb=.rb= extension indicates that this
+file contains ruby code.
+\item[helpers]
+contains so-called `helper' functions (again written in ruby) which are
+used to produce page views. Generally, there is a file of helper
+routines corresponding to each database table, for example the helper
+code containing routines to aid the display of sample data is stored in
+the file \verb=samples_helper.rb=. Other files, such as
+\verb=application_helper.rb= are more general-purpose and can be accessed
+more widely, not just to facilitate page display for particular database
+table items.
+\item[mailers]
+contains cose used by the Rails mail subsystem. In the sample tracking
+application, when samples are updated, an email is sent to relevant users.
+The file \verb=sample_mailer.rb= contains the ruby code which sends the
+email.
+\item[models]
+is one of the most important directories because it contains the code
+which interacts with the database. In Rails, each database table defines
+a `model' and the code to access this model is contained in a file in the
+\verb=models= directory. In the case of the samples model for example, this
+file is called \verb=sample.rb=.
+\item[pdfs]
+contains code to generate PDF versions of model data. Only sample data is
+rendered to PDF form in this application. The rendering code (using the
+Prawn library) is contained in the file \verb=sample_pdf.rb=.
+\item[uploaders]
+contains code for uploading files to the server. For each upload type, there
+is a file containing the appropriate code for that file type (although
+often the code will be almost identical in many cases). The standard
+naming convention
+for these files is \verb=<uploader_name>_uploader.rb=. For example, in the
+case of an \emph{asset} upload, the code to do this is stored in the
+file \verb=document_uploader.rb= because the \emph{asset} model has
+a field value called \emph{document} which has been decalred in its model
+code as an uploader called \emph{document}\footnote{Note here that it is
+the uploader name which determines the name of the file containing the
+uploader code, not the field name. In this case the two are equal, but
+they don't have to be.}.
+Other uploader file types include zip data files, sample images and
+synthetic route diagrams.
+\item[views]
+contains temmplate HTML code for displaying page views of data from the
+database. As can be seen from Figure \ref{fig:filestructure}, the views
+directory itself contains lots of subdirectories. each subdirectory
+corresponds to a model from the sample database and contains the view
+templates for various different types of view associated with that model.
+Let us look at the central model in the system, the \emph{sample} model.
+A listing of the \verb=sample= subdirectory shows the following files:
+\begin{verbatim}
+edit.html.erb         groupindex.html.erb  queue.html.erb
+findbarcode.html.erb  index.html.erb       show.html.erb
+_form.html.erb        new.html.erb         userindex.html.erb
+\end{verbatim}
+These files all contain a mixture of traditional HTML and embedded ruby
+--- hence the \verb=.html.erb= extension. Some of the files are specific
+to the sample model but others are common to other models. In particular,
+the files (omitting the extension) \verb=new=, \verb=show= and \verb=edit=
+are templates for the \emph{create}, \emph{read} and
+\emph{edit} operations.
+Additionally, \verb=_form= is a form template for editing or entering 
+model data. This form template is actually included by the new and edit
+templates.
+To get an idea of how this works, here is the edit template contained
+in the file \verb=edit.html.erb=:
+\begin{verbatim}
+<% title "Edit Sample #{@sample.code}" %>
+
+<%= render 'form' %>
+
+<p>
+  <%= link_to "Show", @sample %> |
+  <%= link_to "View All", samples_path %>
+</p>
+\end{verbatim}
+Note that there are familiar HTML elements such as the paragraph tags
+\verb=<p>= and \verb=</p>=. Text within the \verb=<%= and \verb=%>=
+tags is ruby code. Note in particular the \verb=render 'form'= directive.
+This reads in the content of the file \verb=_form.html.erb=.
+
+\end{description}
+\subsubsection{The public Directory}
+This directory contains files that can be \emph{directly} viewed by
+a web browser. For example, if you create a file called \verb=info.html=
+in this directory then (provided its permissions are suitable) you will be
+able to view its contents simply by entering the following URL into your
+web browser:
+\begin{verbatim}
+http://crystal.ncl.ac.uk/info.html
+\end{verbatim}
+The public directory contains things such as stylesheets, error pages
+corresponding to the standard HTTP error codes\footnote{404 and 500 refer
+to 'file not found' and 'internal server error' respectively. A 500 error
+often arises when a program script malfunctions or there is a 
+database problem.} 404, 422 and 500, generic
+images (e.g. icons for buttons and logos), javascript files and any files
+which are uploaded to the server. 
+
+This last category includes all file
+uploads to do with samples and assets. These files are all placed in
+a directory called \verb=uploads= within the public directory.
+Uploaded files are further organised depending on whether they are to
+do with samples or whether they are a generic asset.
+An example will best illustrate this. Suppose that a zip file of sample
+analysis data is uploaded by an administrator. He is free to give the zip file
+any name. Suppose he calls the file \verb=results.zip=. Then, when the file
+is uploaded via the sample edit form, it will be placed in the
+following location:
+\begin{verbatim}
+public/uploads/sample/zipdata/62/results.zip
+\end{verbatim}
+
+Similarly, a synthetic route image file called \verb=synthroute.png=
+ uploaded by a user when submitting a 
+sample analysis request, will be placed in the file:
+\begin{verbatim}
+public/uploads/sample/synth/<sample_id>/synthroute.png
+\end{verbatim}
+where \verb=<sample_id>= is the id automatically assigned by the database
+engine to that particular sample\footnote{In fact another file will be
+automatically created in the same directory, this file is a thumbnail
+version of the user's file and will be given a similar name to that
+which the user submitted except prefixed by the string \texttt{thumb\_}.}.
+To summarize, the general form of the file path for uploaded files is:
+\begin{verbatim}
+<application root>/public/uploads/<model>/<uploader>/<id>/<file name>
+\end{verbatim}
+
+\subsubsection{The config Directory}
+This directory contains configuration and initialization files
+for the rails application. You will rarely, if ever need to edit most
+of these. However, there is one file, \verb=environment.rb=, which
+contains some parameters that you may want to change occasionally.
+Here is a listing of this file:
+
+\tiny
+\begin{verbatim}
+# Load the rails application
+require File.expand_path('../application', __FILE__)
+
+# Initialize the rails application
+SampleTracker::Application.initialize!
+ITEMS_PER_PAGE = 10 # default num items per page for will_paginate
+
+###################  SPECIFIC GLOBAL VARS ####################
+TEXTILE_REF_URL = "http://redcloth.org/textile/"
+CRYS_EMAIL = "xray.cryst@ncl.ac.uk"
+LOCAL_ADMIN_EMAIL = "crysadmin@milkyway.ncl.ac.uk"
+TEXTILE_QUICK_REF_URL = "http://en.wikipedia.org/wiki/Textile_%28markup_language%29"
+SAMPLE_INTRO_TEXT = "a unique code and a barcode will be
+automatically generated on submission of this form when a new sample
+is created. For synthetic route files, please use either the JPG or PNG
+bitmap image format.
+Note further that for security reasons, if there are validation errors
+in the form, you will have to re-select the names of uploaded files.
+Also remeber to set the priority number, the form will not validate unless
+you do this (if you are not going to submit several samples in a short
+space of time we suggest setting the priority number to 1)."
+QUEUE_INTRO_TEXT = "The following gives an appoximate wait time before your 
+sample will be analysed. The actual time will vary depending on sample 
+quality and priority number."
+\end{verbatim}
+\normalsize
+
+There are several constants (those parameters in capitals) which define
+parameters which affect the way the application runs:
+\begin{description}
+\item[\texttt{\textbf{ITEMS\_PER\_PAGE}}]
+is the parameter that controls the \emph{default} pagination of lists
+as mentioned elsewhere. Lists will use this parameter as a default, but
+in most cases users can change the pagination on-the-fly.
+\item[\texttt{\textbf{TEXTILE\_REF\_URL}}]
+contains a URL pointing to a complete Textile reference --- currently
+it refers to the RedCloth web site.
+\item[\texttt{\textbf{CRYS\_EMAIL}}]
+is the email account to which sample submission requests are sent.
+\item[\texttt{\textbf{LOCAL\_ADMIN\_EMAIL}}]
+this is set to the email address which appears in the \emph{From}
+part of all emails which are automatically sent to users by the sample
+tracking system.
+\item[\texttt{\textbf{TEXTILE\_QUICK\_REF\_URL}}]
+contains a URL to a Textile quick reference page. This is currently set
+to the Wikipedia entry for Textile and is used on the page edit screen
+to help administrators edit static pages as shown in Figure \ref{fig:editpage}.
+\item[\texttt{\textbf{SAMPLE\_INTRO\_TEXT}}]
+contains the text that appears in a box at the beginning of the sample
+submission form --- see for example Figure \ref{fig:sampleeditform}. 
+\item[\texttt{\textbf{QUEUE\_INTRO\_TEXT}}]
+contains the text that appears in a box at the beginning of the sample
+queue page.
+\end{description}
+
+\begin{plainblock}
+\begin{center}
+Note that if any of these parameters are changed, the server will need
+to be restarted before the changes will take effect.
+\end{center}
+\end{plainblock}
 
 \section{The Database}\label{sec:database}
 \subsection{Introduction}

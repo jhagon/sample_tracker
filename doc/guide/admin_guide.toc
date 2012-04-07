@@ -17,15 +17,18 @@
 \contentsline {subsection}{\numberline {3.2}Basic Components of the System}{15}{subsection.3.2}
 \contentsline {subsubsection}{\numberline {3.2.1}Ruby Gems}{16}{subsubsection.3.2.1}
 \contentsline {subsection}{\numberline {3.3}Web Server Management}{17}{subsection.3.3}
-\contentsline {subsection}{\numberline {3.4}Application File and Directory Management}{19}{subsection.3.4}
-\contentsline {section}{\numberline {4}The Database}{19}{section.4}
-\contentsline {subsection}{\numberline {4.1}Introduction}{19}{subsection.4.1}
-\contentsline {subsection}{\numberline {4.2}The Samples Table}{19}{subsection.4.2}
-\contentsline {subsection}{\numberline {4.3}The Users Table}{21}{subsection.4.3}
-\contentsline {subsection}{\numberline {4.4}The Stores, Hazards and Sensitivities Tables}{22}{subsection.4.4}
-\contentsline {subsection}{\numberline {4.5}The Groups Table}{23}{subsection.4.5}
-\contentsline {subsection}{\numberline {4.6}Other Tables}{23}{subsection.4.6}
-\contentsline {subsubsection}{\numberline {4.6.1}The Pages Table}{23}{subsubsection.4.6.1}
-\contentsline {subsubsection}{\numberline {4.6.2}The Assets Table}{23}{subsubsection.4.6.2}
-\contentsline {subsubsection}{\numberline {4.6.3}The Popups Table}{24}{subsubsection.4.6.3}
-\contentsline {subsubsection}{\numberline {4.6.4}The Flags Table}{24}{subsubsection.4.6.4}
+\contentsline {subsection}{\numberline {3.4}File and Directory Management}{19}{subsection.3.4}
+\contentsline {subsubsection}{\numberline {3.4.1}The app Directory}{19}{subsubsection.3.4.1}
+\contentsline {subsubsection}{\numberline {3.4.2}The public Directory}{21}{subsubsection.3.4.2}
+\contentsline {subsubsection}{\numberline {3.4.3}The config Directory}{22}{subsubsection.3.4.3}
+\contentsline {section}{\numberline {4}The Database}{23}{section.4}
+\contentsline {subsection}{\numberline {4.1}Introduction}{23}{subsection.4.1}
+\contentsline {subsection}{\numberline {4.2}The Samples Table}{23}{subsection.4.2}
+\contentsline {subsection}{\numberline {4.3}The Users Table}{25}{subsection.4.3}
+\contentsline {subsection}{\numberline {4.4}The Stores, Hazards and Sensitivities Tables}{25}{subsection.4.4}
+\contentsline {subsection}{\numberline {4.5}The Groups Table}{26}{subsection.4.5}
+\contentsline {subsection}{\numberline {4.6}Other Tables}{26}{subsection.4.6}
+\contentsline {subsubsection}{\numberline {4.6.1}The Pages Table}{26}{subsubsection.4.6.1}
+\contentsline {subsubsection}{\numberline {4.6.2}The Assets Table}{27}{subsubsection.4.6.2}
+\contentsline {subsubsection}{\numberline {4.6.3}The Popups Table}{27}{subsubsection.4.6.3}
+\contentsline {subsubsection}{\numberline {4.6.4}The Flags Table}{27}{subsubsection.4.6.4}
