@@ -22,7 +22,8 @@
 \usepackage[super]{cite}
 \usetikzlibrary{shapes,arrows,trees}
 \usepackage[pdftex]{hyperref}
-\title{\sffamily\bfseries Crystallography Service Sample Database Administrator's Guide}
+\newcommand{\samtrack}{\emph{SamTrack}}
+\title{\sffamily\bfseries Crystallography Service \\ \samtrack\\ Administrator's Guide}
 \author{J.P.Hagon\\Computer Systems Support\\School of Chemistry}
 \date{\today}
 \renewcommand{\abstractname}{Introduction}
@@ -59,7 +60,7 @@
 \maketitle
 \begin{abstract}
 This guide is intended for staff who administer the Newcastle University
-Crystallography Service Sample Database.
+Crystallography Service \samtrack\ Database.
 It includes both a general description of the web interface and 
 associated administration procedures along with a more technical
 description of the software interface and the database itself so that
@@ -70,9 +71,11 @@ administrator password.
 \newpage
 \section{General Description of the System}
 \subsection{Introduction}
+\samtrack\ is a software application for tracking samples submitted to
+the Newcastle University Crystallography Service.
 The system consists of a \emph{front-end} which is used by users
-and administrators to submit sample requests and upload analysis data. 
-This front-end is implemented using the 
+and administrators to submit sample requests, upload analysis data,
+edit sample status etc.  This front-end is implemented using the 
 ruby\cite{ruby} programming language and 
 version 3 of \emph{Ruby on Rails}\cite{rails}.
 The front-end is hosted on an \emph{Apache}\cite{apache} server running on an
@@ -107,7 +110,7 @@ Users can either self-register or be added by an administrator.
 An administrator can also disable a user account without actually
 deleting it.
 Only the most basic information about a user is stored in the database,
-namely first name, last name and email address. the email address serves
+--- first name, last name and email address. the email address serves
 as a login id. The user can set his own password. If the user forgets his
 password, the system can email him a secure link to the server via which
 the password can be reset.
@@ -766,128 +769,7 @@ ImageMagick routines to be called from within a Ruby program.
 is used to set up pagination of sample listings (and other things).
 \end{description}
 
-\subsection{Web Server Management}
-Most of the time, you should need only
-two commands when managing the web server --- the commands to switch it on
-and off. To do this use:
-\begin{verbatim}
-sudo apache2ctl start|stop
-\end{verbatim}
-You would typically stop the server to do some maintenance such as editing
-a stylesheet or a major upgrade to the software.
-Occasionally you may need to change some server parameters in the
-web server configuration files. The main configuration file is
-\verb=/etc/apache2/apache2.conf=. You will rarely, if ever, need to
-change anything here unless you want to tweak the server performance (in
-which case you'll definately need to know what you're doing). This file
-does contain some parameters for the apache \emph{Phusion Passenger} 
-module which is needed to interface Rails with the apache server:
-\begin{verbatim}
-LoadModule passenger_module /usr/local/rvm/gems/ruby-1.9.2-p290/
-gems/passenger-3.0.9/ext/apache2/mod_passenger.so
-   PassengerRoot /usr/local/rvm/gems/ruby-1.9.2-p290/gems/passenger-3.0.9
-   PassengerRuby /usr/local/rvm/wrappers/ruby-1.9.2-p290/ruby
-\end{verbatim}
-These configuration lines are added as part of the installation of
-\emph{Phusion Passenger} and tell it where the ruby interpreter and
-passenger software reside in the file system.
-
-The \verb=apache2.conf= file also contains a line which refers to some other
-configuration files:
-\begin{verbatim}
-Include /etc/apache2/sites-enabled/
-\end{verbatim}
-The above line tells the server to get some further configuartion
-details from the contents of the directory
-\verb=/etc/apache2/sites-enabled=.
-\verb=sites-enabled= contains a file called \verb=000-default= which contains
-the descriptions of all the \emph{virtual hosts}\footnote{A single Apache
-web server can support multiple so-called virtual hosts which behave as
-separate web sites.}. The most important virtual host entry is the one
-for the host \verb=crystal.ncl.ac.uk=. Here is the entry in full:
-\begin{verbatim}
-<VirtualHost *:80>
-      ServerName crystal.ncl.ac.uk
-      DocumentRoot /usr/local/share/sample_tracker/public
-      <Directory "/usr/local/share/sample_tracker/public">
-         AllowOverride all
-         Options -MultiViews
-      </Directory>
-        ErrorLog /var/log/apache2/error-crystal.log
-</VirtualHost>
-\end{verbatim}
-For virtual hosting to work, any name given to a virtual host
-(e.g. in this case \verb=crystal.ncl.ac.uk=) must be an official alias
-for the actual apache web server (in this case \verb=milkyway.ncl.ac.uk=).
-We will now describe in detail what these directives mean.
-
-The first line is a tag which defines the beginning of a virtual host
-definition. It has the form \verb=<VirtualHost *:80>=. The number \verb=80=
-is the \emph{port number}\footnote{A port number defines a communications
-channel between computers on the Internet. Port 80 is usually
-used by the HTTP protocol for communication between web servers and browsers
-although other port numbers can be used.}.
-The last line is a closing tag, \verb=</VirtualHost>=. the lines in-between
-contain the directives which control the configuration of this host.
-\begin{description}
-\item[\texttt ServerName]
-This directive sets the name of the virtual host, in this case
-\verb=crystal.ncl.ac.uk=.
-\item[\texttt DocumentRoot]
-Sets the absolute path of the directory on the server which contains
-all static documents which can be \emph{directly} viewable on a web browser.
-No documents outside this directory can be viewed directly or downloaded.
-In this case, the document root is 
-\verb=/usr/local/share/sample_tracker/public=
-i.e. the \verb=public= directory within the full sample tracking application.
-This is a standard rails convention.
-\item[\texttt ErrorLog]
-Specifies the absolute path of the error log file for this virtual host.
-Here, it is set as \verb=/var/log/apache2/error-crystal.log=.
-\end{description}
-There is also a \verb=Directory= section in the virtual host definition.
-This has the form of an opening and closing tag with directives in-between.
-The opening tag has an argument which is the full path of the particular
-directory to which the directives apply. Note that the argument is in quotes.
-In this case the argument is the same directory as the document root.
-Note further that there may be more than one \verb=Directory= section.
-The directives are as follows:
-\begin{description}
-\item[\texttt AllowOverride]
-This directive controls whether directives contained in a file
-(conventionally called \verb=.htaccess= contained in a particular
-directory can override earlier configuration directives at the server
-configuration level. The argument refers to which type of directive
-can be overridden --- in this case \verb=all=.
-\item[\texttt Options]
-This sets a number of options when viewing files contained in the
-relevant directory. here, we have set the \verb=-MultiViews= option
-which allows a single document to be displayed in different ways dependent
-on browser capabilities.
-\end{description}
-
-\begin{plainblock}
-\begin{center}
-\bfseries Location of the Sample Tracking Application
-\end{center}
-It should be clear from the above that if you want to change the
-location of the sample tracking application you must edit the
-virtual host directive file and change the \verb=DocumentRoot= directive
-and \verb=Directory= section argument appropriately.
-\end{plainblock}
-
-We end this section on web management with a brief discussion about
-file permissions. Once you have uploaded the application and all its
-files to a suitable location you must make sure that the file permissions
-are correct. The correct permissions for all files are to set group
-ownership to \verb=root= and user ownership to \verb=nobody=\footnote{%
-\texttt{nobody} is a special user account available on most linux
-systems.}. This can be done with a simple one-line command:
-\begin{verbatim}
-sudo chown -R nobody.root <application document root>
-\end{verbatim}
-
-\subsection{File and Directory Management}
+\subsection{Files and Directories}
 In this section we describe the overall file and directory structure
 of the application. Some of the files contain parameters which can be
 changed to affect the behaviour of the application or the appearance
@@ -1223,7 +1105,435 @@ to be restarted before the changes will take effect.
 \end{center}
 \end{plainblock}
 
-\section{The Database}\label{sec:database}
+\subsubsection{The db Directory}
+This directory contains the actual database used in the application.
+The production database is stored in a single file, \verb=production.sqlite3=.
+There may also be a development database, \verb=development.sqlite3= used
+for development work. The latter file is never used in a production environment
+however. One other important file is \verb=schema.rb=. This is a file
+containing ruby code which can be used to re-generate the entire blank
+database schema.
+
+There is also a directory called \verb=migrate=. This contains all of the
+\emph{migrations} which have been applied to the database since it was
+first initialized. A migration is simply an adjustment to the database
+schema. For example, you may create an initial table in the database but
+later realise that you want to change some characteristic of the table
+such as adding an extra field or changing the datatype of an existing field.
+You can do this by setting up a migration --- basically a bit of ruby code
+which will perform the necessary changes. 
+The file \verb=schema.rb= mentioned earlier can be
+thought of as an accumulation of all the migrations that have been applied
+to the database to get it to its current state.
+
+\subsubsection{Other Directories}
+There are sveral other directories:
+\begin{description}
+\item[tmp]
+holds temporary files created by \samtrack.
+This directory has subdirectories for storing
+cache contents, session information and sockets. These files are automatically
+cleaned up from time-to-time although an occasional manual cleanout may be
+necessary if things go wrong.
+\item[doc]
+contains documentation of various sorts.
+The subdirectory \verb=guide= contains this administrator's guide as well
+as the \LaTeX\ source file and included figures needed to create it.
+There are also several markdown formatted files which contain 
+informally-written information about the development of the application.
+\item[spec]
+is not used at present. It is intended as the location for
+a complete testing suite for the application. The test suite has not yet
+been written, but may be in the future.
+\item[autotest]
+is intended to hold files related to automatic testing.
+It is not used at present.
+\item[lib]
+contains code that doesn't neatly fit anywhere else.
+Within this directory is a file called 
+\verb=development_mail_interceptor.rb=
+which is used to set up an email environment in development mode, where
+you don't want emails to be sent to actual users. The code in this file
+redirects all email to a specific developer's email address.
+There is also a \verb=tasks= directory used to put code for any
+Rake\footnote{Rake is a \emph{build tool} which is used by developers to
+automate certain tasks. It is also used within rails to perform database 
+migrations.} tasks which have been written by developers. No custom
+Rake tasks have been written for this application so the directory is
+currently empty.
+\item[log]
+contains special development log information.
+\item[vendor]
+is the place where third-party code can be stored. It has a subdirectory,
+\verb=plugins= where extensions to rails are stored. Plugins
+extend core rails functionality. We don't use any rails plugins in this
+application at the moment so the directory is empty. The \verb=vendor=
+directory can also be used to store rails and all of its dependencies
+rather than relying on the operating system to provide them. At present
+we don't use this feature, but in future, when the application is stable,
+this is probably where we will install an independent copy of rails and
+its dependent software (e.g. gems) in order that the whole application
+is autonomous and not reliant on what the operating system provides.
+\end{description}
+
+\subsection{Web Server Management}
+Most of the time, you should need only
+two commands when managing the web server --- the commands to switch it on
+and off. To do this use:
+\begin{verbatim}
+sudo apache2ctl start|stop
+\end{verbatim}
+You would typically stop the server to do some maintenance such as editing
+a stylesheet or a major upgrade to the software.
+Occasionally you may need to change some server parameters in the
+web server configuration files. The main configuration file is
+\verb=/etc/apache2/apache2.conf=. You will rarely, if ever, need to
+change anything here unless you want to tweak the server performance (in
+which case you'll definately need to know what you're doing). This file
+does contain some parameters for the apache \emph{Phusion Passenger} 
+module which is needed to interface Rails with the apache server:
+\begin{verbatim}
+LoadModule passenger_module /usr/local/rvm/gems/ruby-1.9.2-p290/
+gems/passenger-3.0.9/ext/apache2/mod_passenger.so
+   PassengerRoot /usr/local/rvm/gems/ruby-1.9.2-p290/gems/passenger-3.0.9
+   PassengerRuby /usr/local/rvm/wrappers/ruby-1.9.2-p290/ruby
+\end{verbatim}
+These configuration lines are added as part of the installation of
+\emph{Phusion Passenger} and tell it where the ruby interpreter and
+passenger software reside in the file system.
+
+The \verb=apache2.conf= file also contains a line which refers to some other
+configuration files:
+\begin{verbatim}
+Include /etc/apache2/sites-enabled/
+\end{verbatim}
+The above line tells the server to get some further configuartion
+details from the contents of the directory
+\verb=/etc/apache2/sites-enabled=.
+\verb=sites-enabled= contains a file called \verb=000-default= which contains
+the descriptions of all the \emph{virtual hosts}\footnote{A single Apache
+web server can support multiple so-called virtual hosts which behave as
+separate web sites.}. The most important virtual host entry is the one
+for the host \verb=crystal.ncl.ac.uk=. Here is the entry in full:
+\begin{verbatim}
+<VirtualHost *:80>
+      ServerName crystal.ncl.ac.uk
+      DocumentRoot /usr/local/share/sample_tracker/public
+      <Directory "/usr/local/share/sample_tracker/public">
+         AllowOverride all
+         Options -MultiViews
+      </Directory>
+        ErrorLog /var/log/apache2/error-crystal.log
+</VirtualHost>
+\end{verbatim}
+For virtual hosting to work, any name given to a virtual host
+(e.g. in this case \verb=crystal.ncl.ac.uk=) must be an official alias
+for the actual apache web server (in this case \verb=milkyway.ncl.ac.uk=).
+We will now describe in detail what these directives mean.
+
+The first line is a tag which defines the beginning of a virtual host
+definition. It has the form \verb=<VirtualHost *:80>=. The number \verb=80=
+is the \emph{port number}\footnote{A port number defines a communications
+channel between computers on the Internet. Port 80 is usually
+used by the HTTP protocol for communication between web servers and browsers
+although other port numbers can be used.}.
+The last line is a closing tag, \verb=</VirtualHost>=. the lines in-between
+contain the directives which control the configuration of this host.
+\begin{description}
+\item[\texttt ServerName]
+This directive sets the name of the virtual host, in this case
+\verb=crystal.ncl.ac.uk=.
+\item[\texttt DocumentRoot]
+Sets the absolute path of the directory on the server which contains
+all static documents which can be \emph{directly} viewable on a web browser.
+No documents outside this directory can be viewed directly or downloaded.
+In this case, the document root is 
+\verb=/usr/local/share/sample_tracker/public=
+i.e. the \verb=public= directory within the root \samtrack\ directory.
+This is a standard rails convention.
+\item[\texttt ErrorLog]
+Specifies the absolute path of the error log file for this virtual host.
+Here, it is set as \verb=/var/log/apache2/error-crystal.log=.
+\end{description}
+There is also a \verb=Directory= section in the virtual host definition.
+This has the form of an opening and closing tag with directives in-between.
+The opening tag has an argument which is the full path of the particular
+directory to which the directives apply. Note that the argument is in quotes.
+In this case the argument is the same directory as the document root.
+Note further that there may be more than one \verb=Directory= section.
+The directives are as follows:
+\begin{description}
+\item[\texttt AllowOverride]
+This directive controls whether directives contained in a file
+(conventionally called \verb=.htaccess= contained in a particular
+directory can override earlier configuration directives at the server
+configuration level. The argument refers to which type of directive
+can be overridden --- in this case \verb=all=.
+\item[\texttt Options]
+This sets a number of options when viewing files contained in the
+relevant directory. here, we have set the \verb=-MultiViews= option
+which allows a single document to be displayed in different ways dependent
+on browser capabilities.
+\end{description}
+
+\begin{plainblock}
+\begin{center}
+\bfseries Root Directory Location of \samtrack
+\end{center}
+It should be clear from the above that if you want to change the root
+directory of \samtrack\  you must edit the
+virtual host directive file and change the \verb=DocumentRoot= directive
+and \verb=Directory= section argument appropriately.
+\end{plainblock}
+
+We end this section on web management with a brief discussion about
+file permissions. Once you have uploaded the application and all its
+files to a suitable location you must make sure that the file permissions
+are correct. The correct permissions for all files are to set group
+ownership to \verb=root= and user ownership to \verb=nobody=\footnote{%
+\texttt{nobody} is a special user account available on most linux
+systems.}. This can be done with a simple one-line command:
+\begin{verbatim}
+sudo chown -R nobody.root <application document root>
+\end{verbatim}
+
+\subsection{Raw Database Management}
+Hopefully, you won't often need to refer to this section because
+\samtrack\  will handle all of the database operations
+for you. Sometimes however, the database becomes broken in some way
+and needs to be edited in its `raw' form. For example, you may
+be logged in as an administrator and inadvertently remove your own
+admininstration rights. If you were the only administrator then you now
+have a problem because only an administrator can change a user's rights!
+We will look at how to solve this particular problem later in this
+section. We consider specifically SQLite3 database manipulation here
+since that is the database used in the application.
+In this section we describe two utilities for manipulating
+SQLite3 databases, the command-line linux program \emph{sqlite3} and
+the web browser plugin \emph{sqlite-manager}\cite{sqlitemanager}.
+
+\subsubsection{Database Management with sqlite3}
+\emph{sqlite3} is available on all systems where the SQLite3 database
+is installed. Here, we briefly describe how to use it to manipulate the
+sample database and give one example of its use in a practical situation.
+A simple command gets you started:
+\begin{verbatim}
+sqlite3 <sqlite3 database file>
+\end{verbatim}
+which produces some informational output followed by a prompt:
+\begin{verbatim}
+SQLite version 3.6.22
+Enter ".help" for instructions
+Enter SQL statements terminated with a ";"
+sqlite> 
+\end{verbatim}
+All commands in sqlite3 begin with a full stop. Assuming, we're looking
+at the sample tracking database, typing \verb=.tables= will give a list
+of tables in the database:
+\begin{verbatim}
+sqlite> .tables
+assets                 pages                  schema_migrations    
+flags                  popups                 sensitivities        
+groups                 samples                stores               
+hazards                samples_sensitivities  uploads              
+hazards_samples        samples_stores         users                
+sqlite> 
+\end{verbatim}
+The \verb=.schema= command can be used to check the schema of either
+individual tables or, without an argument, \emph{all} tables:
+
+\small
+\begin{verbatim}
+sqlite> .schema samples
+CREATE TABLE "samples" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "code"
+varchar(255), "cif" varchar(255), "synth" varchar(255), "coshh_name" varchar(255
+), "coshh_desc" varchar(255), "coshh_info" text, "params" varchar(255), "priorit
+y" integer, "powd" boolean, "chiral" boolean, "cost_code" varchar(255), "barcode
+" varchar(255), "created_at" datetime, "updated_at" datetime, "user_id" integer,
+ "flag_id" integer DEFAULT 1 NOT NULL, "userref" varchar(255), "zipdata" varchar
+(255), "sampleimage" varchar(255), "reference" varchar(255), "comments" text, "c
+olour" text, "size" text, "shape" text, "feedback" text);
+sqlite> 
+\end{verbatim}
+\normalsize
+
+What is displayed here is the SQL command sequence needed to create the
+table (in this case the samples table). You can deduce from this the whole
+table schema --- field names, data types, whether a particular field is
+allowed to be NULL or if it has a default value etc.
+
+If you want to actually enter data into or edit a database, you need to 
+understand the database query language SQL. A good, quick introduction is
+available on the \emph{w3schools} web site\cite{w3schoolssql}.
+Now, as an example, let's return to the problem of giving a user
+administration rights when there are no other such users\footnote{If you think about it, this will always be the case initially!}.
+In this case we'll use sqlite3 to give a particular user administration
+rights. We'll assume that the user's last name is 'Hagon'. First, we need
+to find the user. Here's the SQL to do that\footnote{Note that SQL
+commands must be terminated by a semi-colon.}:
+
+\small
+\begin{verbatim}
+sqlite> select * from users where lastname = 'Hagon';
+2|jerry.hagon@ncl.ac.uk|$2a$10$V2eSY1MD2dWkIESZ/3mtGe8hYvVDVkDTDEd4NKqZOQJ3t9wg9
+8iFq|hkTD7hHWzEu5ErjSFh2y|2012-02-16 10:19:43.792239||190|2012-04-06 07:43:02.65
+2582|2012-04-04 13:58:26.642714|127.0.0.1|127.0.0.1|2011-11-06 15:18:43.971379|2
+012-04-06 07:43:02.653005|19|f|Jerry|Hagon|t|t
+sqlite> 
+\end{verbatim}
+\normalsize
+
+Now, what does all this mean? First, each field in the output is separated
+by a vertical bar (\verb=|=). The order of the fields is determined by the
+schema, so let's find this out:
+
+\small
+\begin{verbatim}
+sqlite> .schema users
+CREATE TABLE "users" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "email" v
+archar(255) DEFAULT '' NOT NULL, "encrypted_password" varchar(128) DEFAULT '' NO
+T NULL, "reset_password_token" varchar(255), "reset_password_sent_at" datetime, 
+"remember_created_at" datetime, "sign_in_count" integer DEFAULT 0, "current_sign
+_in_at" datetime, "last_sign_in_at" datetime, "current_sign_in_ip" varchar(255),
+ "last_sign_in_ip" varchar(255), "created_at" datetime, "updated_at" datetime, "
+group_id" integer, "admin" boolean DEFAULT 'f', "firstname" varchar(255), "lastn
+ame" varchar(255), "leader" boolean DEFAULT 'f', "enabled" boolean DEFAULT 't');
+CREATE UNIQUE INDEX "index_users_on_email" ON "users" ("email");
+CREATE UNIQUE INDEX "index_users_on_reset_password_token" ON "users" ("reset_pas
+sword_token");
+sqlite> 
+\end{verbatim}
+\normalsize
+
+Ignoring the \verb=CREATE UNIQUE INDEX= which don't relate to the order of the
+fields, we see that in the \verb=CREATE TABLE= entry (which ends with the
+semi-colon before the firts line beginning with \verb=CREATE UNIQUE INDEX=)
+the last five fields are \verb=admin=, \verb=firstname=, \verb=lastname=
+\verb=leader= and \verb=enabled=. \verb=admin= is the key field --- it's
+a \emph{boolean} field having only two values, true or false (labelled
+as either \verb='t'= or \verb='f'= in the above output.
+
+The last five entries for the user were listed as \verb=f|Jerry|Hagon|t|t=
+which means that he is not an administrative user. To give this user
+administrative rights we must change the \verb=admin= field (5th from last).
+Here is the SQL to do that:
+
+\small
+\begin{verbatim}
+sqlite> update users set admin='t' where id=2;
+sqlite> select * from users where lastname = 'Hagon';
+2|jerry.hagon@ncl.ac.uk|$2a$10$V2eSY1MD2dWkIESZ/3mtGe8hYvVDVkDTDEd4NKqZOQJ3t9wg9
+8iFq|hkTD7hHWzEu5ErjSFh2y|2012-02-16 10:19:43.792239||190|2012-04-06 07:43:02.65
+2582|2012-04-04 13:58:26.642714|127.0.0.1|127.0.0.1|2011-11-06 15:18:43.971379|2
+012-04-06 07:43:02.653005|19|t|Jerry|Hagon|t|t
+sqlite> 
+\end{verbatim}
+\normalsize
+ 
+And we can see from the \verb=select= command that the change has been applied.
+Note that we have used the SQL \emph{update} command and applied it to the
+user whose \verb=id= field is 2. Now, the \verb=id= field
+is the first one in the list and we have used that to refer to the user.
+We could also have used any other field, but the \verb=id=  field is unique
+and so is guaranteed to refer to only one user. A command such as:
+\begin{verbatim}
+update users set admin='t' where lastname='Hagon';
+\end{verbatim}
+would also work but if there were, say, two users with that same last name, 
+the change would be applied to both of them.
+
+\subsubsection{Database Management with sqlite-manager}
+\emph{sqlite-manager} provides a graphical user interface to SQLite3
+database management. It is a web browser plugin available for the Firefox
+web browser and can be easily installed via a
+simple one-click link\cite{sqlitemanager}.
+The plugin is accessed via the Firefox \emph{Tools} menu as shown in
+Figure \ref{fig:firefoxtools}.
+
+\begin{figure}[!h]
+\begin{center}
+\includegraphics[width=0.95\textwidth]{firefoxtools}
+\caption{Firefox \emph{Tools} menu showing the link to the installed
+\emph{sqlite-manager} plugin (4th from top in the menu).
+\label{fig:firefoxtools}}
+\end{center}
+\end{figure}
+
+\begin{figure}[!hb]
+\begin{center}
+\includegraphics[width=0.75\textwidth]{sqlitemanwin}
+\caption{Initially the user is presented with the main
+sqlite-manager window. \label{fig:sqlitemanagerwindow}}
+\end{center}
+\end{figure}
+
+When sqlite-manager starts up, you first see the main window shown
+in Figure \ref{fig:sqlitemanagerwindow}.
+To read in a database, select \emph{Connect Database} from the
+\emph{Database} menu.
+A file browser window will appear, but by default it shows only those
+files with extension \verb=.sqlite=. At the bottom right of this window
+is a drop-down select box which allows you to view `All Files'. After
+selecting this option you will be able to see any file in the window.
+After browsing to the appropriate directory and selecting the database file
+you want (we will use a sample tracking database file in the description
+to follow), the main window should show the database as shown in
+Figure \ref{fig:sqlitemanagerdat}.
+
+\begin{figure}[!h]
+\begin{center}
+\includegraphics[width=0.75\textwidth]{sqlitemandat}
+\caption{The main sqlite-manager window after loading a sample
+tracking database file. Note the list of tables in the left hand panel.%
+\label{fig:sqlitemanagerdat}}
+\end{center}
+\end{figure}
+
+We will now try to do the same update that was performed using the
+command-line utility \emph{sqlite3} previously. To begin, select the
+\emph{users} table from the list in the left hand panel then select
+the \emph{Browse \& Search} tab in the main panel. You should see a list
+of users (you can use the mouse to adjust the width of the field columns).
+This is shown in Figure \ref{fig:sqlitemanagerlist}.
+
+\begin{figure}[!h]
+\begin{center}
+\includegraphics[width=0.75\textwidth]{sqlitemanlist}
+\caption{The \emph{users} table listing in the \emph{Browse \& Search}
+tab in the main panel.%
+\label{fig:sqlitemanagerlist}}
+\end{center}
+\end{figure}
+
+Editing an entry is easy, just double-click on the row that you want to edit
+--- in this case the first one. The \emph{Edit Record} box will pop up.
+Scroll down until you reach the admin field, change its value
+accordingly and then click the \emph{OK} button 
+(Figure \ref{fig:sqlitemanageredit}.
+
+\begin{figure}[!h]
+\begin{center}
+\includegraphics[width=0.45\textwidth]{sqlitemanedit}
+\caption{The sqlite-manager \emph{Edit Record} window. Each field in the
+record can be edited.\label{fig:sqlitemanageredit}}
+\end{center}
+\end{figure}
+
+The sqlite-manager plugin is very powerful and well-worth experimenting
+with (using a test database of course!). It can perform arbitrary SQL
+commands via an SQL command panel and has simple short-cuts for doing
+most update/create operations. There are also easy-to-use search and sort
+facilities.
+
+There are other tools which can be used to manipulate SQLite3 databases.
+The two we have described are freely available. Other free alternatives
+are also available as well as commercial tools. Some of these are described
+on the SQLite web site.
+
+\subsection{The GitHub Repository}
+
+
+\section{The Database Schema}\label{sec:database}
 \subsection{Introduction}
 The core of the system is the database which holds information about 
 users, samples etc. In this section we describe the whole database
@@ -1717,5 +2027,7 @@ relationship between the tables they link.\label{fig:database_schema}}
 \bibitem{redcloth} \url{http://redcloth.org/}
 \bibitem{rmagick} \url{http://rmagick.rubyforge.org/}
 \bibitem{willp} \url{https://github.com/mislav/will_paginate}
+\bibitem{sqlitemanager} \url{http://code.google.com/p/sqlite-manager/}
+\bibitem{w3schoolssql} \url{http://www.w3schools.com/sql/}
 \end{thebibliography}
 \end{document}

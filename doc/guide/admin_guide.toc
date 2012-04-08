@@ -16,19 +16,25 @@
 \contentsline {subsection}{\numberline {3.1}Introduction}{15}{subsection.3.1}
 \contentsline {subsection}{\numberline {3.2}Basic Components of the System}{15}{subsection.3.2}
 \contentsline {subsubsection}{\numberline {3.2.1}Ruby Gems}{16}{subsubsection.3.2.1}
-\contentsline {subsection}{\numberline {3.3}Web Server Management}{17}{subsection.3.3}
-\contentsline {subsection}{\numberline {3.4}File and Directory Management}{19}{subsection.3.4}
-\contentsline {subsubsection}{\numberline {3.4.1}The app Directory}{19}{subsubsection.3.4.1}
-\contentsline {subsubsection}{\numberline {3.4.2}The public Directory}{21}{subsubsection.3.4.2}
-\contentsline {subsubsection}{\numberline {3.4.3}The config Directory}{22}{subsubsection.3.4.3}
-\contentsline {section}{\numberline {4}The Database}{23}{section.4}
-\contentsline {subsection}{\numberline {4.1}Introduction}{23}{subsection.4.1}
-\contentsline {subsection}{\numberline {4.2}The Samples Table}{23}{subsection.4.2}
-\contentsline {subsection}{\numberline {4.3}The Users Table}{25}{subsection.4.3}
-\contentsline {subsection}{\numberline {4.4}The Stores, Hazards and Sensitivities Tables}{25}{subsection.4.4}
-\contentsline {subsection}{\numberline {4.5}The Groups Table}{26}{subsection.4.5}
-\contentsline {subsection}{\numberline {4.6}Other Tables}{26}{subsection.4.6}
-\contentsline {subsubsection}{\numberline {4.6.1}The Pages Table}{26}{subsubsection.4.6.1}
-\contentsline {subsubsection}{\numberline {4.6.2}The Assets Table}{27}{subsubsection.4.6.2}
-\contentsline {subsubsection}{\numberline {4.6.3}The Popups Table}{27}{subsubsection.4.6.3}
-\contentsline {subsubsection}{\numberline {4.6.4}The Flags Table}{27}{subsubsection.4.6.4}
+\contentsline {subsection}{\numberline {3.3}Files and Directories}{17}{subsection.3.3}
+\contentsline {subsubsection}{\numberline {3.3.1}The app Directory}{17}{subsubsection.3.3.1}
+\contentsline {subsubsection}{\numberline {3.3.2}The public Directory}{20}{subsubsection.3.3.2}
+\contentsline {subsubsection}{\numberline {3.3.3}The config Directory}{20}{subsubsection.3.3.3}
+\contentsline {subsubsection}{\numberline {3.3.4}The db Directory}{21}{subsubsection.3.3.4}
+\contentsline {subsubsection}{\numberline {3.3.5}Other Directories}{22}{subsubsection.3.3.5}
+\contentsline {subsection}{\numberline {3.4}Web Server Management}{22}{subsection.3.4}
+\contentsline {subsection}{\numberline {3.5}Raw Database Management}{24}{subsection.3.5}
+\contentsline {subsubsection}{\numberline {3.5.1}Database Management with sqlite3}{24}{subsubsection.3.5.1}
+\contentsline {subsubsection}{\numberline {3.5.2}Database Management with sqlite-manager}{26}{subsubsection.3.5.2}
+\contentsline {subsection}{\numberline {3.6}The GitHub Repository}{29}{subsection.3.6}
+\contentsline {section}{\numberline {4}The Database Schema}{29}{section.4}
+\contentsline {subsection}{\numberline {4.1}Introduction}{29}{subsection.4.1}
+\contentsline {subsection}{\numberline {4.2}The Samples Table}{29}{subsection.4.2}
+\contentsline {subsection}{\numberline {4.3}The Users Table}{30}{subsection.4.3}
+\contentsline {subsection}{\numberline {4.4}The Stores, Hazards and Sensitivities Tables}{31}{subsection.4.4}
+\contentsline {subsection}{\numberline {4.5}The Groups Table}{32}{subsection.4.5}
+\contentsline {subsection}{\numberline {4.6}Other Tables}{32}{subsection.4.6}
+\contentsline {subsubsection}{\numberline {4.6.1}The Pages Table}{32}{subsubsection.4.6.1}
+\contentsline {subsubsection}{\numberline {4.6.2}The Assets Table}{32}{subsubsection.4.6.2}
+\contentsline {subsubsection}{\numberline {4.6.3}The Popups Table}{33}{subsubsection.4.6.3}
+\contentsline {subsubsection}{\numberline {4.6.4}The Flags Table}{33}{subsubsection.4.6.4}
