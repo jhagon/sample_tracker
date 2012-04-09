@@ -24,7 +24,8 @@
 \usepackage[pdftex]{hyperref}
 \newcommand{\samtrack}{\emph{SamTrack}}
 \title{\sffamily\bfseries Crystallography Service \\ \samtrack\\ Administrator's Guide}
-\author{J.P.Hagon\\Computer Systems Support\\School of Chemistry}
+\author{J.P.Hagon\\Computer Systems Support\\School of Chemistry\\
+Revision: Draft}
 \date{\today}
 \renewcommand{\abstractname}{Introduction}
 %\renewcommand{\thefootnote}{\fnsymbol{footnote}}
@@ -68,6 +69,8 @@ administrators can recover from situations such as a forgotton
 administrator password.
 \end{abstract}
 \tableofcontents
+\listoffigures
+\listoftables
 \newpage
 \section{General Description of the System}
 \subsection{Introduction}
@@ -76,8 +79,8 @@ the Newcastle University Crystallography Service.
 The system consists of a \emph{front-end} which is used by users
 and administrators to submit sample requests, upload analysis data,
 edit sample status etc.  This front-end is implemented using the 
-ruby\cite{ruby} programming language and 
-version 3 of \emph{Ruby on Rails}\cite{rails}.
+ruby\cite{rubybook,ruby} programming language and 
+version 3 of \emph{Ruby on Rails}\cite{railsbook,rails}.
 The front-end is hosted on an \emph{Apache}\cite{apache} server running on an
 \emph{Ubuntu}\cite{ubuntu} linux system. 
 Technical details will be described elsewhere.
@@ -178,12 +181,27 @@ such as headings, paragraphs, floating elements, tables and images.
 \section{Web Management Guide}
 \subsection{Introduction}
 In this section we describe the web management interface to the
-sample tracking database. When a manager is logged-in, the home page of
+sample tracking database. 
+Before going through the basics of the web interface there is one
+important point to make regarding the use of 
+\emph{Microsoft Internet Explorer}:
+
+\begin{plainblock}
+There is a current issue with delete operations\footnote{This seems to affect
+all Rails3 applications.} when using 
+Internet Explorer. Basically, the delete operation will appear to work
+but actually doesn't delete anything. All other operations which change the
+database (create, edit) work fine but the delete operation does not.
+For this reason, it is recommended that administrators use another browser
+such as Firefox or Chrome when doing system management tasks.
+\end{plainblock}
+
+When a manager is logged-in, the home page of
 the system looks similar to that shown in Figure \ref{fig:homepage}
 
-\begin{figure}[!h]
+\begin{figure}[!htb]
 \begin{center}
-\includegraphics[width=0.75\textwidth]{homepage}
+\includegraphics[width=0.65\textwidth]{homepage}
 \caption{Administrator's view of home page.\label{fig:homepage}}
 \end{center}
 \end{figure}
@@ -215,6 +233,12 @@ This is the main set of web-based tools for administrators. We will
 describe each of these in the next section.
 \end{description}
 \subsection{Adding Static Pages}\label{sec:static}
+
+\piccaption{The \emph{show}, \emph{edit} and \emph{delete} buttons.
+\label{fig:showeditdelete}}
+\parpic[r]{\includegraphics{show}\quad
+           \includegraphics{edit}\quad
+           \includegraphics{delete}}
 Clicking the \emph{PAGES} link in the \emph{Admin Tools} sub-menu 
 produces the pages index shown in Figure \ref{fig:pageidx}.
 This shows a list of pages. For each of these pages is a set of buttons
@@ -223,19 +247,19 @@ Figure \ref{fig:showeditdelete}.
 These buttons are used throughout the database editing pages on the web server.
 At the bottom of the list is a link to create a new page.
 
-\begin{figure}[!h]
-\begin{center}
-\includegraphics{show}\quad
-\includegraphics{edit}\quad
-\includegraphics{delete}
-\end{center}
-\caption{The \emph{show}, \emph{edit} and \emph{delete} buttons.
-\label{fig:showeditdelete}}
-\end{figure}
+%\begin{figure}[!htb]
+%\begin{center}
+%\includegraphics{show}\quad
+%\includegraphics{edit}\quad
+%\includegraphics{delete}
+%\end{center}
+%\caption{The \emph{show}, \emph{edit} and \emph{delete} buttons.
+%\label{fig:showeditdelete}}
+%\end{figure}
 
-\begin{figure}[!h]
+\begin{figure}[!htb]
 \begin{center}
-\includegraphics[width=0.75\textwidth]{pageidx}
+\includegraphics[width=0.65\textwidth]{pageidx}
 \caption{The pages index view.\label{fig:pageidx}}
 \end{center}
 \end{figure}
@@ -331,7 +355,7 @@ First, a user fills out a sample submission form online. This form is
 shown in Figure \ref{fig:sampleform}. This figure shows the
 submission form from the point of view of both a non-administrative user
 and an administrator.
-\begin{figure}[!h]
+\begin{figure}[!htb]
 \begin{center}
 \includegraphics[width=0.45\textwidth]{sampleformuser}
 \quad
@@ -347,15 +371,32 @@ of sample processing.
 
 There is a lot of validation built into the form making it very unlikely
 that a form will be submitted with incomplete information.
-Table \ref{table:samplevalidations} gives a complete list of
+Table \ref{tab:sampval} gives a complete list of
 validation checks. If a validation check fails on submission of the form,
 the user will be presented with the \emph{Invalid Fields} box which will
 tell him which fields have not been entered correctly and what is
 required. An extreme example of this is shown in Figure
 \ref{fig:invalidfields} which shows what happens when none of the fields
 in the form are filled-in.
+\begin{table}{!htb}
+\begin{center}
+\begin{tabular}{lll}
+\textbf{Field} & \textbf{Description} & \textbf{Validation} \\\hline
+cif     &    chemical formula    &   can't be blank \\
+synth   &    synthetic route diagram   &  must be supplied  \\
+coshh\_name  &  name of solvent  &  can't be blank  \\
+coshh\_info  &  COSHH handling information  &  can't be blank \\  
+coshh\_desc  &  sample description  &  can't be blank  \\
+params  &  unit cell parameters or CSD/Newcastle code  &  can't be blank \\ 
+priority & user sample priority number & integer, range 1--9 \\
+userref & user reference & alphanumeric without spaces \\
+costcode & cost centre code & can't be blank
+\end{tabular}
+\caption{List of sample validation requirements.\label{tab:sampval}}
+\end{center}
+\end{table}
 
-\begin{figure}[!h]
+\begin{figure}[!htb]
 \begin{center}
 \includegraphics[width=0.45\textwidth]{invalidfields}
 \quad
@@ -417,7 +458,7 @@ Once the sample has been submitted, a user can regenerate the sample receipt
 at any time via a PDF link button in the sample list on his profile page
 shown in Figure \ref{fig:userprofile}.
 
-\begin{figure}[!h]
+\begin{figure}[!htb]
 \begin{center}
 \fcolorbox{darkgreen}{white}{\includegraphics[width=0.9\textwidth]{samplereceipt}}
 \caption{Example of a sample receipt (the actual size is A4).
@@ -428,7 +469,7 @@ the A4 page border.\label{fig:samplereceipt}}
 \end{center}
 \end{figure}
 
-\begin{figure}[!h]
+\begin{figure}[!htb]
 \begin{center}
 \includegraphics[width=0.65\textwidth]{userprofile}
 \quad
@@ -491,14 +532,14 @@ default message `No feedback given.' is seen on the relevant part of the
 sample show page. This is also illustrated in 
 Figure \ref{fig:sampleshowpage}.
 
-\begin{figure}[!h]
+\begin{figure}[!htb]
 \begin{center}
 \includegraphics[width=0.75\textwidth]{sampleeditform}
 \caption{A fully complete sample edit form.\label{fig:sampleeditform}}
 \end{center}
 \end{figure}
 
-\begin{figure}[!h]
+\begin{figure}[!htb]
 \begin{center}
 \includegraphics[width=0.60\textwidth]{sampleshowpage}
 \quad
@@ -519,7 +560,7 @@ find information about a particular sample or group of samples.
 In this section we describe the tools that are available to quickly find
 the sample data you need.
 
-\begin{figure}[!h]
+\begin{figure}[!htb]
 \begin{center}
 \includegraphics[width=0.75\textwidth]{sampleindex}
 \caption{An administrator's view of the full sample index. 
@@ -552,7 +593,7 @@ After the choice is made, the list will be re-paginated according to
 the selected value. Note that for a full samples listing, the search box
 itself must be empty when you do this.
 
-\begin{figure}[!h]
+\begin{figure}[!htb]
 \begin{center}
 \includegraphics[width=0.75\textwidth]{searchform}
 \caption{The sample index search form. This is usually found
@@ -608,7 +649,7 @@ Most scanners are capable of doing this, including the Zebex.
 Of course, you can also type in the bar code by hand if you don't
 have access to a scanner.
 
-\begin{figure}[!h]
+\begin{figure}[!htb]
 \begin{center}
 \fcolorbox{darkgreen}{white}{%
 \includegraphics[width=0.75\textwidth]{barcodeform}}
@@ -632,7 +673,7 @@ to write the web interface to the sample database.
 Figure \ref{fig:systemcomponents} summarizes the main components and
 their relationships.
 
-\begin{figure}[!ht]
+\begin{figure}[!htb]
 \small
 \begin{center}
 \begin{tikzpicture}
@@ -780,7 +821,7 @@ Figure \ref{fig:filestructure}.
 \captionsetup{width=20cm}
 \begin{center}
 \scriptsize
-\begin{tikzpicture}
+\begin{tikzpicture}[scale=0.9]
 \node (root) {application root}
   [edge from parent fork down]
 
@@ -971,6 +1012,8 @@ model data. This form template is actually included by the new and edit
 templates.
 To get an idea of how this works, here is the edit template contained
 in the file \verb=edit.html.erb=:
+
+\scriptsize
 \begin{verbatim}
 <% title "Edit Sample #{@sample.code}" %>
 
@@ -981,10 +1024,76 @@ in the file \verb=edit.html.erb=:
   <%= link_to "View All", samples_path %>
 </p>
 \end{verbatim}
+\normalsize
+
 Note that there are familiar HTML elements such as the paragraph tags
 \verb=<p>= and \verb=</p>=. Text within the \verb=<%= and \verb=%>=
 tags is ruby code. Note in particular the \verb=render 'form'= directive.
 This reads in the content of the file \verb=_form.html.erb=.
+
+Also contained in the \verb=views= directory are the email templates used
+when sending confirmation/update notifications to users. These 
+templates are contained in the \verb=sample_mailer= subdirectory.
+There are four template files:
+\begin{verbatim}
+sample_receipt.html.erb  sample_update.html.erb
+sample_receipt.text.erb  sample_update.text.erb
+\end{verbatim}
+The files contain templates for both simple text and HTML formatted emails
+corresponding to emails sent on sample submission (a receipt email)
+and emails sent when a sample status is updated (an update email).
+Here is a listing of the template for a receipt email with HTML
+formatting:
+
+\tiny
+\begin{verbatim}
+<p>
+Dear User
+</p>
+
+<p>
+New Sample Submission Code: <%=@sample.code%> (your ref <%=@sample.userref%>)<br />
+Submitted By: <%="#{@sample.user.firstname} #{@sample.user.lastname}"%>
+</p>
+
+<p>
+your sample analysis request has been received. Please download a
+receipt using the link below. Please quote the sample code in any
+correspondence. 
+</p>
+
+<p>
+There is a tear-off slip at the bottom
+of the receipt which you should attach to your sample.
+You will be informed via email of any
+changes in the status of your sample.
+</p>
+
+<p>
+<%= link_to "Analysis Request Receipt", "#{sample_url(@sample, :host => MAIL_HOST)}.pdf" %>
+</p>
+
+<p>
+Copies of this email are sent to both sample submitters and their
+research group leaders (where different).
+</p>
+
+<p>
+Newcastle Crystallography Service
+</p>
+\end{verbatim}
+\normalsize
+
+Note the HTML formatting elements, \verb=<p>= and \verb=</p>= as well
+as some embedded ruby (between the \verb=<%= and \verb=%>= tags).
+The text version is similar, but without the HTML formatting tags.
+
+\begin{plainblock}
+You can edit the view templates without needing to restart
+the application. However, large-scale changes to views should be
+incorporated into the official source code repository on GitHub
+(see section \ref{sec:github}).
+\end{plainblock}
 
 \end{description}
 \subsubsection{The public Directory}
@@ -1034,7 +1143,7 @@ To summarize, the general form of the file path for uploaded files is:
 <application root>/public/uploads/<model>/<uploader>/<id>/<file name>
 \end{verbatim}
 
-\subsubsection{The config Directory}
+\subsubsection{The config Directory}\label{sec:parameters}
 This directory contains configuration and initialization files
 for the rails application. You will rarely, if ever need to edit most
 of these. However, there is one file, \verb=environment.rb=, which
@@ -1099,10 +1208,11 @@ queue page.
 \end{description}
 
 \begin{plainblock}
-\begin{center}
 Note that if any of these parameters are changed, the server will need
-to be restarted before the changes will take effect.
-\end{center}
+to be restarted before the changes will take effect. You should also
+make a note of such changes in the case of a system upgrade because
+the source code on GitHub will not necessarily have these parameters
+set to the same values.
 \end{plainblock}
 
 \subsubsection{The db Directory}
@@ -1450,7 +1560,7 @@ simple one-click link\cite{sqlitemanager}.
 The plugin is accessed via the Firefox \emph{Tools} menu as shown in
 Figure \ref{fig:firefoxtools}.
 
-\begin{figure}[!h]
+\begin{figure}[!htb]
 \begin{center}
 \includegraphics[width=0.95\textwidth]{firefoxtools}
 \caption{Firefox \emph{Tools} menu showing the link to the installed
@@ -1459,7 +1569,7 @@ Figure \ref{fig:firefoxtools}.
 \end{center}
 \end{figure}
 
-\begin{figure}[!hb]
+\begin{figure}[!htb]
 \begin{center}
 \includegraphics[width=0.75\textwidth]{sqlitemanwin}
 \caption{Initially the user is presented with the main
@@ -1480,7 +1590,7 @@ you want (we will use a sample tracking database file in the description
 to follow), the main window should show the database as shown in
 Figure \ref{fig:sqlitemanagerdat}.
 
-\begin{figure}[!h]
+\begin{figure}[!htb]
 \begin{center}
 \includegraphics[width=0.75\textwidth]{sqlitemandat}
 \caption{The main sqlite-manager window after loading a sample
@@ -1496,7 +1606,7 @@ the \emph{Browse \& Search} tab in the main panel. You should see a list
 of users (you can use the mouse to adjust the width of the field columns).
 This is shown in Figure \ref{fig:sqlitemanagerlist}.
 
-\begin{figure}[!h]
+\begin{figure}[!htb]
 \begin{center}
 \includegraphics[width=0.75\textwidth]{sqlitemanlist}
 \caption{The \emph{users} table listing in the \emph{Browse \& Search}
@@ -1511,7 +1621,7 @@ Scroll down until you reach the admin field, change its value
 accordingly and then click the \emph{OK} button 
 (Figure \ref{fig:sqlitemanageredit}.
 
-\begin{figure}[!h]
+\begin{figure}[!htb]
 \begin{center}
 \includegraphics[width=0.45\textwidth]{sqlitemanedit}
 \caption{The sqlite-manager \emph{Edit Record} window. Each field in the
@@ -1530,14 +1640,222 @@ The two we have described are freely available. Other free alternatives
 are also available as well as commercial tools. Some of these are described
 on the SQLite web site.
 
-\subsection{The GitHub Repository}
+\subsection{Software Updates and GitHub}\label{sec:github}
+The \samtrack\ application is stored on GitHub\cite{github}, a
+a web-based hosting service for projects that use the 
+\emph{Git} revision control system.
+This means that the source code is safe and new versions of the
+software can be quickly downloaded and installed.
+Anyone can view the \samtrack\ repository. 
+The URL is \url{https://github.com/jhagon/sample_tracker}.
+Typing this URL into your browser produces a page something like that
+shown in Figure \ref{fig:github1}.
+
+\begin{figure}[!htb]
+\begin{center}
+\includegraphics[width=0.75\textwidth]{github1}
+\caption{The \samtrack\ GitHub repository.\label{fig:github1}}
+\end{center}
+\end{figure}
+
+The GitHub repository contains a wealth of information about the
+development of the software and its current status. You can browse
+the entire file structure of the system, downloading individual files
+or the entire repository. Any development work on the system will be
+mirrored on GitHub so that the latest version of the software can be
+downloaded at any time. It is also possible to download any previous
+version of the software if needed.
+
+To download the current version of \samtrack, simply click on the
+\emph{ZIP icon} near the top of the file browser panel on the left hand side. 
+This will
+pack the whole of the source into a compressed ZIP file. If you
+require a specific version, then first click the \emph{history} link on the
+top right of the main file browser panel. This will take you to the
+\emph{Commit History} page. If you click on the descriptive text for
+a particular revision, you will be taken to the summary page for that
+particular revision. Near the top right is a \emph{Browse code} button
+which when clicked will take you to a file browser panel for that revision.
+Again, you will see a \emph{ZIP icon}, on the top-left of the file browser
+panel which you can click to get a ZIP file of that version.
+
+You can also submit bug reports via the GitHub page although you must
+be registered to do so. Current issues can be viewed via the link at
+the top of the main repository page.
+Also, there are statistics and charts which provide detailed information
+about the application.
+
+\subsection{Backup and Upgrade Procedures}
+It is essential of course to make sure that the system is adequately
+backed-up. As we have seen, a copy of the software itself (both current
+and previous versions) is safely stored on GitHub. However, GitHub
+does not store sample data --- you must take steps to make sure the
+sample data is safe. As a general rule, if you back up the whole of the
+application root directory then that is sufficient. 
+As mentioned in section \ref{sec:parameters} you should also make
+a note of any global parameters that you change because these will
+not necessarily be reflected in the GitHub source if you perform
+a full upgrade of \samtrack. 
+
+Volatile sample data is stored in two places:
+\begin{enumerate}[(i)]
+\item
+The SQLite3 database file
+\verb=<application root>/db/production.sqlite3=;
+\item
+The public directory
+\verb=<application root>/public= and everything underneath it.
+\end{enumerate}
+
+\subsubsection{System Upgrade Procedure}\label{sec:upgrade}
+There are two circumstances where you will need to do a full system upgrade:
+\begin{itemize}
+\item
+after major updates to the software;
+\item
+whenever the database schema has changed (no matter how small the change
+may be).
+\end{itemize}
+
+\begin{plainblock}
+\begin{center}
+\bfseries Database Schema Changes
+\end{center}
+Schema changes can be very minor, e.g. a renaming of a field, a change
+in data type, a change in default value etc. or they can be more complex, 
+such as the
+addition of one or more fields or even whole new tables. However, a schema
+change \emph{no matter how small} necessitates a full system upgrade in
+the manner described below.
+\end{plainblock}
 
 
-\section{The Database Schema}\label{sec:database}
+We will go through the steps needed to perform a full
+software upgrade. This procedure is also described in the file
+\verb=<application root>/doc/UPGRADE.markdown=\footnote{If you view
+this file (and any other markdown-formatted file) on GitHub, it will
+be nicely formatted according to the markdown specifications.}
+
+\begin{enumerate}
+\item
+login using the \verb=crysadmin= account and switch to a root shell:
+\begin{verbatim}
+sudo bash
+\end{verbatim}
+\item
+Stop the web server:
+\begin{verbatim}
+apache2ctl stop
+\end{verbatim}
+\item
+Change to the directory which contains the \samtrack\ application 
+(usually \verb=/usr/local/share=) and
+move the application root directory to a different place thus retaining a
+complete copy of the old system --- we don't want to scrub it just in case!
+\begin{verbatim}
+cd /usr/local/share
+mv sample_tracker sample_tracker.old
+\end{verbatim}
+\item
+Go to the GitHub repository where the latest copy of the application is stored
+and download a copy using the procedure described in section
+\ref{sec:github}. Put the downloaded ZIP file in a temporary directory
+such as \verb=/tmp=. The ZIP file will have a name similar to
+\verb=jhagon-sample_tracker-b493e1b.zip= with the \verb=b493e1b= part
+indicating the revision:
+\begin{verbatim}
+mv jhagon-sample_tracker-b493e1b.zip /tmp
+\end{verbatim}
+\item
+Now, unzip the file in the temporary directory 
+(at the moment, it doesn't matter where you do this):
+\begin{verbatim}
+unzip jhagon-sample_tracker-b493e1b.zip
+\end{verbatim}
+You should have a directory called something like:
+\begin{verbatim}
+jhagon-sample_tracker-b493e1b
+\end{verbatim}
+tem
+Move the above directory to the live application location:
+\begin{verbatim}
+mv jhagon-sample_tracker-b493e1b /usr/local/share
+\end{verbatim}
+then change to the \verb=/usr/local/share= directory and rename the\newline
+\verb=jhagon-sample_tracker-b493e1b= directory to \verb=sample_tracker=:
+\begin{verbatim}
+cd /usr/local/share
+mv jhagon-sample_tracker-b493e1b sample_tracker
+\end{verbatim}
+\item
+Change to the \verb=sample_tracker= directory and remove the production 
+database (if it exists) and also the \verb=public= direcory:
+\begin{verbatim}
+rm db/production.sqlite3
+rm -rf public
+\end{verbatim}
+\item
+Now we must import the live production database and \verb=public=
+directory from the saved copy of the previous application:
+\begin{verbatim}
+cp <previous sample_tracker dir>/db/production.sqlite3 db
+cp -r <previous sample_tracker dir>/public .
+\end{verbatim}
+where the above commands are assuming we're in the new application root
+directory (\verb=/usr/local/share/sample_tracker=).
+If the database schema has not changed, go to step 
+\ref{item:num}. Otherwise:
+\item
+We must now migrate the database to its new schema. First we must make
+sure we are running the latest ruby. The server's default version of ruby is
+too old so we must instead use a special version which we can access by
+typing:
+\begin{verbatim}
+source /etc/profile.d/rvm.sh
+\end{verbatim}
+to check this, if you type `ruby -v` you should get something
+similar to this --- the important part is the version number of ruby,
+it should be 1.9.x:
+\begin{verbatim}
+ruby 1.9.2p290 (2011-07-09 revision 32553) [i686-linux]
+\end{verbatim}
+\item
+Now perform a database schema migration by typing the following:
+\begin{verbatim}
+export RAILS_ENV=production
+rake db:migrate
+\end{verbatim}
+Note that you may see a couple of warnings during the rake command, but
+this is OK.
+\item\label{item:num}
+We are almost done. Next change the ownership of the entire 
+\verb=sample_tracker=
+directory structure to user \verb=nobody=. Before doing this we change
+directory to that which holds the application root directory:
+\begin{verbatim}
+cd /usr/local/share
+chown -R nobody.root sample_tracker
+\end{verbatim}
+\item
+Now all that is left is to start the web server (and hope!):
+\begin{verbatim}
+apache2ctl start
+\end{verbatim}
+
+\end{enumerate}
+
+At this point you should perform a few checks on the new system. If there are
+problems, you can stop the web server, scrub the new version and copy the 
+previous saved version back to the correct location. then restart the web
+server.
+
+
+\section{Database Schema Description}\label{sec:database}
 \subsection{Introduction}
 The core of the system is the database which holds information about 
 users, samples etc. In this section we describe the whole database
-structure (or \emph{schema} in database parlance).
+structure (or \emph{schema} in database parlance) at the time
+of writing.
 The easiest way to get an overall view of the database schema is to
 study Figure \ref{fig:database_schema}. This shows
 all the tables, fields and relationships in a single diagram.
@@ -1555,8 +1873,8 @@ of the tables which follows.
 The samples and users tables are the key parts of the database as is
 evident from Figure \ref{fig:database_schema}. They are related to each
 other via a \emph{one-to-many} relationship, i.e. \emph{one} user
-can have \emph{many} samples. The samples table
-consists of the following fields:
+can have \emph{many} samples but a single sample is associated with
+just \emph{one} user. The samples table consists of the following fields:
 \begin{description}
 \item[code]
 a string, automatically generated by the system having the
@@ -2014,14 +2332,18 @@ relationship between the tables they link.\label{fig:database_schema}}
 
 \newpage
 \begin{thebibliography}{2}
-\bibitem{ruby} \url{http://www.ruby-lang.org/}
-\bibitem{rails} \url{http://rubyonrails.org/}
-\bibitem{apache} \url{http://www.apache.org/}
-\bibitem{ubuntu} \url{http://www.ubuntu.com/}
-\bibitem{sqlite} \url{http://www.sqlite.org/}
-\bibitem{textile} \url{http://en.wikipedia.org/wiki/Textile_%28markup_language%29}
-\bibitem{cancan} \url{https://github.com/ryanb/cancan}
-\bibitem{carrierwave} \url{https://github.com/jnicklas/carrierwave}
+\bibitem{rubybook} Thomas D., Fowler C. and Hunt, A.
+\emph{Programming Ruby 1.9: The Pragmatic Programmer's Guide}, The Pragmatic Programmers, LLC, Raleigh, NC, and Dallas, TX, 4e, 2011
+\bibitem{railsbook} Ruby S., Thomas D. and Heinmeier Hansson, D.
+\emph{Agile Web development with Rails}, The Pragmatic Programmers, LLC, Raleigh, NC, and Dallas, TX, 1e, 2009
+\bibitem{ruby} \emph{Official Ruby Web Site}, \url{http://www.ruby-lang.org/}
+\bibitem{rails} \emph{Official Ruby on Rails Web Site}, \url{http://rubyonrails.org/}
+\bibitem{apache} \emph{The Apache Software Foundation Web Site}, \url{http://www.apache.org/}
+\bibitem{ubuntu} \emph{Ubuntu Linux}, \url{http://www.ubuntu.com/}
+\bibitem{sqlite} \emph{SQLite Database}, \url{http://www.sqlite.org/}
+\bibitem{textile} \emph{Textile Description}, Wikipedia, \url{http://en.wikipedia.org/wiki/Textile_%28markup_language%29}
+\bibitem{cancan} \emph{CanCan Repository}, GitHub, \url{https://github.com/ryanb/cancan}
+\bibitem{carrierwave} \emph{Carrierwave Repository}, GitHub, \url{https://github.com/jnicklas/carrierwave}
 \bibitem{devise} \url{https://github.com/plataformatec/devise/}
 \bibitem{prawn} \url{http://prawn.majesticseacreature.com/}
 \bibitem{redcloth} \url{http://redcloth.org/}
@@ -2029,5 +2351,6 @@ relationship between the tables they link.\label{fig:database_schema}}
 \bibitem{willp} \url{https://github.com/mislav/will_paginate}
 \bibitem{sqlitemanager} \url{http://code.google.com/p/sqlite-manager/}
 \bibitem{w3schoolssql} \url{http://www.w3schools.com/sql/}
+\bibitem{github} \url{https://github.com/}
 \end{thebibliography}
 \end{document}

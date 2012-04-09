@@ -26,8 +26,10 @@
 \BOOKMARK [2][-]{subsection.3.5}{Raw Database Management}{section.3}
 \BOOKMARK [3][-]{subsubsection.3.5.1}{Database Management with sqlite3}{subsection.3.5}
 \BOOKMARK [3][-]{subsubsection.3.5.2}{Database Management with sqlite-manager}{subsection.3.5}
-\BOOKMARK [2][-]{subsection.3.6}{The GitHub Repository}{section.3}
-\BOOKMARK [1][-]{section.4}{The Database Schema}{}
+\BOOKMARK [2][-]{subsection.3.6}{Software Updates and GitHub}{section.3}
+\BOOKMARK [2][-]{subsection.3.7}{Backup and Upgrade Procedures}{section.3}
+\BOOKMARK [3][-]{subsubsection.3.7.1}{System Upgrade Procedure}{subsection.3.7}
+\BOOKMARK [1][-]{section.4}{Database Schema Description}{}
 \BOOKMARK [2][-]{subsection.4.1}{Introduction}{section.4}
 \BOOKMARK [2][-]{subsection.4.2}{The Samples Table}{section.4}
 \BOOKMARK [2][-]{subsection.4.3}{The Users Table}{section.4}

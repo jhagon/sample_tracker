@@ -1,40 +1,42 @@
-\contentsline {section}{\numberline {1}General Description of the System}{3}{section.1}
-\contentsline {subsection}{\numberline {1.1}Introduction}{3}{subsection.1.1}
-\contentsline {subsection}{\numberline {1.2}Users}{3}{subsection.1.2}
-\contentsline {subsection}{\numberline {1.3}Groups}{3}{subsection.1.3}
-\contentsline {subsection}{\numberline {1.4}Samples}{3}{subsection.1.4}
-\contentsline {subsection}{\numberline {1.5}Public Pages}{5}{subsection.1.5}
-\contentsline {section}{\numberline {2}Web Management Guide}{5}{section.2}
-\contentsline {subsection}{\numberline {2.1}Introduction}{5}{subsection.2.1}
-\contentsline {subsection}{\numberline {2.2}Adding Static Pages}{6}{subsection.2.2}
-\contentsline {subsection}{\numberline {2.3}Uploading General Files to the Server}{7}{subsection.2.3}
-\contentsline {subsection}{\numberline {2.4}Creating Users and Groups}{8}{subsection.2.4}
-\contentsline {subsection}{\numberline {2.5}Sample Management}{8}{subsection.2.5}
-\contentsline {subsection}{\numberline {2.6}Sample Search and Display Tools}{10}{subsection.2.6}
-\contentsline {subsubsection}{\numberline {2.6.1}BarCode Scanning}{14}{subsubsection.2.6.1}
-\contentsline {section}{\numberline {3}System Management and Internals}{15}{section.3}
-\contentsline {subsection}{\numberline {3.1}Introduction}{15}{subsection.3.1}
-\contentsline {subsection}{\numberline {3.2}Basic Components of the System}{15}{subsection.3.2}
-\contentsline {subsubsection}{\numberline {3.2.1}Ruby Gems}{16}{subsubsection.3.2.1}
-\contentsline {subsection}{\numberline {3.3}Files and Directories}{17}{subsection.3.3}
-\contentsline {subsubsection}{\numberline {3.3.1}The app Directory}{17}{subsubsection.3.3.1}
-\contentsline {subsubsection}{\numberline {3.3.2}The public Directory}{20}{subsubsection.3.3.2}
-\contentsline {subsubsection}{\numberline {3.3.3}The config Directory}{20}{subsubsection.3.3.3}
-\contentsline {subsubsection}{\numberline {3.3.4}The db Directory}{21}{subsubsection.3.3.4}
-\contentsline {subsubsection}{\numberline {3.3.5}Other Directories}{22}{subsubsection.3.3.5}
-\contentsline {subsection}{\numberline {3.4}Web Server Management}{22}{subsection.3.4}
-\contentsline {subsection}{\numberline {3.5}Raw Database Management}{24}{subsection.3.5}
-\contentsline {subsubsection}{\numberline {3.5.1}Database Management with sqlite3}{24}{subsubsection.3.5.1}
-\contentsline {subsubsection}{\numberline {3.5.2}Database Management with sqlite-manager}{26}{subsubsection.3.5.2}
-\contentsline {subsection}{\numberline {3.6}The GitHub Repository}{29}{subsection.3.6}
-\contentsline {section}{\numberline {4}The Database Schema}{29}{section.4}
-\contentsline {subsection}{\numberline {4.1}Introduction}{29}{subsection.4.1}
-\contentsline {subsection}{\numberline {4.2}The Samples Table}{29}{subsection.4.2}
-\contentsline {subsection}{\numberline {4.3}The Users Table}{30}{subsection.4.3}
-\contentsline {subsection}{\numberline {4.4}The Stores, Hazards and Sensitivities Tables}{31}{subsection.4.4}
-\contentsline {subsection}{\numberline {4.5}The Groups Table}{32}{subsection.4.5}
-\contentsline {subsection}{\numberline {4.6}Other Tables}{32}{subsection.4.6}
-\contentsline {subsubsection}{\numberline {4.6.1}The Pages Table}{32}{subsubsection.4.6.1}
-\contentsline {subsubsection}{\numberline {4.6.2}The Assets Table}{32}{subsubsection.4.6.2}
-\contentsline {subsubsection}{\numberline {4.6.3}The Popups Table}{33}{subsubsection.4.6.3}
-\contentsline {subsubsection}{\numberline {4.6.4}The Flags Table}{33}{subsubsection.4.6.4}
+\contentsline {section}{\numberline {1}General Description of the System}{4}{section.1}
+\contentsline {subsection}{\numberline {1.1}Introduction}{4}{subsection.1.1}
+\contentsline {subsection}{\numberline {1.2}Users}{4}{subsection.1.2}
+\contentsline {subsection}{\numberline {1.3}Groups}{4}{subsection.1.3}
+\contentsline {subsection}{\numberline {1.4}Samples}{4}{subsection.1.4}
+\contentsline {subsection}{\numberline {1.5}Public Pages}{6}{subsection.1.5}
+\contentsline {section}{\numberline {2}Web Management Guide}{6}{section.2}
+\contentsline {subsection}{\numberline {2.1}Introduction}{6}{subsection.2.1}
+\contentsline {subsection}{\numberline {2.2}Adding Static Pages}{7}{subsection.2.2}
+\contentsline {subsection}{\numberline {2.3}Uploading General Files to the Server}{8}{subsection.2.3}
+\contentsline {subsection}{\numberline {2.4}Creating Users and Groups}{9}{subsection.2.4}
+\contentsline {subsection}{\numberline {2.5}Sample Management}{9}{subsection.2.5}
+\contentsline {subsection}{\numberline {2.6}Sample Search and Display Tools}{14}{subsection.2.6}
+\contentsline {subsubsection}{\numberline {2.6.1}BarCode Scanning}{15}{subsubsection.2.6.1}
+\contentsline {section}{\numberline {3}System Management and Internals}{16}{section.3}
+\contentsline {subsection}{\numberline {3.1}Introduction}{16}{subsection.3.1}
+\contentsline {subsection}{\numberline {3.2}Basic Components of the System}{16}{subsection.3.2}
+\contentsline {subsubsection}{\numberline {3.2.1}Ruby Gems}{18}{subsubsection.3.2.1}
+\contentsline {subsection}{\numberline {3.3}Files and Directories}{18}{subsection.3.3}
+\contentsline {subsubsection}{\numberline {3.3.1}The app Directory}{20}{subsubsection.3.3.1}
+\contentsline {subsubsection}{\numberline {3.3.2}The public Directory}{22}{subsubsection.3.3.2}
+\contentsline {subsubsection}{\numberline {3.3.3}The config Directory}{23}{subsubsection.3.3.3}
+\contentsline {subsubsection}{\numberline {3.3.4}The db Directory}{24}{subsubsection.3.3.4}
+\contentsline {subsubsection}{\numberline {3.3.5}Other Directories}{24}{subsubsection.3.3.5}
+\contentsline {subsection}{\numberline {3.4}Web Server Management}{25}{subsection.3.4}
+\contentsline {subsection}{\numberline {3.5}Raw Database Management}{27}{subsection.3.5}
+\contentsline {subsubsection}{\numberline {3.5.1}Database Management with sqlite3}{27}{subsubsection.3.5.1}
+\contentsline {subsubsection}{\numberline {3.5.2}Database Management with sqlite-manager}{29}{subsubsection.3.5.2}
+\contentsline {subsection}{\numberline {3.6}Software Updates and GitHub}{30}{subsection.3.6}
+\contentsline {subsection}{\numberline {3.7}Backup and Upgrade Procedures}{32}{subsection.3.7}
+\contentsline {subsubsection}{\numberline {3.7.1}System Upgrade Procedure}{32}{subsubsection.3.7.1}
+\contentsline {section}{\numberline {4}Database Schema Description}{35}{section.4}
+\contentsline {subsection}{\numberline {4.1}Introduction}{35}{subsection.4.1}
+\contentsline {subsection}{\numberline {4.2}The Samples Table}{35}{subsection.4.2}
+\contentsline {subsection}{\numberline {4.3}The Users Table}{36}{subsection.4.3}
+\contentsline {subsection}{\numberline {4.4}The Stores, Hazards and Sensitivities Tables}{37}{subsection.4.4}
+\contentsline {subsection}{\numberline {4.5}The Groups Table}{37}{subsection.4.5}
+\contentsline {subsection}{\numberline {4.6}Other Tables}{37}{subsection.4.6}
+\contentsline {subsubsection}{\numberline {4.6.1}The Pages Table}{38}{subsubsection.4.6.1}
+\contentsline {subsubsection}{\numberline {4.6.2}The Assets Table}{38}{subsubsection.4.6.2}
+\contentsline {subsubsection}{\numberline {4.6.3}The Popups Table}{38}{subsubsection.4.6.3}
+\contentsline {subsubsection}{\numberline {4.6.4}The Flags Table}{38}{subsubsection.4.6.4}
