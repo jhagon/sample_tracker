@@ -1,42 +1,42 @@
-\BOOKMARK [1][-]{section.1}{General Description of the System}{}
-\BOOKMARK [2][-]{subsection.1.1}{Introduction}{section.1}
-\BOOKMARK [2][-]{subsection.1.2}{Users}{section.1}
-\BOOKMARK [2][-]{subsection.1.3}{Groups}{section.1}
-\BOOKMARK [2][-]{subsection.1.4}{Samples}{section.1}
-\BOOKMARK [2][-]{subsection.1.5}{Public Pages}{section.1}
-\BOOKMARK [1][-]{section.2}{Web Management Guide}{}
-\BOOKMARK [2][-]{subsection.2.1}{Introduction}{section.2}
-\BOOKMARK [2][-]{subsection.2.2}{Adding Static Pages}{section.2}
-\BOOKMARK [2][-]{subsection.2.3}{Uploading General Files to the Server}{section.2}
-\BOOKMARK [2][-]{subsection.2.4}{Creating Users and Groups}{section.2}
-\BOOKMARK [2][-]{subsection.2.5}{Sample Management}{section.2}
-\BOOKMARK [2][-]{subsection.2.6}{Sample Search and Display Tools}{section.2}
-\BOOKMARK [3][-]{subsubsection.2.6.1}{BarCode Scanning}{subsection.2.6}
-\BOOKMARK [1][-]{section.3}{System Management and Internals}{}
-\BOOKMARK [2][-]{subsection.3.1}{Introduction}{section.3}
-\BOOKMARK [2][-]{subsection.3.2}{Basic Components of the System}{section.3}
-\BOOKMARK [3][-]{subsubsection.3.2.1}{Ruby Gems}{subsection.3.2}
-\BOOKMARK [2][-]{subsection.3.3}{Files and Directories}{section.3}
-\BOOKMARK [3][-]{subsubsection.3.3.1}{The app Directory}{subsection.3.3}
-\BOOKMARK [3][-]{subsubsection.3.3.2}{The public Directory}{subsection.3.3}
-\BOOKMARK [3][-]{subsubsection.3.3.3}{The config Directory}{subsection.3.3}
-\BOOKMARK [3][-]{subsubsection.3.3.4}{The db Directory}{subsection.3.3}
-\BOOKMARK [3][-]{subsubsection.3.3.5}{Other Directories}{subsection.3.3}
-\BOOKMARK [2][-]{subsection.3.4}{Web Server Management}{section.3}
-\BOOKMARK [2][-]{subsection.3.5}{Raw Database Management}{section.3}
-\BOOKMARK [3][-]{subsubsection.3.5.1}{Database Management with sqlite3}{subsection.3.5}
-\BOOKMARK [3][-]{subsubsection.3.5.2}{Database Management with sqlite-manager}{subsection.3.5}
-\BOOKMARK [2][-]{subsection.3.6}{Software Updates and GitHub}{section.3}
-\BOOKMARK [2][-]{subsection.3.7}{Backup and Upgrade Procedures}{section.3}
-\BOOKMARK [3][-]{subsubsection.3.7.1}{System Upgrade Procedure}{subsection.3.7}
-\BOOKMARK [1][-]{section.4}{Database Schema Description}{}
-\BOOKMARK [2][-]{subsection.4.1}{Introduction}{section.4}
-\BOOKMARK [2][-]{subsection.4.2}{The Samples Table}{section.4}
-\BOOKMARK [2][-]{subsection.4.3}{The Users Table}{section.4}
-\BOOKMARK [2][-]{subsection.4.4}{The Stores, Hazards and Sensitivities Tables}{section.4}
-\BOOKMARK [2][-]{subsection.4.5}{The Groups Table}{section.4}
-\BOOKMARK [2][-]{subsection.4.6}{Other Tables}{section.4}
-\BOOKMARK [3][-]{subsubsection.4.6.1}{The Pages Table}{subsection.4.6}
-\BOOKMARK [3][-]{subsubsection.4.6.2}{The Assets Table}{subsection.4.6}
-\BOOKMARK [3][-]{subsubsection.4.6.3}{The Popups Table}{subsection.4.6}
-\BOOKMARK [3][-]{subsubsection.4.6.4}{The Flags Table}{subsection.4.6}
+\BOOKMARK [1][-]{section.1}{General Description of the System}{}% 1
+\BOOKMARK [2][-]{subsection.1.1}{Introduction}{section.1}% 2
+\BOOKMARK [2][-]{subsection.1.2}{Users}{section.1}% 3
+\BOOKMARK [2][-]{subsection.1.3}{Groups}{section.1}% 4
+\BOOKMARK [2][-]{subsection.1.4}{Samples}{section.1}% 5
+\BOOKMARK [2][-]{subsection.1.5}{Public Pages}{section.1}% 6
+\BOOKMARK [1][-]{section.2}{Web Management Guide}{}% 7
+\BOOKMARK [2][-]{subsection.2.1}{Introduction}{section.2}% 8
+\BOOKMARK [2][-]{subsection.2.2}{Adding Static Pages}{section.2}% 9
+\BOOKMARK [2][-]{subsection.2.3}{Uploading General Files to the Server}{section.2}% 10
+\BOOKMARK [2][-]{subsection.2.4}{Creating Users and Groups}{section.2}% 11
+\BOOKMARK [2][-]{subsection.2.5}{Sample Management}{section.2}% 12
+\BOOKMARK [2][-]{subsection.2.6}{Sample Search and Display Tools}{section.2}% 13
+\BOOKMARK [3][-]{subsubsection.2.6.1}{Bar Code Scanning}{subsection.2.6}% 14
+\BOOKMARK [1][-]{section.3}{System Management and Internals}{}% 15
+\BOOKMARK [2][-]{subsection.3.1}{Introduction}{section.3}% 16
+\BOOKMARK [2][-]{subsection.3.2}{Basic Components of the System}{section.3}% 17
+\BOOKMARK [3][-]{subsubsection.3.2.1}{Ruby Gems}{subsection.3.2}% 18
+\BOOKMARK [2][-]{subsection.3.3}{Files and Directories}{section.3}% 19
+\BOOKMARK [3][-]{subsubsection.3.3.1}{The app Directory}{subsection.3.3}% 20
+\BOOKMARK [3][-]{subsubsection.3.3.2}{The public Directory}{subsection.3.3}% 21
+\BOOKMARK [3][-]{subsubsection.3.3.3}{The config Directory}{subsection.3.3}% 22
+\BOOKMARK [3][-]{subsubsection.3.3.4}{The db Directory}{subsection.3.3}% 23
+\BOOKMARK [3][-]{subsubsection.3.3.5}{Other Directories}{subsection.3.3}% 24
+\BOOKMARK [2][-]{subsection.3.4}{Web Server Management}{section.3}% 25
+\BOOKMARK [2][-]{subsection.3.5}{Raw Database Management}{section.3}% 26
+\BOOKMARK [3][-]{subsubsection.3.5.1}{Database Management with sqlite3}{subsection.3.5}% 27
+\BOOKMARK [3][-]{subsubsection.3.5.2}{Database Management with sqlite-manager}{subsection.3.5}% 28
+\BOOKMARK [2][-]{subsection.3.6}{Software Updates and GitHub}{section.3}% 29
+\BOOKMARK [2][-]{subsection.3.7}{Backup and Upgrade Procedures}{section.3}% 30
+\BOOKMARK [3][-]{subsubsection.3.7.1}{System Upgrade Procedure}{subsection.3.7}% 31
+\BOOKMARK [1][-]{section.4}{Database Schema Description}{}% 32
+\BOOKMARK [2][-]{subsection.4.1}{Introduction}{section.4}% 33
+\BOOKMARK [2][-]{subsection.4.2}{The Samples Table}{section.4}% 34
+\BOOKMARK [2][-]{subsection.4.3}{The Users Table}{section.4}% 35
+\BOOKMARK [2][-]{subsection.4.4}{The Stores, Hazards and Sensitivities Tables}{section.4}% 36
+\BOOKMARK [2][-]{subsection.4.5}{The Groups Table}{section.4}% 37
+\BOOKMARK [2][-]{subsection.4.6}{Other Tables}{section.4}% 38
+\BOOKMARK [3][-]{subsubsection.4.6.1}{The Pages Table}{subsection.4.6}% 39
+\BOOKMARK [3][-]{subsubsection.4.6.2}{The Assets Table}{subsection.4.6}% 40
+\BOOKMARK [3][-]{subsubsection.4.6.3}{The Popups Table}{subsection.4.6}% 41
+\BOOKMARK [3][-]{subsubsection.4.6.4}{The Flags Table}{subsection.4.6}% 42

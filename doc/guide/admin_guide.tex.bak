@@ -65,7 +65,7 @@ Crystallography Service \samtrack\ Database.
 It includes both a general description of the web interface and 
 associated administration procedures along with a more technical
 description of the software interface and the database itself so that
-administrators can recover from situations such as a forgotten
+administrators can recover from situations such as a forgotton
 administrator password.
 \end{abstract}
 \tableofcontents
@@ -130,7 +130,7 @@ about all the group's samples.
 \subsection{Samples}
 
 The primary purpose of the system is to track and keep a record of
-samples submitted to the crystallography service. A typical work-flow is
+samples submitted to the crystallography service. A typical workflow is
 shown in Figure \ref{fig:sample_workflow}.
 Emails are sent automatically by the system when a sample status
 is updated by an administrator.
@@ -160,7 +160,7 @@ is updated by an administrator.
     \path [line] (status1) -- node [, color=black] {yes}(email3);
     \path [line] (email4) |- (status);
 \end{tikzpicture}
-\caption{Typical work-flow for sample processing cycle.
+\caption{Typical workflow for sample processing cycle.
 Emails are sent automatically by the system whenever the status of a
 sample is updated.\label{fig:sample_workflow}}
 \end{center}
@@ -348,7 +348,7 @@ user is the same.
 \subsection{Sample Management}
 
 In this section we give a complete description of the sample management
-work-flow.
+workflow.
 \begin{enumerate}[(i)]
 \item
 First, a user fills out a sample submission form online. This form is
@@ -415,7 +415,7 @@ group leader then the other group leaders will also receive an email.})
 will receive a confirmation email containing a link to the 
 \emph{Sample Receipt} ---
 a PDF file containing the user input information as well as a unique code
-identifying the user, user group and sample and a unique bar code.
+identifying the user, user group and sample and a unique barcode.
 The email has the following general form with the tags in angle
 brackets filled-in automatically:
 
@@ -446,7 +446,7 @@ Newcastle Crystallography Service
 \normalsize
 
 A tear-off slip at the bottom of the sample receipt
-containing the bar code, sample code and provided user
+containing the barcode, sample code and provided user
 reference as well as essential COSHH information can be attached to the
 actual sample itself.
 Figure \ref{fig:samplereceipt} shows a typical sample receipt.
@@ -517,7 +517,7 @@ When crystallography staff have uploaded all results files (docx, res and
 sample image) to the server and added any additional text feedback for
 the sample, they will flag the sample as \verb=COMPLETED= and the process
 will end. The sample data will continue to be available to users
-(and administrators) indefinitely after that.
+(and administrators) indefinately after that.
 
 Results files (docx and res) will usually be made available in a single 
 zip file, with
@@ -637,27 +637,27 @@ a second search after an initial search, the results of the second search
 will be exactly the same as if it had been performed first.
 \end{plainblock}
 
-\subsubsection{Bar Code Scanning}
+\subsubsection{BarCode Scanning}
 \piccaption{A Zebex scanner.\label{fig:zebex}}
 \parpic[r]{\includegraphics[width=0.3\textwidth]{zebex}}
 As mentioned earlier, each sample has associated with it a unique
-bar code and it may sometimes be convenient to scan a sample bar code
+barcode and it may sometimes be convenient to scan a sample barcode
 and have the associated sample record displayed to the screen.
 To this end, the system has a very simple interface which allows
 a simple low-cost USB scanner such as the \emph{Zebex} scanner shown in 
-Figure \ref{fig:zebex} to be used to extract a bar code.
+Figure \ref{fig:zebex} to be used to extract a barcode.
 The approach taken to facilitate this is brute force.
 
 In the \emph{Admin Tools} menu is a link called \emph{Find Bar Code}.
 Clicking this takes the user to a very simple form with just a single
 entry field for a bar code. Now, assuming that the scanner is plugged in to
 the same PC, if the mouse is clicked in the search box, then when the
-scanner scans the bar code (usually a button needs to be pressed on the 
+scanner scans the barcode (usually a button needs to be pressed on the 
 scanner) the actual code will magically appear in the box. Pressing
 the search button on the form should then produce the matching sample
 (see Figure \ref{fig:barcodeform}. 
 For this to work correctly, the
-bar code scanner needs to be put in \emph{keyboard emulation} mode.
+barcode scanner needs to be put in \emph{keyboard emulation} mode.
 Most scanners are capable of doing this, including the Zebex.
 Of course, you can also type in the bar code by hand if you don't
 have access to a scanner.
@@ -683,7 +683,7 @@ used to do most of the programming.
 To begin with, we will describe the components of the system from the
 operating system right up to the \emph{Rails3} software which is used
 to write the web interface to the sample database.
-Figure \ref{fig:systemcomponents} summarises the main components and
+Figure \ref{fig:systemcomponents} summarizes the main components and
 their relationships.
 
 \begin{figure}[!htb]
@@ -745,7 +745,7 @@ Let's now look at each of these components individually:
 The system runs on a computer running the Ubuntu version of the
 linux operating system.
 The specific release used at present is \emph{Ubuntu 10.04.3 LTS}.
-Release 10.04 is also known via the code name `lucid'. LTS stands
+Release 10.04 is also known via the codename `lucid'. LTS stands
 for 'Long Term Support'. Extended support for this version will
 last until 2014.
 \item[Shell]
@@ -772,7 +772,7 @@ recent version of ruby (1.9.2).
 Rails 3 requires a database application to store and retrieve sample data.
 We are using the \emph{SQLite3} database. This is a `lightweight' database
 which requires very little separate maintenance. In particular, it
-does not require a separate authentication process for access, nor
+does not require a separate authentication process for acces, nor
 does it need to run a separate process in the background as with other
 database software such as \emph{mysql}.
 \end{description}
@@ -798,7 +798,7 @@ The following Ruby Gems are used in the application:
 \begin{description}
 \item[cancan\cite{cancan}]
 written by well-known Rails programmer Ryan Bates is used for
-authorisation. By this we mean controlling which parts of the application
+authorization. By this we mean controlling which parts of the application
 can be accessed by users. For example, some parts of the application can
 be accessed only by administrative users and others can be accessed by
 anyone --- even those who have not registered to use the system.
@@ -941,7 +941,7 @@ config.ru Gemfile Gemfile.lock README.markdown
 contents of this file are automatically displayed when viewing the home
 page of the application on GitHub.
 
-\verb=config.ru= is a file used to initialise the application via a
+\verb=config.ru= is a file used to initialize the application via a
 special software interface called \emph{Rack}\footnote{Rack is part
 of the interface between a rails application and a web server.}.
 
@@ -972,7 +972,7 @@ the file \verb=samples_helper.rb=. Other files, such as
 more widely, not just to facilitate page display for particular database
 table items.
 \item[mailers]
-contains code used by the Rails mail subsystem. In the sample tracking
+contains cose used by the Rails mail subsystem. In the sample tracking
 application, when samples are updated, an email is sent to relevant users.
 The file \verb=sample_mailer.rb= contains the ruby code which sends the
 email.
@@ -994,7 +994,7 @@ naming convention
 for these files is \verb=<uploader_name>_uploader.rb=. For example, in the
 case of an \emph{asset} upload, the code to do this is stored in the
 file \verb=document_uploader.rb= because the \emph{asset} model has
-a field value called \emph{document} which has been declared in its model
+a field value called \emph{document} which has been decalred in its model
 code as an uploader called \emph{document}\footnote{Note here that it is
 the uploader name which determines the name of the file containing the
 uploader code, not the field name. In this case the two are equal, but
@@ -1002,7 +1002,7 @@ they don't have to be.}.
 Other uploader file types include zip data files, sample images and
 synthetic route diagrams.
 \item[views]
-contains template HTML code for displaying page views of data from the
+contains temmplate HTML code for displaying page views of data from the
 database. As can be seen from Figure \ref{fig:filestructure}, the views
 directory itself contains lots of subdirectories. each subdirectory
 corresponds to a model from the sample database and contains the view
@@ -1151,7 +1151,7 @@ engine to that particular sample\footnote{In fact another file will be
 automatically created in the same directory, this file is a thumbnail
 version of the user's file and will be given a similar name to that
 which the user submitted except prefixed by the string \texttt{thumb\_}.}.
-To summarise, the general form of the file path for uploaded files is:
+To summarize, the general form of the file path for uploaded files is:
 \begin{verbatim}
 <application root>/public/uploads/<model>/<uploader>/<id>/<file name>
 \end{verbatim}
@@ -1239,7 +1239,7 @@ database schema.
 
 There is also a directory called \verb=migrate=. This contains all of the
 \emph{migrations} which have been applied to the database since it was
-first initialised. A migration is simply an adjustment to the database
+first initialized. A migration is simply an adjustment to the database
 schema. For example, you may create an initial table in the database but
 later realise that you want to change some characteristic of the table
 such as adding an extra field or changing the datatype of an existing field.
@@ -1250,13 +1250,13 @@ thought of as an accumulation of all the migrations that have been applied
 to the database to get it to its current state.
 
 \subsubsection{Other Directories}
-There are several other directories:
+There are sveral other directories:
 \begin{description}
 \item[tmp]
 holds temporary files created by \samtrack.
 This directory has subdirectories for storing
 cache contents, session information and sockets. These files are automatically
-cleaned up from time-to-time although an occasional manual clean-out may be
+cleaned up from time-to-time although an occasional manual cleanout may be
 necessary if things go wrong.
 \item[doc]
 contains documentation of various sorts.
@@ -1312,7 +1312,7 @@ Occasionally you may need to change some server parameters in the
 web server configuration files. The main configuration file is
 \verb=/etc/apache2/apache2.conf=. You will rarely, if ever, need to
 change anything here unless you want to tweak the server performance (in
-which case you'll definitely need to know what you're doing). This file
+which case you'll definately need to know what you're doing). This file
 does contain some parameters for the apache \emph{Phusion Passenger} 
 module which is needed to interface Rails with the apache server:
 \begin{verbatim}
@@ -1330,7 +1330,7 @@ configuration files:
 \begin{verbatim}
 Include /etc/apache2/sites-enabled/
 \end{verbatim}
-The above line tells the server to get some further configuration
+The above line tells the server to get some further configuartion
 details from the contents of the directory
 \verb=/etc/apache2/sites-enabled=.
 \verb=sites-enabled= contains a file called \verb=000-default= which contains
@@ -1426,7 +1426,7 @@ Hopefully, you won't often need to refer to this section because
 for you. Sometimes however, the database becomes broken in some way
 and needs to be edited in its `raw' form. For example, you may
 be logged in as an administrator and inadvertently remove your own
-administration rights. If you were the only administrator then you now
+admininstration rights. If you were the only administrator then you now
 have a problem because only an administrator can change a user's rights!
 We will look at how to solve this particular problem later in this
 section. We consider specifically SQLite3 database manipulation here
@@ -1802,7 +1802,7 @@ mv jhagon-sample_tracker-b493e1b sample_tracker
 \end{verbatim}
 \item
 Change to the \verb=sample_tracker= directory and remove the production 
-database (if it exists) and also the \verb=public= directory:
+database (if it exists) and also the \verb=public= direcory:
 \begin{verbatim}
 rm db/production.sqlite3
 rm -rf public
@@ -1874,7 +1874,7 @@ study Figure \ref{fig:database_schema}. This shows
 all the tables, fields and relationships in a single diagram.
 We now give a brief description of each table.
 
-Note that all tables except join tables have an auto-incremented integer field
+Note that all tables except join tables have an autoincremented integer field
 called \verb=id= which servers as the unique primary key for each record
 in the table. The \verb=id= field will not be listed explicitly in the
 description of each table. All non-join tables also have two other
@@ -1920,7 +1920,7 @@ another boolean indicating whether the molecule is chiral (y/n).
 \item[costcode]
 a string providing a cost centre code for charging if relevant.
 \item[barcode]
-a string field for an automatically generated Code39 standard bar code.
+a string field for an automatically generated Code39 standard barcode.
 \item[user\_id]
 this integer holds the \verb=id= field of the user who requested the
 sample analysis.
@@ -1930,7 +1930,7 @@ an integer holding the \verb=id= field of the status flag of the sample.
 a string for a user-defined reference. This is required to be an
 alphanumeric sequence of characters \emph{without spaces}.
 \item[zipdata]
-a string holding the name of a zip file containing the results of the analysis.
+a string holding the name of a zipfile containing the results of the analysis.
 \item[sampleimage]
 a string holding the name of an image file of the sample molecule after it
 has been identified by the analysis.
@@ -1951,7 +1951,7 @@ crystallography staff.
 
 \subsection{The Users Table}
 The users table, in addition to maintaining a record of users and their
-samples, also serves as a key part of the authentication and authorisation
+samples, also serves as a key part of the authentication and authorization
 system which will be described later. the users table is related to the
 samples table via a \emph{one-to-many} relationship, i.e. \emph{one} user
 has \emph{many} samples.
@@ -2357,7 +2357,7 @@ relationship between the tables they link.\label{fig:database_schema}}
 \bibitem{textile} \emph{Textile Description}, Wikipedia, \url{http://en.wikipedia.org/wiki/Textile_%28markup_language%29}
 \bibitem{cancan} \emph{CanCan Repository}, GitHub, \url{https://github.com/ryanb/cancan}
 \bibitem{carrierwave} \emph{Carrierwave Repository}, GitHub, \url{https://github.com/jnicklas/carrierwave}
-\bibitem{devise} \emph{Devise Repository}, GitHub,\url{https://github.com/plataformatec/devise/}
+\bibitem{devise} \emph{Devide Repository}, GitHub,\url{https://github.com/plataformatec/devise/}
 \bibitem{prawn} \emph{Prawn Ruby Gem for PDF creation},\url{http://prawn.majesticseacreature.com/}
 \bibitem{redcloth} \emph{Redcloth Textile Ruby Gem}, \url{http://redcloth.org/}
 \bibitem{rmagick} \emph{RMagick Ruby Gem}, \url{http://rmagick.rubyforge.org/}
