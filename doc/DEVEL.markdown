@@ -3990,6 +3990,92 @@ some extra login stats have been added to the user profile page:
 <p>
 ```
 
+Removing DLS Entries from Local Sample Queue
+============================================
+It was decided to remove samples flagged for DLS analysis from the main queue
+because this was messing up the estimated wait time for non DLS samples.
+A separate controller action was created - called 'dlsqueue' - which created
+a separate list of DLS-flagged samples. A new view was created for the
+dlsqueue action. To help with this, some existing global variables were
+tweaked and a couple of new ones added in the `config/environment.rb` file:
+
+```
+QUEUE_INTRO_TEXT = "The following gives an appoximate wait time before your sample will be analysed. The actual time will vary depending on sample quality and priority number."
+DLS_VISIT_DATE = "31/06/2012"
+DLS_QUEUE_INTRO_TEXT = "The following samples are awaiting analysis at the Diamond Light Source (DLS). The next visit to DLS is scheduled for #{DLS_VISIT_DATE}."
+```
+
+There are the following alterations to the `app/controllers/samples_controller.rb` file:
+
+```
+  before_filter :authenticate_user!, :except => [:queue, :dlsqueue]
+
+...
+
+  def queue
+     @samples=Sample.page(params[:page]).per_page(ITEMS_PER_PAGE).find( :all,
+       :joins => [:flag],
+       :order => "created_at ASC",
+       :conditions => [" flags.id = samples.flag_id AND flags.name NOT LIKE '%%DLS%%' AND flags.name NOT LIKE '%%FAILED%%' AND flags.name NOT LIKE '%%COMPLETED%%' AND flags.name NOT LIKE '%%WITHDRAWN%%'"])
+
+  end
+
+  def dlsqueue
+     @samples=Sample.page(params[:page]).per_page(ITEMS_PER_PAGE).find( :all,
+       :joins => [:flag],
+       :order => "created_at ASC",
+       :conditions => [" flags.id = samples.flag_id AND flags.name LIKE '%%DLS%%'"])
+
+  end
+```
+
+The top of the `app/views/samples/queue.html.erb` now reads:
+
+```
+<p>
+<%= QUEUE_INTRO_TEXT %>
+</p>
+<p>
+Samples which have been set aside for DLS analysis can be viewed
+<%= link_to "here", "/samples/dlsqueue/1"%>.
+</p>
+```
+
+and the `app/views/samples/dlsqueue.html.erb` view now looks like this:
+
+```
+<% title "Samples Awaiting DLS Analysis" %>
+
+<p>
+<%= DLS_QUEUE_INTRO_TEXT %>
+</p>
+<%= will_paginate @samples %>
+</p>
+<p>
+<table >
+  <tr>
+    <th>Sample Code</th>
+    <th>User Ref</th>
+    <th>Submitted At</th>
+    <th>Priority</th>
+  </tr>
+  <% page_num = params[:page].to_i > 0 ? params[:page].to_i : 1 %>
+  <% days =  1 + (page_num - 1) * ITEMS_PER_PAGE%>
+  <% for sample in @samples %>
+    <tr class="<%= cycle :odd, :even %>">
+      <td><%= sample.code %></td>
+      <td><%= sample.userref %></td>
+      <td><%= neat_time(sample.created_at) %></td>
+      <td><%= sample.priority %></td>
+    </tr>
+    <% days = days + 1%>
+    </tr>
+  <% end %>
+</table>
+</p>
+
+```
+
 TODO: Generating Sample Data
 ============================
 Use Faker to generate a large number of users and samples so that we can

@@ -26,17 +26,17 @@
 \contentsline {subsection}{\numberline {3.5}Raw Database Management}{27}{subsection.3.5}
 \contentsline {subsubsection}{\numberline {3.5.1}Database Management with sqlite3}{27}{subsubsection.3.5.1}
 \contentsline {subsubsection}{\numberline {3.5.2}Database Management with sqlite-manager}{29}{subsubsection.3.5.2}
-\contentsline {subsection}{\numberline {3.6}Software Updates and GitHub}{30}{subsection.3.6}
-\contentsline {subsection}{\numberline {3.7}Backup and Upgrade Procedures}{32}{subsection.3.7}
-\contentsline {subsubsection}{\numberline {3.7.1}System Upgrade Procedure}{32}{subsubsection.3.7.1}
+\contentsline {subsection}{\numberline {3.6}Software Updates and GitHub}{32}{subsection.3.6}
+\contentsline {subsection}{\numberline {3.7}Backup and Upgrade Procedures}{33}{subsection.3.7}
+\contentsline {subsubsection}{\numberline {3.7.1}System Upgrade Procedure}{33}{subsubsection.3.7.1}
 \contentsline {section}{\numberline {4}Database Schema Description}{35}{section.4}
 \contentsline {subsection}{\numberline {4.1}Introduction}{35}{subsection.4.1}
 \contentsline {subsection}{\numberline {4.2}The Samples Table}{35}{subsection.4.2}
-\contentsline {subsection}{\numberline {4.3}The Users Table}{36}{subsection.4.3}
+\contentsline {subsection}{\numberline {4.3}The Users Table}{37}{subsection.4.3}
 \contentsline {subsection}{\numberline {4.4}The Stores, Hazards and Sensitivities Tables}{37}{subsection.4.4}
-\contentsline {subsection}{\numberline {4.5}The Groups Table}{37}{subsection.4.5}
-\contentsline {subsection}{\numberline {4.6}Other Tables}{37}{subsection.4.6}
+\contentsline {subsection}{\numberline {4.5}The Groups Table}{38}{subsection.4.5}
+\contentsline {subsection}{\numberline {4.6}Other Tables}{38}{subsection.4.6}
 \contentsline {subsubsection}{\numberline {4.6.1}The Pages Table}{38}{subsubsection.4.6.1}
-\contentsline {subsubsection}{\numberline {4.6.2}The Assets Table}{38}{subsubsection.4.6.2}
-\contentsline {subsubsection}{\numberline {4.6.3}The Popups Table}{38}{subsubsection.4.6.3}
-\contentsline {subsubsection}{\numberline {4.6.4}The Flags Table}{38}{subsubsection.4.6.4}
+\contentsline {subsubsection}{\numberline {4.6.2}The Assets Table}{39}{subsubsection.4.6.2}
+\contentsline {subsubsection}{\numberline {4.6.3}The Popups Table}{39}{subsubsection.4.6.3}
+\contentsline {subsubsection}{\numberline {4.6.4}The Flags Table}{39}{subsubsection.4.6.4}

@@ -1161,9 +1161,10 @@ This directory contains configuration and initialization files
 for the rails application. You will rarely, if ever need to edit most
 of these. However, there is one file, \verb=environment.rb=, which
 contains some parameters that you may want to change occasionally.
-Here is a listing of this file:
+Here is a listing of this file (linefeeds have been added for clarity but
+do not appear in any of the string variables):
 
-\tiny
+\small
 \begin{verbatim}
 # Load the rails application
 require File.expand_path('../application', __FILE__)
@@ -1189,6 +1190,10 @@ space of time we suggest setting the priority number to 1)."
 QUEUE_INTRO_TEXT = "The following gives an appoximate wait time before your 
 sample will be analysed. The actual time will vary depending on sample 
 quality and priority number."
+DLS_VISIT_DATE = "31/06/2012"
+DLS_QUEUE_INTRO_TEXT = "The following samples are awaiting analysis at the 
+Diamond Light Source (DLS). The next visit to DLS is 
+scheduled for #{DLS_VISIT_DATE}."
 \end{verbatim}
 \normalsize
 
@@ -1213,10 +1218,18 @@ contains a URL to a Textile quick reference page. This is currently set
 to the Wikipedia entry for Textile and is used on the page edit screen
 to help administrators edit static pages as shown in Figure \ref{fig:editpage}.
 \item[\texttt{\textbf{SAMPLE\_INTRO\_TEXT}}]
-contains the text that appears in a box at the beginning of the sample
+contains the text that appears at the beginning of the sample
 submission form --- see for example Figure \ref{fig:sampleeditform}. 
 \item[\texttt{\textbf{QUEUE\_INTRO\_TEXT}}]
 contains the text that appears in a box at the beginning of the sample
+queue page.
+\item[\texttt{\textbf{DLS\_VISIT\_DATE}}]
+contains the date of the next visit to the \emph{Diamond Light Source}. This
+parameter will often be referenced in other global variables and view files.
+For example, the \verb=DLS_QUEUE_INTRO_TEXT= variable in the listing above
+refers to this variable.
+\item[\texttt{\textbf{DLS\_QUEUE\_INTRO\_TEXT}}]
+contains the text that appears at the beginning of the DLS sample
 queue page.
 \end{description}
 
