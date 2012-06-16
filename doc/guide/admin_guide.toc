@@ -11,7 +11,7 @@
 \contentsline {subsection}{\numberline {2.4}Creating Users and Groups}{9}{subsection.2.4}
 \contentsline {subsection}{\numberline {2.5}Sample Management}{9}{subsection.2.5}
 \contentsline {subsection}{\numberline {2.6}Sample Search and Display Tools}{14}{subsection.2.6}
-\contentsline {subsubsection}{\numberline {2.6.1}BarCode Scanning}{15}{subsubsection.2.6.1}
+\contentsline {subsubsection}{\numberline {2.6.1}Bar Code Scanning}{16}{subsubsection.2.6.1}
 \contentsline {section}{\numberline {3}System Management and Internals}{16}{section.3}
 \contentsline {subsection}{\numberline {3.1}Introduction}{16}{subsection.3.1}
 \contentsline {subsection}{\numberline {3.2}Basic Components of the System}{16}{subsection.3.2}
