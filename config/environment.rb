@@ -20,3 +20,5 @@ Also remeber to set the priority number, the form will not validate unless
 you do this (if you are not going to submit several samples in a short
 space of time we suggest setting the priority number to 1)."
 QUEUE_INTRO_TEXT = "The following gives an appoximate wait time before your sample will be analysed. The actual time will vary depending on sample quality and priority number."
+DLS_VISIT_DATE = "31/06/2012"
+DLS_QUEUE_INTRO_TEXT = "The following samples are awaiting analysis at the Diamond Light Source (DLS). The next visit to DLS is scheduled for #{DLS_VISIT_DATE}."
