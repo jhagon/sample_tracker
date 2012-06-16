@@ -99,7 +99,7 @@
     <tr class="<%= cycle :odd, :even %>">
       <td><%= sample.code %></td>
       <td><%= sample.userref %></td>
-      <td><%= sample.flag.name %></td>
+      <td title="<%= sample.flag.description %>"><%= sample.flag.name %></td>
       <td><%= neat_time(sample.created_at) %></td>
       <td><%= neat_time(sample.updated_at) %></td>
       <td><%= sample.priority %></td>
