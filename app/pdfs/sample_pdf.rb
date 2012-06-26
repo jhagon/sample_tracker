@@ -60,9 +60,9 @@ class SamplePdf < Prawn::Document
     bounding_box([0,108], :width => pagewidth) do
 
       font("Courier" ) do
-        font_size 10
+        font_size 8
         str = "#{@sample.code}(#{@sample.userref})"
-        text_box str, :at => [5,cursor+12], :width => 155, :height => 24,
+        text_box str, :at => [5,cursor+10], :width => 155, :height => 24,
                       :style => :bold, :align => :center,
                       :overflow => :shrink_to_fit
 #        draw_text "#{@sample.code}(#{@sample.userref})", size: 12, style: :bold, :at => [0,cursor+3]
