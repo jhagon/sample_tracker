@@ -1,19 +1,8 @@
-<% title "Current Sample Queue" %>
+<% title "Samples Awaiting Further Refinement" %>
 
 <p>
-<%= QUEUE_INTRO_TEXT %>
+<%= REF_QUEUE_INTRO_TEXT %>
 </p>
-<p>
-Samples which have been set aside for DLS analysis can be viewed
-<%= link_to "here", "/samples/dlsqueue/1"%>.
-</p>
-
-<p>
-Samples which have been marked for further refinement after having data
-collected can be viewed
-<%= link_to "here", "/samples/refqueue/1"%>.
-</p>
-
 
 <p>
 <%= will_paginate @samples %>
@@ -26,7 +15,6 @@ collected can be viewed
     <th>Submitted At</th>
     <th>Priority</th>
     <th>Current Status</th>
-    <th>Wait Time</th>
   </tr>
   <% page_num = params[:page].to_i > 0 ? params[:page].to_i : 1 %>
   <% days =  1 + (page_num - 1) * ITEMS_PER_PAGE%>
@@ -37,7 +25,6 @@ collected can be viewed
       <td><%= neat_time(sample.created_at) %></td>
       <td><%= sample.priority %></td>
       <td title="<%= sample.flag.description %>"><%= sample.flag.name %></td>
-      <td><%= pluralize(days, 'Day') %></td>
     </tr>
     <% days = days + 1%>
     </tr>

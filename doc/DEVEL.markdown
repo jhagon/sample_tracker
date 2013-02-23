@@ -4077,6 +4077,100 @@ and the `app/views/samples/dlsqueue.html.erb` view now looks like this:
 
 ```
 
+Adding a Refinement Queue
+=========================
+It was decided to remove those samples for which initial data had been
+collected but for which further refinement was necessary.
+These samples were removed from the main queue and placed in a
+'Refinement Queue'. A similar approach was taken to that for the DLS
+queue previously created.
+
+First, the following line was added to the `config/environment.rb` file:
+
+```
+REF_QUEUE_INTRO_TEXT = "The following samples are awaiting further refinement after initial data collection."
+```
+
+There are the following alterations to the 
+`app/controllers/samples_controller.rb` file:
+
+```
+  before_filter :authenticate_user!, :except => [:queue, :dlsqueue, :refqueue]
+
+  def queue
+     @samples=Sample.page(params[:page]).per_page(ITEMS_PER_PAGE).find( :all,
+       :joins => [:flag],
+       :order => "created_at ASC",
+       :conditions => [" flags.id = samples.flag_id AND flags.name NOT LIKE '%%DLS%%' AND flags.name NOT LIKE '%%FAILED%%' AND flags.name NOT LIKE '%%COMPLETED%%' AND flags.name NOT LIKE '%%WITHDRAWN%%' AND flags.name NOT LIKE '%%DATA%%'"])
+
+  end
+
+  def refqueue
+     @samples=Sample.page(params[:page]).per_page(ITEMS_PER_PAGE).find( :all,
+       :joins => [:flag],
+       :order => "created_at ASC",
+       :conditions => [" flags.id = samples.flag_id AND flags.name LIKE '%%DATA%%'"])
+
+  end
+```
+
+The top of the `app/views/samples/queue.html.erb` file now reads:
+
+```
+<p>
+<%= QUEUE_INTRO_TEXT %>
+</p>
+
+<p>
+Samples which have been set aside for DLS analysis can be viewed
+<%= link_to "here", "/samples/dlsqueue/1"%>.
+</p>
+
+<p>
+Samples which have been marked for further refinement after having data
+collected can be viewed
+<%= link_to "here", "/samples/refqueue/1"%>.
+</p>
+```
+
+and the new `app/views/samples/refqueue.html.erb` contains:
+
+```
+<% title "Samples Awaiting Further Refinement" %>
+
+<p>
+<%= REF_QUEUE_INTRO_TEXT %>
+</p>
+
+<p>
+<%= will_paginate @samples %>
+</p>
+<p>
+<table >
+  <tr>
+    <th>Sample Code</th>
+    <th>User Ref</th>
+    <th>Submitted At</th>
+    <th>Priority</th>
+    <th>Current Status</th>
+  </tr>
+  <% page_num = params[:page].to_i > 0 ? params[:page].to_i : 1 %>
+  <% days =  1 + (page_num - 1) * ITEMS_PER_PAGE%>
+  <% for sample in @samples %>
+    <tr class="<%= cycle :odd, :even %>">
+      <td><%= sample.code %></td>
+      <td><%= sample.userref %></td>
+      <td><%= neat_time(sample.created_at) %></td>
+      <td><%= sample.priority %></td>
+      <td title="<%= sample.flag.description %>"><%= sample.flag.name %></td>
+    </tr>
+    <% days = days + 1%>
+    </tr>
+  <% end %>
+</table>
+</p>
+```
+
 TODO: Generating Sample Data
 ============================
 Use Faker to generate a large number of users and samples so that we can

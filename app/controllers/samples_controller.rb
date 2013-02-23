@@ -1,7 +1,7 @@
 class SamplesController < ApplicationController
   helper_method :sort_column, :sort_direction
 
-  before_filter :authenticate_user!, :except => [:queue, :dlsqueue]
+  before_filter :authenticate_user!, :except => [:queue, :dlsqueue, :refqueue]
   before_filter :must_be_creator_or_leader_or_admin, 
     :only => [:show]
   before_filter :admin_required, :only => [:index, :findbarcode, :edit, :update, :destroy]
@@ -58,7 +58,7 @@ class SamplesController < ApplicationController
      @samples=Sample.page(params[:page]).per_page(ITEMS_PER_PAGE).find( :all,
        :joins => [:flag],
        :order => "created_at ASC",
-       :conditions => [" flags.id = samples.flag_id AND flags.name NOT LIKE '%%DLS%%' AND flags.name NOT LIKE '%%FAILED%%' AND flags.name NOT LIKE '%%COMPLETED%%' AND flags.name NOT LIKE '%%WITHDRAWN%%'"])
+       :conditions => [" flags.id = samples.flag_id AND flags.name NOT LIKE '%%DLS%%' AND flags.name NOT LIKE '%%FAILED%%' AND flags.name NOT LIKE '%%COMPLETED%%' AND flags.name NOT LIKE '%%WITHDRAWN%%' AND flags.name NOT LIKE '%%DATA%%'"])
 
   end
 
@@ -70,6 +70,13 @@ class SamplesController < ApplicationController
 
   end
 
+  def refqueue
+     @samples=Sample.page(params[:page]).per_page(ITEMS_PER_PAGE).find( :all,
+       :joins => [:flag],
+       :order => "created_at ASC",
+       :conditions => [" flags.id = samples.flag_id AND flags.name LIKE '%%DATA%%'"])
+
+  end
 
   def findbarcode
     @samples=Sample.where("(barcode =  '#{params[:search]}')").joins(:flag, {:user => :group})
