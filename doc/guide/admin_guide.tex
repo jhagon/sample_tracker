@@ -167,6 +167,20 @@ sample is updated.\label{fig:sample_workflow}}
 \normalsize
 \end{figure}
 
+\subsection{The Sample Queue}
+There are actually three queues defined in the system:
+\begin{description}
+\item[The Main Queue]
+lists those samples which are awaiting initial analysis.
+\item[The DLS Queue]
+lists those samples which, after an initial analysis, were considered
+to require further analysis at the \emph{Diamond Light Source} at
+RAL.
+\item[The Refinement (Ref) Queue]
+lists those samples which have had initial analysis but require
+further refinement.
+\end{description}
+
 \subsection{Public Pages}
 Most information on the server can be viewed only by registered users.
 However, there are some pages which are more generally accessible.
@@ -1010,9 +1024,10 @@ templates for various different types of view associated with that model.
 Let us look at the central model in the system, the \emph{sample} model.
 A listing of the \verb=sample= subdirectory shows the following files:
 \begin{verbatim}
-edit.html.erb         groupindex.html.erb  queue.html.erb
-findbarcode.html.erb  index.html.erb       show.html.erb
-_form.html.erb        new.html.erb         userindex.html.erb
+dlsqueue.html.erb     groupindex.html.erb  refqueue.html.erb
+edit.html.erb         index.html.erb       show.html.erb
+findbarcode.html.erb  new.html.erb         userindex.html.erb
+_form.html.erb        queue.html.erb
 \end{verbatim}
 These files all contain a mixture of traditional HTML and embedded ruby
 --- hence the \verb=.html.erb= extension. Some of the files are specific
@@ -1194,6 +1209,7 @@ DLS_VISIT_DATE = "31/06/2012"
 DLS_QUEUE_INTRO_TEXT = "The following samples are awaiting analysis at the 
 Diamond Light Source (DLS). The next visit to DLS is 
 scheduled for #{DLS_VISIT_DATE}."
+REF_QUEUE_INTRO_TEXT = "The following samples are awaiting further refinement after initial data collection."
 \end{verbatim}
 \normalsize
 
@@ -1230,6 +1246,9 @@ For example, the \verb=DLS_QUEUE_INTRO_TEXT= variable in the listing above
 refers to this variable.
 \item[\texttt{\textbf{DLS\_QUEUE\_INTRO\_TEXT}}]
 contains the text that appears at the beginning of the DLS sample
+queue page.
+\item[\texttt{\textbf{REF\_QUEUE\_INTRO\_TEXT}}]
+contains the text that appears at the beginning of the refinement sample
 queue page.
 \end{description}
 
