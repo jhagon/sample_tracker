@@ -2477,6 +2477,7 @@ Finally, added a link on the main 'Admin Tools' list in
     <% else %>
     <% end %>
   </div>
+```
 
 BUGFIX: Removed before_filter on userindex
 ==========================================
