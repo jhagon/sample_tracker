@@ -174,5 +174,5 @@ Recovering the Complete Application from GitHub
 Just do this:
 
 ```
-git clone git@github.com:jhagon/sample_tracker.git
+git clone https://github.com/jhagon/sample_tracker.git
 ```

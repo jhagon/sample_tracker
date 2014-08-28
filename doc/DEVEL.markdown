@@ -4171,6 +4171,33 @@ and the new `app/views/samples/refqueue.html.erb` contains:
 </p>
 ```
 
+Timing of Sample Auto-Code Generation
+=====================================
+The timing of this was too far removed from the point at which a new
+sample is actually saved to the database leading to occasional
+inconsistencies. To improve things, in the controller code, the line:
+
+```
+@sample.code = make_sample_code
+```
+
+was moved from the `new` function to the `create` function:
+
+```
+  def create
+    # @sample = Sample.new(params[:sample])
+    @sample = current_user.samples.build params[:sample]
+    @sample.code = make_sample_code
+    if @sample.save
+      SampleMailer.sample_receipt(@sample).deliver
+      SampleMailer.sample_request(@sample).deliver
+      redirect_to @sample, :notice => "Sample request registered. You will receive a receipt and confirmation via email."
+    else
+      render :action => 'new'
+    end
+  end
+```
+
 TODO: Generating Sample Data
 ============================
 Use Faker to generate a large number of users and samples so that we can

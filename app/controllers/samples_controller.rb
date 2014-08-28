@@ -161,12 +161,12 @@ class SamplesController < ApplicationController
 
   def new
     @sample = Sample.new
-    @sample.code = make_sample_code
   end
 
   def create
     # @sample = Sample.new(params[:sample])
     @sample = current_user.samples.build params[:sample]
+    @sample.code = make_sample_code
     if @sample.save
       SampleMailer.sample_receipt(@sample).deliver
       SampleMailer.sample_request(@sample).deliver
