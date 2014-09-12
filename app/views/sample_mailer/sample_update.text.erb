@@ -7,10 +7,17 @@ has changed as follows:
 
 <%="New Status: #{@sample.flag.name} (#{@sample.flag.description}"%>
 
+<%="Feedback: #{@sample.feedback}"%>
+
 <%="Old Status: #{@old_flag.name} (#{@old_flag.description}"%>
 
 <%= link_to "Link to Full Sample Information", "#{sample_url(@sample, 
              :host => MAIL_HOST)}" %>
+
+% if ( @sample.flag.name =~ /(FAILED|WITHDRAWN|REFINEMENT COMPLETED)/i ) %>
+    <%= "#{TERMINATION_MESSAGE}" %>
+ 
+<% end %>
 
 Copies of this email are sent to both sample submitters and their
 research group leaders (where different).

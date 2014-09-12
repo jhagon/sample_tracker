@@ -13,6 +13,10 @@ has changed as follows:
 </p>
 
 <p>
+<%="Feedback: #{@sample.feedback}"%>
+</p>
+
+<p>
 <%="Old Status: #{@old_flag.name} (#{@old_flag.description})"%>
 </p>
 
@@ -20,6 +24,12 @@ has changed as follows:
 <%= link_to "Link to Full Sample Information", "#{sample_url(@sample, 
             :host => MAIL_HOST)}" %>
 </p>
+
+<% if ( @sample.flag.name =~ /(FAILED|WITHDRAWN|REFINEMENT COMPLETED)/i ) %>
+<p>
+    <%= "#{TERMINATION_MESSAGE}" %>
+</p>
+<% end %>
 
 <p>
 Copies of this email are sent to both sample submitters and their

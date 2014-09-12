@@ -23,3 +23,4 @@ QUEUE_INTRO_TEXT = "The following gives an appoximate wait time before your samp
 DLS_VISIT_DATE = "31/06/2012"
 DLS_QUEUE_INTRO_TEXT = "The following samples are awaiting analysis at the Diamond Light Source (DLS). The next visit to DLS is scheduled for #{DLS_VISIT_DATE}."
 REF_QUEUE_INTRO_TEXT = "The following samples are awaiting further refinement after initial data collection."
+TERMINATION_MESSAGE ="Please collect your sample from Crystallography. Any samples that are not collected within a month of the resolution of the submission will be disposed of."
