@@ -1,5 +1,5 @@
 class SamplePdf < Prawn::Document
-  
+
   def initialize(sample)
     super(page_size: "A4")
     @sample = sample
@@ -7,23 +7,28 @@ class SamplePdf < Prawn::Document
     @stores = Store.find(:all)
     @sensitivities = Sensitivity.find(:all)
     header
-    structure
     sample_code
+    details
     coshh
-    scissor_line
-    show_barcode
-    coshh_summary
+    structure
+#
+# New sample receipt dispenses with tear-off slip
+# bar code and redundant coshh information. JPH 12/09/2014
+#
+#    scissor_line
+#    show_barcode
+#    coshh_summary
       
   end
 
   def header
     nbsp = Prawn::Text::NBSP
-      text "Newcastle Crystallography Service", font: "Helvetica", size: 30, style: :bold, align: :center
+      text "Newcastle Crystallography Service", font: "Helvetica", size: 20, style: :bold, align: :center
       text "Bedson Building#{nbsp}#{nbsp} " + 
-           "<font name='ZapfDingbats' size='12'>F#{nbsp}#{nbsp}#{nbsp}</font>" + 
+           "<font name='ZapfDingbats' size='8'>F#{nbsp}#{nbsp}#{nbsp}</font>" + 
            "#{nbsp}#{nbsp}Newcastle University#{nbsp}#{nbsp}" + 
-           "<font name='ZapfDingbats' size='12'>#{nbsp}#{nbsp}F#{nbsp}#{nbsp}</font>" + 
-           "#{nbsp}#{nbsp}NE1 7RU", size: 16, 
+           "<font name='ZapfDingbats' size='8'>#{nbsp}#{nbsp}F#{nbsp}#{nbsp}</font>" + 
+           "#{nbsp}#{nbsp}NE1 7RU", size: 10, 
              align: :center, :inline_format => true
 
     move_down 10
@@ -32,16 +37,31 @@ class SamplePdf < Prawn::Document
     end
   end
 
+# Old sample code routine. JPH 12/09/2014.
+#
+#  def sample_code
+#    text_box "Sample Code: #{@sample.code}", size: 16, style: :bold, align: :left, :at => [0,bounds.top-84]
+#    move_up 16
+#    text_box "Your Ref: #{@sample.userref}", size: 16, style: :bold, align: :right, :at => [250,bounds.top-84]
+#    intro_str = "Please check the details on this receipt. " +
+#                "Changes can be made only by Crystallography staff. " +
+#                "Please use the tear-off slip at the bottom of the page and " +
+#                "attach it to your sample. You will be automatically " +
+#                "informed via e-mail of any changes to your sample status."
+#    text_box intro_str, size: 10, size: 10, :at => [0,bounds.top-104]
+#  end
+
   def sample_code
-    text_box "Sample Code: #{@sample.code}", size: 16, style: :bold, align: :left, :at => [0,bounds.top-84]
+    text_box "Sample Code: #{@sample.code}", size: 16, style: :bold, align: :left, :at => [0,bounds.top-74]
     move_up 16
-    text_box "Your Ref: #{@sample.userref}", size: 16, style: :bold, align: :right, :at => [250,bounds.top-84]
+    text_box "Your Ref: #{@sample.userref}", size: 16, style: :bold, align: :right, :at => [250,bounds.top-74]
     intro_str = "Please check the details on this receipt. " +
                 "Changes can be made only by Crystallography staff. " +
-                "Please use the tear-off slip at the bottom of the page and " +
-                "attach it to your sample. You will be automatically " +
+                "Please print this receipt and submit it along with " +
+                "your sample. Make sure you label your sample with the " +
+                "sample code generated. You will be automatically " +
                 "informed via e-mail of any changes to your sample status."
-    text_box intro_str, size: 10, size: 10, :at => [0,bounds.top-104]
+    text_box intro_str, size: 10, size: 10, :at => [0,bounds.top-94]
   end
 
   def show_barcode
@@ -109,21 +129,40 @@ class SamplePdf < Prawn::Document
   def structure
 
     pagewidth = bounds.right - bounds.left
-    boxwidth = pagewidth*0.5 - 5
-    boxheight = 0.75*boxwidth
+    boxwidth = 524
+    boxheight = 0.7*boxwidth  -50
   # 
   # This next bit gives the absolute path name of the structure image
   #
     strucfile = Rails.root.to_s + '/public' + @sample.synth_url.to_s
+    tmp_str = `identify -format "%[fx:w]x%[fx:h]" "#{strucfile}"`
+    img_dim = tmp_str.split('x')
+    img_ratio = 1.0*img_dim[0].to_i/img_dim[1].to_i
+    
   #
-    text_box "Proposed Structure and Synthetic Route", size: 12, style: :bold, align: :left, :at => [0,bounds.top-168]
-    text_box "Sample Details and Requirements", size: 12, style: :bold, align: :left, :at => [boxwidth+10,bounds.top-168]
-
-    bounding_box([0,bounds.top-182], :width => boxwidth, :height => boxheight) do
-      image strucfile, :position => :center, :height => boxheight*0.9, :width => boxwidth*0.9
+    text_box "Proposed Structure with Numbering Scheme and Synthetic Route Details", size: 12, style: :bold, align: :left, :at => [0,bounds.top-455]
+    bounding_box([0,bounds.top-469], :width => boxwidth, :height => boxheight) do
+      bounding_box([22,bounds.top-3], :width => 416, :height => 312) do
+      if (img_ratio >= 1.33333) then
+        image strucfile, :position => :center, :vposition => :center, :width => 416
+      else
+        image strucfile, :position => :center, :vposition => :center, :height => 312
+      end
+      end
     stroke_bounds
     end
-    bounding_box([boxwidth+10 ,bounds.top-182], :width => boxwidth, :height => boxheight*0.35-5) do
+
+  end
+
+  def details
+
+    pagewidth = bounds.right - bounds.left
+    boxwidth = pagewidth*0.5 - 5
+    boxheight = 0.75*boxwidth
+
+    text_box "Sample Details and Requirements", size: 12, style: :bold, align: :left, :at => [0,bounds.top-148]
+
+    bounding_box([0 ,bounds.top-162], :width => boxwidth, :height => boxheight*0.6-22) do
       bounding_box([5 ,bounds.top-5], :width => boxwidth-10, :height => boxheight-10) do
         text "<b>Chemical Formula:</b> #{@sample.cif}", :size => 10, :inline_format => true
         text "<b>Powder Diffraction Required?</b> #{@sample.powd ? 'Yes' : 'No'}", :size => 10, :inline_format => true
@@ -132,8 +171,8 @@ class SamplePdf < Prawn::Document
       end
       stroke_bounds
     end
-    text_box "User Details", size: 12, style: :bold, align: :left, :at => [boxwidth+10,bounds.top-268]
-    bounding_box([boxwidth+10 ,bounds.top-281], :width => boxwidth, :height => boxheight*0.6 -22) do
+    text_box "User Details", size: 12, style: :bold, align: :left, :at => [boxwidth+10,bounds.top-148]
+    bounding_box([boxwidth+10 ,bounds.top-162], :width => boxwidth, :height => boxheight*0.6 -22) do
       bounding_box([5 ,bounds.top-5], :width => boxwidth-10, :height => boxheight-10) do
         text "<b>Submission Date:</b> #{@sample.created_at}", :size => 10, :inline_format => true
         text "<b>Submitted By:</b> #{@sample.user.firstname} #{@sample.user.lastname}", :size => 10, :inline_format => true
@@ -148,8 +187,8 @@ class SamplePdf < Prawn::Document
   end
 
   def coshh
-    text_box "Supplied COSHH Information", size: 12, style: :bold, align: :left, :at => [0,386]
-    bounding_box([0,372], :width => 524, :height => 180) do
+    text_box "Supplied COSHH Information", size: 12, style: :bold, align: :left, :at => [0,498]
+    bounding_box([0,485], :width => 524, :height => 150) do
       boxwidth = bounds.right - bounds.left
       boxheight = bounds.top - bounds.bottom
       stroke_bounds
@@ -178,7 +217,7 @@ class SamplePdf < Prawn::Document
 
       bounding_box([bounds.left+10 ,bounds.top-10], :width => boxwidth*0.5-20, :height => boxheight-20) do
         text "<b>Name of Solvent:</b>  #{@sample.coshh_name}", :size => 10, :inline_format => true
-        text "<b>Description of Sample:</b>  #{@sample.coshh_desc}", :size => 10, :inline_format => true
+        text "<b>Description of Expected Product:</b>  #{@sample.coshh_desc}", :size => 10, :inline_format => true
         text "<b>Handling Procedures:</b>  #{@sample.coshh_info}", :size => 10, :inline_format => true
         text "<b>User Comments:</b>  #{@sample.comments}", :size => 10, :inline_format => true
       end
