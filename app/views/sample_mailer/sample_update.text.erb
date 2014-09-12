@@ -14,7 +14,7 @@ has changed as follows:
 <%= link_to "Link to Full Sample Information", "#{sample_url(@sample, 
              :host => MAIL_HOST)}" %>
 
-% if ( @sample.flag.name =~ /(FAILED|WITHDRAWN|REFINEMENT COMPLETED)/i ) %>
+<% if ( @sample.flag.name =~ /(FAILED|WITHDRAWN|REFINEMENT COMPLETED)/i ) %>
     <%= "#{TERMINATION_MESSAGE}" %>
  
 <% end %>
