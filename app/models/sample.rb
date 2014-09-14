@@ -1,5 +1,5 @@
 class Sample < ActiveRecord::Base
-  attr_accessible :store_ids, :sensitivity_ids, :hazard_ids, :code, :cif, :synth, :coshh_name, :coshh_desc, :coshh_info, :coshh_haz, :params, :priority, :powd, :chiral, :cost_code, :barcode, :user_id, :flag_id, :userref, :zipdata, :sampleimage, :reference, :comments, :colour, :size, :shape, :feedback
+  attr_accessible :store_ids, :sensitivity_ids, :hazard_ids, :code, :cif, :synth, :coshh_name, :coshh_desc, :coshh_info, :coshh_haz, :params, :priority, :powd, :chiral, :cost_code, :barcode, :user_id, :flag_id, :userref, :zipdata, :sampleimage, :reference, :comments, :colour, :size, :shape, :feedback, :spec_info
   has_and_belongs_to_many :hazards
   has_and_belongs_to_many :sensitivities
   has_and_belongs_to_many :stores
@@ -20,6 +20,7 @@ HUMANIZED_ATTRIBUTES = {
   :zipdata        => "data file",
   :sampleimage    => "sample image file",
   :cost_code      => "cost centre code",
+  :spec_info      => "spectroscopic data",
 
 }
 

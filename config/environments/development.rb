@@ -31,15 +31,7 @@ SampleTracker::Application.configure do
   # appended to a file with the title equal to the user's email addr.
   #
   config.action_mailer.delivery_method = :file
-  config.action_mailer.smtp_settings = {
-    :address              => "smtp.gmail.com",
-    :port                 => "587",
-    :domain               => "gmail.com",
-    :user_name            => "",
-    :password             => "",
-    :authentication       => "plain",
-    :enable_starttls_auto => true
-}
+
   # define host in email templates. There may well be a helper for
   # this, but for now do it via a global string variable.
   MAIL_HOST = 'localhost:3000'

@@ -10,7 +10,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120316181525) do
+ActiveRecord::Schema.define(:version => 20140913173354) do
 
   create_table "assets", :force => true do |t|
     t.string   "document"
@@ -88,6 +88,7 @@ ActiveRecord::Schema.define(:version => 20120316181525) do
     t.text     "size"
     t.text     "shape"
     t.text     "feedback"
+    t.text     "spec_info"
   end
 
   create_table "samples_sensitivities", :id => false, :force => true do |t|

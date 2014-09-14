@@ -140,7 +140,7 @@ class SamplePdf < Prawn::Document
     img_ratio = 1.0*img_dim[0].to_i/img_dim[1].to_i
     
   #
-    text_box "Proposed Structure with Numbering Scheme and Synthetic Route Details", size: 12, style: :bold, align: :left, :at => [0,bounds.top-455]
+    text_box "Expected Structure with Numbering Scheme and Synthetic Route Details", size: 12, style: :bold, align: :left, :at => [0,bounds.top-455]
     bounding_box([0,bounds.top-469], :width => boxwidth, :height => boxheight) do
       bounding_box([22,bounds.top-3], :width => 416, :height => 312) do
       if (img_ratio >= 1.33333) then
@@ -168,6 +168,7 @@ class SamplePdf < Prawn::Document
         text "<b>Powder Diffraction Required?</b> #{@sample.powd ? 'Yes' : 'No'}", :size => 10, :inline_format => true
         text "<b>Chiral Structure?</b> #{@sample.chiral ? 'Yes' : 'No'}", :size => 10, :inline_format => true
         text "<b>Your Priority Number:</b> #{@sample.priority}", :size => 10, :inline_format => true
+        text "<b>Spec Info:</b> #{@sample.spec_info}", :size => 10, :inline_format => true
       end
       stroke_bounds
     end
@@ -179,7 +180,11 @@ class SamplePdf < Prawn::Document
         text "<b>Research Group:</b>  #{@sample.user.group.group_desc}", :size => 10, :inline_format => true
         text "<b>Contact E-Mail:</b>  #{@sample.user.email}", :size => 10, :inline_format => true
         text "<b>Cost Centre Code:</b> #{@sample.cost_code}", :size => 10, :inline_format => true
-        text "<b>Assigned Bar Code:</b> #{@sample.barcode}", :size => 10, :inline_format => true
+#
+# Don't print bar code.
+#
+#        text "<b>Assigned Bar Code:</b> #{@sample.barcode}", :size => 10, :inline_format => true
+#
       end
       stroke_bounds
     end
