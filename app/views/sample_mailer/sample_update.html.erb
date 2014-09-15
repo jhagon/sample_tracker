@@ -25,7 +25,7 @@ has changed as follows:
             :host => MAIL_HOST)}" %>
 </p>
 
-<% if ( @sample.flag.name =~ /(FAILED|WITHDRAWN|REFINEMENT COMPLETED)/i ) %>
+<% if ( @sample.flag.name =~ /(DATA COLLECTED|FAILED|WITHDRAWN|REFINEMENT COMPLETED)/i ) %>
 <p>
     <%= "#{TERMINATION_MESSAGE}" %>
 </p>
